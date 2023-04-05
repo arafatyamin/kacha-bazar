@@ -24,7 +24,7 @@ const SideBar = () => {
     {
       name: "products",
       icon: <RiShoppingBag3Fill />,
-      link: "../admin/dashbord",
+      link: "../admin/products",
     },
     {
       name: "category",
