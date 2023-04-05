@@ -10,7 +10,7 @@ const AdminLayout = ({ children }) => {
         <div className="hidden lg:block">
           <SideBar />
         </div>
-        {children}
+        <div className="w-full h-full">{children}</div>
       </div>
     </div>
   );
