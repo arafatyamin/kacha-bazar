@@ -59,9 +59,9 @@ const SideBar = () => {
   ];
 
   return (
-    <div className="w-[300px] h-[80vh] relative">
+    <div className="w-[250px] min-h-screen  relative">
       {/* nav menu  */}
-      <div className=" fixed top-0 bg-white shadow-md left-0 w-[250px] h-screen">
+      <div className=" lg:fixed top-0 bg-white shadow-md left-0 w-[250px] h-screen">
         <div className=" flex p-5 items-center">
           <img
             className="w-[120px]"
@@ -95,7 +95,7 @@ const SideBar = () => {
         </div>
 
         {/* logout button  */}
-        <div className="absolute bottom-4 w-full ">
+        <div className="absolute bottom-44 lg:bottom-4 w-full ">
           <div className=" flex justify-center items-center ">
             <button className="flex items-center px-14 py-2 rounded-lg font-semibold duration-300 hover:bg-[#016a47] text-white bg-[#0E9F6E] ">
               <AiOutlineLogout className="mr-2" />
