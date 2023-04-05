@@ -3,23 +3,28 @@ import { FaMoon, FaBell } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 import { AiOutlineLogout, AiFillSetting } from "react-icons/ai";
 import { GoThreeBars } from "react-icons/go";
+import SideBar from "./SideBar";
 
 const Header = () => {
   const [openProfileModal, setOpenProfileModal] = useState(false);
+  const [openSideNav, setOpenSideNav] = useState(false);
 
   return (
-    <nav className="shadow-md h-[7vh]">
-      <div className="max-w-[1440px] mx-auto p-3 flex items-center justify-between text-xl text-[#0E9F6E]">
+    <nav className="shadow-md w-full">
+      <div className="max-w-[1440px] w-full mx-auto p-3 flex items-center justify-between  text-xl text-[#0E9F6E]">
         <div>
           {/* hambarger  */}
-          <button className="block lg:hidden">
+          <button
+            onClick={() => setOpenSideNav(!openSideNav)}
+            className="block lg:hidden"
+          >
             <GoThreeBars />
           </button>
         </div>
         <div className="flex items-center  ">
           {/* button  */}
           <div className="mr-5">
-            <button className="p-3 mx-2">
+            <button className="p-3 md:mx-2">
               <FaMoon />
             </button>
             <button className="p-3 relative">
@@ -67,6 +72,15 @@ const Header = () => {
             )}
           </div>
         </div>
+      </div>
+
+      {/* small device side menu  */}
+      <div
+        className={`absolute ${
+          openSideNav ? "left-0 bg-black/40" : " left-[-100%] "
+        } w-full  full duration-300`}
+      >
+        <SideBar />
       </div>
     </nav>
   );
