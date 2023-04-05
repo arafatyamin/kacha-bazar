@@ -1,11 +1,17 @@
+import Header from "@/Components/AdminComponents/Header";
+import SideBar from "@/Components/AdminComponents/SideBar";
 import React from "react";
 
 const AdminLayout = ({ children }) => {
   return (
     <div>
-      <h2>Admin Header</h2>
-      {children}
-      <h2>Admin Footer</h2>
+      <Header />
+      <div className="flex">
+        <div className="hidden lg:block">
+          <SideBar />
+        </div>
+        {children}
+      </div>
     </div>
   );
 };

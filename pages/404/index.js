@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import CustomerLayout from "@/Layouts/CustomerLayout";
+import CommonLayout from "@/Layouts/CommonLayout";
 
 const ErrorPage = () => {
   return (
@@ -42,7 +42,7 @@ const ErrorPage = () => {
 };
 
 ErrorPage.getLayout = (page) => {
-  return <CustomerLayout>{page}</CustomerLayout>;
+  return <CommonLayout>{page}</CommonLayout>;
 };
 
 export default ErrorPage;
