@@ -8,7 +8,7 @@ const Header = () => {
   const [openProfileModal, setOpenProfileModal] = useState(false);
 
   return (
-    <nav className="shadow-lg">
+    <nav className="shadow-md h-[7vh]">
       <div className="max-w-[1440px] mx-auto p-3 flex items-center justify-between text-xl text-[#0E9F6E]">
         <div>
           {/* hambarger  */}
