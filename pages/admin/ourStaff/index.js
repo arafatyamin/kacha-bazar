@@ -32,7 +32,7 @@ const OurStaff = () => {
       name: "Security Guard",
     },
     {
-      _id: 6,
+      _id: 7,
       name: "Deliver Person",
     },
   ];

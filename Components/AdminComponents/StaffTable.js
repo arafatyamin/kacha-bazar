@@ -23,9 +23,9 @@ const StaffTable = () => {
             </tr>
           </thead>
           <tbody className="text-[14px]">
-            {[...Array(20)].map((number) => (
+            {[...Array(20)].map((number, i) => (
               <tr
-                key={number}
+                key={i}
                 className="text-left border-b border-opacity-20 border-gray-700 "
               >
                 <td className="px-3 py-2 text-left">

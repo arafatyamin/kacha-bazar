@@ -75,7 +75,7 @@ const SideBar = () => {
           {sideNavItem?.map((item) => {
             const { name, icon, link } = item || {};
             return (
-              <Link href={link}>
+              <Link key={name} href={link}>
                 <button
                   onClick={() => setIsActive(name)}
                   className={`w-full  relative flex items-center px-6 py-3 duration-300 hover:bg-gray-100 hover:text-[#0b9768] ${

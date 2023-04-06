@@ -86,6 +86,7 @@ const Header = () => {
         className={`absolute ${
           openSideNav ? "left-0 bg-black/40" : " left-[-100%] "
         } w-full  full duration-300`}
+        onClick={() => setOpenSideNav(false)}
       >
         <SideBar />
       </div>
