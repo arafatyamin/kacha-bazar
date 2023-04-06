@@ -1,4 +1,5 @@
 import CategoryCard from "@/Components/CustomerComponents/Cards/CategoryCard/CategoryCard";
+import UserSideNav from "@/Components/CustomerComponents/CustomerAdmin/UserSideNav";
 import { categoryItems } from "@/data/data";
 
 const demo = () => {
@@ -11,6 +12,7 @@ const demo = () => {
               <CategoryCard data={categoryItem} key={categoryItem.id} />
             ))}
           </div>
+          <UserSideNav />
         </div>
       </section>
     </>
