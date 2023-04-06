@@ -1,10 +1,9 @@
 import React from "react";
-import { SlMagnifierAdd } from "react-icons/sl";
+import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
-const ProductsTable = () => {
+const CategoryTable = () => {
   return (
     <div className="container pb-8 mx-auto rounded-md  bg-gray-100">
       <div className="overflow-x-auto bg-white">
@@ -12,27 +11,24 @@ const ProductsTable = () => {
           <thead className="rounded-t-lg bg-gray-100 border border-b-none text-gray-500 ">
             <tr className="text-left ">
               <th title="Ranking" className="p-3 text-left">
-                SKU
+                ID
               </th>
-              <th className="p-3 text-left">PRODUCT NAME</th>
-              <th className="p-3">CATEGORY</th>
-              <th className="p-3">PRICE</th>
-              <th className="p-3">STOCK</th>
-              <th className="p-3">STATUS</th>
-              <th className="p-3">DISCOUNT</th>
-              <th className="p-3">DETAILS</th>
+              <th className="p-3 text-left">ICON</th>
+              <th className="p-3 w-[500px]">PARENT</th>
+              <th className="p-3">CHILDREN </th>
+              <th className="p-3">TYPE</th>
               <th className="p-3">PUBLISHED</th>
               <th className="p-3">ACTIONS</th>
             </tr>
           </thead>
           <tbody className="text-[14px]">
-            {[...Array(20)].map((number, i) => (
+            {[...Array(10)].map((number, i) => (
               <tr
                 key={i}
                 className="text-left border-b border-opacity-20 border-gray-700 "
               >
                 <td className="px-3 py-2 text-left">
-                  <span>E88F5D</span>
+                  <span>283E</span>
                 </td>
                 <td className="px-3 py-2 text-left">
                   <div className="flex items-center">
@@ -41,29 +37,23 @@ const ProductsTable = () => {
                       src="https://i.postimg.cc/13JnVvWJ/Urban-Frgr-Organic-Calming-Herbal-Tea-15-ct.jpg"
                       alt="product"
                     />
-                    <span className="ml-2">Calming Herbal Tea</span>
                   </div>
                 </td>
                 <td className="px-3 py-2">
-                  <span>Drinks</span>
+                  <span className="text-gray-500 font-bold px-2 py-1 bg-gray-100 rounded-full mx-1">
+                    Organic Food
+                  </span>
+                  <span className="text-gray-500 font-bold px-2 py-1 bg-gray-100 rounded-full mx-1">
+                    Pickles & Condiments
+                  </span>
                 </td>
                 <td className="px-3 py-2">
-                  <span>$5</span>
+                  <span>1</span>
                 </td>
                 <td className="px-3 py-2">
-                  <span>100</span>
+                  <span>Grocery</span>
                 </td>
-                <td className="px-3 py-2 ">
-                  <span>Selling</span>
-                </td>
-                <td className="px-3  py-2 ">
-                  <span></span>
-                </td>
-                <td className="px-3 py-2 text-center">
-                  <button className="hover:text-[#07895e] " title="Details">
-                    <SlMagnifierAdd />
-                  </button>
-                </td>
+
                 <td className="px-3 py-2">
                   <label
                     htmlFor={number}
@@ -113,12 +103,6 @@ const ProductsTable = () => {
               <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
                 3
               </button>
-              <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
-                4
-              </button>
-              <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
-                5
-              </button>
 
               <span>-</span>
 
@@ -136,4 +120,4 @@ const ProductsTable = () => {
   );
 };
 
-export default ProductsTable;
+export default CategoryTable;
