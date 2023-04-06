@@ -9,8 +9,6 @@ import React, { useState } from "react";
 const Category = () => {
   const [newCategory, setNewCategory] = useState(false);
 
-  console.log(newCategory);
-
   const categorys = [
     {
       _id: 1,
