@@ -49,7 +49,7 @@ const SideBar = () => {
     {
       name: "our staff",
       icon: <BiUser />,
-      link: "../admin/dashbord",
+      link: "../admin/ourStaff",
     },
     {
       name: "setting",

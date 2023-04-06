@@ -1,8 +1,6 @@
 import Button from "@/Components/AdminComponents/Button";
 import CouponsTable from "@/Components/AdminComponents/CouponsTable";
-import ProductsTable from "@/Components/AdminComponents/ProductsTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
-import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
 import React from "react";
 
