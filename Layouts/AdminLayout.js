@@ -6,11 +6,9 @@ const AdminLayout = ({ children }) => {
   return (
     <div>
       <Header />
-      <div className="flex">
-        <div className="hidden lg:block">
-          <SideBar />
-        </div>
-        <div className="w-full h-full">{children}</div>
+      <div className="flex ">
+        <SideBar />
+        <div className=" w-full h-full">{children}</div>
       </div>
     </div>
   );
