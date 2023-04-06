@@ -1,11 +1,14 @@
+import AddNewStaff from "@/Components/AdminComponents/AddNewStaff";
 import Button from "@/Components/AdminComponents/Button";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import SelectInput from "@/Components/AdminComponents/SelectInput";
 import StaffTable from "@/Components/AdminComponents/StaffTable";
 import AdminLayout from "@/Layouts/AdminLayout";
-import React from "react";
+import React, { useState } from "react";
 
 const OurStaff = () => {
+  const [newStaff, setNewStaff] = useState(false);
+
   const staffRole = [
     {
       _id: 1,
@@ -51,7 +54,7 @@ const OurStaff = () => {
             <SelectInput items={staffRole} name={"Staff Role"} />
           </div>
 
-          <div>
+          <div onClick={() => setNewStaff(true)}>
             <Button name={"Add Staff"} />
           </div>
         </div>
@@ -60,6 +63,8 @@ const OurStaff = () => {
 
         <StaffTable />
       </div>
+
+      <AddNewStaff newStaff={newStaff} setNewStaff={setNewStaff} />
     </section>
   );
 };

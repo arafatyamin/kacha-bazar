@@ -3,7 +3,9 @@ import { TiDeleteOutline } from "react-icons/ti";
 import SearchInput from "./SearchInput";
 import SelectInput from "./SelectInput";
 
-const AddNewCoupons = ({ newCoupon, setNewCoupon }) => {
+const AddNewStaff = ({ newStaff, setNewStaff }) => {
+  console.log(newStaff);
+
   const categorys = [
     {
       _id: 1,
@@ -74,19 +76,19 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon }) => {
   return (
     <div
       className={`fixed top-0 ${
-        newCoupon ? "right-0" : "right-[-100%]"
+        newStaff ? "right-0" : "right-[-100%]"
       }   w-full duration-300 `}
     >
       <div className="flex justify-end relative">
         <div
-          onClick={() => setNewCoupon(false)}
+          onClick={() => setNewStaff(false)}
           className={`bg-black/60 hidden lg:block w-full h-screen`}
         ></div>
 
         <div className="w-full bg-white ">
           <div className="bg-gray-100 p-6 flex justify-between items-center">
             <div>
-              <h2 className="text-lg">Add Coupon</h2>
+              <h2 className="text-lg">Add Staff</h2>
               <p className="text-xs">
                 Add your Product category and necessary information from here
               </p>
@@ -94,7 +96,7 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon }) => {
 
             <div>
               <button
-                onClick={() => setNewCoupon(!newCoupon)}
+                onClick={() => setNewStaff(!newStaff)}
                 className="text-2xl h-10 w-10 bg-white text-red-600 rounded-full flex justify-center items-center shadow-md"
               >
                 <TiDeleteOutline />
@@ -102,9 +104,9 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon }) => {
             </div>
           </div>
 
-          <div className="my-3 lg:grid grid-cols-1 lg:grid-cols-3 p-6  gap-6 rounded-md shadow-sm h-[70%] lg:h-[80%] overflow-auto  bg-white text-xs">
+          <div className="my-3 lg:grid grid-cols-1 lg:grid-cols-3 p-6  gap-6 rounded-md shadow-sm h-[70%] lg:h-[80%] overflow-auto bg-white text-xs">
             <div className="">
-              <p>Coupon Banner Image</p>
+              <p>Staff Image</p>
             </div>
             <div className="col-span-2 ">
               <fieldset className="w-full space-y-1 text-gray-100">
@@ -126,43 +128,52 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon }) => {
               </div>
             </div>
 
-            <p className="py-2">Campaign Name</p>
+            <p className="py-2"> Name</p>
             <div className="col-span-2 ">
-              <SearchInput placeholder={"Campaign Title"} />
+              <SearchInput placeholder={"Staff name"} />
             </div>
 
-            <p className="py-2">Campaign Code</p>
-            <div className="col-span-2 ">
-              <SearchInput placeholder={"Campaign Code"} />
-            </div>
-
-            <p className="py-2">Coupon Validity Time</p>
+            <p className="py-2">Email</p>
             <div className="col-span-2 ">
               <input
-                type="date"
+                type="email"
+                placeholder="email"
                 className="w-full p-3 focus:outline-none rounded-md border bg-gray-100"
               />
             </div>
 
-            <p className="py-2">Discount Percentage</p>
+            <p className="py-2">Password</p>
             <div className="col-span-2 ">
-              <SearchInput placeholder={"Discount Percentage"} />
+              <input
+                type="password"
+                placeholder="email"
+                className="w-full p-3 focus:outline-none rounded-md border bg-gray-100"
+              />
             </div>
 
-            <p className="py-2">Product Type</p>
+            <p className="py-2">Contact Number</p>
             <div className="col-span-2 ">
-              <SearchInput placeholder={"Product Type"} />
+              <SearchInput placeholder={"Contact Number"} />
             </div>
 
-            <p className="py-2">Campaign Code</p>
+            <p className="py-2">Joining Date</p>
             <div className="col-span-2 ">
-              <SelectInput items={categorys} name={"select child category"} />
+              <input
+                type="date"
+                placeholder="Joining Date"
+                className="w-full p-3 focus:outline-none rounded-md border bg-gray-100"
+              />
+            </div>
+
+            <p className="py-2">Staff Role</p>
+            <div className="col-span-2 ">
+              <SelectInput items={categorys} name={"select role"} />
             </div>
           </div>
 
           <div className="col-span-3 px-3 flex items-center gap-6">
             <button
-              onClick={() => setNewCoupon(false)}
+              onClick={() => setNewStaff(false)}
               className="py-3 px-6 bg-gray-100 rounded-md hover:bg-red-100 text-red-300 hover:text-red-600 duration-300 w-full"
             >
               Cancel
@@ -170,9 +181,9 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon }) => {
 
             <button
               className="py-3 px-6 bg-[#108a61] rounded-md 
-          hover:bg-[#078057] text-white  duration-300 w-full"
+              hover:bg-[#078057] text-white  duration-300 w-full"
             >
-              Add Coupon
+              Add Category
             </button>
           </div>
         </div>
@@ -181,4 +192,4 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon }) => {
   );
 };
 
-export default AddNewCoupons;
+export default AddNewStaff;
