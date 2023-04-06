@@ -4,13 +4,14 @@ import { RxDashboard } from "react-icons/rx";
 import { AiOutlineLogout, AiFillSetting } from "react-icons/ai";
 import { GoThreeBars } from "react-icons/go";
 import SideBar from "./SideBar";
+import Link from "next/link";
 
 const Header = () => {
   const [openProfileModal, setOpenProfileModal] = useState(false);
   const [openSideNav, setOpenSideNav] = useState(false);
 
   return (
-    <nav className="shadow-md w-full">
+    <nav className="shadow-md  w-full">
       <div className="max-w-[1440px] w-full mx-auto p-3 flex items-center justify-between  text-xl text-[#0E9F6E]">
         <div>
           {/* hambarger  */}
@@ -53,15 +54,21 @@ const Header = () => {
             {openProfileModal && (
               <div className="absolute bottom-100 rounded-lg shadow-lg right-0 text-gray-600 text-sm font-semibold  bg-white w-[250px]">
                 <div>
-                  <button className="w-full flex items-center p-3 duration-300 hover:bg-gray-200 ">
+                  <Link
+                    href={"/admin/dashbord"}
+                    className="w-full flex items-center p-3 duration-300 hover:bg-gray-200 "
+                  >
                     <RxDashboard className="mr-2" />
                     <span className="">Dashbord</span>
-                  </button>
+                  </Link>
 
-                  <button className="w-full flex font-sm p-3 duration-300 hover:bg-gray-200 items-center">
+                  <Link
+                    href={"/admin/setting"}
+                    className="w-full flex font-sm p-3 duration-300 hover:bg-gray-200 items-center"
+                  >
                     <AiFillSetting className="mr-2" />
                     <span className="">Edit Profile</span>
-                  </button>
+                  </Link>
 
                   <button className="w-full rounded-lg rounded-t-none flex font-sm p-3 duration-300 hover:bg-gray-200 items-center">
                     <AiOutlineLogout className="mr-2" />
