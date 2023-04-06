@@ -1,6 +1,5 @@
 import CategoryCard from "@/Components/CustomerComponents/Cards/CategoryCard/CategoryCard";
 import { categoryItems } from "@/data/data";
-import Image from "next/image";
 
 const demo = () => {
   return (
