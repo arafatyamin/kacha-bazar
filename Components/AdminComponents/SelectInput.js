@@ -2,7 +2,11 @@ import React from "react";
 
 const SelectInput = ({ items, name }) => {
   return (
-    <select name="" id="" className="w-full p-3 rounded-md border bg-gray-100">
+    <select
+      name=""
+      id=""
+      className="w-full p-3 rounded-md border bg-gray-100 active:bg-white"
+    >
       <option value={""} className="hidden">
         {name}
       </option>

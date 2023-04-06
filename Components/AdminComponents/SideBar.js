@@ -29,32 +29,32 @@ const SideBar = () => {
     {
       name: "category",
       icon: <AiOutlineBars />,
-      link: "../admin/dashbord",
+      link: "../admin/category",
     },
     {
       name: "customers",
       icon: <FiUsers />,
-      link: "../admin/dashbord",
+      link: "../admin/customers",
     },
     {
       name: "orders",
       icon: <AiOutlineShoppingCart />,
-      link: "../admin/dashbord",
+      link: "../admin/orders",
     },
     {
       name: "coupons",
       icon: <AiOutlineGift />,
-      link: "../admin/dashbord",
+      link: "../admin/coupons",
     },
     {
       name: "our staff",
       icon: <BiUser />,
-      link: "../admin/dashbord",
+      link: "../admin/ourStaff",
     },
     {
       name: "setting",
       icon: <FiSettings />,
-      link: "../admin/dashbord",
+      link: "../admin/setting",
     },
   ];
 
