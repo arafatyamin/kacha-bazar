@@ -1,7 +1,37 @@
+import Head from "next/head";
 import CustomerLayout from "@/Layouts/CustomerLayout";
+import UserSideNav from "@/Components/CustomerComponents/CustomerAdmin/UserSideNav";
+import { useState } from "react";
+import UserDashboard from "./dashboard";
+import OrderPage from "./order";
+import UpdateProfile from "./update-profile";
+import ChangePassword from "./change-password";
 
 const user = () => {
-  return <div>User Panel</div>;
+  const [navbarValue, setNavbarValue] = useState("dashboard");
+  console.log(navbarValue);
+  return (
+    <>
+      <Head>
+        <title>User Dashboard</title>
+      </Head>
+      <main>
+        <div className="container">
+          <div className="grid grid-cols-[1fr_5fr]">
+            <UserSideNav setNavbarValue={setNavbarValue} />
+            <div className="p-2">
+              {navbarValue === "dashboard" && <UserDashboard />}
+              {navbarValue === "my orders" && <OrderPage />}
+              {navbarValue === "update profile" && <UpdateProfile />}
+              {navbarValue === "change password" && <ChangePassword />}
+              {navbarValue === "log out" &&
+                "I'm hacker lol! you can't log out me okay! focus your work."}
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
 };
 
 user.getLayout = function (page) {

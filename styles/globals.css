@@ -56,7 +56,7 @@ body {
     font-family: var(--ff-primary), sans-serif;
   }
   body {
-    background: var(--clr-secondary);
+    background: #fff;
   }
 
   h1 {
