@@ -13,8 +13,122 @@ body {
   background: #fff;
   font-family: "Nunito", sans-serif;
 } */
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  :root {
+    --clr-primary: #10b981;
+    --clr-primary-light: #d1fae5;
+    --clr-primary-hover: #059669;
+
+    --clr-secondary: #f3f4f6;
+    --clr-gray: #6b7280;
+    --clr-red: #ef4444;
+    --clr-red-light: #fee2e2;
+
+    --ff-primary: Inter, sans-serif;
+    --ff-secondary: Open Sans, sans-serif;
+
+    --fs-700: 1.875rem;
+    --fs-600: 1.5rem;
+    --fs-550: 1.125rem;
+    --fs-500: 1.25rem;
+    --fs-400: 1rem;
+    --fs-300: 0.875rem;
+    --fs-200: 0.75rem;
+
+    --fw-400: 400;
+    --fw-500: 500;
+    --fw-700: 700;
+    --fw-600: 600;
+  }
+  html {
+    font-family: var(--ff-primary), sans-serif;
+  }
+  body {
+    background: var(--clr-secondary);
+  }
+
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+  table {
+    @apply border-collapse shadow-md min-w-[60%] rounded-md;
+  }
+  thead {
+    @apply shadow-md h-12 px-2;
+  }
+  th {
+    @apply uppercase px-2 lg:px-3 lg:py-2 text-sm font-bold text-left;
+  }
+  td {
+    @apply lg:px-3 lg:py-2 px-2 py-1;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+}
+
+@layer utilities {
+  /* utility classes  */
+  .text-primary {
+    color: var(--clr-primary);
+  }
+
+  .text-primary-light {
+    color: var(--clr-primary-light);
+  }
+  .text-primary-hover {
+    color: var(--clr-primary-hover);
+  }
+
+  .bg-primary {
+    background: var(--clr-primary);
+  }
+
+  .bg-secondary {
+    background-color: var(--clr-secondary);
+  }
+  .border-primary {
+    border-bottom: 2px solid var(--clr-primary);
+  }
+
+  .text-gray-primary {
+    color: var(--clr-gray);
+  }
+  .text-red {
+    color: var(--clr-red);
+  }
+  .text-red-light {
+    color: var(--clr-red-light);
+  }
+
+  .font-primary {
+    font-family: var(--ff-primary), sans-serif;
+  }
+  .font-secondary {
+    font-family: var(--ff-secondary), sans-serif;
+  }
+}
+
+@layer components {
+  /* .tableActionsIcon {
+  font-size: 1.5rem;
+ } */
+}
