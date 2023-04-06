@@ -1,5 +1,4 @@
 import Button from "@/Components/AdminComponents/Button";
-import CouponsTable from "@/Components/AdminComponents/CouponsTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import SelectInput from "@/Components/AdminComponents/SelectInput";
 import StaffTable from "@/Components/AdminComponents/StaffTable";

@@ -54,7 +54,7 @@ const SideBar = () => {
     {
       name: "setting",
       icon: <FiSettings />,
-      link: "../admin/dashbord",
+      link: "../admin/setting",
     },
   ];
 
