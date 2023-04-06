@@ -1,5 +1,4 @@
-import React from "react";
-
+import dynamic from "next/dynamic";
 import {
   LineChart,
   Line,
@@ -15,50 +14,50 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
+const data2 = [
   {
-    name: "Sunday",
+    name: "Sun",
     uv: 4000,
     pv: 2400,
     amt: 2400,
   },
   {
-    name: "Monday",
+    name: "Mon",
     uv: 3000,
     pv: 1398,
     amt: 2210,
   },
   {
-    name: "Tuesday",
+    name: "Tue",
     uv: 2000,
     pv: 9800,
     amt: 2290,
   },
   {
-    name: "Wednesday",
+    name: "Wed",
     uv: 2780,
     pv: 3908,
     amt: 2000,
   },
   {
-    name: "Thursday",
+    name: "Thu",
     uv: 1890,
     pv: 4800,
     amt: 2181,
   },
   {
-    name: "Friday",
+    name: "Fri",
     uv: 2390,
     pv: 3800,
     amt: 2500,
   },
 ];
 
-const data2 = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
+const data = [
+  { name: "Potato", value: 400 },
+  { name: "Onion", value: 300 },
+  { name: "Banana", value: 300 },
+  { name: "cucumber", value: 200 },
 ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -90,6 +89,13 @@ const renderCustomizedLabel = ({
   );
 };
 
+const DynamicPieChart = dynamic(
+  () => import("recharts").then((mod) => mod.PieChart),
+  {
+    ssr: false,
+  }
+);
+
 export default function Charts() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -97,56 +103,50 @@ export default function Charts() {
         <div className="p-8">
           <p className="font-bold">Weekly Sales</p>
         </div>
-        <LineChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line
-            type="monotone"
-            dataKey="pv"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
-          />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
+        <ResponsiveContainer width="95%" height={400}>
+          <LineChart data={data2}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="pv"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
+            />
+            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
       <div className=" border bg-white rounded-lg py-6 ">
         <div className="p-8">
-          <p className="font-bold">Weekly Sales</p>
+          <p className="font-bold">Top selling products</p>
         </div>
-        <div>
-          <PieChart width={400} height={300}>
+        <ResponsiveContainer width="99%" height={400}>
+          <DynamicPieChart>
             <Pie
-              data={data2}
-              cx="50%"
-              cy="50%"
+              data={data}
+              cx={200}
+              cy={200}
               labelLine={false}
-              label={renderCustomizedLabel}
+              label={({ name, value }) => `${name}: ${value}`}
               outerRadius={80}
               fill="#8884d8"
               dataKey="value"
             >
-              {data2.map((entry, index) => (
+              {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
                 />
               ))}
             </Pie>
-          </PieChart>
-        </div>
+            <Legend />
+            <Tooltip />
+          </DynamicPieChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );

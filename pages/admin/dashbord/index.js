@@ -7,8 +7,8 @@ import { ImCreditCard } from "react-icons/im";
 import { MdSync } from "react-icons/md";
 import { BsTruck } from "react-icons/bs";
 import { AiOutlineCheck } from "react-icons/ai";
-import TotalOrderCard from "@/Components/AdmminComponents/AdminDashboard/TotalOrderCard ";
-import Charts from "@/Components/AdmminComponents/AdminDashboard/Charts";
+import TotalOrderCard from "@/Components/AdminComponents/TotalOrderCard ";
+import Charts from "@/Components/AdminComponents/Charts";
 import AdminTable from "@/Components/AdminComponents/AdminTable";
 // import Charts from "";
 
@@ -31,7 +31,7 @@ const Dashbord = () => {
 
   return (
     <section className=" bg-gray-100 min-h-screen">
-      <div className="max-w-[1024px] mx-auto">
+      <div className="max-w-[1024px] mx-auto px-5">
         <div>
           <h3 className="font-semibold py-3 text-lg">Dashboard Overview</h3>
         </div>
@@ -83,7 +83,7 @@ const Dashbord = () => {
         </div>
 
         <div>
-          <Charts></Charts>
+          <Charts />
         </div>
 
         <div className="my-10">
@@ -91,6 +91,7 @@ const Dashbord = () => {
         </div>
       </div>
     </section>
+    // <div>hello</div>
   );
 };
 
