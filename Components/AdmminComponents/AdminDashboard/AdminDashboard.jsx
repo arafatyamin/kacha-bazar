@@ -1,11 +1,11 @@
-import TotalOrderCard from "./TotalOrderCard ";
+import TotalOrderCard from "../../AdminComponents/TotalOrderCard ";
 import { FiLayers } from "react-icons/fi";
 import { FiShoppingCart } from "react-icons/fi";
 import { ImCreditCard } from "react-icons/im";
 import { MdSync } from "react-icons/md";
 import { BsTruck } from "react-icons/bs";
 import { AiOutlineCheck } from "react-icons/ai";
-import Charts from "./Charts";
+import Charts from "../../AdminComponents/Charts";
 import AdminTable from "@/Components/AdminComponents/AdminTable";
 
 const orders = [

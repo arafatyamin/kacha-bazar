@@ -79,7 +79,8 @@ export default function Charts() {
             <p className="font-bold">Weekly Sales</p>
         </div>
         <LineChart
-          width={500}
+          // style={{ maxWidth:'500px' }}
+          width={450}
           height={300}
           data={data}
           margin={{
