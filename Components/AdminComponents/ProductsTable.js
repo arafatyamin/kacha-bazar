@@ -25,11 +25,11 @@ const ProductsTable = () => {
               <th className="p-3">ACTIONS</th>
             </tr>
           </thead>
-          <tbody className="text-[14px]">
+          <tbody className="text-[14px] ">
             {[...Array(20)].map((number, i) => (
               <tr
                 key={i}
-                className="text-left border-b border-opacity-20 border-gray-700 "
+                className="text-left border-b border-opacity-20 border-gray-700 bg-white "
               >
                 <td className="px-3 py-2 text-left">
                   <span>E88F5D</span>

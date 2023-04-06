@@ -53,8 +53,6 @@ const data2 = [
   },
 ];
 
-
-
 const data = [
   { name: "Potato", value: 400 },
   { name: "Onion", value: 300 },
@@ -63,7 +61,6 @@ const data = [
 ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -92,7 +89,6 @@ const renderCustomizedLabel = ({
   );
 };
 
-
 const DynamicPieChart = dynamic(
   () => import("recharts").then((mod) => mod.PieChart),
   {
@@ -102,56 +98,54 @@ const DynamicPieChart = dynamic(
 
 export default function Charts() {
   return (
-
-
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
       <div className=" border bg-white rounded-lg py-6 ">
         <div className="p-8">
           <p className="font-bold">Weekly Sales</p>
         </div>
         <ResponsiveContainer width="95%" height={400}>
-        <LineChart data={data2}>
-          <XAxis dataKey="name" />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip />
-          <Legend />
-          <Line
-            type="monotone"
-            dataKey="pv"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
-          />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
+          <LineChart data={data2}>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="pv"
+              stroke="#8884d8"
+              activeDot={{ r: 8 }}
+            />
+            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+          </LineChart>
         </ResponsiveContainer>
       </div>
       <div className=" border bg-white rounded-lg py-6 ">
-      <div className="p-8">
+        <div className="p-8">
           <p className="font-bold">Top selling products</p>
         </div>
         <ResponsiveContainer width="99%" height={400}>
-        <DynamicPieChart>
-          <Pie
-            data={data}
-            cx={200}
-            cy={200}
-            labelLine={false}
-            label={({ name, value }) => `${name}: ${value}`}
-            outerRadius={80}
-            fill="#8884d8"
-            dataKey="value"
-          >
-            {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-          <Legend />
-          <Tooltip />
-        </DynamicPieChart>
+          <DynamicPieChart>
+            <Pie
+              data={data}
+              cx={200}
+              cy={200}
+              labelLine={false}
+              label={({ name, value }) => `${name}: ${value}`}
+              outerRadius={80}
+              fill="#8884d8"
+              dataKey="value"
+            >
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+            <Legend />
+            <Tooltip />
+          </DynamicPieChart>
         </ResponsiveContainer>
       </div>
     </div>

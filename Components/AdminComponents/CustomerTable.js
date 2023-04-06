@@ -24,7 +24,7 @@ const CustomerTable = () => {
             {[...Array(10)].map((number, i) => (
               <tr
                 key={i}
-                className="text-left border-b border-opacity-20 border-gray-700 "
+                className="text-left bg-white border-b border-opacity-20 border-gray-700 "
               >
                 <th className="px-3 py-2 text-left">
                   <span>C1CC</span>
