@@ -1,3 +1,5 @@
+import Header from "@/Components/CommonComponents/Header";
+import HeroSection from "@/Components/CommonComponents/HeroSection";
 import Head from "next/head";
 
 const home = () => {
@@ -7,7 +9,8 @@ const home = () => {
         <title>Home Page</title>
       </Head>
       <main>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <Header />
+        <HeroSection/>
       </main>
     </>
   );
