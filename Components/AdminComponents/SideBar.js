@@ -44,7 +44,7 @@ const SideBar = () => {
     {
       name: "coupons",
       icon: <AiOutlineGift />,
-      link: "../admin/dashbord",
+      link: "../admin/coupons",
     },
     {
       name: "our staff",
