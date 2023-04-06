@@ -34,7 +34,7 @@ const SideBar = () => {
     {
       name: "customers",
       icon: <FiUsers />,
-      link: "../admin/dashbord",
+      link: "../admin/customers",
     },
     {
       name: "orders",
