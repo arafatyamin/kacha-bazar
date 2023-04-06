@@ -29,7 +29,7 @@ const SideBar = () => {
     {
       name: "category",
       icon: <AiOutlineBars />,
-      link: "../admin/dashbord",
+      link: "../admin/category",
     },
     {
       name: "customers",
