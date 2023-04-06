@@ -1,3 +1,4 @@
+import AddNewCategory from "@/Components/AdminComponents/AddNewCategory";
 import Button from "@/Components/AdminComponents/Button";
 import CategoryTable from "@/Components/AdminComponents/CategoryTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
@@ -6,7 +7,7 @@ import AdminLayout from "@/Layouts/AdminLayout";
 import React, { useState } from "react";
 
 const Category = () => {
-  const [newCategory, openNewCategory] = useState(false);
+  const [newCategory, setNewCategory] = useState(false);
 
   console.log(newCategory);
 
@@ -91,7 +92,7 @@ const Category = () => {
           <div className="col-span-2">
             {<SelectInput items={categorys} name={"Category"} />}
           </div>
-          <div className="w-full" onClick={() => openNewCategory(!newCategory)}>
+          <div className="w-full" onClick={() => setNewCategory(!newCategory)}>
             <Button name={"Add Category"} />
           </div>
         </div>
@@ -99,6 +100,11 @@ const Category = () => {
         {/* category table  */}
         <CategoryTable />
       </div>
+
+      <AddNewCategory
+        newCategory={newCategory}
+        setNewCategory={setNewCategory}
+      />
     </section>
   );
 };

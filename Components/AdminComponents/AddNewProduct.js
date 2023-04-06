@@ -81,7 +81,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
       <div className="flex justify-end relative">
         <div
           onClick={() => setNewProduct(false)}
-          className={`bg-black/60 w-full`}
+          className={`bg-black/60 w-full hidden lg:block`}
         ></div>
 
         <div className="w-full bg-white ">
@@ -103,7 +103,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
             </div>
           </div>
 
-          <div className="my-3 lg:grid grid-cols-1 lg:grid-cols-3 p-6  gap-6 rounded-md shadow-sm overflow-y-scroll h-full lg:h-[55%] bg-white text-xs">
+          <div className="my-3 lg:grid grid-cols-1 lg:grid-cols-3 p-6  gap-6 rounded-md shadow-sm overflow-y-scroll h-[48%] bg-white text-xs">
             <div className="">
               <p>Product Image</p>
             </div>
@@ -200,7 +200,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
                 }
               />
             </div>
-            <div className="col-span-3 flex items-center gap-6">
+            <div className="col-span-3 my-3 flex items-center gap-6">
               <button
                 onClick={() => setNewProduct(false)}
                 className="py-3 px-6 bg-gray-100 rounded-md hover:bg-red-100 text-red-300 hover:text-red-600 duration-300 w-full"
