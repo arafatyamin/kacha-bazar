@@ -1,13 +1,12 @@
 import React from "react";
-import AdminLayout from "../Layouts/AdminLayout";
-
+import CustomerLayout from "@/Layouts/CustomerLayout";
 
 const contact = () => {
   return <div>contact</div>;
 };
 
 contact.getLayout = (page) => {
-  return <AdminLayout>{page}</AdminLayout>;
+  return <CustomerLayout>{page}</CustomerLayout>;
 };
 
 export default contact;

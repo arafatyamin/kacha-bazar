@@ -1,34 +1,44 @@
-import TotalOrderCard from "./TotalOrderCard ";
+import AdminLayout from "@/Layouts/AdminLayout";
+import React from "react";
+// import TotalOrderCard from "./TotalOrderCard ";
 import { FiLayers } from "react-icons/fi";
 import { FiShoppingCart } from "react-icons/fi";
 import { ImCreditCard } from "react-icons/im";
 import { MdSync } from "react-icons/md";
 import { BsTruck } from "react-icons/bs";
 import { AiOutlineCheck } from "react-icons/ai";
-import Charts from "./Charts";
+import TotalOrderCard from "@/Components/AdmminComponents/AdminDashboard/TotalOrderCard ";
+import Charts from "@/Components/AdmminComponents/AdminDashboard/Charts";
 import AdminTable from "@/Components/AdminComponents/AdminTable";
+// import Charts from "";
 
-const orders = [
-  { time: "Today Order", price: "$197", color: "#0D969B", FiLayers },
-  {
-    time: "This Month",
-    price: "$1145.00",
-    color: "#1887FA",
-    FiLayers: FiShoppingCart,
-  },
-  {
-    time: "Total Order",
-    price: "$44088.35",
-    color: "#059C62",
-    FiLayers: ImCreditCard,
-  },
-];
 
-function AdminDashboard() {
+
+const Dashbord = () => {
+
+  const orders = [
+    { time: "Today Order", price: "$197", color: "#0D969B", FiLayers },
+    {
+      time: "This Month",
+      price: "$1145.00",
+      color: "#1887FA",
+      FiLayers: FiShoppingCart,
+    },
+    {
+      time: "Total Order",
+      price: "$44088.35",
+      color: "#059C62",
+      FiLayers: ImCreditCard,
+    },
+  ];
+  
+
+
   return (
-    <div className="p-4 bg-[#F1F4F7]">
+    <section className=" bg-gray-100 min-h-screen">
       <div className="max-w-[1024px] mx-auto">
-        <div>
+        
+      <div>
           <h3 className="font-semibold py-3 text-lg">Dashboard Overview</h3>
         </div>
 
@@ -81,14 +91,18 @@ function AdminDashboard() {
         <div>
             <Charts></Charts>
         </div>
-
+        
         <div className="my-10">
           <AdminTable></AdminTable>
         </div>
-
+        
       </div>
-    </div>
+    </section>
   );
-}
+};
 
-export default AdminDashboard;
+export default Dashbord;
+
+Dashbord.getLayout = (page) => {
+  return <AdminLayout>{page}</AdminLayout>;
+};
