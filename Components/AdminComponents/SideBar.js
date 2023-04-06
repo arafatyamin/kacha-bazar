@@ -39,7 +39,7 @@ const SideBar = () => {
     {
       name: "orders",
       icon: <AiOutlineShoppingCart />,
-      link: "../admin/dashbord",
+      link: "../admin/orders",
     },
     {
       name: "coupons",
