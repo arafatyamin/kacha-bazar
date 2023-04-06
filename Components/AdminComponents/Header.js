@@ -3,16 +3,16 @@ import { FaMoon, FaBell } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 import { AiOutlineLogout, AiFillSetting } from "react-icons/ai";
 import { GoThreeBars } from "react-icons/go";
-import SideBar from "./SideBar";
 import Link from "next/link";
+import MobileDiviceMenu from "./MobileDiviceMenu";
 
 const Header = () => {
   const [openProfileModal, setOpenProfileModal] = useState(false);
   const [openSideNav, setOpenSideNav] = useState(false);
 
   return (
-    <nav className="shadow-md  w-full">
-      <div className="max-w-[1440px] w-full mx-auto p-3 flex items-center justify-between  text-xl text-[#0E9F6E]">
+    <nav className="shadow-md  w-full bg-white">
+      <div className="lg:max-w-[1240px] xl:max-w-[1440px] w-full mx-auto p-3 flex items-center justify-between  text-xl text-[#0E9F6E]">
         <div>
           {/* hambarger  */}
           <button
@@ -82,13 +82,11 @@ const Header = () => {
       </div>
 
       {/* small device side menu  */}
-      <div
-        className={`absolute ${
-          openSideNav ? "left-0 bg-black/40" : " left-[-100%] "
-        } w-full  full duration-300`}
-        onClick={() => setOpenSideNav(false)}
-      >
-        <SideBar />
+      <div>
+        <MobileDiviceMenu
+          openSideNav={openSideNav}
+          setOpenSideNav={setOpenSideNav}
+        />
       </div>
     </nav>
   );

@@ -59,15 +59,11 @@ const SideBar = () => {
   ];
 
   return (
-    <div className="w-[250px] min-h-screen hidden lg:block">
+    <div className="hidden lg:block w-[250px] min-h-screen">
       {/* nav menu  */}
-      <div className=" fixed top-0 bg-white shadow-md left-0 w-[250px] h-screen">
+      <div className="  fixed  top-0 bg-white shadow-md left-0 w-[250px] h-screen">
         <div className=" flex p-5 items-center">
-          <img
-            className="w-[120px]"
-            src="https://dashtar-admin.vercel.app/static/media/logo-dark.acf69e90.svg"
-            alt="Logo"
-          />
+          <img className="w-[120px]" src="/images/logo.svg" alt="Logo" />
         </div>
 
         {/* menu item  */}
