@@ -59,9 +59,9 @@ const SideBar = () => {
   ];
 
   return (
-    <div className="w-[250px] min-h-screen  relative">
+    <div className="w-[250px] min-h-screen hidden lg:block">
       {/* nav menu  */}
-      <div className=" lg:fixed top-0 bg-white shadow-md left-0 w-[250px] h-screen">
+      <div className=" fixed top-0 bg-white shadow-md left-0 w-[250px] h-screen">
         <div className=" flex p-5 items-center">
           <img
             className="w-[120px]"
@@ -75,7 +75,7 @@ const SideBar = () => {
           {sideNavItem?.map((item) => {
             const { name, icon, link } = item || {};
             return (
-              <Link href={link}>
+              <Link key={name} href={link}>
                 <button
                   onClick={() => setIsActive(name)}
                   className={`w-full  relative flex items-center px-6 py-3 duration-300 hover:bg-gray-100 hover:text-[#0b9768] ${
