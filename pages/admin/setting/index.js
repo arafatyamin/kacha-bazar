@@ -29,7 +29,7 @@ const Setting = () => {
       name: "Security Guard",
     },
     {
-      _id: 6,
+      _id: 7,
       name: "Deliver Person",
     },
   ];
@@ -39,8 +39,10 @@ const Setting = () => {
       <div className="max-w-[1240px] mx-auto">
         <h3 className="lg:py-4 text-xl font-semibold p-2 ">Edit Profile</h3>
 
-        <div className="my-3  grid grid-cols-1 lg:grid-cols-3 p-6  gap-6 rounded-md shadow-sm bg-white">
-          <p className="p-6">Profile Picture</p>
+        <div className="my-3  lg:grid grid-cols-1 lg:grid-cols-3 p-6  gap-6 rounded-md shadow-sm bg-white">
+          <div className="lg:p-6">
+            <p>Profile Picture</p>
+          </div>
           <div className="col-span-2 ">
             <fieldset className="w-full space-y-1 text-gray-100">
               <div className="flex">
@@ -58,38 +60,38 @@ const Setting = () => {
             </div>
           </div>
 
-          <p className="">Name</p>
+          <p className="py-2">Name</p>
           <div className="col-span-2 ">
             <input
               type="text"
               defaultValue={"Admin"}
-              className="w-full p-3 rounded-md border bg-gray-100"
+              className="w-full p-3 focus:outline-none rounded-md border bg-gray-100"
             />
           </div>
 
-          <p className="">Email</p>
+          <p className="py-2">Email</p>
           <div className="col-span-2 ">
             <input
               type="text"
               defaultValue={"admin@gmail.com"}
-              className="w-full p-3 rounded-md border bg-gray-100"
+              className="w-full p-3 focus:outline-none rounded-md border bg-gray-100"
             />
           </div>
 
-          <p className="">Contact Number</p>
+          <p className="py-2">Contact Number</p>
           <div className="col-span-2 ">
             <input
               type="text"
               defaultValue={"360-943-7332"}
-              className="w-full p-3 rounded-md border bg-gray-100"
+              className="w-full focus:outline-none p-3 rounded-md border bg-gray-100"
             />
           </div>
-          <p className="">Your Role</p>
+          <p className="py-2">Your Role</p>
           <div className="col-span-2 ">
             <SelectInput items={staffRole} name={"Role"} />
           </div>
 
-          <div className="col-span-3 flex justify-end">
+          <div className="col-span-3 py-4 flex justify-end">
             <button className="py-3 px-6 bg-[#0E9F6E] rounded-md text-white hover:bg-[#07895e] duration-300">
               Update Profile
             </button>
