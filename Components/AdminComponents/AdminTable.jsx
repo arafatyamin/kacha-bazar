@@ -3,7 +3,7 @@ import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 import { SlMagnifierAdd } from "react-icons/sl";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const CustomerTable = () => {
+const AdminTable = () => {
   return (
     <div className="container pb-8 mx-auto rounded-md  bg-gray-100">
       <div className="overflow-x-auto bg-white">
@@ -21,9 +21,9 @@ const CustomerTable = () => {
             </tr>
           </thead>
           <tbody className="text-[14px]">
-            {[...Array(10)].map((number, i) => (
+            {[...Array(10)].map((number) => (
               <tr
-                key={i}
+                key={number}
                 className="text-left border-b border-opacity-20 border-gray-700 "
               >
                 <th className="px-3 py-2 text-left">
@@ -93,4 +93,4 @@ const CustomerTable = () => {
   );
 };
 
-export default CustomerTable;
+export default AdminTable;
