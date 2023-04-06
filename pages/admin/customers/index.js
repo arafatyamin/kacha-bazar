@@ -6,7 +6,7 @@ import React from "react";
 const Customers = () => {
   return (
     <section className=" bg-gray-100 min-h-screen">
-      <div className="max-w-[1240px] mx-auto">
+      <div className="lg:max-w-[1024px] xl:max-w-[1240px] mx-auto">
         <h3 className="lg:py-4 text-xl font-semibold p-2 ">Customers</h3>
 
         {/* products search section  */}
