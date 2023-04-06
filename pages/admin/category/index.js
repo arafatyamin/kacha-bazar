@@ -3,9 +3,13 @@ import CategoryTable from "@/Components/AdminComponents/CategoryTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
-import React from "react";
+import React, { useState } from "react";
 
 const Category = () => {
+  const [newCategory, openNewCategory] = useState(false);
+
+  console.log(newCategory);
+
   const categorys = [
     {
       _id: 1,
@@ -87,7 +91,7 @@ const Category = () => {
           <div className="col-span-2">
             {<SelectInput items={categorys} name={"Category"} />}
           </div>
-          <div className="w-full">
+          <div className="w-full" onClick={() => openNewCategory(!newCategory)}>
             <Button name={"Add Category"} />
           </div>
         </div>
