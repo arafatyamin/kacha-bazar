@@ -3,8 +3,28 @@ import { SlMagnifierAdd } from "react-icons/sl";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import SelectInput from "./SelectInput";
 
-const ProductsTable = () => {
+const OrdersTable = () => {
+  const status = [
+    {
+      _id: 1,
+      name: "Delivary",
+    },
+    {
+      _id: 2,
+      name: "Pending",
+    },
+    {
+      _id: 3,
+      name: "Processing",
+    },
+    {
+      _id: 4,
+      name: "Cancel",
+    },
+  ];
+
   return (
     <div className="container pb-8 mx-auto rounded-md  bg-gray-100">
       <div className="overflow-x-auto bg-white">
@@ -12,17 +32,16 @@ const ProductsTable = () => {
           <thead className="rounded-t-lg bg-gray-100 border border-b-none text-gray-500 ">
             <tr className="text-left ">
               <th title="Ranking" className="p-3 text-left">
-                SKU
+                SR NO
               </th>
-              <th className="p-3 text-left">PRODUCT NAME</th>
-              <th className="p-3">CATEGORY</th>
-              <th className="p-3">PRICE</th>
-              <th className="p-3">STOCK</th>
+              <th className="p-3 text-left">TIME</th>
+              <th className="p-3">SHIPPING ADDRESS</th>
+              <th className="p-3">PHONE</th>
+              <th className="p-3">METHOD</th>
+              <th className="p-3">AMOUNT</th>
               <th className="p-3">STATUS</th>
-              <th className="p-3">DISCOUNT</th>
-              <th className="p-3">DETAILS</th>
-              <th className="p-3">PUBLISHED</th>
               <th className="p-3">ACTIONS</th>
+              <th className="p-3">INVOICE</th>
             </tr>
           </thead>
           <tbody className="text-[14px]">
@@ -31,63 +50,37 @@ const ProductsTable = () => {
                 key={i}
                 className="text-left border-b border-opacity-20 border-gray-700 "
               >
+                <th className="px-3 py-2 text-left">
+                  <span>{i + 1}</span>
+                </th>
                 <td className="px-3 py-2 text-left">
-                  <span>E88F5D</span>
-                </td>
-                <td className="px-3 py-2 text-left">
-                  <div className="flex items-center">
-                    <img
-                      className="w-8 h-8 p-1 rounded-full bg-gray-100"
-                      src="https://i.postimg.cc/13JnVvWJ/Urban-Frgr-Organic-Calming-Herbal-Tea-15-ct.jpg"
-                      alt="product"
-                    />
-                    <span className="ml-2">Calming Herbal Tea</span>
-                  </div>
+                  <span>Apr 5, 2023 </span>
                 </td>
                 <td className="px-3 py-2">
-                  <span>Drinks</span>
+                  <span>Mirpur</span>
                 </td>
                 <td className="px-3 py-2">
-                  <span>$5</span>
+                  <span>+062-123654 </span>
                 </td>
-                <td className="px-3 py-2">
-                  <span>100</span>
-                </td>
+                <th className="px-3 py-2">
+                  <span>COD</span>
+                </th>
                 <td className="px-3 py-2 ">
-                  <span>Selling</span>
+                  <span>$80.00 </span>
                 </td>
                 <td className="px-3  py-2 ">
-                  <span></span>
+                  <span className="py-1 px-3 bg-[#f6ea81] rounded-full">
+                    Pending
+                  </span>
                 </td>
-                <td className="px-3 py-2 text-center">
-                  <button className="hover:text-[#07895e] " title="Details">
-                    <SlMagnifierAdd />
-                  </button>
-                </td>
-                <td className="px-3 py-2">
-                  <label
-                    htmlFor={number}
-                    className="inline-flex items-center space-x-4 cursor-pointer text-gray-100"
-                  >
-                    <span className="relative">
-                      <input
-                        id={number}
-                        type="checkbox"
-                        className="hidden peer"
-                      />
-                      <div className="w-10 h-6 rounded-full shadow-inner bg-gray-200  peer-checked:bg-[#07895e]"></div>
-                      <div className="absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full shadow peer-checked:right-0 peer-checked:left-auto bg-white"></div>
-                    </span>
-                  </label>
-                </td>
-                <td className="px-3 py-2">
-                  <div className="flex justify-center items-center">
-                    <button className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300">
-                      <FaRegEdit />
-                    </button>
 
-                    <button className="text-lg mr-2 font-normal text-gray-400 hover:text-red-600 duration-300">
-                      <RiDeleteBin6Line />
+                <td className="px-3 py-2">
+                  <SelectInput items={status} name={"Pending"} />
+                </td>
+                <td className="px-3 py-2">
+                  <div className="flex justify-end items-center">
+                    <button className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300">
+                      <SlMagnifierAdd />
                     </button>
                   </div>
                 </td>
@@ -136,4 +129,4 @@ const ProductsTable = () => {
   );
 };
 
-export default ProductsTable;
+export default OrdersTable;

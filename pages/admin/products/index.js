@@ -1,4 +1,6 @@
+import Button from "@/Components/AdminComponents/Button";
 import ProductsTable from "@/Components/AdminComponents/ProductsTable";
+import SearchInput from "@/Components/AdminComponents/SearchInput";
 import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
 import React from "react";
@@ -83,26 +85,18 @@ const Products = () => {
   ];
 
   return (
-    <section className=" bg-gray-100 min-h-screen">
-      <div className="max-w-[1240px] mx-auto">
+    <section className="  bg-gray-100 min-h-screen">
+      <div className="lg:max-w-[1024px] xl:max-w-[1240px] mx-auto">
         <h3 className="lg:py-4 text-xl font-semibold p-2 ">Products</h3>
 
         {/* products search section  */}
         <div className="my-3 grid grid-cols-1 lg:grid-cols-4 py-6 px-4 gap-6 rounded-md shadow-sm bg-white">
-          <div>
-            <input
-              className="w-full p-3 rounded-md border bg-gray-100"
-              type="text"
-              placeholder="search ny product name"
-            />
-          </div>
+          <SearchInput placeholder={"search by product name"} />
 
           <div>{<SelectInput items={categorys} name={"Category"} />}</div>
           <div>{<SelectInput items={prices} name={"Price"} />}</div>
           <div>
-            <button className="w-full h-full p-3 lg:p-0 bg-[#0E9F6E] rounded-md text-white hover:bg-[#07895e] duration-300">
-              + Add Product
-            </button>
+            <Button name={"Add Product"} />
           </div>
         </div>
 

@@ -1,4 +1,5 @@
-import HomePage from "@/Components/Home/HomePage";
+import CustomerFooter from "@/Components/CustomerComponents/CustomerFooter/CustomerFooter";
+import OfferPage from "@/Components/CustomerComponents/Offer/OfferPage";
 import Head from "next/head";
 
 const home = () => {
@@ -8,7 +9,8 @@ const home = () => {
         <title>Home Page</title>
       </Head>
       <main>
-        <HomePage></HomePage>
+        <OfferPage></OfferPage>
+        <CustomerFooter></CustomerFooter>
       </main>
     </>
   );

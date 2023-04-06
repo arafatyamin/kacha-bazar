@@ -1,10 +1,9 @@
 import React from "react";
-import { SlMagnifierAdd } from "react-icons/sl";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
-const ProductsTable = () => {
+const CouponsTable = () => {
   return (
     <div className="container pb-8 mx-auto rounded-md  bg-gray-100">
       <div className="overflow-x-auto bg-white">
@@ -12,16 +11,15 @@ const ProductsTable = () => {
           <thead className="rounded-t-lg bg-gray-100 border border-b-none text-gray-500 ">
             <tr className="text-left ">
               <th title="Ranking" className="p-3 text-left">
-                SKU
+                ID
               </th>
-              <th className="p-3 text-left">PRODUCT NAME</th>
-              <th className="p-3">CATEGORY</th>
-              <th className="p-3">PRICE</th>
-              <th className="p-3">STOCK</th>
+              <th className="p-3 text-left">START DATE </th>
+              <th className="p-3">END DATE </th>
+              <th className="p-3">CAMPAIGNS NAME </th>
+              <th className="p-3">CODE</th>
+              <th className="p-3">PERCENTAGE</th>
+              <th className="p-3">PRODUCT TYPE </th>
               <th className="p-3">STATUS</th>
-              <th className="p-3">DISCOUNT</th>
-              <th className="p-3">DETAILS</th>
-              <th className="p-3">PUBLISHED</th>
               <th className="p-3">ACTIONS</th>
             </tr>
           </thead>
@@ -31,55 +29,33 @@ const ProductsTable = () => {
                 key={i}
                 className="text-left border-b border-opacity-20 border-gray-700 "
               >
+                <th className="px-3 py-2 text-left">
+                  <span>284B</span>
+                </th>
                 <td className="px-3 py-2 text-left">
-                  <span>E88F5D</span>
-                </td>
-                <td className="px-3 py-2 text-left">
-                  <div className="flex items-center">
-                    <img
-                      className="w-8 h-8 p-1 rounded-full bg-gray-100"
-                      src="https://i.postimg.cc/13JnVvWJ/Urban-Frgr-Organic-Calming-Herbal-Tea-15-ct.jpg"
-                      alt="product"
-                    />
-                    <span className="ml-2">Calming Herbal Tea</span>
-                  </div>
+                  <span>Sep 26, 2022 </span>
                 </td>
                 <td className="px-3 py-2">
-                  <span>Drinks</span>
+                  <span>Apr 29, 2023 </span>
                 </td>
                 <td className="px-3 py-2">
-                  <span>$5</span>
+                  <span>October Gift Voucher </span>
                 </td>
                 <td className="px-3 py-2">
-                  <span>100</span>
+                  <span>OCTOBER21</span>
                 </td>
                 <td className="px-3 py-2 ">
-                  <span>Selling</span>
+                  <span>10%</span>
                 </td>
                 <td className="px-3  py-2 ">
-                  <span></span>
+                  <span>Grocery</span>
                 </td>
                 <td className="px-3 py-2 text-center">
-                  <button className="hover:text-[#07895e] " title="Details">
-                    <SlMagnifierAdd />
-                  </button>
+                  <span className="py-1 px-3 bg-red-600/20 rounded-full text-red-600">
+                    Active
+                  </span>
                 </td>
-                <td className="px-3 py-2">
-                  <label
-                    htmlFor={number}
-                    className="inline-flex items-center space-x-4 cursor-pointer text-gray-100"
-                  >
-                    <span className="relative">
-                      <input
-                        id={number}
-                        type="checkbox"
-                        className="hidden peer"
-                      />
-                      <div className="w-10 h-6 rounded-full shadow-inner bg-gray-200  peer-checked:bg-[#07895e]"></div>
-                      <div className="absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full shadow peer-checked:right-0 peer-checked:left-auto bg-white"></div>
-                    </span>
-                  </label>
-                </td>
+
                 <td className="px-3 py-2">
                   <div className="flex justify-center items-center">
                     <button className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300">
@@ -136,4 +112,4 @@ const ProductsTable = () => {
   );
 };
 
-export default ProductsTable;
+export default CouponsTable;
