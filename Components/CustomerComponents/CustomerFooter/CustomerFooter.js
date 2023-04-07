@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 import { BsFacebook, BsTwitter, BsPinterest, BsLinkedin, BsWhatsapp } from 'react-icons/bs';
 
 const CustomerFooter = () => {
