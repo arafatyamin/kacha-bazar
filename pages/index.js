@@ -1,4 +1,6 @@
 import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
+import Header from "@/Components/CommonComponents/Header";
+import HeroSection from "@/Components/CommonComponents/HeroSection";
 import Head from "next/head";
 
 const home = () => {
@@ -8,6 +10,8 @@ const home = () => {
         <title>Home Page</title>
       </Head>
       <main>
+        <Header />
+        <HeroSection/>
 
         {/* ======================Mobile Ads Banner Part Start====================== */}
         <div className="block mx-auto max-w-screen-2x mt-24">
