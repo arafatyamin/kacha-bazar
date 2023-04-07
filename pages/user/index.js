@@ -6,6 +6,7 @@ import UserDashboard from "./dashboard";
 import OrderPage from "./order";
 import UpdateProfile from "./update-profile";
 import ChangePassword from "./change-password";
+import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
 
 const user = () => {
   const [navbarValue, setNavbarValue] = useState("dashboard");
@@ -29,6 +30,7 @@ const user = () => {
             </div>
           </div>
         </div>
+        <AppStoreBanner />
       </main>
     </>
   );

@@ -40,7 +40,7 @@ const UserSideNav = ({ setNavbarValue }) => {
   return (
     <div className="flex flex-col gap-3">
       {userSideNavItems?.map((userSideNavItem) => {
-        const { _id, title, icon, link } = userSideNavItem;
+        const { _id, title, icon } = userSideNavItem;
         return (
           <p
             key={_id}

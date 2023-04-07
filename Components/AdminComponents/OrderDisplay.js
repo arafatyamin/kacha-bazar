@@ -1,6 +1,5 @@
 const OrderDisplay = ({ data }) => {
   const { icon, title, result, bg } = data;
-  console.log(bg);
   return (
     <div className="flex gap-2 items-center border rounded-sm p-2">
       <div
