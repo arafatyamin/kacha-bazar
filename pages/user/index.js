@@ -1,6 +1,6 @@
 import Head from "next/head";
 import CustomerLayout from "@/Layouts/CustomerLayout";
-import UserSideNav from "@/Components/CustomerComponents/CustomerAdmin/UserSideNav";
+import UserSideNav from "@/Components/AdminComponents/UserSideNav";
 import { useState } from "react";
 import UserDashboard from "./dashboard";
 import OrderPage from "./order";
