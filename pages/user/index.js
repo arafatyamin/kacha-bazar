@@ -1,15 +1,15 @@
 import Head from "next/head";
 import CustomerLayout from "@/Layouts/CustomerLayout";
-import UserSideNav from "@/Components/CustomerComponents/CustomerAdmin/UserSideNav";
+import UserSideNav from "@/Components/AdminComponents/UserSideNav";
 import { useState } from "react";
 import UserDashboard from "./dashboard";
 import OrderPage from "./order";
 import UpdateProfile from "./update-profile";
 import ChangePassword from "./change-password";
+import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
 
 const user = () => {
   const [navbarValue, setNavbarValue] = useState("dashboard");
-  console.log(navbarValue);
   return (
     <>
       <Head>
@@ -17,7 +17,7 @@ const user = () => {
       </Head>
       <main>
         <div className="container">
-          <div className="grid grid-cols-[1fr_5fr]">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_5fr]">
             <UserSideNav setNavbarValue={setNavbarValue} />
             <div className="p-2">
               {navbarValue === "dashboard" && <UserDashboard />}
@@ -29,6 +29,7 @@ const user = () => {
             </div>
           </div>
         </div>
+        <AppStoreBanner />
       </main>
     </>
   );
