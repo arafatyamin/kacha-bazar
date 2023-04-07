@@ -6,7 +6,7 @@ const UserDashboard = () => {
   return (
     <div>
       <h3 className="mb-3 font-medium">Dashboard</h3>
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
         {orderItems.map((orderItem) => (
           <OrderDisplay data={orderItem} key={orderItem._id} />
         ))}
