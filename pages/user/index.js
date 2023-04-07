@@ -10,7 +10,6 @@ import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStor
 
 const user = () => {
   const [navbarValue, setNavbarValue] = useState("dashboard");
-  console.log(navbarValue);
   return (
     <>
       <Head>
