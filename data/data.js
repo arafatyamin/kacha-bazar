@@ -1,3 +1,6 @@
+import { AiOutlineSync } from "react-icons/ai";
+import { BsCart4, BsCheck2, BsTruck } from "react-icons/bs";
+
 export const categoryItems = [
   {
     id: "1",
@@ -128,5 +131,36 @@ export const categoryItems = [
     title: "Sports & Fitness",
     subTitleOne: "Sports",
     subTitleTwo: "Fitness",
+  },
+];
+
+export const orderItems = [
+  {
+    _id: 1,
+    icon: <BsCart4 size={25} color="#FF2F2F" />,
+    title: "Total Order",
+    result: 328,
+    bg: "bg-red-200",
+  },
+  {
+    _id: 2,
+    icon: <AiOutlineSync size={25} color="#FF502B" />,
+    title: "Pending Order",
+    result: 75,
+    bg: "bg-orange-200",
+  },
+  {
+    _id: 3,
+    icon: <BsTruck size={25} color="#3E3EFA" />,
+    title: "Processing Order",
+    result: 40,
+    bg: "bg-indigo-200",
+  },
+  {
+    _id: 4,
+    icon: <BsCheck2 size={25} color="#06A803" />,
+    title: "Complete Order",
+    result: 212,
+    bg: "bg-green-200",
   },
 ];
