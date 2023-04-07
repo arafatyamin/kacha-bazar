@@ -49,7 +49,7 @@ const OfferCard = ({ title, discount, categories, imageUrl, shippingCost, coupon
             </div>
             <p className="text-xs leading-5 text-gray-500 mt-2">
              * This coupon code will apply on 
-              <span className="font-bold text-gray-700">{categories} type products</span>
+              <span className="font-bold text-gray-700">{categories} type products </span>
               and when you shopping more then
               <span className="font-bold text-gray-700"> ${shippingCost}</span>
             </p>
