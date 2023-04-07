@@ -1,10 +1,13 @@
+import AddNewCoupons from "@/Components/AdminComponents/AddNewCoupons";
 import Button from "@/Components/AdminComponents/Button";
 import CouponsTable from "@/Components/AdminComponents/CouponsTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import AdminLayout from "@/Layouts/AdminLayout";
-import React from "react";
+import React, { useState } from "react";
 
 const Coupons = () => {
+  const [newCoupon, setNewCoupon] = useState(false);
+
   return (
     <section className=" bg-gray-100 min-h-screen">
       <div className="lg:max-w-[1024px] xl:max-w-[1240px] mx-auto">
@@ -16,15 +19,16 @@ const Coupons = () => {
             <SearchInput placeholder={"search by coupon code/name"} />
           </div>
 
-          <div>
+          <div onClick={() => setNewCoupon(true)}>
             <Button name={"Add Coupon"} />
           </div>
         </div>
 
         {/* coupons table  */}
-
         <CouponsTable />
       </div>
+
+      <AddNewCoupons newCoupon={newCoupon} setNewCoupon={setNewCoupon} />
     </section>
   );
 };

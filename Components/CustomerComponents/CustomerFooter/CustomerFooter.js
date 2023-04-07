@@ -36,7 +36,7 @@ const CustomerFooter = () => {
         <div className="mx-auto max-w-screen-2xl px-4 sm:px-10">
           <div className="grid grid-cols-2 md:grid-cols-7 xl:grid-cols-12 gap-5 sm:gap-9 lg:gap-11 xl:gap-7 py-10 lg:py-16 justify-between">
           <div className="pb-3.5 sm:pb-0 col-span-1 md:col-span-2 lg:col-span-3">
-          <h1 className="text-md font-medium">Company</h1>
+          <h1 className="text-lg font-medium mb-2">Company</h1>
           <ul className="text-sm flex flex-col space-y-3">
             <li className="flex items-baseline">
               <a href="/" className="text-gray-600 inline-block w-full hover:text-emerald-500">About Us</a>
@@ -53,7 +53,7 @@ const CustomerFooter = () => {
           </ul>
           </div>
           <div className="pb-3.5 sm:pb-0 col-span-1 md:col-span-2 lg:col-span-3">
-          <h1 className="text-md font-medium">Top Category</h1>
+          <h1 className="text-lg font-medium mb-2">Top Category</h1>
           <ul className="text-sm flex flex-col space-y-3">
             <li className="flex items-baseline">
               <a href="/" className="text-gray-600 inline-block w-full hover:text-emerald-500">Fish & Meat</a>
@@ -70,7 +70,7 @@ const CustomerFooter = () => {
           </ul>
           </div>
           <div className="pb-3.5 sm:pb-0 col-span-1 md:col-span-2 lg:col-span-3">
-          <h1 className="text-md font-medium">My Account</h1>
+          <h1 className="text-lg font-medium mb-2">My Account</h1>
           <ul className="text-sm flex flex-col space-y-3">
             <li className="flex items-baseline">
               <a href="/" className="text-gray-600 inline-block w-full hover:text-emerald-500">Dashboard</a>
@@ -87,25 +87,25 @@ const CustomerFooter = () => {
           </ul>
           </div>
           <div className="pb-3.5 sm:pb-0 col-span-1 md:col-span-2 lg:col-span-3">
-          <div className="text-md font-medium">
+          <div className="text-md font-medium mb-2">
             <Image
             src='https://kachabazar-store.vercel.app/logo/logo-color.svg'
-            width='120'
+            width='100'
             height='100'
              />
           </div>
           <ul className="text-sm flex flex-col space-y-3">
             <li className="flex items-baseline">
-              <a href="/" className="text-gray-600 inline-block w-full hover:text-emerald-500">About Us</a>
+              <p className="text-gray-600 inline-block w-full">987 Andre Plain Suite High Street 838,</p>
             </li>
             <li className="flex items-baseline">
-              <a href="/" className="text-gray-600 inline-block w-full hover:text-emerald-500">Contact us</a>
+            <p className="text-gray-600 inline-block w-full">Lake Hestertown, USA</p>
             </li>
             <li className="flex items-baseline">
-              <a href="/" className="text-gray-600 inline-block w-full hover:text-emerald-500">Careers</a>
+            <p className="text-gray-600 inline-block w-full">Tell: 02.356.1666</p>
             </li>
             <li className="flex items-baseline">
-              <a href="/" className="text-gray-600 inline-block w-full hover:text-emerald-500">Latest news</a>
+            <p className="text-gray-600 inline-block w-full">Email: ccruidk@test.com</p>
             </li>
           </ul>
           </div>
@@ -139,13 +139,6 @@ const CustomerFooter = () => {
           <p className="text-base leading-7 font-medium block">Call Us Today!</p>
           <h5 className="text 2xl font-bold text-emerald-500 leading-7">+012345-67900</h5>
         </div>
-        {/* <div className="col-span-1 hidden lg:block md:block">
-          <ul className="lg:text-right">
-            <li className="px-1 mb-2 md:mb-0 transition hover:opacity-80 inline-flex">
-
-            </li>
-          </ul>
-        </div> */}
       </div>
     </div>
     <div className="mx-auto mx-w-screen-2xl px-3 sm:px-10 flex justify-center py-4">

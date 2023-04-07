@@ -1,11 +1,14 @@
+import AddNewProduct from "@/Components/AdminComponents/AddNewProduct";
 import Button from "@/Components/AdminComponents/Button";
 import ProductsTable from "@/Components/AdminComponents/ProductsTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
-import React from "react";
+import React, { useState } from "react";
 
 const Products = () => {
+  const [newProduct, setNewProduct] = useState(false);
+
   const categorys = [
     {
       _id: 1,
@@ -95,7 +98,7 @@ const Products = () => {
 
           <div>{<SelectInput items={categorys} name={"Category"} />}</div>
           <div>{<SelectInput items={prices} name={"Price"} />}</div>
-          <div>
+          <div onClick={() => setNewProduct(!newProduct)}>
             <Button name={"Add Product"} />
           </div>
         </div>
@@ -127,6 +130,8 @@ const Products = () => {
 
         <ProductsTable />
       </div>
+
+      <AddNewProduct newProduct={newProduct} setNewProduct={setNewProduct} />
     </section>
   );
 };
