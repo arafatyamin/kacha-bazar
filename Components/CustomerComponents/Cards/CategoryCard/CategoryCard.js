@@ -4,7 +4,7 @@ import Link from "next/link";
 const CategoryCard = ({ data }) => {
   const { title, subTitleOne, subTitleTwo, subTitleThree, imgUrl } = data;
   return (
-    <div className="p-3 border rounded">
+    <div className="p-3 border rounded bg-white hover:shadow-md duration-200">
       <div className="flex gap-3">
         <div>
           <Image src={imgUrl} alt={title} width="30" height="30" />
