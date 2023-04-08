@@ -27,7 +27,7 @@ const home = () => {
        
         {/* ======================Tiny Banner Part Start========================== */}
 
-        <TinyBanner></TinyBanner>
+        
 
         {/* ======================Tiny Banner End=============================== */}
         

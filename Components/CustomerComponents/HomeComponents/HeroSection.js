@@ -1,6 +1,7 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import Button from '../../CommonComponents/shared/Button';
+import TinyBanner from "../Banner/TinyBanner";
 
 const carouselSlider = [
     {
@@ -45,6 +46,7 @@ const HeroSection = () => {
         <div className="w-2/5  bg-red-100"></div>
         {/* <OfferComponent/> */}
       </div>
+      <TinyBanner />
     </div>
   );
 }
