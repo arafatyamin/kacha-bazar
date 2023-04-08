@@ -3,13 +3,13 @@ import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
 import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
 import Header from "@/Components/CommonComponents/Header";
 import CategoryCard from "@/Components/CustomerComponents/Cards/CategoryCard/CategoryCard";
-import UserSideNav from "@/Components/CustomerComponents/CustomerAdmin/UserSideNav";
+// import UserSideNav from "@/Components/CustomerComponents/CustomerAdmin/UserSideNav";
 import FeaturedProducts from "@/Components/CustomerComponents/HomeComponents/FeaturedProducts";
 import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSection";
 import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
 import { categoryItems } from "@/data/data";
 import Head from "next/head";
-import AboutUs from "./AboutUs/AboutUs";
+import AboutUs from "./about-us";
 import TinyBanner from "@/Components/CustomerComponents/Banner/TinyBanner";
 import { offeredProductItems, productItems } from "@/data/productData";
 
