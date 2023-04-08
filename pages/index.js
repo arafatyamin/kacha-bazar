@@ -1,4 +1,6 @@
 import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
+import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
+import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
 import Head from "next/head";
 
 const home = () => {
@@ -7,7 +9,7 @@ const home = () => {
       <Head>
         <title>Home Page</title>
       </Head>
-      <main>
+      <main className="relative">
 
         {/* ======================Mobile Ads Banner Part Start====================== */}
         <div className="block mx-auto max-w-screen-2x mt-24">
@@ -42,10 +44,16 @@ const home = () => {
 
 
         {/* ======================App Store Section Part Start====================== */}
-
         <AppStoreBanner></AppStoreBanner>
-
         {/* ======================App Store Section Part End====================== */}
+
+
+        {/* ======================Floating cart card component start ====================== */}
+          <div className=" fixed top-80 right-0">
+            <FlotingCart></FlotingCart>
+          </div>
+        {/* ======================Floating cart card component start ====================== */}
+
 
       </main>
     </>
