@@ -6,6 +6,7 @@ import HeroSection from "@/Components/CommonComponents/HeroSection";
 import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
 import Head from "next/head";
 import AboutUs from "./AboutUs/AboutUs";
+import TinyBanner from "@/Components/CustomerComponents/Banner/TinyBanner";
 
 const home = () => {
   return (
@@ -16,11 +17,19 @@ const home = () => {
       <main className="relative">
         <Header />
         <HeroSection/>
+
+
+       
+        {/* ======================Tiny Banner Part Start========================== */}
+
+        <TinyBanner></TinyBanner>
+
+        {/* ======================Tiny Banner End=============================== */}
         
 
-        {/* ======================About Us Part Start=============================== */}
+        {/* ======================About Us Part Start============================= */}
 
-        <AboutUs></AboutUs>
+        {/* <AboutUs></AboutUs> */}
 
         {/* ======================About Us Part End=============================== */}
 
