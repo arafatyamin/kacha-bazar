@@ -1,8 +1,8 @@
 import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
-import Header from "@/Components/CommonComponents/Header";
-import HeroSection from "@/Components/CommonComponents/HeroSection";
 import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
 import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
+import Header from "@/Components/CommonComponents/Header";
+import HeroSection from "@/Components/CommonComponents/HeroSection";
 import Head from "next/head";
 
 const home = () => {
