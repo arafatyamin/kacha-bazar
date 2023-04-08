@@ -9,8 +9,6 @@ import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSect
 import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
 import { categoryItems } from "@/data/data";
 import Head from "next/head";
-import AboutUs from "./about-us";
-import TinyBanner from "@/Components/CustomerComponents/Banner/TinyBanner";
 import { offeredProductItems, productItems } from "@/data/productData";
 
 const home = () => {
@@ -22,21 +20,6 @@ const home = () => {
       <main className="relative">
         <Header />
         <HeroSection />
-
-
-       
-        {/* ======================Tiny Banner Part Start========================== */}
-
-        
-
-        {/* ======================Tiny Banner End=============================== */}
-        
-
-        {/* ======================About Us Part Start============================= */}
-
-        {/* <AboutUs></AboutUs> */}
-
-        {/* ======================About Us Part End=============================== */}
 
 
         {/* ======================Featured Categories Part Start====================== */}
