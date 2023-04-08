@@ -5,7 +5,7 @@ const TinyBanner = () => {
     <div className=" bg-orange-100 px-10 py-6 rounded-lg mt-6 hidden lg:block">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="font-sans text-xl">
+              <h1 className="font-primary text-xl">
                 <span className="text-emerald-600 font-bold mr-2">100% Natural Quality</span>
                  Organic Product
               </h1>
@@ -14,7 +14,7 @@ const TinyBanner = () => {
               <a className="text-emerald-600 ml-1" href="">discount product</a>
               </p>
             </div>
-            <a className="text-sm font-sans font-medium px-6 py-2 bg-emerald-500 text-center rounded-full text-white hover:bg-emerald-700" href="">Shop Now</a>
+            <a className="text-sm font-primary font-medium px-6 py-2 bg-emerald-500 text-center rounded-full text-white hover:bg-emerald-700" href="">Shop Now</a>
           </div>
         </div>
   )

@@ -5,7 +5,7 @@ import Header from "@/Components/CommonComponents/Header";
 import HeroSection from "@/Components/CommonComponents/HeroSection";
 import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
 import Head from "next/head";
-import AboutUs from "./AboutUs/AboutUs";
+import AboutUs from "./about-us";
 import TinyBanner from "@/Components/CustomerComponents/Banner/TinyBanner";
 
 const home = () => {
