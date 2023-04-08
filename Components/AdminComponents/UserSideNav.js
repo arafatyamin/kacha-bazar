@@ -40,11 +40,11 @@ const UserSideNav = ({ setNavbarValue }) => {
   return (
     <div className="flex flex-col gap-3">
       {userSideNavItems?.map((userSideNavItem) => {
-        const { _id, title, icon, link } = userSideNavItem;
+        const { _id, title, icon } = userSideNavItem;
         return (
           <p
             key={_id}
-            className="flex items-center gap-2 hover:text-primary px-2 py-3 cursor-pointer"
+            className="flex items-center gap-2 hover:text-primary p-2 cursor-pointer"
             onClick={(e) => setNavbarValue(e.target.innerText.toLowerCase())}
           >
             {icon} {title}
