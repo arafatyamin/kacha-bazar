@@ -43,7 +43,9 @@ const HeroSection = () => {
         </div>
 
         {/* right  */}
-        <div className="w-2/5  bg-red-100"></div>
+        <div className="w-2/5 border-2 border-[var(--clr-red)] rounded-md hover:border-[var(--clr-primary)] ">
+          <div className="h-10 bg-orange-200 text-center overflow-hidden rounded-t-md pt-2 font-bold">Latest Super Discount Active Coupon Code</div>
+        </div>
         {/* <OfferComponent/> */}
       </div>
       <TinyBanner />
