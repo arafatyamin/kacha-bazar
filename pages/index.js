@@ -12,7 +12,6 @@ const home = () => {
         <title>Home Page</title>
       </Head>
       <main className="relative">
-      <main>
         <Header />
         <HeroSection/>
 
