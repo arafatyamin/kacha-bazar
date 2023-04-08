@@ -101,6 +101,9 @@ body {
   .bg-primary {
     background: var(--clr-primary);
   }
+  .bg-primary-hover {
+    background: var(--clr-primary-hover);
+  }
 
   .bg-secondary {
     background-color: var(--clr-secondary);
