@@ -7,12 +7,10 @@ const checkout = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
 
-  console.log(watch("example"));
   return (
     <>
       <Head>
@@ -27,42 +25,63 @@ const checkout = () => {
                   <div className="mb-8">
                     <h3 className="mb-3 font-medium">01. Personal Details</h3>
                     <div>
-                      <div className="flex gap-2 mb-5">
+                      <div className="flex gap-3 mb-5">
                         <div className="w-full">
-                          <label htmlFor="firstName">First Name</label>
+                          <label
+                            htmlFor="firstName"
+                            className="mb-1 inline-block"
+                          >
+                            First Name
+                          </label>
                           <br />
                           <input
                             id="firstName"
                             placeholder="John"
+                            className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
                             {...register("firstName")}
                           />
                         </div>
                         <div className="w-full">
-                          <label htmlFor="lastName">Last Name</label>
+                          <label
+                            htmlFor="lastName"
+                            className="mb-1 inline-block"
+                          >
+                            Last Name
+                          </label>
                           <br />
                           <input
                             id="lastName"
                             placeholder="Doe"
-                            {...register("example")}
+                            className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
+                            {...register("lastName")}
                           />
                         </div>
                       </div>
 
-                      <div className="flex gap-2">
+                      <div className="flex gap-3">
                         <div className="w-full">
-                          <label htmlFor="email">Email Address</label>
+                          <label htmlFor="email" className="mb-1 inline-block">
+                            Email Address
+                          </label>
                           <br />
                           <input
                             id="email"
+                            className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
                             placeholder="John@gmail.com"
                             {...register("email")}
                           />
                         </div>
                         <div className="w-full">
-                          <label htmlFor="phoneNumber">Phone Number</label>
+                          <label
+                            htmlFor="phoneNumber"
+                            className="mb-1 inline-block"
+                          >
+                            Phone Number
+                          </label>
                           <br />
                           <input
                             id="phoneNumber"
+                            className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
                             placeholder="e.g. 123456789"
                             {...register("phoneNumber")}
                           />
@@ -70,45 +89,61 @@ const checkout = () => {
                       </div>
                     </div>
                   </div>
-                  {/* Shipping Details */}
+
                   <div className="mb-8">
                     <h3 className="mb-3 font-medium">02. Shipping Details</h3>
                     <div>
                       <div className="w-full mb-3">
-                        <label htmlFor="shippingAddress">
+                        <label
+                          htmlFor="shippingAddress"
+                          className="mb-1 inline-block"
+                        >
                           Shipping Address
                         </label>
                         <br />
                         <input
                           id="shippingAddress"
+                          className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
                           placeholder="123 Boulevard Rd, Beverley Hills"
                           {...register("shippingAddress")}
                         />
                       </div>
-                      <div className="flex gap-2 mb-5">
+                      <div className="flex gap-3 mb-5">
                         <div className="w-full">
-                          <label htmlFor="city">City</label>
+                          <label htmlFor="city" className="mb-1 inline-block">
+                            City
+                          </label>
                           <br />
                           <input
                             id="city"
+                            className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
                             placeholder="Dhaka"
                             {...register("city")}
                           />
                         </div>
                         <div className="w-full">
-                          <label htmlFor="country">Country</label>
+                          <label
+                            htmlFor="country"
+                            className="mb-1 inline-block"
+                          >
+                            Country
+                          </label>
                           <br />
                           <input
                             id="country"
+                            className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
                             placeholder="Bangladesh"
                             {...register("country")}
                           />
                         </div>
                         <div className="w-full">
-                          <label htmlFor="zip">ZIP / Postal</label>
+                          <label htmlFor="zip" className="mb-1 inline-block">
+                            ZIP / Postal
+                          </label>
                           <br />
                           <input
                             id="zip"
+                            className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
                             placeholder="2345"
                             {...register("zip")}
                           />
@@ -117,13 +152,13 @@ const checkout = () => {
                     </div>
                   </div>
 
-                  <div className="mb-8">
+                  {/* <div className="mb-8">
                     <h3 className="font-medium mb-3">03. Shipping Cost</h3>
                     <div className="flex gap-5">
-                      <div className="flex-1 px-3 py-5 border rounded">
-                        <label htmlFor="fedex">
+                      <label htmlFor="fedex" className="flex-1 cursor-pointer">
+                        <div className="px-3 py-5 border rounded">
                           <div className="flex justify-between gap-2">
-                            <div className="flex gap-2 items-center">
+                            <div className="flex gap-3 items-center">
                               <div>
                                 <BsTruck size="30" color="#bcbcbc" />
                               </div>
@@ -142,12 +177,12 @@ const checkout = () => {
                               {...register("fedex", { required: true })}
                             />
                           </div>
-                        </label>
-                      </div>
-                      <div className="flex-1 px-3 py-5 border rounded">
-                        <label htmlFor="ups">
+                        </div>
+                      </label>
+                      <label htmlFor="ups" className="flex-1 cursor-pointer">
+                        <div className="px-3 py-5 border rounded">
                           <div className="flex justify-between gap-2">
-                            <div className="flex gap-2 items-center">
+                            <div className="flex gap-3 items-center">
                               <div>
                                 <BsTruck size="30" color="#bcbcbc" />
                               </div>
@@ -166,19 +201,67 @@ const checkout = () => {
                               {...register("ups", { required: true })}
                             />
                           </div>
-                        </label>
-                      </div>
+                        </div>
+                      </label>
                     </div>
                   </div>
 
-                  {/* include validation with required or other standard HTML validation rules */}
-                  <input {...register("exampleRequired", { required: true })} />
-                  {/* errors will return when field validation fails  */}
+                  <div className="mb-8">
+                    <h3 className="font-medium mb-3">04. Payment Details</h3>
+                    <div className="flex gap-5">
+                      <label htmlFor="cash" className="flex-1 cursor-pointer">
+                        <div className="px-3 py-5 border rounded">
+                          <div className="flex justify-between gap-2">
+                            <div className="flex gap-3 items-center">
+                              <div>
+                                <BsTruck size="30" color="#bcbcbc" />
+                              </div>
+                              <div>
+                                <h6>Cash On Delivery</h6>
+                              </div>
+                            </div>
+                            <input
+                              id="cash"
+                              type="radio"
+                              name="cash"
+                              value="cash"
+                              {...register("cash", { required: true })}
+                            />
+                          </div>
+                        </div>
+                      </label>
+                      <label htmlFor="card" className="flex-1 cursor-pointer">
+                        <div className="px-3 py-5 border rounded">
+                          <div className="flex justify-between gap-2">
+                            <div className="flex gap-3 items-center">
+                              <div>
+                                <BsTruck size="30" color="#bcbcbc" />
+                              </div>
+                              <div>
+                                <h6>Credit Card</h6>
+                              </div>
+                            </div>
+                            <input
+                              id="card"
+                              type="radio"
+                              name="card"
+                              value="card"
+                              {...register("card", { required: true })}
+                            />
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+                  </div> */}
+
                   {errors.exampleRequired && (
                     <span>This field is required</span>
                   )}
 
-                  <input type="submit" />
+                  <input
+                    className="bg-green-600 px-5 py-2 text-white rounded cursor-pointer"
+                    type="submit"
+                  />
                 </form>
               </div>
               <div className="p-2">2</div>
