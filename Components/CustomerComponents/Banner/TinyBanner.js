@@ -1,3 +1,4 @@
+import Button from '@/Components/CommonComponents/shared/Button';
 import React from 'react'
 
 const TinyBanner = () => {
@@ -19,12 +20,7 @@ const TinyBanner = () => {
               </a>
             </p>
           </div>
-          <a
-            className="text-sm font-sans font-medium px-6 py-2 bg-emerald-500 text-center rounded-full text-white hover:bg-emerald-700"
-            href=""
-          >
-            Shop Now
-          </a>
+          <Button text={"Shop Now"} fill={true} />
         </div>
       </div>
     </div>
