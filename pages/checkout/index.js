@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useForm } from "react-hook-form";
 import CustomerLayout from "@/Layouts/CustomerLayout";
 import { BsTruck } from "react-icons/bs";
+import OrderSummary from "@/Components/CustomerComponents/Cards/OrderSummary/OrderSummary";
 
 const checkout = () => {
   const {
@@ -264,7 +265,9 @@ const checkout = () => {
                   />
                 </form>
               </div>
-              <div className="p-2">2</div>
+              <div className="p-2">
+                <OrderSummary />
+              </div>
             </div>
           </div>
         </section>
