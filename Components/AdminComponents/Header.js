@@ -5,6 +5,7 @@ import { AiOutlineLogout, AiFillSetting } from "react-icons/ai";
 import { GoThreeBars } from "react-icons/go";
 import Link from "next/link";
 import MobileDiviceMenu from "./MobileDiviceMenu";
+import SmallDeviceMenu from "./SmallDeviceMenu";
 
 const Header = () => {
   const [openProfileModal, setOpenProfileModal] = useState(false);

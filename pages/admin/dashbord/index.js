@@ -37,8 +37,8 @@ const Dashbord = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {orders.map((order) => (
-            <TotalOrderCard order={order}></TotalOrderCard>
+          {orders.map((order, i) => (
+            <TotalOrderCard key={i} order={order}></TotalOrderCard>
           ))}
         </div>
 

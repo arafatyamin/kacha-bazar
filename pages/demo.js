@@ -1,6 +1,6 @@
 import CategoryCard from "@/Components/CustomerComponents/Cards/CategoryCard/CategoryCard";
 import ProductCard from "@/Components/CustomerComponents/Cards/ProductCard/ProductCard";
-import UserSideNav from "@/Components/CustomerComponents/CustomerAdmin/UserSideNav";
+import UserSideNav from "@/Components/AdminComponents/UserSideNav";
 import { categoryItems } from "@/data/data";
 
 const demo = () => {
