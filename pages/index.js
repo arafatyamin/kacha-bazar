@@ -1,15 +1,14 @@
 import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
-import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
-import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
 import Header from "@/Components/CommonComponents/Header";
 import CategoryCard from "@/Components/CustomerComponents/Cards/CategoryCard/CategoryCard";
+import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
 // import UserSideNav from "@/Components/CustomerComponents/CustomerAdmin/UserSideNav";
+import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
 import FeaturedProducts from "@/Components/CustomerComponents/HomeComponents/FeaturedProducts";
 import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSection";
-import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
 import { categoryItems } from "@/data/data";
-import Head from "next/head";
 import { offeredProductItems, productItems } from "@/data/productData";
+import Head from "next/head";
 
 const home = () => {
   return (
@@ -32,7 +31,7 @@ const home = () => {
               Choose your necessary products from this feature categories.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
             {categoryItems.map((categoryItem) => (
               <CategoryCard data={categoryItem} key={categoryItem.id} />
             ))}
@@ -50,18 +49,19 @@ const home = () => {
 
         {/* ======================Mobile Ads Banner Part Start====================== */}
 
-        <MobileAdsBanner></MobileAdsBanner>
+        <MobileAdsBanner />
         
         {/* ======================Mobile Ads Banner Part End====================== */}
 
-        {/* ======================App Store Section Part Start====================== */}
         <FeaturedProducts Items={offeredProductItems}/>
-        <AppStoreBanner></AppStoreBanner>
+
+        {/* ======================App Store Section Part Start====================== */}
+        <AppStoreBanner />
         {/* ======================App Store Section Part End====================== */}
 
         {/* ======================Floating cart card component start ====================== */}
           <div className=" fixed top-80 right-0">
-            <FlotingCart></FlotingCart>
+            <FlotingCart />
           </div>
         {/* ======================Floating cart card component start ====================== */}
 
