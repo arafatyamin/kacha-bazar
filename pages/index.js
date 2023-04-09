@@ -19,55 +19,52 @@ const home = () => {
       </Head>
       <main className="relative">
         <Header />
-        <HeroSection/>
-        
+        <div className="container">
+          <HeroSection />
 
-        {/* ======================Featured Categories Part Start====================== */}
-        <div className="container mx-auto px-3 lg:px-10 py-6 ">
-          <div className="text-center mt-10">
-            <h2 className="font-bold text-xl sm:text-2xl">
-              Featured Categories
-            </h2>
-            <p className="text-gray-primary text-sm sm:text-base">
-              Choose your necessary products from this feature categories.
-            </p>
+          {/* ======================Featured Categories Part Start====================== */}
+          <div className="container mx-auto px-3 lg:px-10 py-6 ">
+            <div className="text-center mt-10">
+              <h2 className="font-bold text-xl sm:text-2xl">
+                Featured Categories
+              </h2>
+              <p className="text-gray-primary text-sm sm:text-base">
+                Choose your necessary products from this feature categories.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
+              {categoryItems.map((categoryItem) => (
+                <CategoryCard data={categoryItem} key={categoryItem.id} />
+              ))}
+            </div>
+            {/* <UserSideNav /> */}
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
-            {categoryItems.map((categoryItem) => (
-              <CategoryCard data={categoryItem} key={categoryItem.id} />
-            ))}
-          </div>
-          {/* <UserSideNav /> */}
+          {/* ======================Featured Categories Part End====================== */}
+
+          {/* ======================Featured Products Part Start====================== */}
+          <FeaturedProducts Items={productItems} />
+
+          {/* ======================Featured Products Part End====================== */}
+
+          {/* ======================Mobile Ads Banner Part Start====================== */}
         </div>
-        {/* ======================Featured Categories Part End====================== */}
-
-
-        {/* ======================Featured Products Part Start====================== */}
-        <FeaturedProducts Items={productItems}/>
-
-        {/* ======================Featured Products Part End====================== */}
-
-
-        {/* ======================Mobile Ads Banner Part Start====================== */}
-
         <MobileAdsBanner />
-        
+
         {/* ======================Mobile Ads Banner Part End====================== */}
 
-        <FeaturedProducts Items={offeredProductItems}/>
+        <div className="container">
+          <FeaturedProducts Items={offeredProductItems} />
+        </div>
 
         {/* ======================App Store Section Part Start====================== */}
         <AppStoreBanner />
         {/* ======================App Store Section Part End====================== */}
 
         {/* ======================Floating cart card component start ====================== */}
-          <div className=" fixed top-80 right-0">
-            <FlotingCart />
-          </div>
+        <div className="fixed top-80 right-0">
+          <FlotingCart />
+        </div>
         {/* ======================Floating cart card component start ====================== */}
-
-
-
       </main>
     </>
   );
