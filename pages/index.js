@@ -1,5 +1,4 @@
-import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
-import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
+import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
 import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
 import Header from "@/Components/CommonComponents/Header";
 import CategoryCard from "@/Components/CustomerComponents/Cards/CategoryCard/CategoryCard";
@@ -10,7 +9,6 @@ import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/Mobil
 import { categoryItems } from "@/data/data";
 import Head from "next/head";
 import { offeredProductItems, productItems } from "@/data/productData";
-import FAQ from "./FAQ/FAQ";
 
 const home = () => {
   return (
@@ -67,9 +65,6 @@ const home = () => {
         {/* ======================Floating cart card component start ====================== */}
 
 
-        {/* ====================== FAQ Start =============================== */}
-          <FAQ/>
-        {/* ====================== FAQ END =============================== */}
 
       </main>
     </>
