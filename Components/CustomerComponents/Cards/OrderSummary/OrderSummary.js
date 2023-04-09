@@ -1,3 +1,5 @@
+import Button from "@/Components/CommonComponents/shared/Button";
+
 const OrderSummary = () => {
   return (
     <div className="border rounded p-3">
@@ -6,13 +8,13 @@ const OrderSummary = () => {
         {[1, 2, 3, 4, 5].map((i) => (
           <p>Product {i}</p>
         ))}
-        <div>
+        <div className="flex gap-3 justify-between items-center">
           <input
             type="text"
             placeholder="Input your coupon code"
             className="px-3 py-2 border rounded outline-none mt-3"
           />
-          <button>Apply</button>
+          <Button text={"Apply"} />
         </div>
         <div className="mt-5 border-b">
           <ul>
