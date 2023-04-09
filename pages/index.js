@@ -52,9 +52,21 @@ const home = () => {
 
         {/* ======================Mobile Ads Banner Part End====================== */}
 
-        <div className="container">
-          <FeaturedProducts Items={offeredProductItems} />
-        </div>
+        <section className="py-10">
+          <div className="container">
+            <div className="text-center">
+              <h2 className="font-bold text-xl sm:text-2xl mb-2">
+                Popular Products for Daily Shopping
+              </h2>
+              <p className="text-gray-primary text-sm sm:text-base max-w-2xl mx-auto">
+                See all our popular products in this week. You can choose your
+                daily needs products from this list and get some special offer
+                with free shipping.
+              </p>
+            </div>
+            <FeaturedProducts Items={offeredProductItems} />
+          </div>
+        </section>
 
         {/* ======================App Store Section Part Start====================== */}
         <AppStoreBanner />
