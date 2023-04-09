@@ -1,5 +1,4 @@
-import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
-import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
+import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
 import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
 import Header from "@/Components/CommonComponents/Header";
 import CategoryCard from "@/Components/CustomerComponents/Cards/CategoryCard/CategoryCard";
@@ -19,8 +18,8 @@ const home = () => {
       </Head>
       <main className="relative">
         <Header />
-        <HeroSection />
-
+        <HeroSection/>
+        
 
         {/* ======================Featured Categories Part Start====================== */}
         <div className="container mx-auto px-3 lg:px-10 py-6 ">
@@ -66,10 +65,10 @@ const home = () => {
         {/* ======================Floating cart card component start ====================== */}
 
 
+
       </main>
     </>
   );
 };
 
 export default home;
-
