@@ -1,5 +1,7 @@
+import { categoryItems } from '@/data/data';
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from 'react';
 import { AiOutlineRight } from "react-icons/ai";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
@@ -10,40 +12,7 @@ import { categoryItems } from "@/data/data";
 import { Fragment } from "react";
 
 const Header = () => {
-  const categories = [
-    {
-      title: "Fish and Meat",
-      icon: "/images/home/carp-fish.webp",
-      child: [
-        {
-          title: "Fish",
-          link: "/",
-        },
-        {
-          title: "Meat",
-          link: "/",
-        },
-      ],
-    },
-    {
-      title: "Fish and Meat",
-      icon: "/images/home/carp-fish.webp",
-      child: [
-        {
-          title: "Fish",
-          link: "/",
-        },
-        {
-          title: "Meat",
-          link: "/",
-        },
-      ],
-    },
-    {
-      title: "Fish and Meat",
-      icon: "/images/home/carp-fish.webp",
-    },
-  ];
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false)
   return (
     <header>
       {/*   */}
@@ -98,44 +67,46 @@ const Header = () => {
       {/* ======================Main header Part End====================== */}
 
       {/* ======================Sub header Part Start====================== */}
-      <div className="container">
-        <nav className="bg-white text-sm font-primary relative">
-          <div className="h-12 flex justify-between items-center max-w-screen-2xl">
-            {/* Left  */}
-            <ul className="flex gap-8">
+      <nav className="bg-white text-sm font-primary relative">
+        <div className="h-12 flex justify-between items-center max-w-screen-2xl px-10">
+          {/* Left  */}
+          <ul className="flex gap-8">
+            <div>
               <div>
-                <div>
+                <span>
                   Categories
-                  {/* //TODO: Need to implement dropdown */}
-                  <div className="bg-red-100 absolute z-10 h-96 w-60 overflow-auto">
-                    <DropDown itemList={categoryItems} />;
+                </span>
+                {/* //TODO: Need to implement dropdown */}
+                {!isCategoryOpen && (
+                  <div className="absolute z-10 h-[450px] w-80 overflow-auto rounded-md top-12 scrollbar-hide bg-white shadow-md">
+                    <DropDown itemList={categoryItems} />
                   </div>
-                </div>
+                )}
               </div>
-              <li>
-                <Link href="/about-us">About Us</Link>
-              </li>
-              <li>
-                <Link href="/contact">Contact Us</Link>
-              </li>
-              <li>
-                <Link href="#">Pages</Link>
-              </li>
-              <li>
-                <Link href="#">Offers</Link>
-              </li>
-            </ul>
-            <ul className="flex gap-8">
-              <li>
-                <Link href="/privacy-policy">Privacy Policy</Link>
-              </li>
-              <li>
-                <Link href="/terms-and-condition">Terms & Conditions</Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
+            </div>
+            <li>
+              <Link href="/about">About Us</Link>
+            </li>
+            <li>
+              <Link href="/contact">Contact Us</Link>
+            </li>
+            <li>
+              <Link href="#">Pages</Link>
+            </li>
+            <li>
+              <Link href="#">Offers</Link>
+            </li>
+          </ul>
+          <ul className="flex gap-8">
+            <li>
+              <Link href="/privacy-policy">Privacy Policy</Link>
+            </li>
+            <li>
+              <Link href="/terms-and-condition">Terms & Conditions</Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <hr />
 
       {/* ======================Sub header Part End====================== */}
@@ -147,20 +118,20 @@ export default Header;
 
 const DropDown = ({ itemList }) => {
   return (
-    <div className="p-4 ">
+    <div className="p-6 space-y-4">
       {itemList?.map((item) => (
-        <div className="gap-2">
-          <div className="flex gap-2 items-center justify-between">
-            <div>
+        <div className="hover:bg-gray-100 duration-200 transition ease-in-out rounded p-2 cursor-pointer">
+          <div className="flex gap-4 items-center justify-between">
+            <div className="flex gap-4 items-center ">
               <Image src={item?.imgUrl} height={20} width={20} />
               <p>{item.title}</p>
             </div>
-            <AiOutlineRight className="items-end" />
+            <AiOutlineRight className="items-end text-gray-primary" />
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="gap-2 items-center m-2 hidden">
             <p>-</p>
             <Link href="#">
-              <p>{item.title}</p>
+              <p className="hover:text-primary duration-150">{item.title}</p>
             </Link>
           </div>
         </div>
