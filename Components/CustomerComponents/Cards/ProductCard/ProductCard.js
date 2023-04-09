@@ -1,28 +1,31 @@
-import Counter from '@/Components/CommonComponents/Counter';
-import Button from '@/Components/CommonComponents/shared/Button';
-import Image from 'next/image';
-import { useState } from 'react';
-import { MdShoppingBasket } from 'react-icons/md';
+import Counter from "@/Components/CommonComponents/Counter";
+import Button from "@/Components/CommonComponents/shared/Button";
+import Image from "next/image";
+import { useState } from "react";
+import { MdShoppingBasket } from "react-icons/md";
 
-const ProductCard = ({imgUrl, quantity, title, price=0, offer}) => {
-    const offerPrice = price * (100 - offer)/100;
+const ProductCard = ({ imgUrl, quantity, title, price = 0, offer }) => {
+  const offerPrice = (price * (100 - offer)) / 100;
 
-    {/**======== Counter part========= */}
-    const[counter, setCounter] = useState(0)
-    
-    const increaseHandler = () => {
-      setCounter(prev => prev+1)
-      
-    }
-    const decreaseHandler = () => {
-      setCounter(prev => prev -1)
-    }
-    {/**======== Counter part end========= */}
+  {
+    /**======== Counter part========= */
+  }
+  const [counter, setCounter] = useState(0);
 
-    const [hoverState, setHoverState] = useState(false)
-    const hoverStateHandler = () => {
-      setHoverState(!hoverState)
-    }
+  const increaseHandler = () => {
+    setCounter((prev) => prev + 1);
+  };
+  const decreaseHandler = () => {
+    setCounter((prev) => prev - 1);
+  };
+  {
+    /**======== Counter part end========= */
+  }
+
+  const [hoverState, setHoverState] = useState(false);
+  const hoverStateHandler = () => {
+    setHoverState(!hoverState);
+  };
   return (
     <div
       className="bg-white min-w-[200px] relative rounded border border-gray-100 shadow-sm pt-4"
@@ -35,7 +38,7 @@ const ProductCard = ({imgUrl, quantity, title, price=0, offer}) => {
         height={150}
         className={`mx-auto ${
           hoverState &&
-          "scale-105  duration-150 transition transform ease-linear"
+          "scale-105  duration-150 transition transform ease-in-out"
         }`}
       />
       {offer && (
@@ -74,6 +77,6 @@ const ProductCard = ({imgUrl, quantity, title, price=0, offer}) => {
       </div>
     </div>
   );
-}
+};
 
-export default ProductCard
+export default ProductCard;
