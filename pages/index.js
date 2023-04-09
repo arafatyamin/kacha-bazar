@@ -1,9 +1,8 @@
-import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
-import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
 import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
+// import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
+import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
 import Header from "@/Components/CommonComponents/Header";
 import CategoryCard from "@/Components/CustomerComponents/Cards/CategoryCard/CategoryCard";
-import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
 // import UserSideNav from "@/Components/CustomerComponents/CustomerAdmin/UserSideNav";
 import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
 import FeaturedProducts from "@/Components/CustomerComponents/HomeComponents/FeaturedProducts";
