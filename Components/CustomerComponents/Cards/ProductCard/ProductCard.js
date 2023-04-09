@@ -24,11 +24,20 @@ const ProductCard = ({imgUrl, quantity, title, price=0, offer}) => {
       setHoverState(!hoverState)
     }
   return (
-    <div className="bg-white min-w-[200px] relative rounded border border-gray-100 shadow-sm pt-4" 
-    onMouseEnter={hoverStateHandler}
-    onMouseLeave={hoverStateHandler}
+    <div
+      className="bg-white min-w-[200px] relative rounded border border-gray-100 shadow-sm pt-4"
+      onMouseEnter={hoverStateHandler}
+      onMouseLeave={hoverStateHandler}
     >
-      <Image src={imgUrl} width={200} height={200} className={`mx-auto ${hoverState && "scale-105  duration-300 object-cover"}`} />
+      <Image
+        src={imgUrl}
+        width={150}
+        height={150}
+        className={`mx-auto ${
+          hoverState &&
+          "scale-105  duration-150 transition transform ease-linear"
+        }`}
+      />
       {offer && (
         <p className="absolute top-4 right-4 bg-orange-400 text-white text-sm w-fit px-2 py-[2px] rounded ">
           {offer}% Off
@@ -49,7 +58,11 @@ const ProductCard = ({imgUrl, quantity, title, price=0, offer}) => {
             <p className="font-bold text-lg"> ${price}</p>
           )}
           {counter ? (
-            <Counter value={counter} increaseHandler={increaseHandler} decreaseHandler={decreaseHandler}/>
+            <Counter
+              value={counter}
+              increaseHandler={increaseHandler}
+              decreaseHandler={decreaseHandler}
+            />
           ) : (
             <Button
               onClick={increaseHandler}
