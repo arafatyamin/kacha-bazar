@@ -46,7 +46,7 @@ const Header = () => {
     <header>
       {/*   */}
       {/* ======================top Header Part Start====================== */}
-      <div className=" text-xs  font-secondary bg-white">
+      <div className="hidden lg:inline text-xs  font-secondary bg-white">
         {/* Left  */}
         <div className="max-w-screen-2xl h-8 mx-auto sm:px-10 flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -77,7 +77,7 @@ const Header = () => {
       <div className=" bg-primary  text-lg ">
         <div className="h-20 flex justify-around items-center gap-8 md:gap-24 lg:gap-28 max-w-screen-2xl px-10 ">
           <img
-            src="public\images\home\carp-fish.webp"
+            src="https://kachabazar-store.vercel.app/logo/logo-light.svg"
             alt="logo"
             width={110}
             height={40}
