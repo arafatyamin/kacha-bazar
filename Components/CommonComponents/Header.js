@@ -1,11 +1,11 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { AiOutlineRight } from 'react-icons/ai';
-import { BiPhoneCall } from 'react-icons/bi';
-import { BsBell } from 'react-icons/bs';
-import { FiShoppingCart } from 'react-icons/fi';
-import { MdOutlinePersonOutline } from 'react-icons/md';
-import SearchBar from './SearchBar';
+import Image from "next/image";
+import Link from "next/link";
+import { AiOutlineRight } from "react-icons/ai";
+import { BiPhoneCall } from "react-icons/bi";
+import { BsBell } from "react-icons/bs";
+import { FiShoppingCart } from "react-icons/fi";
+import { MdOutlinePersonOutline } from "react-icons/md";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   const categories = [
@@ -107,14 +107,26 @@ const Header = () => {
               </div>  */}
               </div>
             </div>
-            <li>About Us</li>
-            <li>Contact Us</li>
-            <li>Pages</li>
-            <li>Offers</li>
+            <li>
+              <Link href="/about">About Us</Link>
+            </li>
+            <li>
+              <Link href="/contact">Contact Us</Link>
+            </li>
+            <li>
+              <Link href="#">Pages</Link>
+            </li>
+            <li>
+              <Link href="#">Offers</Link>
+            </li>
           </ul>
           <ul className="flex gap-8">
-            <li>Privacy Policy</li>
-            <li>Terms & Conditions</li>
+            <li>
+              <Link href="/privacy-policy">Privacy Policy</Link>
+            </li>
+            <li>
+              <Link href="/terms-and-condition">Terms & Conditions</Link>
+            </li>
           </ul>
         </div>
       </nav>
@@ -123,12 +135,11 @@ const Header = () => {
       {/* ======================Sub header Part End====================== */}
     </header>
   );
-}
+};
 
-export default Header
+export default Header;
 
-
-const DropDown =  ({itemList, isChild})  => {
+const DropDown = ({ itemList, isChild }) => {
   return (
     <div>
       {itemList?.map((item) => (
@@ -147,9 +158,9 @@ const DropDown =  ({itemList, isChild})  => {
               <AiOutlineRight className="items-end" />
             </div>
           )}
-          {item.child && <DropDown itemList={item.child} isChild={true}/>}
+          {item.child && <DropDown itemList={item.child} isChild={true} />}
         </div>
       ))}
     </div>
   );
-}
+};
