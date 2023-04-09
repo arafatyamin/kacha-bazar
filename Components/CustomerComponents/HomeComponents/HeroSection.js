@@ -1,25 +1,27 @@
 import CarouselComponent from "@/Components/CommonComponents/CarouselComponent";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import TinyBanner from "../Banner/TinyBanner";
 
 const carouselSlider = [
-    {
-        imageURL: "/images/home/slider-1.webp",
-        heading: "The Best Quality Products Guranteed!!",
-        subheading: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, rem."
-    },
-    {
-        imageURL: "/images/home/slider-2.webp",
-        heading: "The Best Quality Products Guranteed!!",
-        subheading: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, rem."
-    },
-    {
-        imageURL: "/images/home/slider-3.webp",
-        heading: "The Best Quality Products Guranteed!!",
-        subheading: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, rem."
-    },
-]
+  {
+    imageURL: "/images/home/slider-1.webp",
+    heading: "The Best Quality Products Guranteed!!",
+    subheading:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, rem.",
+  },
+  {
+    imageURL: "/images/home/slider-2.webp",
+    heading: "The Best Quality Products Guranteed!!",
+    subheading:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, rem.",
+  },
+  {
+    imageURL: "/images/home/slider-3.webp",
+    heading: "The Best Quality Products Guranteed!!",
+    subheading:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, rem.",
+  },
+];
 const HeroSection = () => {
   return (
     <div className="py-8 bg-white ">
@@ -51,10 +53,8 @@ const HeroSection = () => {
         </div>
         {/* <OfferComponent/> */}
       </div>
-      <TinyBanner />
     </div>
   );
-}
+};
 
-export default HeroSection
-
+export default HeroSection;

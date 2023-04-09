@@ -3,7 +3,7 @@ import React from "react";
 const MobileAdsBanner = () => {
   return (
     <div className="block mx-auto max-w-screen-2x mt-24">
-      <div className="mx-auto max-w-screen-2xl px-3 sm:px-10">
+      <div className="mx-auto max-w-screen-2xl px-3">
         <div className="lg:p-16 p-6 bg-emerald-500 shadow-sm border rounded-lg">
           <div className="w-full bg-white shadow-sm lg:px-10 lg:py-5 p-6 rounded-lg">
             <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-4">

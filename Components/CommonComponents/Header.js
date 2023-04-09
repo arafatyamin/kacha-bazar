@@ -6,8 +6,8 @@ import { BsBell } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import SearchBar from "./SearchBar";
-import { categoryItems } from '@/data/data';
-import { Fragment } from 'react';
+import { categoryItems } from "@/data/data";
+import { Fragment } from "react";
 
 const Header = () => {
   const categories = [
@@ -50,7 +50,7 @@ const Header = () => {
       {/* ======================top Header Part Start====================== */}
       <div className="hidden lg:inline text-xs  font-secondary bg-white ">
         {/* Left  */}
-        <div className="max-w-screen-2xl h-8 mx-auto sm:px-10 flex justify-between items-center">
+        <div className="max-w-screen-2xl h-8 mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
             <BiPhoneCall />
             <p>
@@ -77,61 +77,65 @@ const Header = () => {
       {/* ======================Top Header Part End====================== */}
       {/* ======================Main header Part Start====================== */}
       <div className=" bg-primary  text-lg ">
-        <div className="h-20 flex justify-around items-center gap-8 md:gap-24 lg:gap-28 max-w-screen-2xl px-10 ">
-          <img
-            src="https://kachabazar-store.vercel.app/logo/logo-light.svg"
-            alt="logo"
-            width={110}
-            height={40}
-          />
-          <SearchBar />
-          <nav className="flex gap-10 text-white text-2xl ">
-            <BsBell className="hover:scale-110 duration-200 cursor-pointer" />
-            <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
-            <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
-          </nav>
+        <div className="container">
+          <div className="h-20 flex justify-around items-center gap-8 md:gap-24 lg:gap-28 max-w-screen-2xl">
+            <img
+              src="https://kachabazar-store.vercel.app/logo/logo-light.svg"
+              alt="logo"
+              width={110}
+              height={40}
+            />
+            <SearchBar />
+            <nav className="flex gap-10 text-white text-2xl ">
+              <BsBell className="hover:scale-110 duration-200 cursor-pointer" />
+              <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
+              <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
+            </nav>
+          </div>
         </div>
       </div>
 
       {/* ======================Main header Part End====================== */}
 
       {/* ======================Sub header Part Start====================== */}
-      <nav className="bg-white text-sm font-primary relative">
-        <div className="h-12 flex justify-between items-center max-w-screen-2xl px-10">
-          {/* Left  */}
-          <ul className="flex gap-8">
-            <div>
+      <div className="container">
+        <nav className="bg-white text-sm font-primary relative">
+          <div className="h-12 flex justify-between items-center max-w-screen-2xl">
+            {/* Left  */}
+            <ul className="flex gap-8">
               <div>
-                Categories
-                {/* //TODO: Need to implement dropdown */}
-                <div className="bg-red-100 absolute z-10 h-96 w-60 overflow-auto">
-                <DropDown itemList={categoryItems} />;
-              </div> 
+                <div>
+                  Categories
+                  {/* //TODO: Need to implement dropdown */}
+                  <div className="bg-red-100 absolute z-10 h-96 w-60 overflow-auto">
+                    <DropDown itemList={categoryItems} />;
+                  </div>
+                </div>
               </div>
-            </div>
-            <li>
-              <Link href="/about-us">About Us</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact Us</Link>
-            </li>
-            <li>
-              <Link href="#">Pages</Link>
-            </li>
-            <li>
-              <Link href="#">Offers</Link>
-            </li>
-          </ul>
-          <ul className="flex gap-8">
-            <li>
-              <Link href="/privacy-policy">Privacy Policy</Link>
-            </li>
-            <li>
-              <Link href="/terms-and-condition">Terms & Conditions</Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
+              <li>
+                <Link href="/about-us">About Us</Link>
+              </li>
+              <li>
+                <Link href="/contact">Contact Us</Link>
+              </li>
+              <li>
+                <Link href="#">Pages</Link>
+              </li>
+              <li>
+                <Link href="#">Offers</Link>
+              </li>
+            </ul>
+            <ul className="flex gap-8">
+              <li>
+                <Link href="/privacy-policy">Privacy Policy</Link>
+              </li>
+              <li>
+                <Link href="/terms-and-condition">Terms & Conditions</Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
       <hr />
 
       {/* ======================Sub header Part End====================== */}
@@ -141,8 +145,7 @@ const Header = () => {
 
 export default Header;
 
-
-const DropDown =  ({itemList})  => {
+const DropDown = ({ itemList }) => {
   return (
     <div className="p-4 ">
       {itemList?.map((item) => (
