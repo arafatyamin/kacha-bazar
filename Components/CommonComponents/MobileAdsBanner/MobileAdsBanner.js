@@ -8,16 +8,16 @@ const MobileAdsBanner = () => {
                   <div className="w-full bg-white shadow-sm lg:px-10 lg:py-5 p-6 rounded-lg">
                       <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1">
                         <div className="lg:w-full">
-                            <span className="text-base font-serif lg:text-lg">
+                            <span className="text-base font-sans lg:text-lg">
                             Organic Products and Food
                             </span>
-                            <h2 className="font-serif text-lg lg:text-2xl font-bold mb-1">Quick Delivery to 
+                            <h2 className="font-sans text-lg lg:text-2xl font-bold mb-1">Quick Delivery to 
                              <span className="text-emerald-500 ml-1">Your Home</span>
                             </h2>
                             <p className="text-sm font-sans leading-6">
                             There are many products you will find our shop, Choose your daily necessary product from our KachaBazar shop and get some special offer. See Our latest discounted products from here and get a special discount.
                             </p>
-                            <a href="" className="lg:w-25% text-xs font-serif font-medium inline-block mt-5 px-8 py-3 bg-emerald-500 text-center text-white rounded-full hover:text-white hover:bg-emerald-600">Download App</a>
+                            <a href="" className="lg:w-25% text-xs font-sans font-medium inline-block mt-5 px-8 py-3 bg-emerald-500 text-center text-white rounded-full hover:text-white hover:bg-emerald-600">Download App</a>
                         </div>
                         <div className="">
                             <span className="">
