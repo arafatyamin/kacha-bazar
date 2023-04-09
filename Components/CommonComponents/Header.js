@@ -6,6 +6,8 @@ import { BsBell } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
 import { MdOutlinePersonOutline } from 'react-icons/md';
 import SearchBar from './SearchBar';
+import { categoryItems } from '@/data/data';
+import { Fragment } from 'react';
 
 const Header = () => {
   const categories = [
@@ -46,7 +48,7 @@ const Header = () => {
     <header>
       {/*   */}
       {/* ======================top Header Part Start====================== */}
-      <div className="hidden lg:inline text-xs  font-secondary bg-white">
+      <div className="hidden lg:inline text-xs  font-secondary bg-white ">
         {/* Left  */}
         <div className="max-w-screen-2xl h-8 mx-auto sm:px-10 flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -94,7 +96,7 @@ const Header = () => {
       {/* ======================Main header Part End====================== */}
 
       {/* ======================Sub header Part Start====================== */}
-      <nav className="bg-white text-sm font-primary">
+      <nav className="bg-white text-sm font-primary relative">
         <div className="h-12 flex justify-between items-center max-w-screen-2xl px-10">
           {/* Left  */}
           <ul className="flex gap-8">
@@ -102,9 +104,9 @@ const Header = () => {
               <div>
                 Categories
                 {/* //TODO: Need to implement dropdown */}
-                {/* <div className="bg-red-100">
-                <DropDown itemList={categories} />;
-              </div>  */}
+                <div className="bg-red-100 absolute z-10 h-96 w-60 overflow-auto">
+                <DropDown itemList={categoryItems} />;
+              </div> 
               </div>
             </div>
             <li>About Us</li>
@@ -125,29 +127,27 @@ const Header = () => {
   );
 }
 
-export default Header
+export default Header;
 
 
-const DropDown =  ({itemList, isChild})  => {
+const DropDown =  ({itemList})  => {
   return (
-    <div>
+    <div className="p-4 ">
       {itemList?.map((item) => (
-        <div className="flex flex-col gap-2">
-          {isChild ? (
-            <div className="flex gap-2 items-center">
-              <p>-</p>
-              <Link href={item.link}>
-                <p>{item.title}</p>
-              </Link>
-            </div>
-          ) : (
-            <div className="flex gap-2 items-center">
-              <Image src={item?.icon} height={12} width={12} />
+        <div className="gap-2">
+          <div className="flex gap-2 items-center justify-between">
+            <div>
+              <Image src={item?.imgUrl} height={20} width={20} />
               <p>{item.title}</p>
-              <AiOutlineRight className="items-end" />
             </div>
-          )}
-          {item.child && <DropDown itemList={item.child} isChild={true}/>}
+            <AiOutlineRight className="items-end" />
+          </div>
+          <div className="flex gap-2 items-center">
+            <p>-</p>
+            <Link href="#">
+              <p>{item.title}</p>
+            </Link>
+          </div>
         </div>
       ))}
     </div>
