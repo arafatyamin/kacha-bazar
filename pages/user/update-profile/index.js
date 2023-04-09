@@ -19,13 +19,16 @@ const UpdateProfile = () => {
           Photo
         </label>
         <br />
-      <div class="border border-dashed border-gray-500 relative">
+      <div className="border border-dashed border-gray-500 relative">
       
-      <input type="file" multiple class="cursor-pointer relative block opacity-0 w-full h-full p-16 z-50"/>
-      <div class="text-center p-6 absolute top-0 right-0 left-0 m-auto" >
+      <input type="file" multiple 
+      className="cursor-pointer relative block opacity-0 w-full h-full p-16 z-50"
+      {...register("file", { required: true })}
+      />
+      <div className="text-center p-6 absolute top-0 right-0 left-0 m-auto" >
           <span>icon</span>
           <h4 className="text-sm mt-2">Drag your image here</h4>
-          <p class="text-xs text-gray-400">(only*.jpeg and *.png images will be accepted)</p>
+          <p className="text-xs text-gray-400">(only*.jpeg and *.png images will be accepted)</p>
       </div>
       </div>
       </div>

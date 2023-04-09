@@ -1,3 +1,4 @@
+import MobileAdsBanner from '@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner';
 import OfferCard from './OfferCard';
 
 const OfferPage = () => {
@@ -41,6 +42,9 @@ const OfferPage = () => {
         imageUrl="https://kachabazar-store.vercel.app/_next/image?url=https%3A%2F%2Fi.ibb.co%2F4thS4Z1%2Fins2.jpg&w=128&q=75" 
       />
     </div>
+
+    {/* mobile add banner */}
+    <MobileAdsBanner></MobileAdsBanner>
     </div>
   )
 }
