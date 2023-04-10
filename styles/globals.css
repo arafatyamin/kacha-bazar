@@ -128,6 +128,9 @@ body {
   .font-secondary {
     font-family: var(--ff-secondary), sans-serif;
   }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
 }
 
 @layer components {
