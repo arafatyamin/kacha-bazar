@@ -19,9 +19,9 @@ const MobileAdsBanner = () => {
                             </p>
                             <a href="" className="lg:w-25% text-xs font-primary font-medium inline-block mt-5 px-8 py-3 bg-emerald-500 text-center text-white rounded-full hover:text-white hover:bg-emerald-600">Download App</a>
                         </div>
-                        <div className="">
-                            <span className="">
-                              <img className=" object-cover ml-20" src="https://kachabazar-store.vercel.app/_next/image?url=%2Fcta%2Fdelivery-boy.png&w=384&q=75" alt="" />
+                        <div>
+                            <span>
+                              <img className=" object-cover ml-20 " src="https://kachabazar-store.vercel.app/_next/image?url=%2Fcta%2Fdelivery-boy.png&w=384&q=75" alt="" />
                             </span>
                         </div>
                       </div>
