@@ -37,8 +37,9 @@ const HeroSection = () => {
               emulateTouch={true}
               showThumbs={false}
             >
-              {carouselSlider.map((item) => (
+              {carouselSlider.map((item,index) => (
                 <CarouselComponent
+                  key={index}
                   heading={item.heading}
                   subHeading={item.subheading}
                   bgImage={item.imageURL}
