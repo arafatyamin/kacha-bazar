@@ -34,7 +34,7 @@ const home = () => {
                   Choose your necessary products from this feature categories.
                 </p>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
                 {categoryItems.map((categoryItem) => (
                   <CategoryCard data={categoryItem} key={categoryItem.id} />
                 ))}
@@ -58,7 +58,7 @@ const home = () => {
                     special offer with free shipping.
                   </p>
                 </div>
-                <div className="py-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                   {productItems &&
                     productItems?.length > 0 &&
                     productItems.map((item) => (
@@ -96,7 +96,7 @@ const home = () => {
                   with free shipping.
                 </p>
               </div>
-              <div className="py-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+              <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                 {offeredProductItems &&
                   offeredProductItems?.length > 0 &&
                   offeredProductItems.map((item) => (
@@ -127,8 +127,7 @@ const home = () => {
   );
 };
 
-
-home.getLayout =(page) => {
-  return <CustomerLayout>{page}</CustomerLayout>
-}
+home.getLayout = (page) => {
+  return <CustomerLayout>{page}</CustomerLayout>;
+};
 export default home;
