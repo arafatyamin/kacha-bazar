@@ -23,7 +23,7 @@ const TinyBanner = () => {
           <Button text={"Shop Now"} fill={true} />
         </div>
       </div>
-    </div>
+      </div>
   );
 }
 
