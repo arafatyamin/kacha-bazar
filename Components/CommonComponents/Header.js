@@ -74,7 +74,7 @@ const Header = () => {
                 <div>
                   <span>Categories</span>
                   {/* //TODO: Need to implement dropdown */}
-                  {!isCategoryOpen && (
+                  {isCategoryOpen && (
                     <div className="absolute z-10 h-[450px] w-80 overflow-auto rounded-md top-12 scrollbar-hide bg-white shadow-md">
                       <DropDown itemList={categoryItems} />
                     </div>
@@ -91,7 +91,7 @@ const Header = () => {
                 <Link href="#">Pages</Link>
               </li>
               <li>
-                <Link href="#">Offers</Link>
+                <Link href="/offerPage">Offers</Link>
               </li>
             </ul>
             <ul className="flex gap-8">

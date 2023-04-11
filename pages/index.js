@@ -36,7 +36,7 @@ const home = () => {
               {categoryItems.map((categoryItem) => (
                 <CategoryCard data={categoryItem} key={categoryItem.id} />
               ))}
-            </div>
+            </div> 
             {/* <UserSideNav /> */}
           </div>
           {/* ======================Featured Categories Part End====================== */}
