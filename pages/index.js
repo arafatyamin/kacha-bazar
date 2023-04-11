@@ -25,7 +25,7 @@ const home = () => {
 
           {/* ======================Featured Categories Part Start====================== */}
           <div className="mx-auto py-6 px-4 md:px-0">
-            <div className="container">
+            <div className="custom-container">
               <div className="text-center mt-10">
                 <h2 className="font-bold text-xl sm:text-2xl">
                   Featured Categories
@@ -47,7 +47,7 @@ const home = () => {
           {/* ======================Featured Products Part Start====================== */}
           <section>
             <div className="bg-gray-50 my-4 py-4 px-4 md:px-0">
-              <div className="container">
+              <div className="custom-container">
                 <div className="text-center mt-10 space-y-4">
                   <h2 className="font-bold text-xl sm:text-2xl">
                     Popular Products for Daily Shopping
@@ -85,7 +85,7 @@ const home = () => {
 
         <section>
           <div className="bg-gray-50 my-4 py-4 px-4 md:px-0">
-            <div className="container">
+            <div className="custom-container">
               <div className="text-center mt-10 space-y-4">
                 <h2 className="font-bold text-xl sm:text-2xl">
                   Popular Products for Daily Shopping
