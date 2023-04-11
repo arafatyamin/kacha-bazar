@@ -14,7 +14,7 @@ const AppStoreBanner = () => {
               </span>
             </div>
             <div className="text-center">
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold font-serif mb-3">
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold font-primary mb-3">
                 Get Your Daily Needs From Our KachaBazar Store
               </h3>
               <p className="text-base opacity-90 leading-7">
