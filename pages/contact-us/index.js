@@ -63,7 +63,7 @@ const index = () => {
                         <div className="px-0 pb-2 lg:w-5/12 flex flex-col md:flex-row">
                             <form className="w-full mx-auto flex flex-col justify-center">
                                 <div className='mb-12'>
-                                    <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold font-serif mb-3">For any suppoort just send your query</h3>
+                                    <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold font-primary mb-3">For any suppoort just send your query</h3>
                                     <p className="flex flex-col space-y-5">Collaboratively promote client-focused convergence vis-a-vis customer directed alignments via plagiarize strategic users and standardized infrastructures.</p>
                                 </div>
                                 <div className="flex flex-col space-y-5">
