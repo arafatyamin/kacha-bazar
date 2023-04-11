@@ -46,7 +46,7 @@ const Header = () => {
       </div>
       {/* ======================Top Header Part End====================== */}
       {/* ======================Main header Part Start====================== */}
-      <div className=" bg-primary  text-lg ">
+      <div className="bg-primary  text-lg ">
         <div className="custom-container">
           <div className="h-20 flex justify-around items-center gap-8 md:gap-24 lg:gap-28 max-w-screen-2xl">
 
@@ -90,7 +90,6 @@ const Header = () => {
                     <DropDown itemList={categoryItems} />
                   </div>
                 )}
-              </div>
               <li className="hover:text-primary duration-200">
                 <Link href="/contact">Contact Us</Link>
               </li>
