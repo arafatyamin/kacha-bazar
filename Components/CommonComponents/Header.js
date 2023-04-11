@@ -46,12 +46,14 @@ const Header = () => {
       <div className=" bg-primary  text-lg ">
         <div className="container">
           <div className="h-20 flex justify-around items-center gap-8 md:gap-24 lg:gap-28 max-w-screen-2xl">
-            <img
-              src="https://kachabazar-store.vercel.app/logo/logo-light.svg"
-              alt="logo"
-              width={110}
-              height={40}
-            />
+            <Link href="/">
+              <img
+                src="https://kachabazar-store.vercel.app/logo/logo-light.svg"
+                alt="logo"
+                width={110}
+                height={40}
+              />
+            </Link>
             <SearchBar />
             <nav className="flex gap-10 text-white text-2xl ">
               <BsBell className="hover:scale-110 duration-200 cursor-pointer" />
@@ -75,14 +77,14 @@ const Header = () => {
                   <span>Categories</span>
                   {/* //TODO: Need to implement dropdown */}
                   {!isCategoryOpen && (
-                    <div className="absolute z-10 h-[450px] w-80 overflow-auto rounded-md top-12 scrollbar-hide bg-white shadow-md">
+                    <div className="absolute z-10 h-[450px] w-80 overflow-auto rounded-md top-12 scrollbar-hide bg-white shadow-md hidden">
                       <DropDown itemList={categoryItems} />
                     </div>
                   )}
                 </div>
               </div>
               <li>
-                <Link href="/about">About Us</Link>
+                <Link href="/about-us">About Us</Link>
               </li>
               <li>
                 <Link href="/contact">Contact Us</Link>
