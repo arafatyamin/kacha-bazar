@@ -49,6 +49,7 @@ const Header = () => {
       <div className=" bg-primary  text-lg ">
         <div className="custom-container">
           <div className="h-20 flex justify-around items-center gap-8 md:gap-24 lg:gap-28 max-w-screen-2xl">
+
             <Link href={"/"} className="hidden md:inline">
               <Image
                 src="https://kachabazar-store.vercel.app/logo/logo-light.svg"
@@ -75,7 +76,8 @@ const Header = () => {
           <div className="h-12 flex justify-between items-center max-w-screen-2xl ">
             {/* Left  */}
             <ul className="flex gap-8 items-center">
-              <div>
+              <li>
+                <Link href="/about-us">About Us</Link>
                 <span
                   onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                   className="cursor-pointer flex items-center gap-2 hover:text-primary duration-200"
@@ -89,9 +91,6 @@ const Header = () => {
                   </div>
                 )}
               </div>
-              <li className="hover:text-primary duration-200">
-                <Link href="/about">About Us</Link>
-              </li>
               <li className="hover:text-primary duration-200">
                 <Link href="/contact">Contact Us</Link>
               </li>
