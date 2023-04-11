@@ -10,9 +10,10 @@ import { IoIosArrowUp } from 'react-icons/io';
 import { MdOutlinePersonOutline } from "react-icons/md";
 import SearchBar from "./SearchBar";
 import Button from "./shared/Button";
+import { categoryItems } from "@/data/data";
 
 const Header = () => {
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false)
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   return (
     <header>
       {/* ======================top Header Part Start====================== */}
