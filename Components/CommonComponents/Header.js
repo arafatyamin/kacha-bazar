@@ -1,12 +1,12 @@
 import { categoryItems } from "@/data/data";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from 'react';
+import { useState } from "react";
 import { AiOutlineDown, AiOutlineRight } from "react-icons/ai";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
-import { IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowUp } from "react-icons/io";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import SearchBar from "./SearchBar";
 import Button from "./shared/Button";
@@ -49,7 +49,6 @@ const Header = () => {
       <div className=" bg-primary  text-lg ">
         <div className="custom-container">
           <div className="h-20 flex justify-around items-center gap-8 md:gap-24 lg:gap-28 max-w-screen-2xl">
-
             <Link href={"/"} className="hidden md:inline">
               <Image
                 src="https://kachabazar-store.vercel.app/logo/logo-light.svg"
@@ -77,7 +76,6 @@ const Header = () => {
             {/* Left  */}
             <ul className="flex gap-8 items-center">
               <li>
-                <Link href="/about-us">About Us</Link>
                 <span
                   onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                   className="cursor-pointer flex items-center gap-2 hover:text-primary duration-200"
@@ -90,7 +88,10 @@ const Header = () => {
                     <DropDown itemList={categoryItems} />
                   </div>
                 )}
-              </div>
+              </li>
+              <li>
+                <Link href="/about-us">About Us</Link>
+              </li>
               <li className="hover:text-primary duration-200">
                 <Link href="/contact">Contact Us</Link>
               </li>
