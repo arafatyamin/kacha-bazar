@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <header>
       {/* ======================top Header Part Start====================== */}
-      <div className="container">
+      <div className="custom-container">
         <div className="hidden lg:inline text-xs  font-secondary bg-white">
           {/* Left  */}
           <div className="max-w-screen-2xl h-8 mx-auto flex justify-between items-center">
@@ -47,7 +47,7 @@ const Header = () => {
       {/* ======================Top Header Part End====================== */}
       {/* ======================Main header Part Start====================== */}
       <div className=" bg-primary  text-lg ">
-        <div className="container">
+        <div className="custom-container">
           <div className="h-20 flex justify-around items-center gap-8 md:gap-24 lg:gap-28 max-w-screen-2xl">
             <Link href={"/"} className="hidden md:inline">
               <Image
@@ -71,7 +71,7 @@ const Header = () => {
 
       {/* ======================Sub header Part Start====================== */}
       <nav className="bg-white text-sm font-primary relative hidden md:flex">
-        <div className="container">
+        <div className="custom-container">
           <div className="h-12 flex justify-between items-center max-w-screen-2xl ">
             {/* Left  */}
             <ul className="flex gap-8 items-center">

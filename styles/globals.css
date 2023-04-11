@@ -131,6 +131,9 @@ body {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
+  .custom-container {
+    @apply container 2xl:px-8
+  }
 }
 
 @layer components {

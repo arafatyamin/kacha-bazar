@@ -25,8 +25,8 @@ const carouselSlider = [
 ];
 const HeroSection = () => {
   return (
-    <div className="container">
-      <div className="py-8 bg-white ">
+    <div className="py-8 bg-white ">
+        <div className="custom-container">
         <div className="max-w-screen-2xl mx-auto lg:flex  px-2 md:px-10 gap-8">
           {/* left  */}
           <div className="w-full lg:w-3/5 rounded-md overflow-hidden">
