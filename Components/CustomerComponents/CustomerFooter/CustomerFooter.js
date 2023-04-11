@@ -57,7 +57,7 @@ const CustomerFooter = () => {
         <div className="border-t border-gray-100 w-full">
           <div className="pb-16 lg:pb-0 xl:pb-0 bg-white">
             <div className="mx-auto max-w-screen-2xl">
-              <div className="grid grid-cols-2 md:grid-cols-7 xl:grid-cols-12 gap-5 sm:gap-9 lg:gap-11 xl:gap-7 py-10 lg:py-16 justify-between">
+              <div className="grid grid-cols-1 md:grid-cols-7 xl:grid-cols-12 gap-5 sm:gap-9 lg:gap-11 xl:gap-7 py-10 lg:py-16 px-5 justify-between">
                 <div className="pb-3.5 sm:pb-0 col-span-1 md:col-span-2 lg:col-span-3">
                   <h1 className="text-lg font-medium mb-2">Company</h1>
                   <ul className="text-sm flex flex-col space-y-3">

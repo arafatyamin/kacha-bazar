@@ -1,9 +1,9 @@
-import Button from '@/Components/CommonComponents/shared/Button';
-import React from 'react'
+import Button from "@/Components/CommonComponents/shared/Button";
+import React from "react";
 
 const TinyBanner = () => {
   return (
-    <div className='px-10'>
+    <div>
       <div className=" bg-orange-100 px-10 py-6 rounded-lg mt-6 hidden lg:block">
         <div className="flex justify-between items-center">
           <div>
@@ -23,8 +23,8 @@ const TinyBanner = () => {
           <Button text={"Shop Now"} fill={true} />
         </div>
       </div>
-      </div>
+    </div>
   );
-}
+};
 
-export default TinyBanner
+export default TinyBanner;
