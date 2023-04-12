@@ -97,8 +97,9 @@ const home = () => {
               <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                 {offeredProductItems &&
                   offeredProductItems?.length > 0 &&
-                  offeredProductItems.map((item) => (
+                  offeredProductItems.map((item, index) => (
                     <ProductCard
+                      key={index}
                       imgUrl={item.imgUrl}
                       title={item.title}
                       quantity={item.quantity}
