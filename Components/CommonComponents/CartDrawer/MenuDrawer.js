@@ -31,7 +31,7 @@ const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
             />
           </div>
           <div>
-            <h2>All Categories</h2>
+            <h2 className="ml-4">All Categories</h2>
             <DropDown itemList={categoryItems} />
           </div>
         </div>
@@ -40,4 +40,4 @@ const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
   );
 };
 
-export default MenuDrawer
+export default MenuDrawer;
