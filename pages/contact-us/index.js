@@ -18,7 +18,7 @@ const index = () => {
 
             <div className='bg-white'>
                 <div className="max-w-screen-2xl mx-auto lg:py-20 py-10 px-4 sm:px-10">
-                    <div class="grid md:grid-cols-2 gap-6 lg:grid-cols-3 xl:gap-8 font-primary">
+                    <div className="grid md:grid-cols-2 gap-6 lg:grid-cols-3 xl:gap-8 font-primary">
                         <div className="border p-10 rounded-lg text-center">
                             <span className="flex justify-center text-4xl text-emerald-500 mb-4">
                                 <MdOutlineEmail></MdOutlineEmail>

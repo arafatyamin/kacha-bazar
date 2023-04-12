@@ -4,18 +4,16 @@ import Image from "next/image";
 import { RxCrossCircled } from "react-icons/rx";
 import { DropDown } from "../Header";
 
-const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
+const MenuDrawer = ({ openDrawer, closeDrawerFunc }) => {
   return (
     <div>
       <Drawer
         placement={"left"}
         closable={false}
-        onClose={() => setOpenDrawer(!openDrawer)}
+        onClose={closeDrawerFunc}
         open={openDrawer}
         width="300"
         bodyStyle={{ padding: "0px" }}
-        // key={"right"}
-        // rootClassName=""
       >
         <div className="space-y-2">
           <div className="bg-primary flex justify-between items-center h-14 px-4">
@@ -27,13 +25,17 @@ const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
             />
             <RxCrossCircled
               className="text-2xl text-white font-bold"
-              onClick={setOpenDrawer}
+              onClick={closeDrawerFunc}
             />
           </div>
           <div>
-            <h2>All Categories</h2>
+            <h2 className="px-4">All Categories</h2>
             <DropDown itemList={categoryItems} />
           </div>
+          <div>
+            <h2 className="px-4">Pages</h2>
+          </div>
+
         </div>
       </Drawer>
     </div>
