@@ -6,7 +6,8 @@ import { DropDown } from "../Header";
 
 const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
   return (
-    <div>
+    <div className="">
+      
       <Drawer
         placement={"left"}
         closable={false}
@@ -14,8 +15,7 @@ const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
         open={openDrawer}
         width="300"
         bodyStyle={{ padding: "0px" }}
-        // key={"right"}
-        // rootClassName=""
+        
       >
         <div className="space-y-2">
           <div className="bg-primary flex justify-between items-center h-14 px-4">
@@ -24,14 +24,17 @@ const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
               alt="logo"
               width={110}
               height={40}
+              className="cursor-pointer"
             />
             <RxCrossCircled
-              className="text-2xl text-white font-bold"
-              onClick={setOpenDrawer}
+              className="text-4xl text-white font-bold cursor-pointer hover:scale-110 duration-200 "
+              onClick={() => setOpenDrawer(!openDrawer)}
             />
           </div>
           <div>
             <h2 className="ml-4">All Categories</h2>
+          <div >
+            <h2 className="px-4 font-semibold text-gray-primary">All Categories</h2>
             <DropDown itemList={categoryItems} />
           </div>
         </div>

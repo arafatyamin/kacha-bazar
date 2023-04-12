@@ -11,10 +11,16 @@ const BottomNav = () => {
 
   return (
     <div className="bg-primary md:hidden fixed bottom-0 w-full z-10">
-      <div className="container">
+      <div className="custom-container">
         <nav className="h-12 text-white text-2xl md:hidden flex justify-around items-center gap-8">
+
           <div onClick={() => setOpenDrawer(!openDrawer)}>
             <CgMenuMotion className="hover:scale-105 duration-200 cursor-pointer" />
+          <div>
+            <CgMenuMotion
+              className="hover:scale-105 duration-200 cursor-pointer"
+              onClick={() => setOpenDrawer(!openDrawer)}
+            />
             <MenuDrawer openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
           </div>
           <Link href={"/"}>

@@ -2,6 +2,8 @@ import { Drawer } from "antd";
 import { useState } from "react";
 import { BsBagCheck } from "react-icons/bs";
 import { BiTrash } from "react-icons/bi";
+import { BsBagCheck } from "react-icons/bs";
+
 
 function CartDrawer({ openDrawer, setOpenDrawer }) {
   const [count, setCount] = useState(1);

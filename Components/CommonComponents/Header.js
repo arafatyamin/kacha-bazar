@@ -46,7 +46,7 @@ const Header = () => {
       </div>
       {/* ======================Top Header Part End====================== */}
       {/* ======================Main header Part Start====================== */}
-      <div className=" bg-primary  text-lg ">
+      <div className="bg-primary  text-lg ">
         <div className="custom-container">
           <div className="h-20 flex justify-around items-center gap-8 md:gap-24 lg:gap-28 max-w-screen-2xl">
             <Link href={"/"} className="hidden md:inline">
