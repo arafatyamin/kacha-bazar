@@ -31,6 +31,8 @@ const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
               onClick={() => setOpenDrawer(!openDrawer)}
             />
           </div>
+          <div>
+            <h2 className="ml-4">All Categories</h2>
           <div >
             <h2 className="px-4 font-semibold text-gray-primary">All Categories</h2>
             <DropDown itemList={categoryItems} />
@@ -41,4 +43,4 @@ const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
   );
 };
 
-export default MenuDrawer
+export default MenuDrawer;
