@@ -1,4 +1,6 @@
+import TeamCard from "@/Components/CustomerComponents/Cards/TeamCard/TeamCard";
 import CustomerLayout from "@/Layouts/CustomerLayout";
+import { teamMembers } from "@/data/data";
 
 const AboutUs = () => {
   return (
@@ -135,96 +137,9 @@ const AboutUs = () => {
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-x-5 gap-y-8 lg:grid-cols-6 xl:gap-x-8">
-                <div className="max-w-sm">
-                  <span>
-                    <img
-                      src="https://kachabazar-store.vercel.app/_next/image?url=%2Fteam%2Fteam-1.jpg&w=640&q=75"
-                      alt=""
-                    />
-                  </span>
-                  <div className="py-4">
-                    <h5 className="text-lg font-semibold font-serif">
-                      Niamh Shea
-                    </h5>
-                    <span className="opacity-75 text-sm">
-                      Co-founder & Executive
-                    </span>
-                  </div>
-                </div>
-                <div className="max-w-sm">
-                  <span>
-                    <img
-                      src="https://kachabazar-store.vercel.app/_next/image?url=%2Fteam%2Fteam-2.jpg&w=640&q=75"
-                      alt=""
-                    />
-                  </span>
-                  <div className="py-4">
-                    <h5 className="text-lg font-semibold font-serif">
-                      Orla Dwyer
-                    </h5>
-                    <span className="opacity-75 text-sm">Chief Executive</span>
-                  </div>
-                </div>
-                <div className="max-w-sm">
-                  <span>
-                    <img
-                      src="https://kachabazar-store.vercel.app/_next/image?url=%2Fteam%2Fteam-3.jpg&w=640&q=75"
-                      alt=""
-                    />
-                  </span>
-                  <div className="py-4">
-                    <h5 className="text-lg font-semibold font-serif">
-                      Danien James
-                    </h5>
-                    <span className="opacity-75 text-sm">
-                      Co-founder, Chairman
-                    </span>
-                  </div>
-                </div>
-                <div className="max-w-sm">
-                  <span>
-                    <img
-                      src="https://kachabazar-store.vercel.app/_next/image?url=%2Fteam%2Fteam-4.jpg&w=640&q=75"
-                      alt=""
-                    />
-                  </span>
-                  <div className="py-4">
-                    <h5 className="text-lg font-semibold font-serif">
-                      Dara Frazier
-                    </h5>
-                    <span className="opacity-75 text-sm">
-                      Chief Strategy Officer
-                    </span>
-                  </div>
-                </div>
-                <div className="max-w-sm">
-                  <span>
-                    <img
-                      src="https://kachabazar-store.vercel.app/_next/image?url=%2Fteam%2Fteam-5.jpg&w=640&q=75"
-                      alt=""
-                    />
-                  </span>
-                  <div className="py-4">
-                    <h5 className="text-lg font-semibold font-serif">
-                      Glenda Arvidson
-                    </h5>
-                    <span className="opacity-75 text-sm">HR Officer</span>
-                  </div>
-                </div>
-                <div className="max-w-sm">
-                  <span>
-                    <img
-                      src="https://kachabazar-store.vercel.app/_next/image?url=%2Fteam%2Fteam-6.jpg&w=640&q=75"
-                      alt=""
-                    />
-                  </span>
-                  <div className="py-4">
-                    <h5 className="text-lg font-semibold font-serif">
-                      Melvin Davis
-                    </h5>
-                    <span className="opacity-75 text-sm">Lead Developer</span>
-                  </div>
-                </div>
+                {teamMembers.map((teamMember) => (
+                  <TeamCard key={teamMember._id} data={teamMember} />
+                ))}
               </div>
             </div>
           </div>
