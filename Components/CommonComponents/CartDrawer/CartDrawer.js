@@ -1,6 +1,5 @@
 import { Drawer } from "antd";
 import { useState } from "react";
-import { BsBagCheck } from "react-icons/bs";
 import { BiTrash } from "react-icons/bi";
 import { BsBagCheck } from "react-icons/bs";
 
@@ -30,12 +29,12 @@ function CartDrawer({ openDrawer, setOpenDrawer }) {
         closable={false}
         onClose={() => setOpenDrawer(!openDrawer)}
         open={openDrawer}
-        width="100%"
+        width="60%"
         bodyStyle={{ padding: "0px" }}
         // key={"right"}
         // rootClassName=""
       >
-        <div className=" min-h-screen relative">
+        <div className=" min-h-screen  relative">
           <div className=" bg-slate-100 p-5 ">
             <div className="flex items-center gap-2 text-lg font-bold">
               <BsBagCheck></BsBagCheck>
