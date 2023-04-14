@@ -1,9 +1,9 @@
-import React from "react";
+import CustomerLayout from "@/Layouts/CustomerLayout";
 import { FiPhoneCall } from "react-icons/fi";
 import { GoLocation } from "react-icons/go";
 import { MdOutlineEmail } from "react-icons/md";
 
-const index = () => {
+const ContactUsPage = () => {
   return (
     <div className="bg-gray-50">
       <div className="flex justify-center bg-[url('/images/page-header/page-header-bg.jpg')] bg-cover bg-no-repeat bg-bottom">
@@ -140,4 +140,8 @@ const index = () => {
   );
 };
 
-export default index;
+ContactUsPage.getLayout = (page) => {
+  return <CustomerLayout>{page}</CustomerLayout>;
+};
+
+export default ContactUsPage;
