@@ -24,23 +24,21 @@ const home = () => {
           <BottomNav />
 
           {/* ======================Featured Categories Part Start====================== */}
-          <div className="mx-auto py-6 px-4 md:px-0">
-            <div className="custom-container">
-              <div className="text-center mt-10">
-                <h2 className="font-bold text-xl sm:text-2xl">
-                  Featured Categories
-                </h2>
-                <p className="text-gray-primary text-sm sm:text-base">
-                  Choose your necessary products from this feature categories.
-                </p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
-                {categoryItems.map((categoryItem) => (
-                  <CategoryCard data={categoryItem} key={categoryItem.id} />
-                ))}
-              </div>
-              {/* <UserSideNav /> */}
+          <div className="container mx-auto px-3 lg:px-10 py-6 ">
+            <div className="text-center mt-10">
+              <h2 className="font-bold text-xl sm:text-2xl">
+                Featured Categories
+              </h2>
+              <p className="text-gray-primary text-sm sm:text-base">
+                Choose your necessary products from this feature categories.
+              </p>
             </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
+              {categoryItems.map((categoryItem) => (
+                <CategoryCard data={categoryItem} key={categoryItem.id} />
+              ))}
+            </div> 
+            {/* <UserSideNav /> */}
           </div>
           {/* ======================Featured Categories Part End====================== */}
 

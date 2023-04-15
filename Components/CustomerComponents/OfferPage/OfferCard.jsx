@@ -1,6 +1,19 @@
 import Image from "next/image";
+import { useState } from "react";
 
 const OfferCard = ({ title, discount, categories, imageUrl, shippingCost, couponCode, status }) => {
+
+  const [copyStatus, setCopyStatus] = useState("");
+
+  function handleCopyClick() {
+    const copyText = document.getElementById("couponCode");
+    if (copyText) {
+      navigator.clipboard.writeText(copyText.innerText)
+        .then(() => setCopyStatus("Copied!"))
+        .catch(() => setCopyStatus("Copy failed."));
+    }
+  }
+
     return (
       <div className="block md:flex lg:flex md:justify-between lg:justify-between items-center bg-white rounded-md shadow-sm">
         <div className="p-6 flex items-center justify-items-start  w-2/3">
@@ -43,7 +56,8 @@ const OfferCard = ({ title, discount, categories, imageUrl, shippingCost, coupon
               </div>
               <div className="font-serif border border-dashed bg-emerald-50 py-2 border-emerald-300 rounded-lg text-center block">
                 <button className="block w-full">
-                  <span className="uppercase font-serif font-semibold text-base leading-7 text-emerald-600">{couponCode}</span>
+                    {copyStatus ?
+                      <span className="uppercase font-serif font-semibold text-base leading-7 text-emerald-600">{copyStatus}</span> : <span id="couponCode" onClick={handleCopyClick} className="uppercase font-serif font-semibold text-base leading-7 text-emerald-600">{couponCode}</span>}
                 </button>
               </div>
             </div>
