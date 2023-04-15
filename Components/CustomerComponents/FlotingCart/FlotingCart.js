@@ -19,10 +19,12 @@ function FlotingCart() {
         <p className='text-center text-white'>$00.00</p>
       </div>
       </div>
-      <CartDrawer
+      <div className="">
+        <CartDrawer
         openDrawer={openDrawer}
         setOpenDrawer={setOpenDrawer}
       ></CartDrawer>
+      </div>
     </div>
   )
 }
