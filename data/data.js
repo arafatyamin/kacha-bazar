@@ -164,3 +164,42 @@ export const orderItems = [
     bg: "bg-green-200",
   },
 ];
+
+export const teamMembers = [
+  {
+    _id: 1,
+    img: "https://kachabazar-store.vercel.app/_next/image?url=%2Fteam%2Fteam-1.jpg&w=640&q=75",
+    name: "Niamh Shea",
+    role: "Co-founder & Executive",
+  },
+  {
+    _id: 2,
+    img: "https://kachabazar-store.vercel.app/_next/image?url=%2Fteam%2Fteam-2.jpg&w=640&q=75",
+    name: "Orla Dwyer",
+    role: "Chief Executive",
+  },
+  {
+    _id: 3,
+    img: "https://kachabazar-store.vercel.app/_next/image?url=%2Fteam%2Fteam-3.jpg&w=640&q=75",
+    name: "Danien James",
+    role: "Co-founder, Chairman",
+  },
+  {
+    _id: 4,
+    img: "https://kachabazar-store.vercel.app/_next/image?url=%2Fteam%2Fteam-4.jpg&w=640&q=75",
+    name: "Dara Frazier",
+    role: "Chief Strategy Officer",
+  },
+  {
+    _id: 5,
+    img: "https://kachabazar-store.vercel.app/_next/image?url=%2Fteam%2Fteam-5.jpg&w=640&q=75",
+    name: "Glenda Arvidson",
+    role: "HR Officer",
+  },
+  {
+    _id: 6,
+    img: "https://kachabazar-store.vercel.app/_next/image?url=%2Fteam%2Fteam-6.jpg&w=640&q=75",
+    name: "Melvin Davis",
+    role: "Lead Developer",
+  },
+];
