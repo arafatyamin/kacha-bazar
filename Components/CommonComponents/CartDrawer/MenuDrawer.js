@@ -7,7 +7,6 @@ import { DropDown } from "../Header";
 const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
   return (
     <div className="">
-      
       <Drawer
         placement={"left"}
         closable={false}
@@ -15,7 +14,6 @@ const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
         open={openDrawer}
         width="300"
         bodyStyle={{ padding: "0px" }}
-        
       >
         <div className="space-y-2">
           <div className="bg-primary flex justify-between items-center h-14 px-4">
@@ -31,9 +29,14 @@ const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
               onClick={() => setOpenDrawer(!openDrawer)}
             />
           </div>
-          <div >
-            <h2 className="px-4 font-semibold text-gray-primary">All Categories</h2>
-            <DropDown itemList={categoryItems} />
+          <div>
+            <h2 className="ml-4">All Categories</h2>
+            <div>
+              <h2 className="px-4 font-semibold text-gray-primary">
+                All Categories
+              </h2>
+              <DropDown itemList={categoryItems} />
+            </div>
           </div>
         </div>
       </Drawer>
@@ -41,4 +44,4 @@ const MenuDrawer = ({ openDrawer, setOpenDrawer }) => {
   );
 };
 
-export default MenuDrawer
+export default MenuDrawer;

@@ -56,7 +56,7 @@ body {
     font-family: var(--ff-primary), sans-serif;
   }
   body {
-    @apply bg-gray-100
+    @apply bg-gray-100;
   }
 
   h1 {
@@ -134,9 +134,9 @@ body {
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
-}
+  }
   .custom-container {
-    @apply container 2xl:px-8
+    @apply container px-4;
   }
 }
 
