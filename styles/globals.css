@@ -105,6 +105,10 @@ body {
     background: var(--clr-primary-hover);
   }
 
+  .bg-primary-light {
+    background: var(--clr-primary-light);
+  }
+
   .bg-secondary {
     background-color: var(--clr-secondary);
   }
