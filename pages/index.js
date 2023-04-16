@@ -18,8 +18,8 @@ const home = () => {
       <Head>
         <title>Home Page</title>
       </Head>
-      <main className="relative">
-        <div className="">
+      <main>
+        <div className="-z-3">
           <HeroSection />
           <BottomNav />
 
