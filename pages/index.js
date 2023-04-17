@@ -18,13 +18,13 @@ const home = () => {
       <Head>
         <title>Home Page</title>
       </Head>
-      <main className="relative">
-        <div className="">
+      <main>
+        <div className="-z-3">
           <HeroSection />
           <BottomNav />
 
           {/* ======================Featured Categories Part Start====================== */}
-          <div className="container mx-auto px-3 lg:px-10 py-6 ">
+          <div className="custom-container py-6 ">
             <div className="text-center mt-10">
               <h2 className="font-bold text-xl sm:text-2xl">
                 Featured Categories
