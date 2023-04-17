@@ -112,11 +112,13 @@ const Header = () => {
                 <li className="hover:text-primary duration-200">
                   <Link href="#">Pages</Link>
                 </li>
-                <Button
-                  className="hover:border-none"
-                  text={"Offers"}
-                  varientColor={"delete"}
-                />
+                <Link href={"/offerPage"}>
+                  <Button
+                    className="hover:border-none"
+                    text={"Offers"}
+                    varientColor={"delete"}
+                  />
+                </Link>
               </ul>
               <ul className="flex gap-8">
                 <li className="hover:text-primary duration-200">
