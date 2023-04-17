@@ -2,20 +2,21 @@ import { categoryItems } from "@/data/data";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { AiOutlineDown, AiOutlineRight } from "react-icons/ai";
+import { AiOutlineDown } from "react-icons/ai";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdOutlinePersonOutline } from "react-icons/md";
+import DropDown from "./DropDown";
 import SearchBar from "./SearchBar";
 import Button from "./shared/Button";
 
 const Header = () => {
+  const loggedIn = true
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   return (
     <header>
-      {/*   */}
       {/* ======================top Header Part Start====================== */}
       <div className="hidden lg:inline text-xs  font-secondary bg-white ">
         {/* Left  */}
@@ -30,29 +31,32 @@ const Header = () => {
 
           {/* Right  */}
           <ul className="flex items-center gap-4">
-            <Link href={"/#"}>
+            <Link href={"/about-us"}>
               <li className="hover:text-primary duration-200">About Us</li>
             </Link>
             <span>|</span>
-            <Link href={"/#"}>
+            <Link href={"/contact-us"}>
               <li className="hover:text-primary duration-200">Contact Us</li>
             </Link>
             <span>|</span>
-            <Link href={"/#"}>
-              <li className="hover:text-primary duration-200">My account</li>
-            </Link>
+            {loggedIn && (
+              <Link href={"/#"}>
+                <li className="hover:text-primary duration-200">My account</li>
+              </Link>
+            )}
             <span>|</span>
-            <Link href={"/#"}>
+            <Link href={"/signup"}>
               <li className="flex items-center gap-1 hover:text-primary duration-200">
                 <MdOutlinePersonOutline />
-                <span>Login</span>
+                <span>Sign Up</span>
               </li>
             </Link>
           </ul>
         </div>
       </div>
       {/* ======================Top Header Part End====================== */}
-      <div className="sticky z-30 top-0">
+      <div>
+        {/* //TODO: Need to add sticky behavior of Main Header */}
         {/* ======================Main header Part Start====================== */}
         <div className="bg-primary  text-lg">
           <div className="custom-container">
@@ -68,7 +72,9 @@ const Header = () => {
               <SearchBar />
               <nav className="gap-10 text-white text-2xl hidden md:flex">
                 <BsBell className="hover:scale-110 duration-200 cursor-pointer" />
-                <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
+                <Link href={"/checkout"}>
+                  <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
+                </Link>
                 <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
               </nav>
             </div>
@@ -106,7 +112,11 @@ const Header = () => {
                 <li className="hover:text-primary duration-200">
                   <Link href="#">Pages</Link>
                 </li>
-                <Button className="hover:border-none" text={"Offers"} varientColor={"delete"} />
+                <Button
+                  className="hover:border-none"
+                  text={"Offers"}
+                  varientColor={"delete"}
+                />
               </ul>
               <ul className="flex gap-8">
                 <li className="hover:text-primary duration-200">
@@ -129,69 +139,3 @@ const Header = () => {
 
 export default Header;
 
-export const DropDown = ({ itemList }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [id, setId] = useState(null);
-  return (
-    <div className="p-6 space-y-4">
-      {itemList?.map((item) => (
-        <div
-          key={item.id}
-          className="hover:bg-gray-100 hover:text-primary rounded p-2 cursor-pointer"
-          onClick={() => {
-            if (!id) {
-              setIsOpen(!isOpen);
-              setId(item.id);
-            } else if (id !== item.id && isOpen) {
-              setId(item.id);
-            } else if (id == item.id) {
-              setIsOpen(!isOpen);
-            } else {
-              setId(item.id);
-              setIsOpen(!isOpen);
-            }
-          }}
-        >
-          <div className="flex gap-4 items-center justify-between">
-            <div className="flex gap-4 items-center ">
-              <Image src={item?.imgUrl} height={20} width={20} />
-              <p>{item?.title}</p>
-            </div>
-            <AiOutlineRight className="items-end text-gray-primary" />
-          </div>
-          {id == item?.id && isOpen && (
-            <ul className="text-gray-primary">
-              {item.subTitleOne && (
-                <div className="gap-2 items-center ml-8 mt-3 flex transition-all duration-300">
-                  <Link href="#">
-                    <p className="hover:text-primary duration-150">
-                      - {item?.subTitleOne}
-                    </p>
-                  </Link>
-                </div>
-              )}
-              {item.subTitleTwo && (
-                <div className="gap-2 items-center ml-8 mt-3 flex transition-all duration-300">
-                  <Link href="#">
-                    <p className="hover:text-primary duration-150">
-                      - {item?.subTitleTwo}
-                    </p>
-                  </Link>
-                </div>
-              )}
-              {item.subTitleThree && (
-                <div className="gap-2 items-center ml-8 mt-3 flex transition-all duration-300">
-                  <Link href="#">
-                    <p className="hover:text-primary duration-150">
-                      - {item?.subTitleThree}
-                    </p>
-                  </Link>
-                </div>
-              )}
-            </ul>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-};
