@@ -66,6 +66,7 @@ const HeroSection = () => {
                   couponCode="SUMMER21"
                   status="Active"
                   imageUrl="https://kachabazar-store.vercel.app/_next/image?url=https%3A%2F%2Fi.ibb.co%2F23kQcB9%2Fins3.jpg&w=128&q=75"
+                  validityInDays={0.5}
                 />
               ))}
               <div className="w-full text-center my-4">
