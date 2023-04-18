@@ -1,32 +1,32 @@
-import Button from '@/Components/CommonComponents/shared/Button';
-import Input from '@/Components/CommonComponents/shared/Input';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
-import { AiOutlineMail } from 'react-icons/ai';
-import { BsFacebook, BsGoogle } from 'react-icons/bs';
-import { CgKey } from 'react-icons/cg';
+import Button from "@/Components/CommonComponents/shared/Button";
+import Input from "@/Components/CommonComponents/shared/Input";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { AiOutlineMail } from "react-icons/ai";
+import { BsFacebook, BsGoogle } from "react-icons/bs";
+import { CgKey } from "react-icons/cg";
 
 const init = {
   email: "",
   password: "",
-  termsChecked: false
+  termsChecked: false,
 };
 const Login = () => {
-    const [formState, setFormState] = useState({ ...init });
+  const [formState, setFormState] = useState({ ...init });
 
-    const changeHandler = (e) => {
-      setFormState({
-        ...formState,
-        [e.target.name]: e.target.value || e.target.checked,
-      });
-    };
+  const changeHandler = (e) => {
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value || e.target.checked,
+    });
+  };
 
-    const submitHandler = (e) => {
-      e.preventDefault();
+  const submitHandler = (e) => {
+    e.preventDefault();
 
-      //TODO: Need to implement submission
-    };
+    //TODO: Need to implement submission
+  };
   return (
     <div className="custom-container h-screen flex items-center justify-center">
       <div className="bg-white h-4/5 w-4/5 md:flex rounded-md overflow-hidden ">
@@ -120,6 +120,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Login
+export default Login;
