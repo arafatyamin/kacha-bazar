@@ -37,7 +37,7 @@ const home = () => {
               {categoryItems.map((categoryItem) => (
                 <CategoryCard data={categoryItem} key={categoryItem.id} />
               ))}
-            </div> 
+            </div>
             {/* <UserSideNav /> */}
           </div>
           {/* ======================Featured Categories Part End====================== */}
@@ -59,8 +59,9 @@ const home = () => {
                 <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                   {productItems &&
                     productItems?.length > 0 &&
-                    productItems.map((item) => (
+                    productItems.map((item, ind) => (
                       <ProductCard
+                        key={ind}
                         imgUrl={item.imgUrl}
                         title={item.title}
                         quantity={item.quantity}
