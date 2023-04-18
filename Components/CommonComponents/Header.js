@@ -2,7 +2,6 @@ import { categoryItems } from "@/data/data";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { AiOutlineDown } from "react-icons/ai";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
@@ -94,8 +93,12 @@ const Header = () => {
                     onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                     className="cursor-pointer flex items-center gap-2 hover:text-primary duration-200"
                   >
-                    Categories{" "}
-                    {isCategoryOpen ? <IoIosArrowUp /> : <AiOutlineDown />}
+                    Categories
+                      <IoIosArrowUp
+                        className={`text-gray-primary duration-300 ${
+                          isCategoryOpen && "rotate-180 "
+                        }`}
+                      />
                   </span>
                   {isCategoryOpen && (
                     <div className="absolute z-10 h-[450px] w-80 overflow-auto rounded-md top-12 scrollbar-hide bg-white shadow-md">

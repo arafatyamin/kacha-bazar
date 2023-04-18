@@ -6,7 +6,7 @@ import { IoBagCheckOutline } from "react-icons/io5";
 import { MdDoNotDisturbAlt, MdOutlineConnectWithoutContact, MdOutlinePrivacyTip } from "react-icons/md";
 
 export const pageList = [
-  { title: "Offers", link: "/offers", icon: BiGift },
+  { title: "Offers", link: "/offerPage", icon: BiGift },
   { title: "Checkout", link: "/checkout", icon: IoBagCheckOutline },
   { title: "FAQ", link: "/FAQ", icon: FaQuestionCircle },
   { title: "About Us", link: "/about-us", icon: GrInfo },

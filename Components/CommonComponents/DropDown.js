@@ -35,10 +35,14 @@ const DropDown = ({ itemList }) => {
               <Image src={item?.imgUrl} height={20} width={20} />
               <p>{item?.title}</p>
             </div>
-            <AiOutlineRight className="items-end text-gray-primary" />
+            <AiOutlineRight
+              className={`items-end text-gray-primary duration-200 ${
+                id == item?.id && isOpen && "rotate-90 "
+              }`}
+            />
           </div>
           {id == item?.id && isOpen && (
-            <ul className="text-gray-primary">
+            <ul className="text-gray-primary pb-2">
               {item.subTitleOne && (
                 <div className="gap-2 items-center ml-8 mt-3 flex transition-all duration-300">
                   <Link href="#">
