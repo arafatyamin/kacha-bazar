@@ -2,6 +2,8 @@ import CarouselComponent from "@/Components/CommonComponents/CarouselComponent";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import TinyBanner from "../Banner/TinyBanner";
+import OfferCard from "../OfferPage/OfferCard";
+import Button from "@/Components/CommonComponents/shared/Button";
 
 const carouselSlider = [
   {
@@ -49,9 +51,28 @@ const HeroSection = () => {
           </div>
 
           {/* right  */}
-          <div className="w-2/5 border-2 border-[var(--clr-red)] rounded-md hover:border-[var(--clr-primary)] hidden lg:inline-block">
-            <div className="h-10 bg-orange-200 text-center overflow-hidden rounded-t-md pt-2 font-bold">
+          <div className="relative w-2/5 max-h-[365px] border-2 border-[var(--clr-red)] rounded-md hover:border-[var(--clr-primary)] hidden lg:inline-block overflow-auto scrollbar-hide">
+            <div className="sticky top-0 z-30 h-10 bg-orange-200 text-center overflow-hidden rounded-t-md pt-2 font-bold">
               Latest Super Discount Active Coupon Code
+            </div>
+            <div>
+              {Array(2).fill().map((_, index) => (
+                <OfferCard
+                  key={index}
+                  title="Card Title"
+                  categories="Grocery"
+                  discount="15"
+                  shippingCost="500"
+                  couponCode="SUMMER21"
+                  status="Active"
+                  imageUrl="https://kachabazar-store.vercel.app/_next/image?url=https%3A%2F%2Fi.ibb.co%2F23kQcB9%2Fins3.jpg&w=128&q=75"
+                  validityInDays={0.5}
+                />
+              ))}
+              <div className="w-full text-center my-4">
+              <Button text={"Show More"} fill={true}/>
+
+              </div>
             </div>
           </div>
           {/* <OfferComponent/> */}

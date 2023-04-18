@@ -8,19 +8,20 @@ import { RiShoppingCartFill } from 'react-icons/ri';
 
 const BottomNav = () => {
     const [openDrawer, setOpenDrawer] = useState(false);
-    const closeDrawerFunc = () => setOpenDrawer(false)
-    const openDrawerFunc = () => setOpenDrawer(true)
+    const drawerHandler = () => setOpenDrawer(!openDrawer)
 
   return (
     <div className="bg-primary lg:hidden fixed bottom-0 w-full z-10">
       <div className="container">
         <nav className="h-12 text-white text-2xl md:hidden flex justify-around items-center gap-8">
-          <div onClick={openDrawerFunc}>
-            <CgMenuMotion className="hover:scale-105 duration-200 cursor-pointer" />
+          <div>
+            <CgMenuMotion
+              className="hover:scale-105 duration-200 cursor-pointer"
+              onClick={drawerHandler}
+            />
             <MenuDrawer
               openDrawer={openDrawer}
-              openDrawerFunc={openDrawerFunc}
-              closeDrawerFunc={closeDrawerFunc}
+              drawerHandlerFunc={drawerHandler}
             />
           </div>
           <Link href={"/"}>
