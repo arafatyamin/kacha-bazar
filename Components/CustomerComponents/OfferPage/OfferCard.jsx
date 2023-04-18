@@ -1,9 +1,12 @@
 import Image from "next/image";
 import { useState } from "react";
-import Countdown from "react-countdown";
+import Countdown, { zeroPad } from "react-countdown";
 
-const OfferCard = ({ title, discount, categories, imageUrl, shippingCost, couponCode, status, validityInDays }) => {
-
+const OfferCard = ({ title, discount, categories, imageUrl, shippingCost, couponCode, status, validity }) => {
+   validity = validity.endsWith("d")
+    ? Number(validity.slice(0, -1)) * 24 * 60 * 60 * 1000
+    : validity.endsWith("h") &&
+      Number(validity.slice(0, -1)) * 60 * 60 * 1000;
   const [copyStatus, setCopyStatus] = useState("");
 
   function handleCopyClick() {
@@ -32,7 +35,7 @@ const OfferCard = ({ title, discount, categories, imageUrl, shippingCost, coupon
             <span className="inline-block mb-2">
               {/* countdown start */}
               <Countdown
-                date={Date.now() + Number(validityInDays) * 24 * 60 * 60 * 1000}
+                date={Date.now() + validity}
                 renderer={renderer}
               />
             </span>
@@ -104,19 +107,19 @@ const OfferCard = ({ title, discount, categories, imageUrl, shippingCost, coupon
       return (
         <div className="flex items-center font-semibold">
           <span className="flex items-center justify-center bg-[var(--clr-red-light)] text-sm  font-semibold px-2 py-1 rounded mx-1">
-            {days}
+            {zeroPad(days)}
           </span>
           :
           <span className="flex items-center justify-center bg-[var(--clr-red-light)] text-sm  font-semibold px-2 py-1 rounded mx-1">
-            {hours}
+            {zeroPad(hours)}
           </span>
           :
           <span className="flex items-center justify-center bg-[var(--clr-red-light)] text-sm  font-semibold px-2 py-1 rounded mx-1">
-            {minutes}
+            {zeroPad(minutes)}
           </span>
           :
           <span className="flex items-center justify-center bg-[var(--clr-red-light)] text-sm  font-semibold px-2 py-1 rounded mx-1">
-            {seconds}
+            {zeroPad(seconds)}
           </span>
         </div>
       );
@@ -124,19 +127,19 @@ const OfferCard = ({ title, discount, categories, imageUrl, shippingCost, coupon
       return (
         <div className="flex items-center font-semibold">
           <span className="flex items-center justify-center bg-primary text-white  font-semibold px-2 py-1 rounded mx-1">
-            {days}
+            {zeroPad(days)}
           </span>
           :
           <span className="flex items-center justify-center bg-primary text-white  font-semibold px-2 py-1 rounded mx-1">
-            {hours}
+            {zeroPad(hours)}
           </span>
           :
           <span className="flex items-center justify-center bg-primary text-white  font-semibold px-2 py-1 rounded mx-1">
-            {minutes}
+            {zeroPad(minutes)}
           </span>
           :
           <span className="flex items-center justify-center bg-primary text-white  font-semibold px-2 py-1 rounded mx-1">
-           {seconds}
+           {zeroPad(seconds)}
           </span>
         </div>
       );
