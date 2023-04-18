@@ -115,12 +115,15 @@ const Header = () => {
                 <li className="hover:text-primary duration-200">
                   <Link href="#">Pages</Link>
                 </li>
-                <Link href={"/offerPage"}>
-                  <Button
+                <Link href={"/offerPage"} className="px-2 py-1 bg-[var(--clr-red-light)] text-red font-bold rounded-md relative">
+                  <p className="h-2 w-2 rounded-full bg-[var(--clr-red)] absolute -top-1 -right-1  animate-ping duration-300"></p>
+                  <p className="h-2 w-2 rounded-full bg-[var(--clr-red)] absolute -top-1 -right-1"></p>
+                    <p>Offers</p>
+                  {/* <Button
                     className="hover:border-none"
                     text={"Offers"}
                     varientColor={"delete"}
-                  />
+                  /> */}
                 </Link>
               </ul>
               <ul className="flex gap-8">
