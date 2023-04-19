@@ -4,6 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import TinyBanner from "../Banner/TinyBanner";
 import OfferCard from "../OfferPage/OfferCard";
 import Button from "@/Components/CommonComponents/shared/Button";
+import Link from "next/link";
 
 const carouselSlider = [
   {
@@ -55,22 +56,29 @@ const HeroSection = () => {
             <div className="sticky top-0 z-30 h-10 bg-orange-200 text-center overflow-hidden rounded-t-md pt-2 font-bold">
               Latest Super Discount Active Coupon Code
             </div>
-            <div>
+            <div className="flex flex-col gap-4">
               {Array(2).fill().map((_, index) => (
                 <OfferCard
                   key={index}
-                  title="Card Title"
-                  categories="Grocery"
-                  discount="15"
-                  shippingCost="500"
-                  couponCode="SUMMER21"
-                  status="Active"
-                  imageUrl="https://kachabazar-store.vercel.app/_next/image?url=https%3A%2F%2Fi.ibb.co%2F23kQcB9%2Fins3.jpg&w=128&q=75"
-                  validityInDays={0.5}
+                  title = "Another Card Title"
+                  categories = "Grocery"
+                  discount = "12"
+                  shippingCost = "1000"
+                  couponCode = "WINTER21"
+                  status = "Inactive"
+                  imageUrl = "https://kachabazar-store.vercel.app/_next/image?url=https%3A%2F%2Fi.ibb.co%2F4thS4Z1%2Fins2.jpg&w=128&q=75"
+                  validity = {
+                    "2d"
+                  }
                 />
               ))}
               <div className="w-full text-center my-4">
-              <Button text={"Show More"} fill={true}/>
+              <Link href={"/offerPage"}>
+              < Button text = {
+                "Show More"
+              }
+              />
+              </Link>
 
               </div>
             </div>

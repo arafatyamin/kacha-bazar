@@ -1,5 +1,6 @@
 import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
 import CustomerLayout from "@/Layouts/CustomerLayout";
+
 import OfferCard from "../../Components/CustomerComponents/OfferPage/OfferCard";
 
 const offerPage = () => {

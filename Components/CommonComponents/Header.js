@@ -117,8 +117,8 @@ const Header = () => {
                 </li>
                 <Link href={"/offerPage"} className="px-2 py-1 bg-[var(--clr-red-light)] text-red font-bold rounded-md relative">
                   <p className="h-2 w-2 rounded-full bg-[var(--clr-red)] absolute -top-1 -right-1  animate-ping duration-300"></p>
-                  <p className="h-2 w-2 rounded-full bg-[var(--clr-red)] absolute -top-1 -right-1"></p>
-                    <p>Offers</p>
+                  <p className="h-2 w-2 rounded-full bg-[var(--clr-red)] absolute -top-1 -right-1 "></p>
+                    <p className = "hover:text-emerald-600 text-red-500" > Offers </p>
                   {/* <Button
                     className="hover:border-none"
                     text={"Offers"}
