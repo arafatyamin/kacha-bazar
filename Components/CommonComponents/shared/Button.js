@@ -17,7 +17,7 @@ const Button = ({
           : ""
       } ${
         size == "sm" ? "text-sm" : size == "lg" ? "text-lg" : ""
-      } rounded-lg font-semibold lg:px-3 lg:py-2 ${
+      } rounded-lg font-semibold lg:px-3 lg:py-2 px-2 py-1  ${
         fill ? "bg-primary text-white" : "text-primary"
       } ${className} hover:bg-primary-hover hover:text-white duration-200`}
       {...props}

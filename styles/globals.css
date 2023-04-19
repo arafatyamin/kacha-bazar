@@ -56,7 +56,7 @@ body {
     font-family: var(--ff-primary), sans-serif;
   }
   body {
-    @apply bg-gray-100
+    @apply bg-gray-100;
   }
 
   h1 {
@@ -105,6 +105,10 @@ body {
     background: var(--clr-primary-hover);
   }
 
+  .bg-primary-light {
+    background: var(--clr-primary-light);
+  }
+
   .bg-secondary {
     background-color: var(--clr-secondary);
   }
@@ -130,7 +134,10 @@ body {
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
-}
+  }
+  .custom-container {
+    @apply container px-4;
+  }
 }
 
 @layer components {

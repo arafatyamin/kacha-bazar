@@ -1,12 +1,13 @@
 import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
 // import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
-import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
-import Header from "@/Components/CommonComponents/Header";
 import CategoryCard from "@/Components/CustomerComponents/Cards/CategoryCard/CategoryCard";
+import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
 // import UserSideNav from "@/Components/CustomerComponents/CustomerAdmin/UserSideNav";
 import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
-import FeaturedProducts from "@/Components/CustomerComponents/HomeComponents/FeaturedProducts";
+import BottomNav from "@/Components/CustomerComponents/BottomNav";
+import ProductCard from "@/Components/CustomerComponents/Cards/ProductCard/ProductCard";
 import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSection";
+import CustomerLayout from "@/Layouts/CustomerLayout";
 import { categoryItems } from "@/data/data";
 import { offeredProductItems, productItems } from "@/data/productData";
 import Head from "next/head";
@@ -17,13 +18,13 @@ const home = () => {
       <Head>
         <title>Home Page</title>
       </Head>
-      <main className="relative">
-        <Header />
-        <div className="container">
+      <main>
+        <div className="-z-3">
           <HeroSection />
+          <BottomNav />
 
           {/* ======================Featured Categories Part Start====================== */}
-          <div className="container mx-auto px-3 lg:px-10 py-6 ">
+          <div className="custom-container py-6 ">
             <div className="text-center mt-10">
               <h2 className="font-bold text-xl sm:text-2xl">
                 Featured Categories
@@ -42,7 +43,36 @@ const home = () => {
           {/* ======================Featured Categories Part End====================== */}
 
           {/* ======================Featured Products Part Start====================== */}
-          <FeaturedProducts Items={productItems} />
+          <section>
+            <div className="bg-gray-50 my-4 py-4 px-4 md:px-0">
+              <div className="custom-container">
+                <div className="text-center mt-10 space-y-4">
+                  <h2 className="font-bold text-xl sm:text-2xl">
+                    Popular Products for Daily Shopping
+                  </h2>
+                  <p className="text-gray-primary text-sm sm:text-base max-w-2xl mx-auto">
+                    See all our popular products in this week. You can choose
+                    your daily needs products from this list and get some
+                    special offer with free shipping.
+                  </p>
+                </div>
+                <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                  {productItems &&
+                    productItems?.length > 0 &&
+                    productItems.map((item, ind) => (
+                      <ProductCard
+                        key={ind}
+                        imgUrl={item.imgUrl}
+                        title={item.title}
+                        quantity={item.quantity}
+                        price={item.price}
+                        offer={item.offer}
+                      />
+                    ))}
+                </div>
+              </div>
+            </div>
+          </section>
 
           {/* ======================Featured Products Part End====================== */}
 
@@ -52,19 +82,34 @@ const home = () => {
 
         {/* ======================Mobile Ads Banner Part End====================== */}
 
-        <section className="py-10">
-          <div className="container">
-            <div className="text-center">
-              <h2 className="font-bold text-xl sm:text-2xl mb-2">
-                Popular Products for Daily Shopping
-              </h2>
-              <p className="text-gray-primary text-sm sm:text-base max-w-2xl mx-auto">
-                See all our popular products in this week. You can choose your
-                daily needs products from this list and get some special offer
-                with free shipping.
-              </p>
+        <section>
+          <div className="bg-gray-50 my-4 py-4 px-4 md:px-0">
+            <div className="custom-container">
+              <div className="text-center mt-10 space-y-4">
+                <h2 className="font-bold text-xl sm:text-2xl">
+                  Popular Products for Daily Shopping
+                </h2>
+                <p className="text-gray-primary text-sm sm:text-base max-w-2xl mx-auto">
+                  See all our popular products in this week. You can choose your
+                  daily needs products from this list and get some special offer
+                  with free shipping.
+                </p>
+              </div>
+              <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                {offeredProductItems &&
+                  offeredProductItems?.length > 0 &&
+                  offeredProductItems.map((item, index) => (
+                    <ProductCard
+                      key={index}
+                      imgUrl={item.imgUrl}
+                      title={item.title}
+                      quantity={item.quantity}
+                      price={item.price}
+                      offer={item.offer}
+                    />
+                  ))}
+              </div>
             </div>
-            <FeaturedProducts Items={offeredProductItems} />
           </div>
         </section>
 
@@ -82,4 +127,7 @@ const home = () => {
   );
 };
 
+home.getLayout = (page) => {
+  return <CustomerLayout>{page}</CustomerLayout>;
+};
 export default home;
