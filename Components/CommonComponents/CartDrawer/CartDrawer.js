@@ -37,6 +37,7 @@ function CartDrawer({ openDrawer, setOpenDrawer }) {
                 open={openDrawer}
                 width="420"
                 bodyStyle={{ padding: '0px' }}
+                // destroyOnClose={true}
             // key={"right"} 
             // rootClassName=""
             >
