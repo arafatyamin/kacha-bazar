@@ -12,6 +12,7 @@ const offerPage = () => {
           }
         }
         className = "flex justify-center bg-indigo-100 bg-cover bg-no-repeat bg-bottom w-full py-10 lg:py-20" >
+          <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-center">Mega Offer</h1>
           </div>
         <div className='mx-auto max-w-screen-2xl px-4 py-10 lg:py-20 sm:px-10'>
           
