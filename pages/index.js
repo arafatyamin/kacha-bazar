@@ -118,7 +118,7 @@ const home = () => {
         {/* ======================App Store Section Part End====================== */}
 
         {/* ======================Floating cart card component start ====================== */}
-        <div className="fixed top-80 right-0">
+        <div div className = "fixed top-80 right-0 hidden md:block" >
           <FlotingCart />
         </div>
         {/* ======================Floating cart card component start ====================== */}

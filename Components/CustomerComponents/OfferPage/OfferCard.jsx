@@ -11,6 +11,8 @@ const OfferCard = ({
   couponCode,
   status,
   validity,
+  
+  
 }) => {
   validity = validity?.endsWith("d")
     ? Number(validity.slice(0, -1)) * 24 * 60 * 60 * 1000
@@ -28,7 +30,7 @@ const OfferCard = ({
   }
 
   return (
-    <div className="block md:flex lg:flex md:justify-between lg:justify-between items-center bg-white rounded-md shadow-sm">
+    <div className="block md:flex lg:flex md:justify-between lg:justify-between items-center bg-white rounded-md shadow-sm h-[190px] border">
       <div className="p-6 flex items-center justify-items-start  w-2/3">
         <figure className="image h-full">
           <Image
@@ -65,8 +67,8 @@ const OfferCard = ({
           </div>
         </div>
       </div>
-      <div className="md:border-l-2 lg:border-l-2 border-dashed my-6 lg:w-1/3 md:w-1/3 relative px-6">
-        <div className="flex lg:my-6 md:my-5 mb-6 items-center">
+      <div className="border-l-2 border-dashed my-6 md:w-1/3 relative px-2">
+        <div className="before:my-6 flex md:my-5 mb-6 items-center">
           <div className="w-full">
             <div className="block">
               <div className=" border border-dashed bg-emerald-50 py-2 border-emerald-300 rounded-lg text-center block">
@@ -87,7 +89,7 @@ const OfferCard = ({
                 </button>
               </div>
             </div>
-            <p className="text-xs leading-5 text-gray-500 mt-2">
+            <p className="text-xs text-gray-500 mt-2">
               * This coupon code will apply on
               <span className="font-bold text-gray-700">
                 {categories} type products{" "}
@@ -108,7 +110,7 @@ function renderer({ days, hours, minutes, seconds, completed }) {
   if (completed) {
     return (
       <div className="flex items-center font-semibold">
-        <span className="flex items-center justify-center bg-[var(--clr-red-light)] text-sm  font-semibold px-2 py-1 rounded mx-1">
+        <span className="flex items-center justify-center bg-[var(--clr-red-light)] text-sm  font-semibold px-2 py-1 rounded mx-1 w-8">
           {zeroPad(days)}
         </span>
         :
@@ -116,11 +118,11 @@ function renderer({ days, hours, minutes, seconds, completed }) {
           {zeroPad(hours)}
         </span>
         :
-        <span className="flex items-center justify-center bg-[var(--clr-red-light)] text-sm  font-semibold px-2 py-1 rounded mx-1">
+        <span className="flex items-center justify-center bg-[var(--clr-red-light)] text-sm  font-semibold px-2 py-1 rounded mx-1 w-8">
           {zeroPad(minutes)}
         </span>
         :
-        <span className="flex items-center justify-center bg-[var(--clr-red-light)] text-sm  font-semibold px-2 py-1 rounded mx-1">
+        <span className="flex items-center justify-center bg-[var(--clr-red-light)] text-sm  font-semibold px-2 py-1 rounded mx-1 w-8">
           {zeroPad(seconds)}
         </span>
       </div>
@@ -128,19 +130,19 @@ function renderer({ days, hours, minutes, seconds, completed }) {
   } else {
     return (
       <div className="flex items-center font-semibold">
-        <span className="flex items-center justify-center bg-primary text-white  font-semibold px-2 py-1 rounded mx-1">
+        <span className="flex items-center justify-center bg-primary text-white  font-semibold px-2 py-1 rounded mx-1 w-8">
           {zeroPad(days)}
         </span>
         :
-        <span className="flex items-center justify-center bg-primary text-white  font-semibold px-2 py-1 rounded mx-1">
+        <span className="flex items-center justify-center bg-primary text-white  font-semibold px-2 py-1 rounded mx-1 w-8">
           {zeroPad(hours)}
         </span>
         :
-        <span className="flex items-center justify-center bg-primary text-white  font-semibold px-2 py-1 rounded mx-1">
+        <span className="flex items-center justify-center bg-primary text-white  font-semibold px-2 py-1 rounded mx-1 w-8">
           {zeroPad(minutes)}
         </span>
         :
-        <span className="flex items-center justify-center bg-primary text-white  font-semibold px-2 py-1 rounded mx-1">
+        <span className="flex items-center justify-center bg-primary text-white px-2 py-1 rounded mx-1 w-8">
           {zeroPad(seconds)}
         </span>
       </div>

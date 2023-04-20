@@ -1,10 +1,21 @@
 import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
 import CustomerLayout from "@/Layouts/CustomerLayout";
+
 import OfferCard from "../../Components/CustomerComponents/OfferPage/OfferCard";
 
 const offerPage = () => {
     return (
-      <div className="mx-auto max-w-screen-2xl px-4 py-10 lg:py-20 sm:px-10">
+      <div className="w-full">
+        <div div style = {
+          {
+            backgroundImage: `url("https://kachabazar-store.vercel.app/page-header-bg.jpg")`
+          }
+        }
+        className = "flex justify-center bg-indigo-100 bg-cover bg-no-repeat bg-bottom w-full py-10 lg:py-20" >
+          <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-center">Mega Offer</h1>
+          </div>
+        <div className='mx-auto max-w-screen-2xl px-4 py-10 lg:py-20 sm:px-10'>
+          
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <OfferCard
             title="Card Title"
@@ -50,6 +61,7 @@ const offerPage = () => {
 
         {/* mobile add banner */}
         <MobileAdsBanner></MobileAdsBanner>
+      </div>
       </div>
     );
 };

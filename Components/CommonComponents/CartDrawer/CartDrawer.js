@@ -30,8 +30,9 @@ function CartDrawer({ openDrawer, setOpenDrawer }) {
         closable={false}
         onClose={() => setOpenDrawer(!openDrawer)}
         open={openDrawer}
-        width="60%"
+        width="30%"
         bodyStyle={{ padding: "0px" }}
+        className=""
         // key={"right"}
         // rootClassName=""
       >

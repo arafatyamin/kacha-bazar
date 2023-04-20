@@ -53,46 +53,6 @@ const ContactUsPage = () => {
             </div>
           </div>
 
-<<<<<<< HEAD
-            <div className='bg-white'>
-                <div className="max-w-screen-2xl mx-auto lg:py-20 py-10 px-4 sm:px-10">
-                    <div className="grid md:grid-cols-2 gap-6 lg:grid-cols-3 xl:gap-8 font-primary">
-                        <div className="border p-10 rounded-lg text-center">
-                            <span className="flex justify-center text-4xl text-emerald-500 mb-4">
-                                <MdOutlineEmail></MdOutlineEmail>
-                            </span>
-                            <h5 className="text-xl mb-2 font-bold">
-                                Email Us
-                            </h5>
-                            <p className="mb-0 text-base opacity-90 leading-7">
-                                <a className="text-emerald-500 mr-1" href="">kachabazar@gmail.com</a>
-                                 Interactively grow empowered for process-centric total linkage.
-                            </p>
-                        </div>
-                        <div className="border p-10 rounded-lg text-center">
-                            <span className="flex justify-center text-4xl text-emerald-500 mb-4">
-                                <FiPhoneCall></FiPhoneCall>
-                            </span>
-                            <h5 className="text-xl mb-2 font-bold">
-                            Call Us
-                            </h5>
-                            <p className="mb-0 text-base opacity-90 leading-7">
-                                <a className="text-emerald-500 mr-1" href="">029-00124667</a>
-                                Distinctively disseminate focused solutions clicks-and-mortar ministate.
-                            </p>
-                        </div>
-                        <div className="border p-10 rounded-lg text-center">
-                            <span className="flex justify-center text-4xl text-emerald-500 mb-4">
-                                <GoLocation></GoLocation>
-                            </span>
-                            <h5 className="text-xl mb-2 font-bold">
-                            Location
-                            </h5>
-                            <p className="mb-0 text-base opacity-90 leading-7">
-                            Cecilia Chapman, 561-4535 Nulla LA, United States 96522
-                            </p>
-                        </div>
-=======
           <div className="px-0 pt-24 mx-auto items-center flex flex-col md:flex-row w-full justify-between">
             <div className="hidden md:w-full lg:w-5/12 lg:flex flex-col h-full">
               <img
@@ -126,7 +86,6 @@ const ContactUsPage = () => {
                           className="py-2 px-4 md:px-5 w-full appearance-none border text-sm opacity-75 text-input rounded-md placeholder-body min-h-12 transition duration-200 focus:ring-0 ease-in-out bg-white border-gray-200 focus:outline-none focus:border-emerald-500 h-11 md:h-12"
                         />
                       </div>
->>>>>>> fc3af0c4c6db85801a3ce57d4375cb4a0dc8a67a
                     </div>
                     <div className="w-full md:w-1/2 md:ml-2.5 lg:ml-5 mt-2 md:mt-0">
                       <label className="block text-gray-500 font-medium text-sm leading-none mb-2">
