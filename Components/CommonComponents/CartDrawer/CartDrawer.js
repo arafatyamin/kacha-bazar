@@ -8,12 +8,14 @@ function CartDrawer({ openDrawer, setOpenDrawer }) {
 
   const cartData = [
     {
+      _id: 1,
       name: "Mint",
       photo: "https://i.postimg.cc/251Skfbd/Mint-6-5ct.jpg",
       quantity: "2",
       price: "50.00",
     },
     {
+      _id: 2,
       name: "Pumpkin",
       photo: "https://i.postimg.cc/2Sc5N568/Mini-Pumpkin-Box-each.jpg",
       quantity: "2",
@@ -28,8 +30,9 @@ function CartDrawer({ openDrawer, setOpenDrawer }) {
         closable={false}
         onClose={() => setOpenDrawer(!openDrawer)}
         open={openDrawer}
-        width="60%"
+        width="30%"
         bodyStyle={{ padding: "0px" }}
+        className=""
         // key={"right"}
         // rootClassName=""
       >
@@ -42,7 +45,7 @@ function CartDrawer({ openDrawer, setOpenDrawer }) {
           </div>
           <div>
             {cartData.map((data) => (
-              <div className="flex py-3 px-4">
+              <div key={data._id} className="flex py-3 px-4">
                 <img className="h-16 w-auto" src={data.photo}></img>
                 <div className="flex items-center justify-between flex-grow">
                   <div>

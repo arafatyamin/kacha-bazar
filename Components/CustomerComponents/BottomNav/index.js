@@ -11,7 +11,7 @@ const BottomNav = () => {
     const drawerHandler = () => setOpenDrawer(!openDrawer)
 
   return (
-    <div className="bg-primary md:hidden fixed bottom-0 w-full z-10">
+    <div className="bg-primary lg:hidden fixed bottom-0 w-full z-10">
       <div className="container">
         <nav className="h-12 text-white text-2xl md:hidden flex justify-around items-center gap-8">
           <div>

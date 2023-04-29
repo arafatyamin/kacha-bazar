@@ -4,6 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import TinyBanner from "../Banner/TinyBanner";
 import OfferCard from "../OfferPage/OfferCard";
 import Button from "@/Components/CommonComponents/shared/Button";
+import Link from "next/link";
 
 const carouselSlider = [
   {
@@ -55,7 +56,7 @@ const HeroSection = () => {
             <div className="sticky top-0 z-30 h-10 bg-orange-200 text-center overflow-hidden rounded-t-md pt-2 font-bold">
               Latest Super Discount Active Coupon Code
             </div>
-            <div>
+            <div className="flex flex-col gap-4">
               {Array(2).fill().map((_, index) => (
                 <OfferCard
                   key={index}
@@ -70,7 +71,12 @@ const HeroSection = () => {
                 />
               ))}
               <div className="w-full text-center my-4">
-              <Button text={"Show More"} fill={true}/>
+              <Link href={"/offerPage"}>
+              < Button text = {
+                "Show More"
+              }
+              />
+              </Link>
 
               </div>
             </div>

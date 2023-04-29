@@ -37,7 +37,7 @@ const home = () => {
               {categoryItems.map((categoryItem) => (
                 <CategoryCard data={categoryItem} key={categoryItem.id} />
               ))}
-            </div> 
+            </div>
             {/* <UserSideNav /> */}
           </div>
           {/* ======================Featured Categories Part End====================== */}
@@ -59,8 +59,9 @@ const home = () => {
                 <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                   {productItems &&
                     productItems?.length > 0 &&
-                    productItems.map((item) => (
+                    productItems.map((item, ind) => (
                       <ProductCard
+                        key={ind}
                         imgUrl={item.imgUrl}
                         title={item.title}
                         quantity={item.quantity}
@@ -117,7 +118,7 @@ const home = () => {
         {/* ======================App Store Section Part End====================== */}
 
         {/* ======================Floating cart card component start ====================== */}
-        <div className="fixed top-80 right-0">
+        <div div className = "fixed top-80 right-0 hidden md:block" >
           <FlotingCart />
         </div>
         {/* ======================Floating cart card component start ====================== */}
