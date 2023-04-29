@@ -60,16 +60,14 @@ const HeroSection = () => {
               {Array(2).fill().map((_, index) => (
                 <OfferCard
                   key={index}
-                  title = "Another Card Title"
-                  categories = "Grocery"
-                  discount = "12"
-                  shippingCost = "1000"
-                  couponCode = "WINTER21"
-                  status = "Inactive"
-                  imageUrl = "https://kachabazar-store.vercel.app/_next/image?url=https%3A%2F%2Fi.ibb.co%2F4thS4Z1%2Fins2.jpg&w=128&q=75"
-                  validity = {
-                    "2d"
-                  }
+                  title="Card Title"
+                  categories="Grocery"
+                  discount="15"
+                  shippingCost="500"
+                  couponCode="SUMMER21"
+                  status="Active"
+                  imageUrl="https://kachabazar-store.vercel.app/_next/image?url=https%3A%2F%2Fi.ibb.co%2F23kQcB9%2Fins3.jpg&w=128&q=75"
+                  validity={"1d"}
                 />
               ))}
               <div className="w-full text-center my-4">
