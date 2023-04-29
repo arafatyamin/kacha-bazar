@@ -18,7 +18,7 @@ const SignUp = () => {
   const changeHandler = (e) => {
     setFormState({
       ...formState,
-      [e.target.name]: e.target.value || e.target.checked,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -31,7 +31,7 @@ const SignUp = () => {
     <div className="custom-container h-screen flex items-center justify-center">
       <div className="bg-white h-4/5 w-4/5 md:flex rounded-md overflow-hidden ">
         <div className="bg-primary w-1/2 hidden lg:inline p-6">
-          <Link href={"/"} className="hidden md:inline text-primary">
+          <Link href={"/"}>
             <Image
               src="https://kachabazar-store.vercel.app/logo/logo-light.svg"
               alt="logo"
@@ -50,7 +50,17 @@ const SignUp = () => {
           </h2>
         </div>
         <div className="mx-auto my-4 p-4 flex flex-col gap-4">
-          <div className="space-y-2 mb-8">
+          <div className="space-y-2 mb-2 sm:mb-8">
+            <div className="bg-primary px-4 py-2 rounded-md lg:hidden">
+              <Link href={"/"}>
+                <Image
+                  src="https://kachabazar-store.vercel.app/logo/logo-light.svg"
+                  alt="logo"
+                  width={110}
+                  height={40}
+                />
+              </Link>
+            </div>
             <h2 className="font-semibold">Get's Started.</h2>
             <p className="text-sm text-gray-primary">
               Already have an account?{" "}
@@ -66,7 +76,7 @@ const SignUp = () => {
           >
             <Input
               name={"email"}
-              placeholder={"johndoe@company.com"}
+              placeholder={"email"}
               Icon={AiOutlineMail}
               value={formState.email}
               changeHandler={changeHandler}
@@ -82,6 +92,7 @@ const SignUp = () => {
             />
             <div className="flex items-center">
               <Input
+                name={"termsChecked"}
                 type="checkbox"
                 className="border-none"
                 onChange={changeHandler}
@@ -108,7 +119,7 @@ const SignUp = () => {
           </form>
           {/* ========Input Section End ========  */}
 
-          <div className="text-center m-4 text-gray-primary">or</div>
+          <div className="text-center sm:m-4 text-gray-primary">or</div>
 
           {/* ========OAuth Section Start ========  */}
           <div className="lg:flex lg:space-x-2 space-y-2 lg:space-y-0">
