@@ -27,19 +27,12 @@ const ProductCard = ({ imgUrl, quantity, title, price = 0, offer }) => {
     setHoverState(!hoverState);
   };
   return (
-    <div
-      className="bg-white min-w-[200px] relative rounded border border-gray-100 shadow-sm pt-4"
-      onMouseEnter={hoverStateHandler}
-      onMouseLeave={hoverStateHandler}
-    >
+    <div className="group bg-white min-w-[200px] relative rounded border border-gray-100 shadow-sm pt-4">
       <Image
         src={imgUrl}
         width={150}
         height={150}
-        className={`mx-auto ${
-          hoverState &&
-          "scale-105  duration-150 transition transform ease-in-out"
-        }`}
+        className="mx-auto group-hover:scale-110 duration-300"
       />
       {offer && (
         <p className="absolute top-4 right-4 bg-orange-400 text-white text-sm w-fit px-2 py-[2px] rounded ">
