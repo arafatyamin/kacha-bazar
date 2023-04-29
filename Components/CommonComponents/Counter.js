@@ -1,14 +1,14 @@
 
 const Counter = ({value, decreaseHandler, increaseHandler}) => {
   return (
-    <div className="bg-primary text-white font-bold px-3 py-1 space-x-2 rounded ">
-      <span onClick={decreaseHandler} className="cursor-pointer">
+    <div className="flex justify-around items-center bg-primary text-white font-bold px-3 py-1 rounded min-w-[90px]">
+      <div onClick={decreaseHandler} className="cursor-pointer">
         -
-      </span>
-      <span>{value}</span>
-      <span onClick={increaseHandler} className="cursor-pointer">
+      </div>
+      <div>{value}</div>
+      <div onClick={increaseHandler} className="cursor-pointer">
         +
-      </span>
+      </div>
     </div>
   );
 }
