@@ -18,7 +18,7 @@ const Login = () => {
     const changeHandler = (e) => {
       setFormState({
         ...formState,
-        [e.target.name]: e.target.value || e.target.checked,
+        [e.target.name]: e.target.value
       });
     };
 
@@ -50,7 +50,17 @@ const Login = () => {
           </h2>
         </div>
         <div className="mx-auto my-4 p-4 flex flex-col gap-4">
-          <div className="space-y-2 mb-8">
+          <div className="space-y-2 mb-2 sm:mb-8">
+            <div className="bg-primary px-4 py-2 rounded-md md:hidden">
+              <Link href={"/"}>
+                <Image
+                  src="https://kachabazar-store.vercel.app/logo/logo-light.svg"
+                  alt="logo"
+                  width={110}
+                  height={40}
+                />
+              </Link>
+            </div>
             <h2 className="font-semibold">Welcome Back 👋</h2>
             <p className="text-sm text-gray-primary">
               Get connected using your email and password
@@ -61,11 +71,12 @@ const Login = () => {
           <form onSubmit={submitHandler} className="space-y-2">
             <Input
               name={"email"}
-              placeholder={"johndoe@company.com"}
+              placeholder={"email"}
               Icon={AiOutlineMail}
               value={formState.email}
               changeHandler={changeHandler}
               type={"email"}
+              className={"overflow-hidden"}
             />
             <Input
               name={"password"}
@@ -84,25 +95,36 @@ const Login = () => {
                   value={formState.termsChecked}
                 />
 
-                <p className="text-sm text-gray-primary">Remember me</p>
+                <p className="text-xs sm:text-sm text-gray-primary">
+                  Remember me
+                </p>
               </div>
               <Link
                 href={"#"}
-                className="text-sm text-gray-primary hover:text-primary"
+                className="text-xs sm:text-sm text-gray-primary hover:text-primary"
               >
                 Forgot Password?
               </Link>
             </div>
             <div className="flex items-center gap-4">
-              <Button text="Login Now" type="submit" fill={true} />
+              <Button
+                text="Login Now"
+                type="submit"
+                fill={true}
+                className="text-sm sm:text-base"
+              />
               <Link href="/signup">
-                <Button text="Create Account" varientColor={"primary"} />
+                <Button
+                  text="Create Account"
+                  varientColor={"primary"}
+                  className="text-sm sm:text-base"
+                />
               </Link>
             </div>
           </form>
           {/* ========Input Section End ========  */}
 
-          <div className="text-center m-4 text-gray-primary">or</div>
+          <div className="text-center sm:m-4 text-gray-primary">or</div>
 
           {/* ========OAuth Section Start ========  */}
           <div className="lg:flex lg:space-x-2 space-y-2 lg:space-y-0">
