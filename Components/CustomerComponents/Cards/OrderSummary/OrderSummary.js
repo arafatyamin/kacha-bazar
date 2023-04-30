@@ -1,18 +1,26 @@
 import Button from "@/Components/CommonComponents/shared/Button";
+import { cartData } from "@/data/cartData";
+import { BsArrowDown } from "react-icons/bs";
+import CartItem from "@/Components/CustomerComponents/Cards/CartItem/CartItem";
 
 const OrderSummary = () => {
   return (
     <div className="border rounded p-3">
       <h3 className="font-medium mb-3">Order Summary</h3>
       <div>
-        {[1, 2, 3, 4, 5].map((i) => (
-          <p>Product {i}</p>
-        ))}
-        <div className="flex gap-3 justify-between items-center">
+        <div className="h-64 bg-white rounded-md overflow-auto space-y-1 relative">
+          {cartData?.map((item) => (
+            <CartItem data={item} />
+          ))}
+        </div>
+        {cartData?.length > 2 && (
+            <BsArrowDown className="mx-auto bg-primary-light p-2 w-8 h-8 rounded-full text-primary animate-bounce" />
+        )}
+        <div className="flex gap-3 justify-between items-center mt-4">
           <input
             type="text"
             placeholder="Input your coupon code"
-            className="px-3 py-2 border rounded outline-none mt-3"
+            className="px-3 py-2 border rounded outline-none"
           />
           <Button text={"Apply"} />
         </div>
