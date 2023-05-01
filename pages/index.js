@@ -124,7 +124,7 @@ const home = () => {
         </div>
         {/* ======================Floating cart card component start ====================== */}
         {/* ======================Floating cart card component start ====================== */}
-        <div className="fixed bottom-40 right-0">
+        <div>
           <ScrollToTop />
         </div>
         {/* ======================Floating cart card component start ====================== */}
