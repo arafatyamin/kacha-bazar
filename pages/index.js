@@ -19,7 +19,7 @@ const home = () => {
       <Head>
         <title>Home Page</title>
       </Head>
-      <main onScroll={() => console.log(window.pageYOffset)}>
+      <main>
         <div className="-z-3">
           <HeroSection />
           {/* <BottomNav /> */}
@@ -123,11 +123,11 @@ const home = () => {
           <FlotingCart />
         </div>
         {/* ======================Floating cart card component start ====================== */}
-        {/* ======================Floating cart card component start ====================== */}
+        {/* ======================Scroll to top component start ====================== */}
         <div>
           <ScrollToTop />
         </div>
-        {/* ======================Floating cart card component start ====================== */}
+        {/* ======================Scroll to top component start ====================== */}
       </main>
     </>
   );
