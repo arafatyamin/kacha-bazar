@@ -28,8 +28,8 @@ const OfferCard = ({
   }
 
   return (
-    <div className="block md:flex md:justify-between items-center bg-white rounded-md shadow-sm h-[150px] border p-4">
-      <div className="flex items-center w-2/3 border-r-2 border-dashed pr-1">
+    <div className="block md:flex md:justify-between items-center bg-white rounded-md shadow-sm min-h-[150px] xl:h-[150px] border p-4 space-y-4 md:space-y-0">
+      <div className="flex items-center md:w-2/3 md:border-r-2 border-dashed pr-1 ">
         <figure className="h-full">
           <Image
             src={imageUrl}
@@ -65,7 +65,7 @@ const OfferCard = ({
           </div>
         </div>
       </div>
-      <div className="md:w-1/3 relative pl-3">
+      <div className="md:w-1/3 md:pl-3">
         <div className="before:my-6 flex md:my-5 mb-6 items-center">
           <div className="w-full">
             <div className="block">
@@ -88,7 +88,7 @@ const OfferCard = ({
               </div>
             </div>
             <p className="text-xs text-gray-500 mt-2">
-              * This coupon code will apply on
+              * This coupon code will apply on{" "}
               <span className="font-bold text-gray-700">
                 {categories} type products{" "}
               </span>

@@ -24,7 +24,7 @@ function CartDrawer({ openDrawer, setOpenDrawer }) {
           </div>
           <div>
             {cartData?.map((data) => (
-              <CartItem data={data} />
+              <CartItem key={data._id} data={data} />
             ))}
           </div>
           <div className="flex items-center justify-between p-[10px] mx-5 my-3 bg-primary rounded-lg absolute bottom-0 left-0 right-0 ">

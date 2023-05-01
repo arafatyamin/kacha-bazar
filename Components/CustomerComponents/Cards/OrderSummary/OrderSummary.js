@@ -8,14 +8,19 @@ const OrderSummary = () => {
     <div className="border rounded p-3">
       <h3 className="font-medium mb-3">Order Summary</h3>
       <div>
-        <div className="h-64 bg-white rounded-md overflow-auto space-y-1 relative">
-          {cartData?.map((item) => (
-            <CartItem data={item} />
-          ))}
+        <div className="relative">
+          <div className="h-64 bg-white rounded-md overflow-auto space-y-1 relative">
+            {cartData?.map((item, index) => (
+              <CartItem key={index} data={item} />
+            ))}
+          </div>
+          <div className="absolute bottom-2 left-[50%]" >
+            {cartData?.length > 2 && (
+              <BsArrowDown className="mx-auto bg-primary-light p-2 w-8 h-8 rounded-full text-primary animate-bounce" />
+            )}
+          </div>
         </div>
-        {cartData?.length > 2 && (
-            <BsArrowDown className="mx-auto bg-primary-light p-2 w-8 h-8 rounded-full text-primary animate-bounce" />
-        )}
+
         <div className="flex gap-3 justify-between items-center mt-4">
           <input
             type="text"

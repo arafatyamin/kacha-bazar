@@ -16,7 +16,7 @@ const offerPage = () => {
           </div>
         <div className='mx-auto max-w-screen-2xl px-4 py-10 lg:py-20 sm:px-10'>
           
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <OfferCard
             title="Card Title"
             categories="Grocery"

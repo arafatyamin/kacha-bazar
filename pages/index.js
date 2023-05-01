@@ -11,6 +11,7 @@ import CustomerLayout from "@/Layouts/CustomerLayout";
 import { categoryItems } from "@/data/data";
 import { offeredProductItems, productItems } from "@/data/productData";
 import Head from "next/head";
+import ScrollToTop from "@/Components/CustomerComponents/CustomerFooter/ScrollToTop";
 
 const home = () => {
   return (
@@ -18,7 +19,7 @@ const home = () => {
       <Head>
         <title>Home Page</title>
       </Head>
-      <main>
+      <main onScroll={() => console.log(window.pageYOffset)}>
         <div className="-z-3">
           <HeroSection />
           {/* <BottomNav /> */}
@@ -118,8 +119,13 @@ const home = () => {
         {/* ======================App Store Section Part End====================== */}
 
         {/* ======================Floating cart card component start ====================== */}
-        <div div className = "fixed top-80 right-0 hidden md:block" >
+        <div className="fixed top-80 right-0 hidden md:block">
           <FlotingCart />
+        </div>
+        {/* ======================Floating cart card component start ====================== */}
+        {/* ======================Floating cart card component start ====================== */}
+        <div className="fixed bottom-40 right-0">
+          <ScrollToTop />
         </div>
         {/* ======================Floating cart card component start ====================== */}
       </main>

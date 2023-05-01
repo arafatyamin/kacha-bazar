@@ -6,6 +6,7 @@ import {
   BsLinkedin,
   BsWhatsapp,
 } from "react-icons/bs";
+import ScrollToTop from "./ScrollToTop";
 
 const CustomerFooter = () => {
   return (
@@ -205,8 +206,8 @@ const CustomerFooter = () => {
           </div>
         </div>
         <div className="mx-auto max-w-screen-2xl bg-gray-50 shadow-sm border border-gray-50 rounded-lg">
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-5 sm:gap-9 lg:gap-11 xl:gap-7 py-8 items-center justify-between">
-            <div className="col-span-1">
+          <div className="flex  py-8 items-center justify-evenly">
+            <div className="">
               <span className="text-base leading-7 font-medium block mb-2 pb-0 5">
                 Follow Us
               </span>
@@ -263,7 +264,7 @@ const CustomerFooter = () => {
                 </li>
               </ul>
             </div>
-            <div className="col-span-1 text-center hidden lg:block md:block">
+            <div className="text-center hidden md:block">
               <p className="text-base leading-7 font-medium block">
                 Call Us Today!
               </p>

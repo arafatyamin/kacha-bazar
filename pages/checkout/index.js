@@ -19,7 +19,7 @@ const checkout = () => {
       </Head>
       <main>
         <section>
-          <div className="container">
+          <div className="custom-container">
             <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-2">
               <div className="p-2">
                 <form onSubmit={handleSubmit(onSubmit)}>
