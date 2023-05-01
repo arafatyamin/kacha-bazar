@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { BsArrowUp } from "react-icons/bs";
+import { BsArrowUp, BsArrowUpSquareFill } from "react-icons/bs";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -22,12 +22,8 @@ const ScrollToTop = () => {
   useEffect(() => {
     window.addEventListener("scroll", listenToScroll);
   }, []);
-  const variants = {
-  open: { opacity: 1, x: 0 },
-  closed: { opacity: 0, x: "-100%" },
-}
   return (
-     (
+    isVisible && (
       <motion.div
         initial={{
           x: 500,
@@ -43,9 +39,9 @@ const ScrollToTop = () => {
           duration: 1.5,
         }}
         onClick={scrollToTop}
-        className={`cursor-pointer fixed bottom-20 right-12 h-10 w-10 md:h-14 md:w-14 bg-primary-light rounded-full  justify-center items-center z-30 flex`}
+        className={`cursor-pointer fixed bottom-20 right-12 z-30`}
       >
-        <BsArrowUp className="text-primary text-2xl mt-1  md:text-3xl  md:mt-2 animate-bounce" />
+        <BsArrowUpSquareFill className="text-primary text-2xl mt-1  md:text-4xl animate-bounce" />
       </motion.div>
     )
   );
