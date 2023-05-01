@@ -8,7 +8,7 @@ function FlotingCart() {
 
   return (
     <div className="h-24 w-[75px] bg-gray-200 rounded-md">
-      <div div onClick = {
+      <div onClick = {
         () => setOpenDrawer(!openDrawer)
       } >
         <div className=' p-2 '>
