@@ -1,3 +1,4 @@
+import Head from "next/head";
 import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
 // import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
 import CategoryCard from "@/Components/CustomerComponents/Cards/CategoryCard/CategoryCard";
@@ -10,7 +11,6 @@ import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSect
 import CustomerLayout from "@/Layouts/CustomerLayout";
 import { categoryItems } from "@/data/data";
 import { offeredProductItems, productItems } from "@/data/productData";
-import Head from "next/head";
 import ScrollToTop from "@/Components/CustomerComponents/CustomerFooter/ScrollToTop";
 
 const home = () => {
