@@ -9,7 +9,6 @@ import { IoIosArrowUp } from "react-icons/io";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import DropDown from "./DropDown";
 import SearchBar from "./SearchBar";
-import Button from "./shared/Button";
 
 const Header = () => {
   const loggedIn = true;
