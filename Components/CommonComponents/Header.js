@@ -115,7 +115,7 @@ const Header = () => {
                   <Link href="/contact-us">Contact Us</Link>
                 </li>
                 <li className="hover:text-primary duration-200">
-                  <Link href="#">Pages</Link>
+                  <Link href="/products">Products</Link>
                 </li>
                 <Link
                   href={"/offerPage"}
