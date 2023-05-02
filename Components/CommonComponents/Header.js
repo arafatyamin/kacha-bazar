@@ -12,7 +12,7 @@ import SearchBar from "./SearchBar";
 import Button from "./shared/Button";
 
 const Header = () => {
-  const loggedIn = true
+  const loggedIn = true;
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   return (
     <header>
@@ -154,4 +154,3 @@ const Header = () => {
 };
 
 export default Header;
-

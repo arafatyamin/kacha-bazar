@@ -11,7 +11,7 @@ import ScrollToTop from "./ScrollToTop";
 
 const CustomerFooter = () => {
   return (
-    <div className="bg-white">
+    <footer className="bg-white">
       <div className="container">
         <div className="hidden relative py-6 lg:grid grid-cols-2 md:grid-cols-4 xl:grid-cols-4 mx-auto border-b-2 border-gray-100 bg-white">
           <div className="border-r border-gray-200 py-1 flex items-center justify-center bg-white">
@@ -59,7 +59,7 @@ const CustomerFooter = () => {
         <div className="border-t border-gray-100 w-full">
           <div className="pb-16 lg:pb-0 xl:pb-0 bg-white">
             <div className="mx-auto max-w-screen-2xl">
-              <div className="grid grid-cols-1 md:grid-cols-7 xl:grid-cols-12 gap-5 sm:gap-9 lg:gap-11 xl:gap-7 py-10 lg:py-16 px-5 justify-between">
+              <div className="grid grid-cols-1 md:grid-cols-7 xl:grid-cols-12 gap-5 sm:gap-9 lg:gap-11 xl:gap-7 py-10 lg:py-16 justify-between">
                 <div className="pb-3.5 sm:pb-0 col-span-1 md:col-span-2 lg:col-span-3">
                   <h1 className="text-lg font-medium mb-2">Company</h1>
                   <ul className="text-sm flex flex-col space-y-3">
@@ -207,7 +207,7 @@ const CustomerFooter = () => {
           </div>
         </div>
         <div className="mx-auto max-w-screen-2xl bg-gray-50 shadow-sm border border-gray-50 rounded-lg">
-          <div className="flex  py-8 items-center justify-evenly">
+          <div className="flex py-8 items-center justify-between">
             <div className="">
               <span className="text-base leading-7 font-medium block mb-2 pb-0 5">
                 Follow Us
@@ -295,7 +295,7 @@ const CustomerFooter = () => {
           </p>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 
