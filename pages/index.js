@@ -118,16 +118,7 @@ const home = () => {
         <AppStoreBanner />
         {/* ======================App Store Section Part End====================== */}
 
-        {/* ======================Floating cart card component start ====================== */}
-        <div className="fixed top-80 right-0 hidden md:block">
-          <FlotingCart />
-        </div>
-        {/* ======================Floating cart card component start ====================== */}
-        {/* ======================Scroll to top component start ====================== */}
-        <div>
-          <ScrollToTop />
-        </div>
-        {/* ======================Scroll to top component start ====================== */}
+        
       </main>
     </>
   );
