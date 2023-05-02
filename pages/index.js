@@ -11,7 +11,6 @@ import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSect
 import CustomerLayout from "@/Layouts/CustomerLayout";
 import { categoryItems } from "@/data/data";
 import { offeredProductItems, productItems } from "@/data/productData";
-import ScrollToTop from "@/Components/CustomerComponents/CustomerFooter/ScrollToTop";
 
 const home = () => {
   return (
@@ -25,7 +24,7 @@ const home = () => {
           <HeroSection />
 
           {/* ======================Featured Categories Part Start====================== */}
-          <div className="custom-container py-6 ">
+          <div className="container">
             <div className="text-center mt-10">
               <h2 className="font-bold text-xl sm:text-2xl">
                 Featured Categories
@@ -34,7 +33,7 @@ const home = () => {
                 Choose your necessary products from this feature categories.
               </p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
               {categoryItems.map((categoryItem) => (
                 <CategoryCard data={categoryItem} key={categoryItem.id} />
               ))}
@@ -45,8 +44,8 @@ const home = () => {
 
           {/* ======================Featured Products Part Start====================== */}
           <section>
-            <div className="bg-gray-50 my-4 py-4 px-4 md:px-0">
-              <div className="custom-container">
+            <div className="container">
+              <div className="bg-gray-50 my-4">
                 <div className="text-center mt-10 space-y-4">
                   <h2 className="font-bold text-xl sm:text-2xl">
                     Popular Products for Daily Shopping
@@ -84,8 +83,8 @@ const home = () => {
         {/* ======================Mobile Ads Banner Part End====================== */}
 
         <section>
-          <div className="bg-gray-50 my-4 py-4 px-4 md:px-0">
-            <div className="custom-container">
+          <div className="container">
+            <div className="bg-gray-50 my-4">
               <div className="text-center mt-10 space-y-4">
                 <h2 className="font-bold text-xl sm:text-2xl">
                   Popular Products for Daily Shopping
@@ -117,8 +116,6 @@ const home = () => {
         {/* ======================App Store Section Part Start====================== */}
         <AppStoreBanner />
         {/* ======================App Store Section Part End====================== */}
-
-        
       </main>
     </>
   );

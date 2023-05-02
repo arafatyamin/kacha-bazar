@@ -9,7 +9,6 @@ import { IoIosArrowUp } from "react-icons/io";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import DropDown from "./DropDown";
 import SearchBar from "./SearchBar";
-import Button from "./shared/Button";
 
 const Header = () => {
   const loggedIn = true;
@@ -115,7 +114,7 @@ const Header = () => {
                   <Link href="/contact-us">Contact Us</Link>
                 </li>
                 <li className="hover:text-primary duration-200">
-                  <Link href="#">Pages</Link>
+                  <Link href="/products">Products</Link>
                 </li>
                 <Link
                   href={"/offerPage"}
