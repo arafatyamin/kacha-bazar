@@ -1,6 +1,7 @@
 import Counter from "@/Components/CommonComponents/Counter";
 import Button from "@/Components/CommonComponents/shared/Button";
 import CustomerLayout from "@/Layouts/CustomerLayout";
+import { Carousel } from "@trendyol-js/react-carousel";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -41,10 +42,16 @@ const SingleProduct = () => {
                 src={"/images/home/Orange-Bell-Pepper-22ct.webp"}
                 height={400}
                 width={400}
-                className="mx"
               />
             </div>
-            <div>{/* //TODO: product image list carousel  */}</div>
+            <div>
+              <Carousel slide={1} show={1} transition={0.5}>
+                <div className="h-48 w-48 bg-red-400 p-4 m-3 border-2 border-gray-200 rounded-2xl">
+                  hello
+                </div>
+                
+              </Carousel>
+            </div>
           </div>
           {/* <==== Image portion end ====>  */}
           {/* <==== Description portion Start  ====>  */}
