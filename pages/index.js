@@ -17,7 +17,8 @@ const home = () => {
   return (
     <>
       <Head>
-        <title>Home Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Home</title>
       </Head>
       <main>
         <div className="-z-3">
