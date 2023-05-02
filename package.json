@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@trendyol-js/react-carousel": "^3.0.2",
     "antd": "^5.4.0",
     "framer-motion": "^10.11.2",
     "next": "13.2.4",
