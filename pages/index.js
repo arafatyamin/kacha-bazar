@@ -22,7 +22,6 @@ const home = () => {
       <main>
         <div className="-z-3">
           <HeroSection />
-          {/* <BottomNav /> */}
 
           {/* ======================Featured Categories Part Start====================== */}
           <div className="custom-container py-6 ">
