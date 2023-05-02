@@ -11,7 +11,6 @@ import { categoryItems } from "@/data/data";
 import CustomerLayout from "@/Layouts/CustomerLayout";
 
 const ProductsPage = () => {
-  console.log(categoryItems);
 
   return (
     <div className="container mt-12">

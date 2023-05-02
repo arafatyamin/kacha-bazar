@@ -1,11 +1,12 @@
 import Image from "next/image";
 import {
   BsFacebook,
-  BsTwitter,
-  BsPinterest,
   BsLinkedin,
+  BsPinterest,
+  BsTwitter,
   BsWhatsapp,
 } from "react-icons/bs";
+import FlotingCart from "../FlotingCart/FlotingCart";
 import ScrollToTop from "./ScrollToTop";
 
 const CustomerFooter = () => {
@@ -274,6 +275,16 @@ const CustomerFooter = () => {
             </div>
           </div>
         </div>
+        {/* ======================Floating cart card component start ====================== */}
+        <div className="fixed top-80 right-0 hidden md:block">
+          <FlotingCart />
+        </div>
+        {/* ======================Floating cart card component start ====================== */}
+
+        {/* ======================Scroll to top card component start ====================== */}
+        <ScrollToTop />
+        {/* ======================Scroll to top card component start ====================== */}
+
         <div className="mx-auto mx-w-screen-2xl px-3 sm:px-10 flex justify-center py-4">
           <p className="text-sm text-gray-500 leading-6">
             Copyright 2022 @

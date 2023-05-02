@@ -1,4 +1,3 @@
-import React from 'react'
 import Button from './shared/Button';
 
 const CarouselComponent = ({ heading, subHeading, bgImage }) => {

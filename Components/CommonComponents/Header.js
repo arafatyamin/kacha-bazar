@@ -74,7 +74,7 @@ const Header = () => {
                 <Link href={"/checkout"}>
                   <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
                 </Link>
-                <Link href={"/login"}>
+                <Link href={"/user"}>
                   <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
                 </Link>
               </nav>
