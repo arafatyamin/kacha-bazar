@@ -1,23 +1,35 @@
 import Counter from "@/Components/CommonComponents/Counter";
 import Button from "@/Components/CommonComponents/shared/Button";
+// import Carousel from "@/Components/CustomerComponents/MultiCardSlider/MultiCardSlider";
 import CustomerLayout from "@/Layouts/CustomerLayout";
+import { imageUrl } from "@/data/imageUrl";
+
 import { Carousel } from "@trendyol-js/react-carousel";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { BiHomeAlt } from "react-icons/bi";
-import { BsFacebook, BsLinkedin, BsPinterest, BsShieldSlash, BsTruck, BsTwitter, BsWhatsapp } from "react-icons/bs";
+import {
+  BsFacebook,
+  BsLinkedin,
+  BsPinterest,
+  BsShieldSlash,
+  BsTruck,
+  BsTwitter,
+  BsWhatsapp,
+} from "react-icons/bs";
 import { FiDollarSign, FiSun } from "react-icons/fi";
 import { GrSync } from "react-icons/gr";
 import { IoLocationOutline } from "react-icons/io5";
-import { MdKeyboardArrowRight } from "react-icons/md";
+import { MdArrowBackIos, MdArrowForwardIos, MdKeyboardArrowRight } from "react-icons/md";
 
 const SingleProduct = () => {
   const [stock, setStock] = useState(true);
   const router = useRouter();
   const { productId } = router.query;
-  const [isDescCollapsed, setIsDescCollapsed] = useState(true)
+  const [isDescCollapsed, setIsDescCollapsed] = useState(true);
+  const [currentImage, setCurrentImage] = useState(imageUrl[0])
   return (
     <>
       <Head>
@@ -39,17 +51,37 @@ const SingleProduct = () => {
           <div className="xl:w-1/3">
             <div className="w-fit mx-auto">
               <Image
-                src={"/images/home/Orange-Bell-Pepper-22ct.webp"}
+                src={currentImage}
                 height={400}
                 width={400}
               />
             </div>
-            <div>
-              <Carousel slide={1} show={1} transition={0.5}>
-                <div className="h-48 w-48 bg-red-400 p-4 m-3 border-2 border-gray-200 rounded-2xl">
-                  hello
-                </div>
-                
+            <hr/>
+            <div className="max-w-[500px] mx-auto">
+              <Carousel
+                slide={1}
+                show={3.5}
+                transition={0.5}
+                responsive={true}
+                swiping={true}
+                leftArrow={
+                  <MdArrowBackIos className="relative inset-y-1/2 text-2xl cursor-pointer hover:scale-110 duration-200" />
+                }
+                rightArrow={
+                  <MdArrowForwardIos className="relative inset-y-1/2 text-2xl cursor-pointer hover:scale-105 duration-200" />
+                }
+                useArrowKeys={true}
+              >
+                {imageUrl.map((image, index) => (
+                  <div key={index} className="mr-2 hover:scale-105 duration-200" onClick={() => setCurrentImage(image)}>
+                    <Image
+                      src={image}
+                      alt="placeholder"
+                      height={200}
+                      width={200}
+                    />
+                  </div>
+                ))}
               </Carousel>
             </div>
           </div>
