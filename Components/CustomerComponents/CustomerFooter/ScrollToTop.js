@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { BsArrowUp, BsArrowUpSquareFill } from "react-icons/bs";
+import { BsArrowUpSquareFill } from "react-icons/bs";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,7 +11,7 @@ const ScrollToTop = () => {
     let heightToHidden = 250;
     const windowScrolled =
       document.body.scrollTop || document.documentElement.scrollTop;
-
+    console.log(windowScrolled)
     if (windowScrolled > heightToHidden) {
       setIsVisible(true);
     } else {
@@ -22,6 +22,7 @@ const ScrollToTop = () => {
   useEffect(() => {
     window.addEventListener("scroll", listenToScroll);
   }, []);
+  
   return (
     isVisible && (
       <motion.div
