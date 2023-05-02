@@ -74,7 +74,9 @@ const Header = () => {
                 <Link href={"/checkout"}>
                   <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
                 </Link>
-                <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
+                <Link href={"/user"}>
+                  <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
+                </Link>
               </nav>
             </div>
           </div>
@@ -94,11 +96,11 @@ const Header = () => {
                     className="cursor-pointer flex items-center gap-2 hover:text-primary duration-200"
                   >
                     Categories
-                      <IoIosArrowUp
-                        className={`text-gray-primary duration-300 ${
-                          isCategoryOpen && "rotate-180 "
-                        }`}
-                      />
+                    <IoIosArrowUp
+                      className={`text-gray-primary duration-300 ${
+                        isCategoryOpen && "rotate-180 "
+                      }`}
+                    />
                   </span>
                   {isCategoryOpen && (
                     <div className="absolute z-10 h-[450px] w-80 overflow-auto rounded-md top-12 scrollbar-hide bg-white shadow-md">
@@ -115,10 +117,16 @@ const Header = () => {
                 <li className="hover:text-primary duration-200">
                   <Link href="#">Pages</Link>
                 </li>
-                <Link href={"/offerPage"} className="px-2 py-1 bg-[var(--clr-red-light)] text-red font-bold rounded-md relative">
+                <Link
+                  href={"/offerPage"}
+                  className="px-2 py-1 bg-[var(--clr-red-light)] text-red font-bold rounded-md relative"
+                >
                   <p className="h-2 w-2 rounded-full bg-[var(--clr-red)] absolute -top-1 -right-1  animate-ping duration-300"></p>
                   <p className="h-2 w-2 rounded-full bg-[var(--clr-red)] absolute -top-1 -right-1 "></p>
-                    <p className = "hover:text-emerald-600 text-red-500" > Offers </p>
+                  <p className="hover:text-emerald-600 text-red-500">
+                    {" "}
+                    Offers{" "}
+                  </p>
                   {/* <Button
                     className="hover:border-none"
                     text={"Offers"}
