@@ -11,7 +11,6 @@ import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSect
 import CustomerLayout from "@/Layouts/CustomerLayout";
 import { categoryItems } from "@/data/data";
 import { offeredProductItems, productItems } from "@/data/productData";
-import ScrollToTop from "@/Components/CustomerComponents/CustomerFooter/ScrollToTop";
 
 const home = () => {
   return (
@@ -117,8 +116,6 @@ const home = () => {
         {/* ======================App Store Section Part Start====================== */}
         <AppStoreBanner />
         {/* ======================App Store Section Part End====================== */}
-
-        
       </main>
     </>
   );
