@@ -1,13 +1,33 @@
-import AddNewProduct from "@/Components/AdminComponents/AddNewProduct";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import AddNewProduct from "@/Components/AdminComponents/Products/AddNewProduct";
 import Button from "@/Components/AdminComponents/Button";
-import ProductsTable from "@/Components/AdminComponents/ProductsTable";
+import ProductsTable from "@/Components/AdminComponents/Products/ProductsTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
-import React, { useState } from "react";
 
 const Products = () => {
   const [newProduct, setNewProduct] = useState(false);
+  const [page, setPage] = useState(1);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProducts();
+  }, [page]);
+
+  const getProducts = async () => {
+    try {
+      const response = await axios(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+          `/products?page=${page}&limit=10`
+      );
+      console.log(response.data); // products
+      setProducts(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const categorys = [
     {
@@ -128,7 +148,7 @@ const Products = () => {
 
         {/* products table  */}
 
-        <ProductsTable />
+        <ProductsTable products={products} />
       </div>
 
       <AddNewProduct newProduct={newProduct} setNewProduct={setNewProduct} />

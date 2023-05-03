@@ -17,7 +17,7 @@ const user = () => {
       </Head>
       <main>
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_5fr]">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_5fr]">
             <UserSideNav setNavbarValue={setNavbarValue} />
             <div className="p-2">
               {navbarValue === "dashboard" && <UserDashboard />}
