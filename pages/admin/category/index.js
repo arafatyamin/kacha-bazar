@@ -1,80 +1,33 @@
 import AddNewCategory from "@/Components/AdminComponents/AddNewCategory";
+import AddNewSubCategory from "@/Components/AdminComponents/AddNewSubCategory";
 import Button from "@/Components/AdminComponents/Button";
 import CategoryTable from "@/Components/AdminComponents/CategoryTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
-import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Category = () => {
   const [newCategory, setNewCategory] = useState(false);
+  const [newSubCategory, setNewSubCategory] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [page, setPage] = useState(1);
 
-  const categorys = [
-    {
-      _id: 1,
-      name: "Fruits & Vegetable",
-    },
-    {
-      _id: 2,
-      name: "Organic Food",
-    },
-    {
-      _id: 3,
-      name: "Fish & Meat",
-    },
-    {
-      _id: 4,
-      name: "Drinks",
-    },
-    {
-      _id: 5,
-      name: "Fresh Seafood",
-    },
-    {
-      _id: 6,
-      name: "Cooking Essentials",
-    },
-    {
-      _id: 7,
-      name: "Biscuits & Cakes",
-    },
-    {
-      _id: 8,
-      name: "Sauces & Pickles",
-    },
-    {
-      _id: 9,
-      name: "Breakfast",
-    },
-    {
-      _id: 10,
-      name: "Milk & Dairy",
-    },
-    {
-      _id: 11,
-      name: "Household Tools",
-    },
-    {
-      _id: 12,
-      name: "Pet Care",
-    },
-    {
-      _id: 13,
-      name: "Snacks & Instant",
-    },
-    {
-      _id: 14,
-      name: "Honey",
-    },
-    {
-      _id: 15,
-      name: "Jam & Jelly",
-    },
-    {
-      _id: 16,
-      name: "Beauty & Health",
-    },
-  ];
+  useEffect(() => {
+    getCategories();
+  }, [page]);
+
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+          `/categories?page=${page}&limit=10`
+      );
+      setCategories(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <section className=" bg-gray-100 min-h-screen">
@@ -86,22 +39,33 @@ const Category = () => {
           <div className="col-span-2">
             <SearchInput placeholder={"search by category type"} />
           </div>
-
-          <div className="col-span-2">
-            {<SelectInput items={categorys} name={"Category"} />}
-          </div>
           <div className="w-full" onClick={() => setNewCategory(!newCategory)}>
             <Button name={"Add Category"} />
+          </div>
+          <div
+            className="w-full"
+            onClick={() => setNewSubCategory(!newSubCategory)}
+          >
+            <Button name={"Add Sub Category"} />
           </div>
         </div>
 
         {/* category table  */}
-        <CategoryTable />
+        <CategoryTable
+          categories={categories}
+          setCategories={setCategories}
+          setPage={setPage}
+          page={page}
+        />
       </div>
 
       <AddNewCategory
         newCategory={newCategory}
         setNewCategory={setNewCategory}
+      />
+      <AddNewSubCategory
+        newSubCategory={newSubCategory}
+        setNewSubCategory={setNewSubCategory}
       />
     </section>
   );

@@ -1,9 +1,34 @@
-import React from "react";
+import { useState } from "react";
 import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import UpdateCategory from "./UpdateCategory";
 
-const CategoryTable = () => {
+const CategoryTable = ({ categories, setCategories, setPage, page }) => {
+  const [updatePP, showUpdate] = useState(false);
+  const [deletePP, setDelete] = useState(false);
+  const [CategoryToUpdate, setCTU] = useState({});
+
+  const deleteCategory = (id) => {};
+  const categoryToUpdate = (id) => {
+    const category = categories.find((c) => c.id === id);
+
+    setCTU(category);
+    showUpdate(true);
+  };
+
+  const updateCategory = (newCat) => {
+    const index = categories.findIndex((c) => c.id === newCat.id);
+    const temp = [...categories];
+    temp[index] = {
+      ...temp[index],
+      ...newCat,
+    };
+    setCategories(temp);
+  };
+
+  const isPP = page > 1 ? true : false;
+  const isNP = categories?.length < 10 ? false : true;
   return (
     <div className="container pb-8 mx-auto rounded-md  bg-gray-100">
       <div className="overflow-x-auto bg-white">
@@ -14,55 +39,50 @@ const CategoryTable = () => {
                 ID
               </th>
               <th className="p-3 text-left">ICON</th>
-              <th className="p-3 w-[500px]">PARENT</th>
-              <th className="p-3">CHILDREN </th>
-              <th className="p-3">TYPE</th>
+              <th className="p-3 w-[500px]">NAME</th>
+              <th className="p-3">Sub Category </th>
               <th className="p-3">PUBLISHED</th>
               <th className="p-3">ACTIONS</th>
             </tr>
           </thead>
           <tbody className="text-[14px]">
-            {[...Array(10)].map((number, i) => (
+            {categories?.map((category, i) => (
               <tr
-                key={i}
+                key={"category" + i}
                 className="text-left bg-white border-b border-opacity-20 border-gray-700 "
               >
                 <td className="px-3 py-2 text-left">
-                  <span>283E</span>
+                  <span>{category?.id.toUpperCase()}</span>
                 </td>
                 <td className="px-3 py-2 text-left">
                   <div className="flex items-center">
                     <img
                       className="w-8 h-8 p-1 rounded-full bg-gray-100"
-                      src="https://i.postimg.cc/13JnVvWJ/Urban-Frgr-Organic-Calming-Herbal-Tea-15-ct.jpg"
+                      src={category?.icon}
                       alt="product"
                     />
                   </div>
                 </td>
                 <td className="px-3 py-2">
                   <span className="text-gray-500 font-bold px-2 py-1 bg-gray-100 rounded-full mx-1">
-                    Organic Food
-                  </span>
-                  <span className="text-gray-500 font-bold px-2 py-1 bg-gray-100 rounded-full mx-1">
-                    Pickles & Condiments
+                    {category?.name}
                   </span>
                 </td>
                 <td className="px-3 py-2">
-                  <span>1</span>
-                </td>
-                <td className="px-3 py-2">
-                  <span>Grocery</span>
+                  <span>{category?.subCategories?.length}</span>
                 </td>
 
                 <td className="px-3 py-2">
                   <label
-                    htmlFor={number}
+                    htmlFor={"publish" + i}
                     className="inline-flex items-center space-x-4 cursor-pointer text-gray-100"
                   >
                     <span className="relative">
                       <input
-                        id={number}
+                        id={"publish" + i}
                         type="checkbox"
+                        readOnly
+                        checked={category?.published ? true : false}
                         className="hidden peer"
                       />
                       <div className="w-10 h-6 rounded-full shadow-inner bg-gray-200  peer-checked:bg-[#07895e]"></div>
@@ -72,11 +92,17 @@ const CategoryTable = () => {
                 </td>
                 <td className="px-3 py-2">
                   <div className="flex justify-center items-center">
-                    <button className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300">
+                    <button
+                      className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300"
+                      onClick={() => categoryToUpdate(category?.id)}
+                    >
                       <FaRegEdit />
                     </button>
 
-                    <button className="text-lg mr-2 font-normal text-gray-400 hover:text-red-600 duration-300">
+                    <button
+                      className="text-lg mr-2 font-normal text-gray-400 hover:text-red-600 duration-300"
+                      onClick={() => deleteCategory(category?.id)}
+                    >
                       <RiDeleteBin6Line />
                     </button>
                   </div>
@@ -85,19 +111,32 @@ const CategoryTable = () => {
             ))}
           </tbody>
         </table>
+        {updatePP && (
+          <UpdateCategory
+            showUpdate={showUpdate}
+            updateCategory={updateCategory}
+            category={CategoryToUpdate}
+          />
+        )}
         <div className="rounded-b-md text-xs bg-white shadow-md border border-t-none font-semibold text-gray-500 ">
           <div className="p-4  flex  justify-between items-center col-span-4">
             <p>SHOWING 46-60 OF 312</p>
 
             <div className="flex items-center">
-              <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
+              <button
+                disabled={!isPP}
+                className={`p-2 ${
+                  !isPP ? "" : "hover:bg-gray-200"
+                } duration-300 rounded-md mx-1`}
+                onClick={() => setPage((old) => old - 1)}
+              >
                 <AiOutlineLeft />
               </button>
 
               <button className="p-2 bg-[#07895e] text-white duration-300 rounded-md mx-1">
-                1
+                {page}
               </button>
-              <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
+              {/* <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
                 2
               </button>
               <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
@@ -108,8 +147,14 @@ const CategoryTable = () => {
 
               <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
                 21
-              </button>
-              <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
+              </button> */}
+              <button
+                disabled={!isNP}
+                className={`p-2 ${
+                  !isNP ? "" : "hover:bg-gray-200"
+                } duration-300 rounded-md mx-1`}
+                onClick={() => setPage((old) => old + 1)}
+              >
                 <AiOutlineRight />
               </button>
             </div>
