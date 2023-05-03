@@ -19,14 +19,14 @@ const checkout = () => {
       </Head>
       <main>
         <section>
-          <div className="container">
-            <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-2">
+          <div className="custom-container">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
               <div className="p-2">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="mb-8">
                     <h3 className="mb-3 font-medium">01. Personal Details</h3>
                     <div>
-                      <div className="flex gap-3 mb-5">
+                      <div className="flex flex-col md:flex-row gap-3 mb-5">
                         <div className="w-full">
                           <label
                             htmlFor="firstName"
@@ -59,7 +59,7 @@ const checkout = () => {
                         </div>
                       </div>
 
-                      <div className="flex gap-3">
+                      <div className="flex flex-col md:flex-row gap-3 mb-5">
                         <div className="w-full">
                           <label htmlFor="email" className="mb-1 inline-block">
                             Email Address
@@ -109,7 +109,7 @@ const checkout = () => {
                           {...register("shippingAddress")}
                         />
                       </div>
-                      <div className="flex gap-3 mb-5">
+                      <div className="flex flex-col md:flex-row gap-3 mb-5">
                         <div className="w-full">
                           <label htmlFor="city" className="mb-1 inline-block">
                             City

@@ -1,9 +1,8 @@
-
 const MobileAdsBanner = () => {
   return (
     <div className="container">
       <div className="block mx-auto max-w-screen-2xl my-6">
-        <div className="mx-auto px-3 md:px-0 max-w-screen-2xl">
+        <div className="mx-auto md:px-0 max-w-screen-2xl">
           <div className="lg:p-16 p-6 bg-emerald-500 shadow-sm border rounded-lg">
             <div className="w-full bg-white shadow-sm lg:px-10 lg:py-5 p-6 rounded-lg">
               <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-4">

@@ -11,8 +11,6 @@ const OfferCard = ({
   couponCode,
   status,
   validity,
-  
-  
 }) => {
   validity = validity?.endsWith("d")
     ? Number(validity.slice(0, -1)) * 24 * 60 * 60 * 1000
@@ -30,9 +28,9 @@ const OfferCard = ({
   }
 
   return (
-    <div className="block md:flex lg:flex md:justify-between lg:justify-between items-center bg-white rounded-md shadow-sm h-[190px] border">
-      <div className="p-6 flex items-center justify-items-start  w-2/3">
-        <figure className="image h-full">
+    <div className="block md:flex md:justify-between items-center bg-white rounded-md shadow-sm min-h-[150px] xl:h-[150px] border p-4 space-y-4 md:space-y-0">
+      <div className="flex items-center md:w-2/3 md:border-r-2 border-dashed pr-1 ">
+        <figure className="h-full">
           <Image
             src={imageUrl}
             alt="My Image"
@@ -67,7 +65,7 @@ const OfferCard = ({
           </div>
         </div>
       </div>
-      <div className="border-l-2 border-dashed my-6 md:w-1/3 relative px-2">
+      <div className="md:w-1/3 md:pl-3">
         <div className="before:my-6 flex md:my-5 mb-6 items-center">
           <div className="w-full">
             <div className="block">
@@ -90,7 +88,7 @@ const OfferCard = ({
               </div>
             </div>
             <p className="text-xs text-gray-500 mt-2">
-              * This coupon code will apply on
+              * This coupon code will apply on{" "}
               <span className="font-bold text-gray-700">
                 {categories} type products{" "}
               </span>
@@ -142,7 +140,7 @@ function renderer({ days, hours, minutes, seconds, completed }) {
           {zeroPad(minutes)}
         </span>
         :
-        <span className="flex items-center justify-center bg-primary text-white px-2 py-1 rounded mx-1 w-8">
+        <span className="flex items-center justify-center bg-primary text-white font-semibold px-2 py-1 rounded mx-1 w-8">
           {zeroPad(seconds)}
         </span>
       </div>
