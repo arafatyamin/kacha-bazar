@@ -50,13 +50,9 @@ const SingleProduct = () => {
           {/* <==== Image portion Start ====>  */}
           <div className="xl:w-1/3">
             <div className="w-fit mx-auto">
-              <Image
-                src={currentImage}
-                height={400}
-                width={400}
-              />
+              <Image src={currentImage} height={400} width={400} alt="need"/>
             </div>
-            <hr/>
+            <hr />
             <div className="max-w-[500px] mx-auto">
               <Carousel
                 slide={1}
@@ -73,7 +69,12 @@ const SingleProduct = () => {
                 useArrowKeys={true}
               >
                 {imageUrl.map((image, index) => (
-                  <div key={index} className="mr-2 hover:scale-105 duration-200" onClick={() => setCurrentImage(image)}>
+                  <div
+                    key={index}
+                    className={`mr-2 hover:scale-105 duration-200 ${image===currentImage ? "opacity-95": "opacity-50"}`}
+                    onClick={() => setCurrentImage(image)}
+                    
+                  >
                     <Image
                       src={image}
                       alt="placeholder"
@@ -257,7 +258,7 @@ const SingleProduct = () => {
                 </li>
               </ul>
             </div>
-            {/* terms section  start */}
+            {/* terms section  end */}
           </div>
           {/* <==== Description portion end ====>  */}
         </div>

@@ -1,22 +1,42 @@
 import Button from "@/Components/CommonComponents/shared/Button";
 import { cartData } from "@/data/cartData";
-import { BsArrowDown } from "react-icons/bs";
+import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import CartItem from "@/Components/CustomerComponents/Cards/CartItem/CartItem";
+import { useEffect, useState } from "react";
 
 const OrderSummary = () => {
+  const [isVisible, setIsVisible] = useState(false)
+  const scrollToFunc = () => {
+    document.querySelector("#cart").scrollTo({top:0, behavior:"smooth"})
+  }
+  const listenToScroll =() => {
+    let scrollToShow = 20;
+    let sectionScrolled = document.querySelector("#cart").scrollTop
+    if (sectionScrolled >= scrollToShow) {
+      setIsVisible(true)
+    } else {
+      setIsVisible(false)
+    }
+  }
+  useEffect(() => {
+    document.querySelector("#cart").addEventListener("scroll", listenToScroll);
+  }, []);
   return (
     <div className="border rounded p-3">
       <h3 className="font-medium mb-3">Order Summary</h3>
       <div>
         <div className="relative">
-          <div className="h-64 bg-white rounded-md overflow-auto space-y-1 relative">
+          <div
+            className="h-96 bg-white rounded-md overflow-auto space-y-1 relative"
+            id="cart"
+          >
             {cartData?.map((item, index) => (
               <CartItem key={index} data={item} />
             ))}
           </div>
-          <div className="absolute bottom-2 left-[50%]" >
-            {cartData?.length > 2 && (
-              <BsArrowDown className="mx-auto bg-primary-light p-2 w-8 h-8 rounded-full text-primary animate-bounce" />
+          <div className="absolute bottom-2 left-[50%]">
+            {isVisible && (
+              <BsArrowUp className="mx-auto bg-primary-light p-2 w-8 h-8 rounded-full text-primary" onClick={scrollToFunc}/>
             )}
           </div>
         </div>
