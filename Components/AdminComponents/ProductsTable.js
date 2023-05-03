@@ -4,7 +4,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
-const ProductsTable = () => {
+const ProductsTable = ({ products }) => {
   return (
     <div className="container pb-8 mx-auto rounded-md  bg-gray-100">
       <div className="overflow-x-auto bg-white">
@@ -17,22 +17,22 @@ const ProductsTable = () => {
               <th className="p-3 text-left">PRODUCT NAME</th>
               <th className="p-3">CATEGORY</th>
               <th className="p-3">PRICE</th>
+              <th className="p-3">DISCOUNT</th>
               <th className="p-3">STOCK</th>
               <th className="p-3">STATUS</th>
-              <th className="p-3">DISCOUNT</th>
               <th className="p-3">DETAILS</th>
               <th className="p-3">PUBLISHED</th>
               <th className="p-3">ACTIONS</th>
             </tr>
           </thead>
           <tbody className="text-[14px] ">
-            {[...Array(20)].map((number, i) => (
+            {products?.map((product, i) => (
               <tr
-                key={i}
+                key={"product" + i}
                 className="text-left border-b border-opacity-20 border-gray-700 bg-white "
               >
                 <td className="px-3 py-2 text-left">
-                  <span>E88F5D</span>
+                  <span>{product?.id?.toUpperCase()}</span>
                 </td>
                 <td className="px-3 py-2 text-left">
                   <div className="flex items-center">
@@ -41,24 +41,25 @@ const ProductsTable = () => {
                       src="https://i.postimg.cc/13JnVvWJ/Urban-Frgr-Organic-Calming-Herbal-Tea-15-ct.jpg"
                       alt="product"
                     />
-                    <span className="ml-2">Calming Herbal Tea</span>
+                    <span className="ml-2">{product?.title}</span>
                   </div>
                 </td>
                 <td className="px-3 py-2">
-                  <span>Drinks</span>
+                  <span>{product?.category?.name}</span>
                 </td>
                 <td className="px-3 py-2">
-                  <span>$5</span>
+                  <span>${product?.price || 0}</span>
+                </td>
+                <td className="px-3  py-2 ">
+                  <span>${product?.discount || 0}</span>
                 </td>
                 <td className="px-3 py-2">
-                  <span>100</span>
+                  <span>{product?.quantity || 0}</span>
                 </td>
                 <td className="px-3 py-2 ">
                   <span>Selling</span>
                 </td>
-                <td className="px-3  py-2 ">
-                  <span></span>
-                </td>
+
                 <td className="px-3 py-2 text-center">
                   <button className="hover:text-[#07895e] " title="Details">
                     <SlMagnifierAdd />
@@ -66,12 +67,14 @@ const ProductsTable = () => {
                 </td>
                 <td className="px-3 py-2">
                   <label
-                    htmlFor={number}
+                    htmlFor={"publish" + i}
                     className="inline-flex items-center space-x-4 cursor-pointer text-gray-100"
                   >
                     <span className="relative">
                       <input
-                        id={number}
+                        readOnly
+                        checked={product?.published || false}
+                        id={"publish" + i}
                         type="checkbox"
                         className="hidden peer"
                       />
