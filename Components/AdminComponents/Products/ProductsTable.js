@@ -19,7 +19,6 @@ const ProductsTable = ({ products }) => {
               <th className="p-3">PRICE</th>
               <th className="p-3">DISCOUNT</th>
               <th className="p-3">STOCK</th>
-              <th className="p-3">STATUS</th>
               <th className="p-3">DETAILS</th>
               <th className="p-3">PUBLISHED</th>
               <th className="p-3">ACTIONS</th>
@@ -56,10 +55,6 @@ const ProductsTable = ({ products }) => {
                 <td className="px-3 py-2">
                   <span>{product?.quantity || 0}</span>
                 </td>
-                <td className="px-3 py-2 ">
-                  <span>Selling</span>
-                </td>
-
                 <td className="px-3 py-2 text-center">
                   <button className="hover:text-[#07895e] " title="Details">
                     <SlMagnifierAdd />
