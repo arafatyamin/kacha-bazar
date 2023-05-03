@@ -7,7 +7,7 @@ function FlotingCart() {
 
 
   return (
-    <div className="h-24 w-[75px] bg-gray-200 rounded-md">
+    <div className="h-24 w-[75px] hidden lg:block bg-gray-200 rounded-md">
       <div onClick = {
         () => setOpenDrawer(!openDrawer)
       } >
@@ -19,7 +19,7 @@ function FlotingCart() {
         <p className='text-center text-white'>$00.00</p>
       </div>
       </div>
-      <div className="">
+      <div className="w-full">
         <CartDrawer
         openDrawer={openDrawer}
         setOpenDrawer={setOpenDrawer}
