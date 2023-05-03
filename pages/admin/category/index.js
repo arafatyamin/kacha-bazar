@@ -1,7 +1,7 @@
-import AddNewCategory from "@/Components/AdminComponents/AddNewCategory";
-import AddNewSubCategory from "@/Components/AdminComponents/AddNewSubCategory";
+import AddNewCategory from "@/Components/AdminComponents/Category/AddNewCategory";
+import AddNewSubCategory from "@/Components/AdminComponents/Category/AddNewSubCategory";
 import Button from "@/Components/AdminComponents/Button";
-import CategoryTable from "@/Components/AdminComponents/CategoryTable";
+import CategoryTable from "@/Components/AdminComponents/Category/CategoryTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { useState, useEffect } from "react";
