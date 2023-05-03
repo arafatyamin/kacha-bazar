@@ -207,7 +207,7 @@ const CustomerFooter = () => {
           </div>
         </div>
         <div className="mx-auto max-w-screen-2xl bg-gray-50 shadow-sm border border-gray-50 rounded-lg">
-          <div className="flex py-8 items-center justify-around">
+          <div className="flex py-8 items-center justify-between">
             <div className="">
               <span className="text-base leading-7 font-medium block mb-2 pb-0 5">
                 Follow Us
