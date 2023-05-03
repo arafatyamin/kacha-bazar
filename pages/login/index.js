@@ -78,7 +78,7 @@ const Login = () => {
               <form onSubmit={submitHandler} className="space-y-2">
                 <Input
                   name={"email"}
-                  placeholder={"email"}
+                  label={"Email"}
                   Icon={AiOutlineMail}
                   value={formState.email}
                   changeHandler={changeHandler}
@@ -87,7 +87,7 @@ const Login = () => {
                 />
                 <Input
                   name={"password"}
-                  placeholder={"password"}
+                  label={"Password"}
                   type={"password"}
                   Icon={CgKey}
                   value={formState.password}

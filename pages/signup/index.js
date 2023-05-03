@@ -37,6 +37,7 @@ const SignUp = () => {
       <main>
         <div className="custom-container h-screen flex items-center justify-center">
           <div className="bg-white h-4/5 w-4/5 md:flex rounded-md overflow-hidden ">
+            {/* <=======left portion Start======> */}
             <div className="bg-primary w-1/2 hidden lg:inline p-6">
               <Link href={"/"}>
                 <Image
@@ -56,9 +57,12 @@ const SignUp = () => {
                 Started for free and get attractive offer
               </h2>
             </div>
+            {/* <=======left portion End======> */}
+            {/* <=======Right portion End======> */}
+
             <div className="mx-auto my-4 p-4 flex flex-col gap-4">
               <div className="space-y-2 mb-2 sm:mb-8">
-                <div className="bg-primary px-4 py-2 rounded-md lg:hidden">
+                <div className="bg-primary px-4 py-2 rounded-md lg:hidden w-full">
                   <Link href={"/"}>
                     <Image
                       src="https://kachabazar-store.vercel.app/logo/logo-light.svg"
@@ -79,19 +83,19 @@ const SignUp = () => {
               {/* ========Input Section Start ========  */}
               <form
                 onSubmit={submitHandler}
-                className="flex flex-col  w-full space-y-3"
+                className="flex flex-col  w-full "
               >
                 <Input
                   name={"email"}
-                  placeholder={"email"}
+                  label={"Email"}
                   Icon={AiOutlineMail}
                   value={formState.email}
                   changeHandler={changeHandler}
                   type={"email"}
                 />
                 <Input
+                  label={"Password"}
                   name={"password"}
-                  placeholder={"password"}
                   type={"password"}
                   Icon={CgKey}
                   value={formState.password}
@@ -141,6 +145,7 @@ const SignUp = () => {
               </div>
               {/* ========OAuth Section Start ========  */}
             </div>
+            {/* <=======Right portion End======> */}
           </div>
         </div>
       </main>
