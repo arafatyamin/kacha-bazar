@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import AddNewProduct from "@/Components/AdminComponents/AddNewProduct";
+import AddNewProduct from "@/Components/AdminComponents/Products/AddNewProduct";
 import Button from "@/Components/AdminComponents/Button";
-import ProductsTable from "@/Components/AdminComponents/ProductsTable";
+import ProductsTable from "@/Components/AdminComponents/Products/ProductsTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
