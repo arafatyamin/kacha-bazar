@@ -1,12 +1,14 @@
 import MenuDrawer from '@/Components/CommonComponents/CartDrawer/MenuDrawer';
 import Link from 'next/link';
 import { useState } from 'react';
+import { BiLogIn } from 'react-icons/bi';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { CgMenuMotion } from "react-icons/cg";
 import { FaHome } from 'react-icons/fa';
 import { RiShoppingCartFill } from 'react-icons/ri';
 
 const BottomNav = () => {
+  const loggedIn =true
     const [openDrawer, setOpenDrawer] = useState(false);
     const drawerHandler = () => setOpenDrawer(!openDrawer)
 
@@ -27,12 +29,18 @@ const BottomNav = () => {
           <Link href={"/"}>
             <FaHome className="hover:scale-105 duration-200 cursor-pointer" />
           </Link>
-          <Link href={"/#"}>
+          <Link href={"/checkout"}>
             <RiShoppingCartFill className="hover:scale-105 duration-200 cursor-pointer" />
           </Link>
-          <Link href={"/#"}>
-            <BsFillPersonFill className="hover:scale-105 duration-200 cursor-pointer" />
-          </Link>
+          {!loggedIn ? (
+            <Link href={"/user"}>
+              <BsFillPersonFill className="hover:scale-105 duration-200 cursor-pointer" />
+            </Link>
+          ) : (
+            <Link href={"/signup"}>
+              <BiLogIn className="hover:scale-105 duration-200 cursor-pointer text-3xl" />
+            </Link>
+          )}
         </nav>
       </div>
     </div>
