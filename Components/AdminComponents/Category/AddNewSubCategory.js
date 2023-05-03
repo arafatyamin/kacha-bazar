@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import axios from "axios";
-import SelectInput from "./SelectInput";
+import SelectInput from "../SelectInput";
 
 const AddNewSubCategory = ({ newSubCategory, setNewSubCategory }) => {
   const [categories, setCategories] = useState([]);
