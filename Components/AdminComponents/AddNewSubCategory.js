@@ -1,9 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import axios from "axios";
+import SelectInput from "./SelectInput";
 
-const AddNewCategory = ({ newCategory, setNewCategory }) => {
+const AddNewSubCategory = ({ newSubCategory, setNewSubCategory }) => {
+  const [categories, setCategories] = useState([]);
   const [preview, setPreview] = useState();
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + `/categories`
+      );
+      setCategories(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const showPreview = (e) => {
     const img = e.target.files[0];
@@ -19,7 +36,7 @@ const AddNewCategory = ({ newCategory, setNewCategory }) => {
     try {
       const formData = new FormData(e.target);
       const response = await axios.post(
-        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/categories",
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/sub-categories",
         formData,
         {
           headers: {
@@ -27,10 +44,10 @@ const AddNewCategory = ({ newCategory, setNewCategory }) => {
           },
         }
       );
-      console.log(response.data); // contains category details
+      console.log(response.data); // contains sub category details
       e.target.reset();
       setPreview("");
-      setNewCategory(false);
+      setNewSubCategory(false);
     } catch (err) {
       console.log(err);
     }
@@ -39,27 +56,28 @@ const AddNewCategory = ({ newCategory, setNewCategory }) => {
   return (
     <div
       className={`fixed top-0 ${
-        newCategory ? "right-0" : "right-[-100%]"
+        newSubCategory ? "right-0" : "right-[-100%]"
       }   w-full duration-300 `}
     >
       <div className="flex justify-end relative">
         <div
-          onClick={() => setNewCategory(false)}
+          onClick={() => setNewSubCategory(false)}
           className={`bg-black/60 hidden lg:block w-full h-screen`}
         ></div>
 
         <div className="w-full bg-white ">
           <div className="bg-gray-100 p-6 flex justify-between items-center">
             <div>
-              <h2 className="text-lg">Add Category</h2>
+              <h2 className="text-lg">Add Sub Category</h2>
               <p className="text-xs">
-                Add your Product category and necessary information from here
+                Add your product sub category and necessary information from
+                here
               </p>
             </div>
 
             <div>
               <button
-                onClick={() => setNewCategory(!newCategory)}
+                onClick={() => setNewSubCategory(!newSubCategory)}
                 className="text-2xl h-10 w-10 bg-white text-red-600 rounded-full flex justify-center items-center shadow-md"
               >
                 <TiDeleteOutline />
@@ -98,15 +116,23 @@ const AddNewCategory = ({ newCategory, setNewCategory }) => {
                 )}
               </div>
 
+              <p className="py-2">Parent Category</p>
+              <div className="col-span-2 ">
+                <SelectInput
+                  items={categories}
+                  name={"select parent category"}
+                />
+              </div>
+
               <p className="py-2">Publish</p>
               <div className="col-span-2 ">
                 <label
-                  htmlFor="publish"
+                  htmlFor="sub-publish"
                   className="inline-flex items-center space-x-4 cursor-pointer text-gray-100"
                 >
                   <span className="relative">
                     <input
-                      id="publish"
+                      id="sub-publish"
                       name="publish"
                       type="checkbox"
                       className="hidden peer"
@@ -119,7 +145,7 @@ const AddNewCategory = ({ newCategory, setNewCategory }) => {
             </div>
             <div className="col-span-3 px-3 flex items-center gap-6">
               <button
-                onClick={() => setNewCategory(false)}
+                onClick={() => setNewSubCategory(false)}
                 className="py-3 px-6 bg-gray-100 rounded-md hover:bg-red-100 text-red-300 hover:text-red-600 duration-300 w-full"
               >
                 Cancel
@@ -130,7 +156,7 @@ const AddNewCategory = ({ newCategory, setNewCategory }) => {
                 className="py-3 px-6 bg-[#108a61] rounded-md 
             hover:bg-[#078057] text-white  duration-300 w-full"
               >
-                Add Category
+                Add Sub Category
               </button>
             </div>
           </form>
@@ -140,4 +166,4 @@ const AddNewCategory = ({ newCategory, setNewCategory }) => {
   );
 };
 
-export default AddNewCategory;
+export default AddNewSubCategory;
