@@ -75,7 +75,9 @@ const ProductsPage = () => {
                     alt="placeholder"
                     style={{ width: "30%" }}
                   />
-                  <p className="text-center text-xs mt-1">{cat?.title}</p>
+                  <p className="whitespace-nowrap text-center text-xs mt-1">
+                    {cat?.title}
+                  </p>
                 </div>
               </div>
             ))}
