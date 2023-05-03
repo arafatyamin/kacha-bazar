@@ -3,31 +3,23 @@ import Input from "@/Components/CommonComponents/shared/Input";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { AiOutlineMail } from "react-icons/ai";
+import { Controller, useForm } from "react-hook-form";
 import { BsFacebook, BsGoogle } from "react-icons/bs";
-import { CgKey } from "react-icons/cg";
 
-const init = {
-  email: "",
-  password: "",
-  termsChecked: false,
-};
 const SignUp = () => {
-  const [formState, setFormState] = useState({ ...init });
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+      checkbox: false,
+    },
+  });
 
-  const changeHandler = (e) => {
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value,
-    });
+  const onValid = (data) => {
+    console.log(data);
+    console.log("clicked");
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    //TODO: Need to implement submission
-  };
   return (
     <>
       <Head>
@@ -36,7 +28,7 @@ const SignUp = () => {
       </Head>
       <main>
         <div className="custom-container h-screen flex items-center justify-center">
-          <div className="bg-white h-4/5 w-4/5 md:flex rounded-md overflow-hidden ">
+          <div className="bg-white h-4/5 lg:w-4/5 w-full md:flex rounded-md overflow-hidden ">
             {/* <=======left portion Start======> */}
             <div className="bg-primary w-1/2 hidden lg:inline p-6">
               <Link href={"/"}>
@@ -82,32 +74,45 @@ const SignUp = () => {
               </div>
               {/* ========Input Section Start ========  */}
               <form
-                onSubmit={submitHandler}
-                className="flex flex-col  w-full "
+                onSubmit={handleSubmit(onValid)}
+                className="flex flex-col  w-full space-y-4 "
               >
-                <Input
-                  name={"email"}
-                  label={"Email"}
-                  Icon={AiOutlineMail}
-                  value={formState.email}
-                  changeHandler={changeHandler}
-                  type={"email"}
+                <Controller
+                  name="email"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      label={"Email"}
+                      id={"email"}
+                      type={"email"}
+                      {...field}
+                    />
+                  )}
                 />
-                <Input
-                  label={"Password"}
-                  name={"password"}
-                  type={"password"}
-                  Icon={CgKey}
-                  value={formState.password}
-                  changeHandler={changeHandler}
+                <Controller
+                  name="password"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      label={"Password"}
+                      id={"password"}
+                      type={"password"}
+                      {...field}
+                    />
+                  )}
                 />
-                <div className="flex items-center">
-                  <Input
-                    name={"termsChecked"}
-                    type="checkbox"
-                    className="border-none"
-                    onChange={changeHandler}
-                    value={formState.termsChecked}
+
+                <div className="flex items-center justify-center">
+                  <Controller
+                    name="checkbox"
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        type={"checkbox"}
+                        className={"border-none"}
+                        {...field}
+                      />
+                    )}
                   />
                   <label className="text-xs text-gray-primary">
                     I agree to Platform's{" "}
