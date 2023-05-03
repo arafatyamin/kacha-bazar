@@ -12,8 +12,8 @@ const TermsAndCondition = () => {
       <main>
         <PageHeader title="Terms & Conditions" />
         <section>
-          <div className="container mx-auto px-3">
-            <div className="mt-16">
+          <div className="container">
+            <div className="py-16">
               <div>
                 <h2 className="mb-2 text-2xl font-medium">
                   Welcome to KachaBazar!

@@ -100,3 +100,4 @@ export default Dashbord;
 Dashbord.getLayout = (page) => {
   return <AdminLayout>{page}</AdminLayout>;
 };
+

@@ -45,7 +45,7 @@ const OrderSummary = () => {
           <input
             type="text"
             placeholder="Input your coupon code"
-            className="px-3 py-2 border rounded outline-none"
+            className="px-1 py-2 border rounded outline-none"
           />
           <Button text={"Apply"} />
         </div>

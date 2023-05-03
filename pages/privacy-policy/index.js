@@ -12,8 +12,8 @@ const PrivacyPolicy = () => {
       <main>
         <PageHeader title={"Privacy & Policy"} />
         <section>
-          <div className="container mx-auto px-3">
-            <div className="mt-16">
+          <div className="container">
+            <div className="py-16">
               <div>
                 <h2 className="mb-2 text-2xl font-medium">
                   Last updated: February 15, 2022
