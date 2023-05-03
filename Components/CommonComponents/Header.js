@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <header>
       {/* ======================top Header Part Start====================== */}
-      <div className="hidden lg:inline text-xs  font-secondary bg-white ">
+      <div className="hidden lg:inline text-xs font-secondary bg-white">
         {/* Left  */}
         <div className="custom-container h-8 mx-auto flex justify-between items-center">
           <div className="flex items-center gap-2">
