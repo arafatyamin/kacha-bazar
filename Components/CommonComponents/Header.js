@@ -84,7 +84,7 @@ const Header = () => {
         {/* ======================Main header Part End====================== */}
 
         {/* ======================Sub header Part Start====================== */}
-        <nav className="bg-white text-sm font-primary relative hidden md:flex">
+        <nav className="bg-white text-sm font-primary relative hidden lg:flex">
           <div className="custom-container">
             <div className="h-12 flex justify-between items-center max-w-screen-2xl ">
               {/* Left  */}
