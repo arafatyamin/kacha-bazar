@@ -45,7 +45,7 @@ const UserSideNav = ({ setNavbarValue }) => {
           <p
             key={_id}
             className="flex items-center gap-2 hover:text-primary p-2 cursor-pointer"
-            onClick={(e) => setNavbarValue(e.target.innerText.toLowerCase())}
+            onClick={(e) => setNavbarValue(e?.target?.innerText?.toLowerCase())}
           >
             {icon} {title}
           </p>
