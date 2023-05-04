@@ -8,25 +8,25 @@ const userSideNavItems = [
     _id: "1",
     title: "Dashboard",
     icon: <RxDashboard />,
-    link: "#",
+    link: "/user",
   },
   {
     _id: "2",
     title: "My Orders",
     icon: <AiOutlineUnorderedList />,
-    link: "#",
+    link: "/user/order",
   },
   {
     _id: "3",
     title: "Update Profile",
     icon: <RxGear />,
-    link: "#",
+    link: "/user/update-profile",
   },
   {
     _id: "4",
     title: "Change Password",
     icon: <HiOutlineClipboardList />,
-    link: "#",
+    link: "/user/change-password",
   },
   {
     _id: "5",
@@ -36,19 +36,19 @@ const userSideNavItems = [
   },
 ];
 
-const UserSideNav = ({ setNavbarValue }) => {
+const UserSideNav = () => {
   return (
     <div className="flex flex-col gap-3">
       {userSideNavItems?.map((userSideNavItem) => {
-        const { _id, title, icon } = userSideNavItem;
+        const { _id, title, icon, link } = userSideNavItem;
         return (
-          <p
+          <Link
+            href={link}
             key={_id}
             className="flex items-center gap-2 hover:text-primary p-2 cursor-pointer"
-            onClick={(e) => setNavbarValue(e?.target?.innerText?.toLowerCase())}
           >
             {icon} {title}
-          </p>
+          </Link>
         );
       })}
     </div>

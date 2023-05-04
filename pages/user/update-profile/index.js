@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+import CustomerDashboardLayout from "@/Layouts/CustomerDashboardLayout";
 
 const UpdateProfile = () => {
   const {
@@ -109,6 +110,10 @@ const UpdateProfile = () => {
       </form>
     </div>
   );
+};
+
+UpdateProfile.getLayout = function (page) {
+  return <CustomerDashboardLayout>{page}</CustomerDashboardLayout>;
 };
 
 export default UpdateProfile;

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useForm } from "react-hook-form";
+import CustomerDashboardLayout from "@/Layouts/CustomerDashboardLayout";
 
 const ChangePassword = () => {
   const {
@@ -70,6 +71,10 @@ const ChangePassword = () => {
       </main>
     </>
   );
+};
+
+ChangePassword.getLayout = function (page) {
+  return <CustomerDashboardLayout>{page}</CustomerDashboardLayout>;
 };
 
 export default ChangePassword;
