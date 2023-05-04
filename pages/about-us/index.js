@@ -77,7 +77,7 @@ const AboutUs = () => {
             </div>
             {/* welcome to our part end */}
 
-            <div div className = "mt-10 lg:mt-16 text-base opacity-90 leading-7 whitespace-normal" >
+            <div className="mt-10 lg:mt-16 text-base opacity-90 leading-7 whitespace-normal">
               <p>
                 Holisticly seize parallel metrics and functional ROI. Seamlessly
                 revolutionize error-free internal or "organic" sources before
