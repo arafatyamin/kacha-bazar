@@ -1,19 +1,33 @@
 import { useRouter } from "next/router";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const withAuth = (Component) => {
   console.log("using hoc");
 
   return (props) => {
     const router = useRouter();
-    let isAuthenticated = false; // check authentication status
-    if (isAuthenticated) {
-      return <Component {...props} />;
-    } else {
-      if (typeof window !== "undefined") {
+    const [data, setData] = useState(null);
+
+    const getUser = async () => {
+      try {
+        const response = await axios.get(
+          process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/customer/details",
+          {
+            withCredentials: true,
+          }
+        );
+        const data = response.data.data;
+        setData(data);
+      } catch (err) {
         router.push("/login");
       }
-      return null;
-    }
+    };
+    useEffect(() => {
+      getUser();
+    }, []);
+
+    return !!data ? <Component {...props} /> : null;
   };
 };
 
