@@ -15,4 +15,5 @@ const CustomerLayout = ({ children }) => {
   );
 };
 
-export default withAuth(CustomerLayout);
+// export default withAuth(CustomerLayout);
+export default CustomerLayout;
