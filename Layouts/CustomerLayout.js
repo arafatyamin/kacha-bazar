@@ -4,10 +4,11 @@ import CustomerFooter from "@/Components/CustomerComponents/CustomerFooter/Custo
 import React from "react";
 
 const CustomerLayout = ({ children }) => {
+  console.log(children);
   return (
     <>
       <Header />
-      <BottomNav/>
+      <BottomNav />
       {children}
       <CustomerFooter />
     </>
