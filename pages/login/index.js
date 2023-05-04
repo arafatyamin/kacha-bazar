@@ -113,13 +113,19 @@ const Login = () => {
 
               {/* ========OAuth Section Start ========  */}
               <div className="lg:flex lg:space-x-2 space-y-2 lg:space-y-0">
-                <div className="flex items-center justify-center gap-2 border border-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-primary-light duration-200 ">
+                <a
+                  href={
+                    process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+                    "/auth/user/google"
+                  }
+                  className="flex items-center justify-center gap-2 border border-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-primary-light duration-200 "
+                >
                   <BsGoogle color="red" />
-                  <p>Sign up with Google</p>
-                </div>
+                  <p>Login with Google</p>
+                </a>
                 <div className="flex items-center justify-center gap-2 border border-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-primary-light duration-200">
                   <BsFacebook className="w-8 h-6" color="blue" />
-                  <p>Sign up with Facebook</p>
+                  <p>Login with Facebook</p>
                 </div>
               </div>
               {/* ========OAuth Section Start ========  */}

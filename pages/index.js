@@ -42,13 +42,13 @@ const home = () => {
           </div>
           {/* ======================Featured Categories Part End====================== */}
 
-          {/* ======================Featured Products Part Start====================== */}
+          {/* ======================Regular Products Part Start====================== */}
           <section>
             <div className="container">
               <div className="bg-gray-50 my-4">
                 <div className="text-center mt-10 space-y-4">
                   <h2 className="font-bold text-xl sm:text-2xl">
-                    Popular Products for Daily Shopping
+                    Regular Products for Daily Shopping
                   </h2>
                   <p className="text-gray-primary text-sm sm:text-base max-w-2xl mx-auto">
                     See all our popular products in this week. You can choose
@@ -56,7 +56,7 @@ const home = () => {
                     special offer with free shipping.
                   </p>
                 </div>
-                <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                <div div className = "grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 mt-8" >
                   {productItems &&
                     productItems?.length > 0 &&
                     productItems.map((item, ind) => (
@@ -74,7 +74,7 @@ const home = () => {
             </div>
           </section>
 
-          {/* ======================Featured Products Part End====================== */}
+          {/* ======================Regular Products Part End====================== */}
 
           {/* ======================Mobile Ads Banner Part Start====================== */}
         </div>
@@ -95,7 +95,7 @@ const home = () => {
                   with free shipping.
                 </p>
               </div>
-              <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+              <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {offeredProductItems &&
                   offeredProductItems?.length > 0 &&
                   offeredProductItems.map((item, index) => (

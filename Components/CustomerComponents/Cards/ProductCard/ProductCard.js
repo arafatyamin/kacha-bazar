@@ -30,6 +30,7 @@ const ProductCard = ({ imgUrl, quantity, title, price = 0, offer }) => {
     <div className="group bg-white min-w-[200px] relative rounded border border-gray-100 shadow-sm pt-4">
       <Image
         src={imgUrl}
+        alt={title}
         width={150}
         height={150}
         className="mx-auto group-hover:scale-110 duration-300"
