@@ -1,8 +1,4 @@
-let customer = {
-  name: "Mark",
-  id: "DkSfU342BdL",
-  email: "mark@gmail.com",
-};
+let customer = {};
 
 const customerReducer = (state = customer, action) => {
   switch (action.type) {
