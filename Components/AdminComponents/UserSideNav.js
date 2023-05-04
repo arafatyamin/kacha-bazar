@@ -2,6 +2,8 @@ import Link from "next/link";
 import { AiOutlineUnlock, AiOutlineUnorderedList } from "react-icons/ai";
 import { RxDashboard, RxGear } from "react-icons/rx";
 import { HiOutlineClipboardList } from "react-icons/hi";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const userSideNavItems = [
   {
@@ -28,15 +30,28 @@ const userSideNavItems = [
     icon: <HiOutlineClipboardList />,
     link: "/user/change-password",
   },
-  {
-    _id: "5",
-    title: "Log Out",
-    icon: <AiOutlineUnlock />,
-    link: "#",
-  },
 ];
 
 const UserSideNav = () => {
+  const router = useRouter();
+
+  const logOut = async () => {
+    try {
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/logout",
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response.data);
+      if (typeof window !== "undefined") {
+        router.push("/login");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-3">
       {userSideNavItems?.map((userSideNavItem) => {
@@ -51,6 +66,14 @@ const UserSideNav = () => {
           </Link>
         );
       })}
+      <Link
+        href={"#"}
+        key={"43"}
+        onClick={logOut}
+        className="flex items-center gap-2 hover:text-primary p-2 cursor-pointer"
+      >
+        <AiOutlineUnlock /> Log Out
+      </Link>
     </div>
   );
 };
