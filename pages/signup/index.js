@@ -7,7 +7,7 @@ import { useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsFacebook, BsGoogle } from "react-icons/bs";
 import { CgKey } from "react-icons/cg";
-import NonPortectedLayout from "../../Layouts/NonPortectedLayout";
+import getCustomer from "@/utils/getCustomer";
 
 const init = {
   email: "",
@@ -157,8 +157,19 @@ const SignUp = () => {
   );
 };
 
-SignUp.getLayout = function (page) {
-  return <NonPortectedLayout>{page}</NonPortectedLayout>;
-};
+export async function getServerSideProps(context) {
+  let customer = await getCustomer(context);
+
+  if (customer) {
+    return {
+      redirect: {
+        destination: "/user",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+}
 
 export default SignUp;
