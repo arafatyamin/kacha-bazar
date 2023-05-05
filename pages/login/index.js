@@ -7,6 +7,7 @@ import { useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsFacebook, BsGoogle } from "react-icons/bs";
 import { CgKey } from "react-icons/cg";
+import NonPortectedLayout from "../../Layouts/NonPortectedLayout"
 
 const init = {
   email: "",
@@ -157,6 +158,10 @@ const Login = () => {
       </main>
     </>
   );
+};
+
+Login.getLayout = function (page) {
+  return <NonPortectedLayout>{page}</NonPortectedLayout>;
 };
 
 export default Login;
