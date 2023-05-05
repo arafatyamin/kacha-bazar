@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import store from "../store";
 
 const withAuth = (Component) => {
   console.log("using hoc");
@@ -18,6 +19,10 @@ const withAuth = (Component) => {
           }
         );
         const data = response.data.data;
+        store.dispatch({
+          type: "UPDATE_CUSTOMER",
+          customer: { isLoggedIn: true, ...data },
+        });
         setData(data);
       } catch (err) {
         router.push("/login");
