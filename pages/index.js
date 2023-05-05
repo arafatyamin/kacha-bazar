@@ -11,6 +11,7 @@ import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSect
 import CustomerLayout from "@/Layouts/CustomerLayout";
 import { categoryItems } from "@/data/data";
 import { offeredProductItems, productItems } from "@/data/productData";
+import axios from "axios";
 
 const home = () => {
   return (
@@ -121,7 +122,36 @@ const home = () => {
   );
 };
 
+export async function getServerSideProps(context) {
+  // Fetch data from external API
+  const { req } = context;
+
+  // Get the cookies from the request
+  const cookies = req.headers.cookie;
+
+  let customer;
+  try {
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/customer/details",
+      {
+        withCredentials: true,
+        headers: {
+          Cookie: cookies,
+        },
+      }
+    );
+    customer = response.data.data;
+  } catch (err) {
+    console.log(err);
+    customer = null;
+  }
+
+  // Pass data to the page via props
+  return { props: { customer } };
+}
+
 home.getLayout = (page) => {
-  return <CustomerLayout>{page}</CustomerLayout>;
+  const customer = page.props.children.props.customer;
+  return <CustomerLayout customer={customer}>{page}</CustomerLayout>;
 };
 export default home;
