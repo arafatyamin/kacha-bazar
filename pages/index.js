@@ -1,11 +1,7 @@
 import Head from "next/head";
 import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
-// import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
 import CategoryCard from "@/Components/CustomerComponents/Cards/CategoryCard/CategoryCard";
-import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
-// import UserSideNav from "@/Components/CustomerComponents/CustomerAdmin/UserSideNav";
 import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
-import BottomNav from "@/Components/CustomerComponents/BottomNav";
 import ProductCard from "@/Components/CustomerComponents/Cards/ProductCard/ProductCard";
 import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSection";
 import CustomerLayout from "@/Layouts/CustomerLayout";
