@@ -13,8 +13,9 @@ import { categoryItems } from "@/data/data";
 import { offeredProductItems, productItems } from "@/data/productData";
 import axios from "axios";
 import getCustomer from "@/utils/getCustomer";
+import getCategories from "@/utils/getCategories";
 
-const home = () => {
+const home = ({ categories }) => {
   return (
     <>
       <Head>
@@ -36,8 +37,8 @@ const home = () => {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
-              {categoryItems.map((categoryItem) => (
-                <CategoryCard data={categoryItem} key={categoryItem.id} />
+              {categories?.map((category) => (
+                <CategoryCard data={category} key={category.id} />
               ))}
             </div>
             {/* <UserSideNav /> */}
@@ -124,9 +125,10 @@ const home = () => {
 };
 
 export async function getServerSideProps(context) {
-  let customer = await getCustomer(context);
+  const customer = await getCustomer(context);
+  const categories = await getCategories();
 
-  return { props: { customer } };
+  return { props: { customer, categories } };
 }
 
 home.getLayout = (page) => {
