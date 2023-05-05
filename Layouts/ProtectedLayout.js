@@ -5,4 +5,5 @@ const ProtectedLayout = ({ children }) => {
   return <>{children}</>;
 };
 
-export default withAuth(ProtectedLayout);
+// export default withAuth(ProtectedLayout);
+export default ProtectedLayout;
