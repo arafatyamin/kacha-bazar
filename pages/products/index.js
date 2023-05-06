@@ -7,24 +7,11 @@ import Button from "@/Components/CommonComponents/shared/Button";
 import Carousel from "@/Components/CustomerComponents/MultiCardSlider/MultiCardSlider";
 import {categoryItems} from "@/data/data";
 import CustomerLayout from "@/Layouts/CustomerLayout";
-import {useDispatch, useSelector} from "react-redux";
-import loadProductsData from "@/store/thunk/fetchProducts";
-import {useEffect} from "react";
-import {loadingStart} from "@/store/actions/productsAction";
 import Head from "next/head";
 import ProductCard from "@/Components/CustomerComponents/Cards/ProductCard/ProductCard";
+import getProducts from "@/utils/getProducts";
 
-const ProductsPage = () => {
-    const {products, loading} = useSelector((state) => state.products);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(loadingStart())
-        dispatch(loadProductsData());
-    }, []);
-
-    console.log(products, loading);
-
+const ProductsPage = ({products}) => {
     return (
         <>
             <Head>
@@ -110,9 +97,8 @@ const ProductsPage = () => {
                 </section>
                 <section>
                     <div className="container">
-                        {loading && <p>Loading...</p>}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
-                            {products?.map((product) => <ProductCard key={product.id} data={product} />)}
+                            {products?.map((product) => <ProductCard key={product.id} data={product}/>)}
                         </div>
                     </div>
                 </section>
@@ -125,12 +111,13 @@ ProductsPage.getLayout = (page) => {
     return <CustomerLayout>{page}</CustomerLayout>;
 };
 
-// export async function getServerSideProps() {
-//     const dispatch = useDispatch();
-//     await dispatch(loadProductsData())
-//     return {
-//         props: {}
-//     }
-// }
+export async function getServerSideProps() {
+    const products = await getProducts();
+    return {
+        props: {
+            products,
+        }
+    }
+}
 
 export default ProductsPage;
