@@ -7,8 +7,11 @@ import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSect
 import CustomerLayout from "@/Layouts/CustomerLayout";
 import { categoryItems } from "@/data/data";
 import { offeredProductItems, productItems } from "@/data/productData";
+import axios from "axios";
+import getCustomer from "@/utils/getCustomer";
+import getCategories from "@/utils/getCategories";
 
-const home = () => {
+const home = ({ categories }) => {
   return (
     <>
       <Head>
@@ -30,8 +33,8 @@ const home = () => {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
-              {categoryItems.map((categoryItem) => (
-                <CategoryCard data={categoryItem} key={categoryItem.id} />
+              {categories?.map((category) => (
+                <CategoryCard data={category} key={category.id} />
               ))}
             </div>
             {/* <UserSideNav /> */}
@@ -52,7 +55,7 @@ const home = () => {
                     special offer with free shipping.
                   </p>
                 </div>
-                <div div className = "grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 mt-8" >
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 py-10">
                   {productItems &&
                     productItems?.length > 0 &&
                     productItems.map((item, ind) => (
@@ -117,7 +120,15 @@ const home = () => {
   );
 };
 
+export async function getServerSideProps(context) {
+  const customer = await getCustomer(context);
+  const categories = await getCategories();
+
+  return { props: { customer, categories } };
+}
+
 home.getLayout = (page) => {
-  return <CustomerLayout>{page}</CustomerLayout>;
+  const customer = page.props.children.props.customer;
+  return <CustomerLayout customer={customer}>{page}</CustomerLayout>;
 };
 export default home;

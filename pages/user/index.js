@@ -1,42 +1,50 @@
-import Head from "next/head";
-import CustomerLayout from "@/Layouts/CustomerLayout";
-import UserSideNav from "@/Components/AdminComponents/UserSideNav";
-import { useState } from "react";
-import UserDashboard from "./dashboard";
-import OrderPage from "./order";
-import UpdateProfile from "./update-profile";
-import ChangePassword from "./change-password";
-import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
+import CustomerDashboardLayout from "@/Layouts/CustomerDashboardLayout";
+import OrderDisplay from "@/Components/AdminComponents/OrderDisplay";
+import OrdersTable from "@/Components/AdminComponents/OrdersTable";
+import { orderItems } from "@/data/data";
+import getCustomer from "@/utils/getCustomer";
 
-const user = () => {
-  const [navbarValue, setNavbarValue] = useState("dashboard");
+const dashboard = () => {
   return (
     <>
-      <Head>
-        <title>User Dashboard</title>
-      </Head>
-      <main>
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_5fr]">
-            <UserSideNav setNavbarValue={setNavbarValue} />
-            <div className="p-2">
-              {navbarValue === "dashboard" && <UserDashboard />}
-              {navbarValue === "my orders" && <OrderPage />}
-              {navbarValue === "update profile" && <UpdateProfile />}
-              {navbarValue === "change password" && <ChangePassword />}
-              {navbarValue === "log out" &&
-                "I'm hacker lol! you can't log out me okay! focus your work."}
-            </div>
-          </div>
+      <div>
+        <h3 className="mb-3 font-medium">Dashboard</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+          {orderItems.map((orderItem) => (
+            <OrderDisplay data={orderItem} key={orderItem._id} />
+          ))}
         </div>
-        <AppStoreBanner />
-      </main>
+        <div className="mt-6">
+          <h3 className="mb-2 font-medium">Recent Order</h3>
+          <OrdersTable />
+        </div>
+      </div>
     </>
   );
 };
 
-user.getLayout = function (page) {
-  return <CustomerLayout>{page}</CustomerLayout>;
+export async function getServerSideProps(context) {
+  let customer = await getCustomer(context);
+
+  if (!customer) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: { customer } };
+}
+
+dashboard.getLayout = function (page) {
+  const customer = page.props.children.props.customer;
+  return (
+    <CustomerDashboardLayout customer={customer}>
+      {page}
+    </CustomerDashboardLayout>
+  );
 };
 
-export default user;
+export default dashboard;

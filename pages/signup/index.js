@@ -7,6 +7,7 @@ import { useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsFacebook, BsGoogle } from "react-icons/bs";
 import { CgKey } from "react-icons/cg";
+import getCustomer from "@/utils/getCustomer";
 
 const init = {
   email: "",
@@ -81,10 +82,7 @@ const SignUp = () => {
                 </p>
               </div>
               {/* ========Input Section Start ========  */}
-              <form
-                onSubmit={submitHandler}
-                className="flex flex-col  w-full "
-              >
+              <form onSubmit={submitHandler} className="flex flex-col  w-full ">
                 <Input
                   name={"email"}
                   label={"Email"}
@@ -134,10 +132,16 @@ const SignUp = () => {
 
               {/* ========OAuth Section Start ========  */}
               <div className="lg:flex lg:space-x-2 space-y-2 lg:space-y-0">
-                <div className="flex items-center justify-center gap-2 border border-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-primary-light duration-200 ">
+                <a
+                  href={
+                    process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+                    "/auth/user/google"
+                  }
+                  className="flex items-center justify-center gap-2 border border-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-primary-light duration-200 "
+                >
                   <BsGoogle color="red" />
                   <p>Sign up with Google</p>
-                </div>
+                </a>
                 <div className="flex items-center justify-center gap-2 border border-gray-200 px-2 py-1 rounded-md cursor-pointer hover:bg-primary-light duration-200">
                   <BsFacebook className="w-8 h-6" color="blue" />
                   <p>Sign up with Facebook</p>
@@ -152,5 +156,20 @@ const SignUp = () => {
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+  let customer = await getCustomer(context);
+
+  if (customer) {
+    return {
+      redirect: {
+        destination: "/user",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+}
 
 export default SignUp;

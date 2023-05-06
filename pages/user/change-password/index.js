@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { useForm } from "react-hook-form";
+import CustomerDashboardLayout from "@/Layouts/CustomerDashboardLayout";
+import getCustomer from "@/utils/getCustomer";
 
 const ChangePassword = () => {
   const {
@@ -69,6 +71,30 @@ const ChangePassword = () => {
         </div>
       </main>
     </>
+  );
+};
+
+export async function getServerSideProps(context) {
+  let customer = await getCustomer(context);
+
+  if (!customer) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: { customer } };
+}
+
+ChangePassword.getLayout = function (page) {
+  const customer = page.props.children.props.customer;
+  return (
+    <CustomerDashboardLayout customer={customer}>
+      {page}
+    </CustomerDashboardLayout>
   );
 };
 
