@@ -7,7 +7,6 @@ const initialState = {
 }
 
 const productsReducer = (state = initialState, action) => {
-    console.log(action);
     switch (action.type) {
         case FETCH_START:
             return {
