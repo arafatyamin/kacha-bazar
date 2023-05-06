@@ -1,0 +1,3 @@
+export const LOADING_START = "LOADING_START";
+export const FETCH_START = "FETCH_START";
+export const LOAD_PRODUCTS = "LOAD_PRODUCTS";
