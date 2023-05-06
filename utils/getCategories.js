@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getCustomer = async () => {
+const getCategories = async () => {
   try {
     const response = await axios.get(
       process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/categories?page=1&limit=18"
@@ -12,4 +12,4 @@ const getCustomer = async () => {
   }
 };
 
-export default getCustomer;
+export default getCategories;
