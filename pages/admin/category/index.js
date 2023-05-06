@@ -36,7 +36,7 @@ const Category = () => {
 
         {/* products search section  */}
         <div className="my-3 grid grid-cols-1 lg:grid-cols-5 py-6 px-4 gap-6 rounded-md shadow-sm bg-white">
-          <div className="col-span-2">
+          <div className="lg:col-span-3 col-span-2">
             <SearchInput placeholder={"search by category type"} />
           </div>
           <div className="w-full" onClick={() => setNewCategory(!newCategory)}>
