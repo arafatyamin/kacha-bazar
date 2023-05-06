@@ -5,13 +5,12 @@ import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/Mobil
 import ProductCard from "@/Components/CustomerComponents/Cards/ProductCard/ProductCard";
 import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSection";
 import CustomerLayout from "@/Layouts/CustomerLayout";
-import { categoryItems } from "@/data/data";
 import { offeredProductItems, productItems } from "@/data/productData";
-import axios from "axios";
 import getCustomer from "@/utils/getCustomer";
 import getCategories from "@/utils/getCategories";
+import getProducts from "@/utils/getProducts";
 
-const home = ({ categories }) => {
+const home = ({ categories, products }) => {
   return (
     <>
       <Head>
@@ -56,16 +55,12 @@ const home = ({ categories }) => {
                   </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 py-10">
-                  {productItems &&
-                    productItems?.length > 0 &&
-                    productItems.map((item, ind) => (
+                  {products &&
+                    products?.length > 0 &&
+                    products.map((product) => (
                       <ProductCard
-                        key={ind}
-                        imgUrl={item.imgUrl}
-                        title={item.title}
-                        quantity={item.quantity}
-                        price={item.price}
-                        offer={item.offer}
+                        key={product.id}
+                        data={product}
                       />
                     ))}
                 </div>
@@ -95,18 +90,14 @@ const home = ({ categories }) => {
                 </p>
               </div>
               <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                {offeredProductItems &&
-                  offeredProductItems?.length > 0 &&
-                  offeredProductItems.map((item, index) => (
-                    <ProductCard
-                      key={index}
-                      imgUrl={item.imgUrl}
-                      title={item.title}
-                      quantity={item.quantity}
-                      price={item.price}
-                      offer={item.offer}
-                    />
-                  ))}
+                {products &&
+                    products?.length > 0 &&
+                    products.map((product) => (
+                        <ProductCard
+                            key={product.id}
+                            data={product}
+                        />
+                    ))}
               </div>
             </div>
           </div>
@@ -123,8 +114,9 @@ const home = ({ categories }) => {
 export async function getServerSideProps(context) {
   const customer = await getCustomer(context);
   const categories = await getCategories();
+  const products = await getProducts()
 
-  return { props: { customer, categories } };
+  return { props: { customer, categories, products } };
 }
 
 home.getLayout = (page) => {
