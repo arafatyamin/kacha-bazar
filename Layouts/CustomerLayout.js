@@ -4,10 +4,10 @@ import CustomerFooter from "@/Components/CustomerComponents/CustomerFooter/Custo
 import React from "react";
 import withAuth from "../auth/withAuth";
 
-const CustomerLayout = ({ children }) => {
+const CustomerLayout = ({ customer, children }) => {
   return (
     <>
-      <Header />
+      <Header customer={customer} />
       <BottomNav />
       {children}
       <CustomerFooter />

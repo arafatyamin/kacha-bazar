@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 import { BsFacebook, BsGoogle } from "react-icons/bs";
+import { CgKey } from "react-icons/cg";
+import getCustomer from "@/utils/getCustomer";
 
 const Login = () => {
   const { handleSubmit, control } = useForm({
@@ -136,5 +138,20 @@ const Login = () => {
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+  let customer = await getCustomer(context);
+
+  if (customer) {
+    return {
+      redirect: {
+        destination: "/user",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+}
 
 export default Login;

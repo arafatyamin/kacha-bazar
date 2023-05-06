@@ -1,14 +1,13 @@
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import store from "../store";
 
-const withAuth = (Component) => {
-  console.log("using hoc");
+const withOutAuth = (Component) => {
+  console.log("using withOutAuth hoc");
 
   return (props) => {
     const router = useRouter();
-    const [data, setData] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(true);
 
     const getUser = async () => {
       try {
@@ -18,22 +17,17 @@ const withAuth = (Component) => {
             withCredentials: true,
           }
         );
-        const data = response.data.data;
-        store.dispatch({
-          type: "UPDATE_CUSTOMER",
-          customer: { isLoggedIn: true, ...data },
-        });
-        setData(data);
+        router.push("/user");
       } catch (err) {
-        router.push("/login");
+        setLoggedIn(false);
       }
     };
     useEffect(() => {
       getUser();
     }, []);
 
-    return !!data ? <Component {...props} /> : null;
+    return !loggedIn ? <Component {...props} /> : null;
   };
 };
 
-export default withAuth;
+export default withOutAuth;

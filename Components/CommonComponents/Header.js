@@ -10,7 +10,7 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 import DropDown from "./DropDown";
 import SearchBar from "./SearchBar";
 
-const Header = () => {
+const Header = ({ customer }) => {
   const loggedIn = true;
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   return (
@@ -36,19 +36,34 @@ const Header = () => {
             <Link href={"/contact-us"}>
               <li className="hover:text-primary duration-200">Contact Us</li>
             </Link>
-            <span>|</span>
-            {loggedIn && (
-              <Link href={"/#"}>
-                <li className="hover:text-primary duration-200">My account</li>
-              </Link>
+
+            {customer ? (
+              <>
+                <span>|</span>
+                <Link href={"/user"}>
+                  <li className="hover:text-primary duration-200">
+                    My account
+                  </li>
+                </Link>
+              </>
+            ) : (
+              <>
+                <span>|</span>
+                <Link href={"/signup"}>
+                  <li className="flex items-center gap-1 hover:text-primary duration-200">
+                    <MdOutlinePersonOutline />
+                    <span>Sign Up</span>
+                  </li>
+                </Link>
+                <span>|</span>
+                <Link href={"/login"}>
+                  <li className="flex items-center gap-1 hover:text-primary duration-200">
+                    <MdOutlinePersonOutline />
+                    <span>Login</span>
+                  </li>
+                </Link>
+              </>
             )}
-            <span>|</span>
-            <Link href={"/signup"}>
-              <li className="flex items-center gap-1 hover:text-primary duration-200">
-                <MdOutlinePersonOutline />
-                <span>Sign Up</span>
-              </li>
-            </Link>
           </ul>
         </div>
       </div>
@@ -73,9 +88,11 @@ const Header = () => {
                 <Link href={"/checkout"}>
                   <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
                 </Link>
-                <Link href={"/user"}>
-                  <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
-                </Link>
+                {customer && (
+                  <Link href={"/user"}>
+                    <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
+                  </Link>
+                )}
               </nav>
             </div>
           </div>

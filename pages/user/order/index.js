@@ -1,6 +1,7 @@
 import CustomerDashboardLayout from "@/Layouts/CustomerDashboardLayout";
 import React from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import getCustomer from "@/utils/getCustomer";
 
 const OrderPage = () => {
   return (
@@ -195,8 +196,28 @@ const OrderPage = () => {
   );
 };
 
+export async function getServerSideProps(context) {
+  let customer = await getCustomer(context);
+
+  if (!customer) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: { customer } };
+}
+
 OrderPage.getLayout = function (page) {
-  return <CustomerDashboardLayout>{page}</CustomerDashboardLayout>;
+  const customer = page.props.children.props.customer;
+  return (
+    <CustomerDashboardLayout customer={customer}>
+      {page}
+    </CustomerDashboardLayout>
+  );
 };
 
 export default OrderPage;
