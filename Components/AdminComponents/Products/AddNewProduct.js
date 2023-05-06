@@ -76,7 +76,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
     <div
       className={`fixed top-0 ${
         newProduct ? "right-0" : "right-[-100%]"
-      }   w-full duration-300 `}
+      }   w-full h-full duration-300 overflow-y-scroll`}
     >
       <div className="flex justify-end relative">
         <div
@@ -101,7 +101,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
             </div>
           </div>
           <form onSubmit={handleSubmit}>
-            <div className="my-2 lg:grid grid-cols-1 lg:grid-cols-3 p-6  gap-5 rounded-md shadow-sm  bg-white text-xs">
+            <div className=" lg:my-2 lg:grid grid-cols-1 lg:grid-cols-3 p-6  gap-5 rounded-md shadow-sm  bg-white text-xs">
               <FormInput title="Title" />
               <p>Images</p>
               <div className="col-span-2 ">
@@ -134,7 +134,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
                 <textarea
                   className="w-full p-2 focus:outline-none rounded-md border bg-gray-100"
                   name="description"
-                  rows="3"
+                  rows="2"
                   required
                 ></textarea>
               </div>
@@ -198,7 +198,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
                 </label>
               </div>
             </div>
-            <div className="col-span-3 m-3 flex items-center gap-6">
+            <div className="col-span-3 my-3 flex items-center gap-6">
               <button
                 onClick={() => setNewProduct(false)}
                 className="py-3 px-6 bg-gray-100 rounded-md hover:bg-red-100 text-red-300 hover:text-red-600 duration-300 w-full"
