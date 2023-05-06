@@ -89,7 +89,7 @@ const UpdateCategory = ({ showUpdate, category, updateCategory }) => {
                     </div>
                   </fieldset>
                   {preview && (
-                    <div className="w-[100px] h-[100px] p-2 border my-2 rounded-md">
+                    <div className="w-[100px] h-[100px]  flex justify-center items-center p-2 border my-2 rounded-md">
                       <img src={preview} alt="category icon" />
                     </div>
                   )}
