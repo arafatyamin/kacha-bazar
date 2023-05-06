@@ -1,4 +1,5 @@
 import {FETCH_START, LOAD_PRODUCTS} from "@/store/actionTypes/actionTypes";
+import { LOAD_PRODUCTS } from "@/store/actionTypes/actionTypes";
 
 export const loadingStart = () => {
     return {
@@ -6,8 +7,8 @@ export const loadingStart = () => {
     }
 }
 export const loadProducts = (data) => {
-    return {
-        type: LOAD_PRODUCTS,
-        payload: data,
-    }
-}
+  return {
+    type: LOAD_PRODUCTS,
+    payload: data,
+  };
+};
