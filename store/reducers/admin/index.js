@@ -14,12 +14,18 @@ import {
   postCategoryFulfill,
   postCategoryPeinding,
   postCategoryReject,
+  postProductPending,
+  postProductError,
+  postProductSuccess,
+  deleteProductFulfill,
+  deleteProductPeinding,
+  deleteProductReject,
 } from "@/store/actionTypes/actionTypes";
 import initialState from "@/store/initialState";
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    // products
+    //get products
     case fetchProducts:
       return {
         ...state,
@@ -41,6 +47,59 @@ const reducer = (state = initialState, action) => {
         isError: false,
         error: "",
         products: action.payload,
+      };
+
+    // post product
+    case postProductPending:
+      return {
+        ...state,
+        postProductLoading: true,
+      };
+
+    case postProductError:
+      return {
+        ...state,
+        postProductLoading: false,
+        postProductError: true,
+        error: action.payload,
+      };
+
+    case postProductSuccess:
+      return {
+        ...state,
+        postProductLoading: false,
+        postProductError: false,
+        error: "",
+        products: [...state.products, action.payload],
+      };
+
+    // delete product
+    case deleteProductPeinding:
+      return {
+        ...state,
+        deleteLoading: true,
+        deleteError: false,
+        error: "",
+        deleteSuccess: false,
+      };
+
+    case deleteProductReject:
+      return {
+        ...state,
+        deleteLoading: false,
+        deleteError: true,
+        error: action.payload,
+        deleteSuccess: false,
+      };
+
+    case deleteProductFulfill:
+      return {
+        ...state,
+        deleteLoading: false,
+        deleteError: false,
+        error: "",
+        deleteSuccess: true,
+        products: state.products.filter((p) => p.id !== action.payload),
       };
 
     // get categorys
@@ -124,7 +183,7 @@ const reducer = (state = initialState, action) => {
         updateSuccess: true,
       };
 
-    // update category
+    // delete category
     case deleteCategoryPeinding:
       return {
         ...state,
@@ -146,10 +205,10 @@ const reducer = (state = initialState, action) => {
     case deleteCategoryFulfill:
       return {
         ...state,
-        updatedLoading: false,
-        updatedError: false,
+        deleteLoading: false,
+        deleteError: false,
         error: "",
-        updateSuccess: true,
+        deleteSuccess: true,
         categories: state.categories.filter((c) => c.id !== action.payload),
       };
 
