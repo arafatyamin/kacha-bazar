@@ -14,15 +14,11 @@ const cartReducer = (state = initialState, action) => {
       let isFound_in_add = state.cart.filter(
         (item) => item.id == action.payload.id
       );
-      isFound_in_add.count += 1;
-
-      let newState_in_add = state.cart.filter(
-        (item) => item.id !== action.payload.id
-      );
-      if (isFound) {
+      if (isFound_in_add.length>0) {
+        isFound_in_add[0].count += 1;
         return {
           ...state,
-          cart: [...newState_in_add, isFound_in_add],
+          cart: [...state.cart],
         };
       } else {
         action.payload.count = 1;
@@ -36,22 +32,18 @@ const cartReducer = (state = initialState, action) => {
       let isFound_in_decrease = state.cart.filter(
         (item) => item.id == action.payload.id
       );
-      isFound_in_decrease.count -= 1;
-
-      let newState_in_decrease = state.cart.filter(
-        (item) => item.id !== action.payload.id
-      );
+      isFound_in_decrease[0].count -= 1;
       return {
         ...state,
-        cart: [...newState_in_decrease, isFound_in_decrease],
+        cart: [...state.cart],
       };
     case REMOVE_FROM_CART:
-      let newState_in_remove = state.cart.filter(
+      let newState = state.cart.filter(
         (item) => item.id !== action.payload.id
       );
       return {
         ...state,
-        cart: [...newState_in_remove],
+        cart: [...newState],
       };
     default:
       return state;

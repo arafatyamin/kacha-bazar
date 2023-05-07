@@ -3,7 +3,7 @@ import { ADD_TO_CART, DECREASE_FROM_CART, REMOVE_FROM_CART } from "../actionType
 export const addToCart = (data) => {
     return {
         type: ADD_TO_CART,
-        payload:data
+        payload: data
     }
 }
 export const decreaseFromCart = (data) => {
