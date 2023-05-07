@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import axios from "axios";
 import Fade from "react-reveal/Fade";
+import { useDispatch, useSelector } from "react-redux";
+import { updatedCategoryData } from "@/store/thunk/admin/category";
 
-const UpdateCategory = ({ showUpdate, category, updateCategory }) => {
+const UpdateCategory = ({ showUpdate, category, updatePP }) => {
   const [preview, setPreview] = useState(category?.icon);
+
+  const dispatch = useDispatch();
+  const { updatedLoading } = useSelector((state) => state.admin);
 
   const showPreview = (e) => {
     const img = e.target.files[0];
@@ -17,24 +22,27 @@ const UpdateCategory = ({ showUpdate, category, updateCategory }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const formData = new FormData(e.target);
-      const response = await axios.put(
-        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
-          "/categories/" +
-          category?.id,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      updateCategory(response.data.data);
-      showUpdate(false);
-    } catch (err) {
-      console.log(err);
-    }
+
+    const formData = new FormData(e.target);
+    dispatch(updatedCategoryData(formData, category?.id, showUpdate));
+
+    // try {
+    //   // const response = await axios.put(
+    //   //   process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+    //   //     "/categories/" +
+    //   //     category?.id,
+    //   //   formData,
+    //   //   {
+    //   //     headers: {
+    //   //       "Content-Type": "multipart/form-data",
+    //   //     },
+    //   //   }
+    //   // );
+    //   // updateCategory(response.data.data);
+    //   // showUpdate(false);
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   return (
@@ -128,7 +136,7 @@ const UpdateCategory = ({ showUpdate, category, updateCategory }) => {
                   className="py-3 px-6 bg-[#108a61] rounded-md 
             hover:bg-[#078057] text-white  duration-300 w-full"
                 >
-                  Update Category
+                  {updatedLoading ? "Loading..." : "Update Category"}
                 </button>
               </div>
             </form>
