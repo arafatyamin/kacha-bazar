@@ -76,7 +76,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
     <div
       className={`fixed top-0 ${
         newProduct ? "right-0" : "right-[-100%]"
-      }   w-full duration-300 `}
+      }   w-full h-full duration-300 overflow-y-scroll`}
     >
       <div className="flex justify-end relative">
         <div
@@ -101,7 +101,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
             </div>
           </div>
           <form onSubmit={handleSubmit}>
-            <div className="my-3 lg:grid grid-cols-1 lg:grid-cols-3 p-6  gap-6 rounded-md shadow-sm  bg-white text-xs">
+            <div className=" lg:my-2 lg:grid grid-cols-1 lg:grid-cols-3 p-6  gap-5 rounded-md shadow-sm  bg-white text-xs">
               <FormInput title="Title" />
               <p>Images</p>
               <div className="col-span-2 ">
@@ -132,9 +132,9 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
               <p className="py-2">Description</p>
               <div className="col-span-2 ">
                 <textarea
-                  className="w-full p-3 focus:outline-none rounded-md border bg-gray-100"
+                  className="w-full p-2 focus:outline-none rounded-md border bg-gray-100"
                   name="description"
-                  rows="5"
+                  rows="2"
                   required
                 ></textarea>
               </div>
@@ -142,7 +142,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
               <div className="col-span-2 ">
                 <select
                   onChange={getSubcategories}
-                  className="w-full p-3 rounded-md border bg-gray-100 active:bg-white"
+                  className="w-full p-2 rounded-md border bg-gray-100 active:bg-white"
                 >
                   <option value={""} className="hidden">
                     Select Category
@@ -159,7 +159,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
               <div className="col-span-2 ">
                 <select
                   name="subCategory"
-                  className="w-full p-3 rounded-md border bg-gray-100 active:bg-white"
+                  className="w-full p-2 rounded-md border bg-gray-100 active:bg-white"
                 >
                   <option value={""} className="hidden">
                     Select Sub Category
