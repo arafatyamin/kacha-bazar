@@ -9,6 +9,16 @@ export const fetchProducts = "product/fetch-start";
 export const fetchError = "product/fetch-error";
 export const fetchSuccess = "product/fetch-success";
 
+// post product
+export const postProductPending = "product/fetch-peinding";
+export const postProductError = "product/fetch-reject";
+export const postProductSuccess = "product/fetch-fullfill";
+
+// deleted product
+export const deleteProductPeinding = "delete-product/peinding";
+export const deleteProductReject = "delete-product/reject";
+export const deleteProductFulfill = "delete-product/fullfill";
+
 // get category
 export const fetchCategoryPeinding = "category/peinding";
 export const fetchCategoryReject = "category/reject";

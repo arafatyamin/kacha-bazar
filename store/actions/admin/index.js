@@ -14,9 +14,15 @@ import {
   postCategoryPeinding,
   postCategoryFulfill,
   postCategoryReject,
+  postProductPending,
+  postProductError,
+  postProductSuccess,
+  deleteProductFulfill,
+  deleteProductPeinding,
+  deleteProductReject,
 } from "@/store/actionTypes/actionTypes";
 
-// products;
+// get products;
 export const productsFetchStart = () => {
   return {
     type: fetchProducts,
@@ -32,6 +38,47 @@ export const productsFetchSuccess = (products) => {
 export const productsFetchError = (error) => {
   return {
     type: fetchError,
+    payload: error.message,
+  };
+};
+
+// post products;
+export const postProductsStart = () => {
+  return {
+    type: postProductPending,
+  };
+};
+export const postProductsSuccess = (product) => {
+  return {
+    type: postProductSuccess,
+    payload: product,
+  };
+};
+
+export const postProductsError = (error) => {
+  return {
+    type: postProductError,
+    payload: error.message,
+  };
+};
+
+// delete products
+export const deleteProductFetchStart = () => {
+  return {
+    type: deleteProductPeinding,
+  };
+};
+
+export const deleteProductFetchSuccess = (id) => {
+  return {
+    type: deleteProductFulfill,
+    payload: id,
+  };
+};
+
+export const deleteProductFetchError = (error) => {
+  return {
+    type: deleteProductReject,
     payload: error.message,
   };
 };

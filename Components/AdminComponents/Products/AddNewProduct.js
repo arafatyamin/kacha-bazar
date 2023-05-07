@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import axios from "axios";
 import FormInput from "./FormInput";
+import { useDispatch, useSelector } from "react-redux";
+import { postNewProduct } from "@/store/thunk/admin/products";
+import { getCategorysData } from "@/store/thunk/admin/category";
 
 const AddNewProduct = ({ newProduct, setNewProduct }) => {
   const [categories, setCategories] = useState([]);
@@ -9,20 +12,24 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
   const [previews, setPreviews] = useState([]);
   const filesRef = useRef(null);
 
+  const dispatch = useDispatch();
+  const { postProductLoading } = useSelector((state) => state.admin);
+
   useEffect(() => {
-    getCategories();
+    // getCategories();
+    dispatch(getCategorysData);
   }, []);
 
-  const getCategories = async () => {
-    try {
-      const response = await axios.get(
-        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + `/categories`
-      );
-      setCategories(response.data.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const getCategories = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       process.env.NEXT_PUBLIC_BACKEND_BASE_URL + `/categories`
+  //     );
+  //     setCategories(response.data.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const getSubcategories = (e) => {
     const sc = categories?.find(
@@ -52,24 +59,29 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
     if (filesRef.current.files.length < 2) {
       return;
     }
-    try {
-      const formData = new FormData(e.target);
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/products",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log(response.data); // contains new product data
-      e.target.reset();
-      setPreviews([]);
-      setNewProduct(false);
-    } catch (err) {
-      console.log(err);
-    }
+
+    const formData = new FormData(e.target);
+    dispatch(postNewProduct(formData, setNewProduct));
+
+    e.target.reset();
+    setPreviews([]);
+
+    // try {
+    //   const response = await axios.post(
+    //     process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/products",
+    //     formData,
+    //     {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data",
+    //       },
+    //     }
+    //   );
+
+    //   console.log(response.data); // contains new product data
+    // setNewProduct(false);
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   return (
@@ -211,7 +223,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
                 className="py-3 px-6 bg-[#108a61] rounded-md 
             hover:bg-[#078057] text-white  duration-300 w-full"
               >
-                Add Product
+                {postProductLoading ? "Loading..." : "Add Product"}
               </button>
             </div>
           </form>
