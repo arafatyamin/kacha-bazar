@@ -1,8 +1,10 @@
 import Counter from "@/Components/CommonComponents/Counter";
 import Button from "@/Components/CommonComponents/shared/Button";
+import { addToCart } from "@/store/actions/cartAction";
 import Image from "next/image";
 import { useState } from "react";
 import { MdShoppingBasket } from "react-icons/md";
+<<<<<<< HEAD
 
 const ProductCard = ({ data }) => {
   const { title, images, price, quantity, discount } = data;
@@ -28,6 +30,22 @@ const ProductCard = ({ data }) => {
   const hoverStateHandler = () => {
     setHoverState(!hoverState);
   };
+=======
+import { useDispatch } from "react-redux";
+
+const ProductCard = ({ data }) => {
+  const {id, title, images, originalPrice, price, quantity, discount } = data;
+const dispatch = useDispatch()
+  const dataForCart = {
+    id,
+    title,
+    images,
+    originalPrice,
+    price,
+    discount
+  }
+
+>>>>>>> f61b693d8be1ec84d8d30fce4e1375b7a014ec06
   return (
     <div className="group bg-white min-w-[200px] relative rounded border border-gray-100 shadow-sm pt-4">
       <div className="overflow-hidden">
@@ -40,8 +58,18 @@ const ProductCard = ({ data }) => {
         />
       </div>
       {discount && (
+<<<<<<< HEAD
         <p className="absolute top-4 right-4 bg-orange-400 text-white text-sm w-fit px-2 py-[2px] rounded ">
           {discount}% Off
+=======
+        <p className="absolute top-4 right-4 bg-orange-400 text-white text-sm w-fit px-2 py-[2px] rounded font-medium ">
+          {isNaN(Number(discount)) ? (
+            <span className="text-lg">{discount} </span>
+          ) : (
+            <span className="text-lg">${discount} </span>
+          )}
+          OFF
+>>>>>>> f61b693d8be1ec84d8d30fce4e1375b7a014ec06
         </p>
       )}
       <div className="px-4 pb-4">
@@ -49,6 +77,7 @@ const ProductCard = ({ data }) => {
         <p className="text-gray-primary">{title || "N/R"}</p>
         <div className="flex justify-between items-center">
           {discount ? (
+<<<<<<< HEAD
             <div className="flex gap-1">
               <p className="font-bold text-lg">${offerPrice}</p>
               <p className="font-bold line-through text-gray-primary">
@@ -73,6 +102,25 @@ const ProductCard = ({ data }) => {
           )}
         </div>
         <p>${price}</p>
+=======
+            <div className="flex gap-2">
+              <p className="font-bold text-lg">${price}</p>
+              <p className="font-semibold text-base line-through text-gray-primary">
+                ${originalPrice}
+              </p>
+            </div>
+          ) : (
+            <p className="font-bold text-lg"> ${originalPrice}</p>
+          )}
+
+          <Button
+            onClick={() => dispatch(addToCart(dataForCart))}
+            Icon={MdShoppingBasket}
+            fill={true}
+            className="text-xl hover:bg-primary active:bg-green-500"
+          />
+        </div>
+>>>>>>> f61b693d8be1ec84d8d30fce4e1375b7a014ec06
       </div>
     </div>
   );

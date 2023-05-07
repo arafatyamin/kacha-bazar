@@ -28,3 +28,8 @@ export const putCategoryFulfill = "put-category/fullfill";
 export const deleteCategoryPeinding = "delete-category/peinding";
 export const deleteCategoryReject = "delete-category/reject";
 export const deleteCategoryFulfill = "delete-category/fullfill";
+
+// cart
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const DECREASE_FROM_CART = "DECREASE_FROM_CART";
