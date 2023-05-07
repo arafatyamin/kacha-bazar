@@ -1,30 +1,35 @@
+import { removeCategoryData } from "@/store/thunk/admin/category";
 import { useState } from "react";
 import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { useDispatch } from "react-redux";
+import swal from "sweetalert";
 import UpdateCategory from "./UpdateCategory";
 
-const CategoryTable = ({ categories, setCategories, setPage, page }) => {
+const CategoryTable = ({ categories, setPage, page }) => {
   const [updatePP, showUpdate] = useState(false);
-  const [deletePP, setDelete] = useState(false);
   const [CategoryToUpdate, setCTU] = useState({});
 
-  const deleteCategory = (id) => {};
+  const dispatch = useDispatch();
+
+  const deleteCategory = (id, name) => {
+    swal({
+      title: "Are you sure?",
+      text: `Delete ${name} Category!`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      dispatch(removeCategoryData(id));
+    });
+  };
+
   const categoryToUpdate = (id) => {
     const category = categories.find((c) => c.id === id);
 
     setCTU(category);
     showUpdate(true);
-  };
-
-  const updateCategory = (newCat) => {
-    const index = categories.findIndex((c) => c.id === newCat.id);
-    const temp = [...categories];
-    temp[index] = {
-      ...temp[index],
-      ...newCat,
-    };
-    setCategories(temp);
   };
 
   const isPP = page > 1 ? true : false;
@@ -101,7 +106,9 @@ const CategoryTable = ({ categories, setCategories, setPage, page }) => {
 
                     <button
                       className="text-lg mr-2 font-normal text-gray-400 hover:text-red-600 duration-300"
-                      onClick={() => deleteCategory(category?.id)}
+                      onClick={() =>
+                        deleteCategory(category?.id, category?.name)
+                      }
                     >
                       <RiDeleteBin6Line />
                     </button>
@@ -114,7 +121,7 @@ const CategoryTable = ({ categories, setCategories, setPage, page }) => {
         {updatePP && (
           <UpdateCategory
             showUpdate={showUpdate}
-            updateCategory={updateCategory}
+            updatePP={updatePP}
             category={CategoryToUpdate}
           />
         )}

@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { postCategoryData } from "@/store/thunk/admin/category";
 
 const AddNewCategory = ({ newCategory, setNewCategory }) => {
   const [preview, setPreview] = useState();
+
+  const dispatch = useDispatch();
+  const { postCategoryLoading } = useSelector((state) => state.admin);
 
   const showPreview = (e) => {
     const img = e.target.files[0];
@@ -16,24 +21,26 @@ const AddNewCategory = ({ newCategory, setNewCategory }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const formData = new FormData(e.target);
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/categories",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log(response.data); // contains category details
-      e.target.reset();
-      setPreview("");
-      setNewCategory(false);
-    } catch (err) {
-      console.log(err);
-    }
+    const formData = new FormData(e.target);
+    dispatch(postCategoryData(formData, setNewCategory));
+    e.target.reset();
+
+    // try {
+    //   const response = await axios.post(
+    //     process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/categories",
+    //     formData,
+    //     {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data",
+    //       },
+    //     }
+    //   );
+    //   console.log(response.data); // contains category details
+    // setPreview("");
+    // setNewCategory(false);
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   return (
@@ -130,7 +137,7 @@ const AddNewCategory = ({ newCategory, setNewCategory }) => {
                 className="py-3 px-6 bg-[#108a61] rounded-md 
             hover:bg-[#078057] text-white  duration-300 w-full"
               >
-                Add Category
+                {postCategoryLoading ? "Loading..." : "Add Category"}
               </button>
             </div>
           </form>
