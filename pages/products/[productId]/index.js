@@ -46,7 +46,7 @@ const SingleProduct = () => {
             <li>Rainbow Chard</li>
           </ul>
         </div>
-        <div className="custom-container bg-white xl:flex p-4 rounded-md my-8">
+        <div className="custom-container bg-white xl:flex gap-4 rounded-md my-8">
           {/* <==== Image portion Start ====>  */}
           <div className="xl:w-1/3">
             <div className="w-fit mx-auto">

@@ -26,9 +26,9 @@ const ScrollToTop = () => {
     isVisible && (
       <motion.div
         initial={{
-          x: 500,
+          x: 0,
           opacity: 0,
-          scale: 0.5,
+          scale: 0.8,
         }}
         animate={{
           x: 0,
@@ -36,12 +36,12 @@ const ScrollToTop = () => {
           scale: 1,
         }}
         transition={{
-          duration: 1.5,
+          duration: 0.3,
         }}
         onClick={scrollToTop}
         className={`cursor-pointer fixed bottom-20 right-12 z-30`}
       >
-        <BsArrowUpSquareFill className="text-primary text-2xl mt-1  md:text-4xl animate-bounce" />
+        <BsArrowUpSquareFill className="text-primary text-2xl mt-1  md:text-4xl" />
       </motion.div>
     )
   );
