@@ -38,7 +38,7 @@ const SingleProduct = ({res}) => {
                 <title>Product Details</title>
             </Head>
             <section>
-                <div className="custom-container">
+                <div className="container">
                     <ul className="flex items-center gap-2 py-4">
                         <li>Home</li>
                         <MdKeyboardArrowRight/>
