@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { SlMagnifierAdd } from "react-icons/sl";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -6,8 +6,17 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { removeProductData } from "@/store/thunk/admin/products";
 import swal from "sweetalert";
+import UpdateProduct from "./updateProduct";
 
 const ProductsTable = ({ products }) => {
+  const [updateModal, setUpdateModal] = useState(false);
+  const [selectProduct, setSelectProduct] = useState({});
+
+  const productUpdateHandelar = (product) => {
+    setUpdateModal(!updateModal);
+    setSelectProduct(product);
+  };
+
   const dispatch = useDispatch();
   const productDeleteHandelar = (id, name) => {
     swal({
@@ -17,7 +26,9 @@ const ProductsTable = ({ products }) => {
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
-      dispatch(removeProductData(id));
+      if (willDelete) {
+        dispatch(removeProductData(id));
+      }
     });
   };
 
@@ -96,7 +107,10 @@ const ProductsTable = ({ products }) => {
                 </td>
                 <td className="px-3 py-2">
                   <div className="flex justify-center items-center">
-                    <button className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300">
+                    <button
+                      onClick={() => productUpdateHandelar(product)}
+                      className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300"
+                    >
                       <FaRegEdit />
                     </button>
 
@@ -151,6 +165,12 @@ const ProductsTable = ({ products }) => {
           </div>
         </div>
       </div>
+      {updateModal && (
+        <UpdateProduct
+          setUpdateModal={setUpdateModal}
+          selectProduct={selectProduct}
+        />
+      )}
     </div>
   );
 };

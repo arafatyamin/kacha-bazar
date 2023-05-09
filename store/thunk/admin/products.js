@@ -9,6 +9,9 @@ import {
   deleteProductFetchError,
   deleteProductFetchSuccess,
   deleteProductFetchStart,
+  putProductFetchStart,
+  putProductFetchSuccess,
+  putProductFetchError,
 } from "@/store/actions/admin";
 import toast from "react-hot-toast";
 
@@ -36,6 +39,22 @@ export const postNewProduct = (data, setNewProduct) => {
       setNewProduct(false);
     } catch (error) {
       dispatch(postProductsError(error));
+      toast.error(error.message);
+    }
+  };
+};
+
+// post new product
+export const updateProduct = (data, setUpdateModal) => {
+  return async (dispatch) => {
+    dispatch(putProductFetchStart());
+    try {
+      const response = await axios.put(`/products/${data.id}`, data);
+      dispatch(putProductFetchSuccess(response?.data?.data));
+      toast.success("Product Update Successfully!");
+      setUpdateModal(false);
+    } catch (error) {
+      dispatch(putProductFetchError(error));
       toast.error(error.message);
     }
   };
