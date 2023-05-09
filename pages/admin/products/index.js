@@ -6,95 +6,24 @@ import ProductsTable from "@/Components/AdminComponents/Products/ProductsTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsData } from "../../../store/thunk/admin/products";
+import { getCategorysData } from "@/store/thunk/admin/category";
 
 const Products = () => {
   const [newProduct, setNewProduct] = useState(false);
   const [page, setPage] = useState(1);
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
+
+  const dispatch = useDispatch();
+  const { products, isLoading, isError, error, categories } = useSelector(
+    (state) => state.admin
+  );
 
   useEffect(() => {
-    getProducts();
+    dispatch(getProductsData);
+    dispatch(getCategorysData);
   }, [page]);
-
-  const getProducts = async () => {
-    try {
-      const response = await axios(
-        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
-          `/products?page=${page}&limit=10`
-      );
-      console.log(response.data); // products
-      setProducts(response.data.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const categorys = [
-    {
-      _id: 1,
-      name: "Fruits & Vegetable",
-    },
-    {
-      _id: 2,
-      name: "Organic Food",
-    },
-    {
-      _id: 3,
-      name: "Fish & Meat",
-    },
-    {
-      _id: 4,
-      name: "Drinks",
-    },
-    {
-      _id: 5,
-      name: "Fresh Seafood",
-    },
-    {
-      _id: 6,
-      name: "Cooking Essentials",
-    },
-    {
-      _id: 7,
-      name: "Biscuits & Cakes",
-    },
-    {
-      _id: 8,
-      name: "Sauces & Pickles",
-    },
-    {
-      _id: 9,
-      name: "Breakfast",
-    },
-    {
-      _id: 10,
-      name: "Milk & Dairy",
-    },
-    {
-      _id: 11,
-      name: "Household Tools",
-    },
-    {
-      _id: 12,
-      name: "Pet Care",
-    },
-    {
-      _id: 13,
-      name: "Snacks & Instant",
-    },
-    {
-      _id: 14,
-      name: "Honey",
-    },
-    {
-      _id: 15,
-      name: "Jam & Jelly",
-    },
-    {
-      _id: 16,
-      name: "Beauty & Health",
-    },
-  ];
 
   const prices = [
     {
@@ -116,7 +45,7 @@ const Products = () => {
         <div className="my-3 grid grid-cols-1 lg:grid-cols-4 py-6 px-4 gap-6 rounded-md shadow-sm bg-white">
           <SearchInput placeholder={"search by product name"} />
 
-          <div>{<SelectInput items={categorys} name={"Category"} />}</div>
+          <div>{<SelectInput items={categories} name={"Category"} />}</div>
           <div>{<SelectInput items={prices} name={"Price"} />}</div>
           <div onClick={() => setNewProduct(!newProduct)}>
             <Button name={"Add Product"} />
@@ -147,8 +76,17 @@ const Products = () => {
         </div>
 
         {/* products table  */}
-
-        <ProductsTable products={products} />
+        {isError ? (
+          <div className="text-center text-2xl text-red-600 p-3">
+            <h2>{error}</h2>
+          </div>
+        ) : isLoading ? (
+          <div className="text-center p-3">
+            <h2>Loading...</h2>
+          </div>
+        ) : (
+          <ProductsTable products={products} />
+        )}
       </div>
 
       <AddNewProduct newProduct={newProduct} setNewProduct={setNewProduct} />
