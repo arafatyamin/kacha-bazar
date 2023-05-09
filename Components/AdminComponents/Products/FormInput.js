@@ -1,4 +1,4 @@
-const FormInput = ({ title, number, name, placeholder }) => {
+const FormInput = ({ title, number, name, placeholder, value }) => {
   return (
     <>
       <p className="py-2">{title || "Title"}</p>
@@ -9,6 +9,7 @@ const FormInput = ({ title, number, name, placeholder }) => {
           type={number ? "number" : "text"}
           name={name || title?.toLowerCase() || "name"}
           placeholder={placeholder || title || "placeholder"}
+          defaultValue={value}
         />
       </div>
     </>
