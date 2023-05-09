@@ -30,11 +30,11 @@ const SingleProduct = ({res}) => {
     const {productId} = router.query;
     const [isDescCollapsed, setIsDescCollapsed] = useState(true);
     const [currentImage, setCurrentImage] = useState(imageUrl[0])
-    console.log(res);
-    const {price, id, description, originalPrice, images, title, unit, discount, qunatity} = res;
+    const {price, id, description, originalPrice, images, title, unit, discount, quantity, category, subCategory, tags} = res;
     return (
         <>
             <Head>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 <title>Product Details</title>
             </Head>
             <section>
@@ -52,7 +52,7 @@ const SingleProduct = ({res}) => {
                     {/* <==== Image portion Start ====>  */}
                     <div className="xl:w-1/3">
                         <div className="w-fit mx-auto">
-                            <Image src={currentImage} height={400} width={400} alt="need"/>
+                            <Image src={images[0]} height={400} width={400} alt={title}/>
                         </div>
                         <hr/>
                         <div className="max-w-[500px] mx-auto">
@@ -72,7 +72,7 @@ const SingleProduct = ({res}) => {
                                 }
                                 useArrowKeys={true}
                             >
-                                {imageUrl.map((image, index) => (
+                                {images.map((image, index) => (
                                     <div
                                         key={index}
                                         className={`mr-2 hover:scale-105 duration-200 ${image === currentImage ? "opacity-95" : "opacity-50"}`}
@@ -95,12 +95,12 @@ const SingleProduct = ({res}) => {
                     <div className="md:flex xl:w-2/3 ">
                         {/* product description start  */}
                         <div className="p-2">
-                            <h2 className="mb-1 font-semibold">Clementine</h2>
+                            <h2 className="mb-1 font-semibold">{title}</h2>
                             <p className="mb-1 text-gray-primary">Id: {productId}</p>
                             {stock ? (
                                 <div className="bg-primary-light w-fit text-sm px-2 py-1 rounded-full font-bold mb-6">
                                     <span className="text-primary">Stock:</span>{" "}
-                                    <span className="text-red">472</span>
+                                    <span className="text-red">{quantity}</span>
                                 </div>
                             ) : (
                                 <span
@@ -109,17 +109,14 @@ const SingleProduct = ({res}) => {
                 </span>
                             )}
 
-                            <h2 className="font-bold mb-4">$13</h2>
+                            <h2 className="font-bold mb-4">${price}</h2>
 
                             <p
                                 className={`text-gray-500 mb-2 ${
                                     isDescCollapsed && "line-clamp-2"
                                 }`}
                             >
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-                                iste qui, necessitatibus aliquam quae quo nobis corporis at
-                                labore omnis? Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit. Nostrum, voluptatem!
+                                {description}
                             </p>
                             <div className="text-sm text-orange-500 cursor-pointer text-end px-8">
                                 {isDescCollapsed ? (
@@ -139,13 +136,11 @@ const SingleProduct = ({res}) => {
                             <div className="font-medium mt-4">
                                 Category:{" "}
                                 <span className="text-gray-primary underline">
-                  fresh-vegetable
+                  {category.name}
                 </span>
                             </div>
                             <div className="flex items-center gap-4 text-xs text-gray-primary p-4 font-medium">
-                                <p>fresh fruits</p>
-                                <p>fruits</p>
-                                <p>vegetable</p>
+                                {tags.map((tag) => (<span>{tag}</span>))}
                             </div>
 
                             {/* social Network  */}
