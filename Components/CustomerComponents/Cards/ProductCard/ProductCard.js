@@ -3,9 +3,10 @@ import Button from "@/Components/CommonComponents/shared/Button";
 import Image from "next/image";
 import {useState} from "react";
 import {MdShoppingBasket} from "react-icons/md";
+import Link from "next/link";
 
 const ProductCard = ({data}) => {
-    const {title, images, price, quantity, discount} = data;
+    const {title, images, price, quantity, discount, id} = data;
 
     console.log(data);
 
@@ -48,7 +49,9 @@ const ProductCard = ({data}) => {
             )}
             <div className="px-4 pb-4">
                 <p className="text-gray-primary">{quantity || "N/R"}</p>
-                <p className="text-gray-primary">{title || "N/R"}</p>
+                <Link href={`/products/${id}`}>
+                    <p className="text-gray-primary">{title || "N/R"}</p>
+                </Link>
                 <div className="flex justify-between items-center">
                     {discount ? (
                         <div className="flex gap-1">
