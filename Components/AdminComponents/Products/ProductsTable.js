@@ -17,7 +17,9 @@ const ProductsTable = ({ products }) => {
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
-      dispatch(removeProductData(id));
+      if (willDelete) {
+        dispatch(removeProductData(id));
+      }
     });
   };
 
