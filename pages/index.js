@@ -58,10 +58,7 @@ const home = ({ categories, products }) => {
                   {products &&
                     products?.length > 0 &&
                     products.map((product) => (
-                      <ProductCard
-                        key={product.id}
-                        data={product}
-                      />
+                      <ProductCard key={product.id} data={product} />
                     ))}
                 </div>
               </div>
@@ -91,13 +88,10 @@ const home = ({ categories, products }) => {
               </div>
               <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {products &&
-                    products?.length > 0 &&
-                    products.map((product) => (
-                        <ProductCard
-                            key={product.id}
-                            data={product}
-                        />
-                    ))}
+                  products?.length > 0 &&
+                  products.map((product) => (
+                    <ProductCard key={product.id} data={product} />
+                  ))}
               </div>
             </div>
           </div>
@@ -114,13 +108,13 @@ const home = ({ categories, products }) => {
 export async function getServerSideProps(context) {
   const customer = await getCustomer(context);
   const categories = await getCategories();
-  const products = await getProducts()
+  const products = await getProducts();
 
   return { props: { customer, categories, products } };
 }
 
 home.getLayout = (page) => {
-  const customer = page.props.children.props.customer;
+  const customer = page.props.children.customer;
   return <CustomerLayout customer={customer}>{page}</CustomerLayout>;
 };
 export default home;
