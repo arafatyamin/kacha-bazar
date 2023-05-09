@@ -41,7 +41,7 @@ const dispatch = useDispatch()
       )}
       <div className="px-4 pb-4">
         <p className="text-gray-primary">{quantity || "N/R"}</p>
-        <p className="text-gray-primary">{title || "N/R"}</p>
+        <p className="text-gray-primary line-clamp-1">{title || "N/R"}</p>
         <div className="flex justify-between items-center">
           {discount ? (
             <div className="flex gap-2">
