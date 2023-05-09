@@ -21,9 +21,9 @@ const ProductsPage = ({ products }) => {
       <main>
         <section className="py-20">
           <div className="container">
-            <div className="md:grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+            <div className="md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="relative rounded-lg w-fit my-2">
-                <Image className=" rounded-lg" src={img1}></Image>
+                <Image className=" rounded-lg" src={img1} alt="Fresh and Natural"></Image>
                 <div className="absolute top-0 left-0 z-10 mt-4 flex-col flex w-full items-center justify-center text-white">
                   <p className=" font-bold">Taste of</p>
                   <p className="text-2xl font-bold">Fresh and Natural</p>
@@ -32,35 +32,35 @@ const ProductsPage = ({ products }) => {
                     text={"Shop Now"}
                     size={"sm"}
                     fill={"true"}
-                    className="text-xs md:text-base px-2 py-2 w-fit border-none"
+                    className="text-xs md:text-base px-2 py-2 w-fit border-none mt-4"
                   />
                 </div>
               </div>
               <div className="relative rounded-lg w-fit my-2">
-                <Image className=" rounded-lg" src={img2}></Image>
+                <Image className=" rounded-lg" src={img2} alt="Fish and Meat"></Image>
                 <div className="absolute top-0 left-0 z-10 mt-4 flex-col flex w-full items-center justify-center text-white">
                   <p className=" font-bold">Taste of</p>
-                  <p className="text-2xl font-bold">Fresh and Natural</p>
+                  <p className="text-2xl font-bold">Fresh and Meat</p>
                   <p>Weakened discount offer</p>
                   <Button
                     text={"Shop Now"}
                     size={"sm"}
                     fill={"true"}
-                    className="text-xs md:text-base px-2 py-2 w-fit border-none"
+                    className="text-xs md:text-base px-2 py-2 w-fit border-none mt-4"
                   />
                 </div>
               </div>
               <div className="relative rounded-lg w-fit my-2">
-                <Image className=" rounded-lg" src={img3}></Image>
+                <Image className=" rounded-lg" src={img3} alt="Bread and Bakery"></Image>
                 <div className="absolute top-0 left-0 z-10 mt-4 flex-col flex w-full items-center justify-center text-white">
                   <p className=" font-bold">Taste of</p>
-                  <p className="text-2xl font-bold">Fresh and Natural</p>
+                  <p className="text-2xl font-bold">Bread and Bakery</p>
                   <p>Weakened discount offer</p>
                   <Button
                     text={"Shop Now"}
                     size={"sm"}
                     fill={"true"}
-                    className="text-xs md:text-base px-2 py-2 w-fit border-none"
+                    className="text-xs md:text-base px-2 py-2 w-fit border-none mt-4"
                   />
                 </div>
               </div>

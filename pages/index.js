@@ -115,6 +115,7 @@ export async function getServerSideProps(context) {
 
 home.getLayout = (page) => {
   const customer = page.props.children.customer;
+
   return <CustomerLayout customer={customer}>{page}</CustomerLayout>;
 };
 export default home;

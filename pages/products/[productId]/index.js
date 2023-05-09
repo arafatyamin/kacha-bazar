@@ -3,12 +3,11 @@ import Button from "@/Components/CommonComponents/shared/Button";
 // import Carousel from "@/Components/CustomerComponents/MultiCardSlider/MultiCardSlider";
 import CustomerLayout from "@/Layouts/CustomerLayout";
 import { imageUrl } from "@/data/imageUrl";
-
 import { Carousel } from "@trendyol-js/react-carousel";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiHomeAlt } from "react-icons/bi";
 import {
   BsFacebook,
@@ -22,21 +21,38 @@ import {
 import { FiDollarSign, FiSun } from "react-icons/fi";
 import { GrSync } from "react-icons/gr";
 import { IoLocationOutline } from "react-icons/io5";
-import { MdArrowBackIos, MdArrowForwardIos, MdKeyboardArrowRight } from "react-icons/md";
+import {
+  MdArrowBackIos,
+  MdArrowForwardIos,
+  MdKeyboardArrowRight,
+} from "react-icons/md";
+import getSingleProduct from "@/utils/getSingleProduct";
 
-const SingleProduct = () => {
+const SingleProduct = ({ res }) => {
   const [stock, setStock] = useState(true);
   const router = useRouter();
   const { productId } = router.query;
   const [isDescCollapsed, setIsDescCollapsed] = useState(true);
-  const [currentImage, setCurrentImage] = useState(imageUrl[0])
+  const [currentImage, setCurrentImage] = useState(imageUrl[0]);
+  const {
+    price,
+    description,
+    images,
+    title,
+    unit,
+    discount,
+    quantity,
+    category,
+    tags,
+  } = res;
   return (
     <>
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Product Details</title>
       </Head>
       <section>
-        <div className="custom-container">
+        <div className="container">
           <ul className="flex items-center gap-2 py-4">
             <li>Home</li>
             <MdKeyboardArrowRight />
@@ -46,11 +62,11 @@ const SingleProduct = () => {
             <li>Rainbow Chard</li>
           </ul>
         </div>
-        <div className="custom-container bg-white xl:flex gap-4 rounded-md my-8">
+        <div className="custom-container bg-white xl:flex p-4 rounded-md my-8">
           {/* <==== Image portion Start ====>  */}
           <div className="xl:w-1/3">
             <div className="w-fit mx-auto">
-              <Image src={currentImage} height={400} width={400} alt="need"/>
+              <Image src={images[0]} height={400} width={400} alt={title} />
             </div>
             <hr />
             <div className="max-w-[500px] mx-auto">
@@ -68,12 +84,13 @@ const SingleProduct = () => {
                 }
                 useArrowKeys={true}
               >
-                {imageUrl.map((image, index) => (
+                {images.map((image, index) => (
                   <div
                     key={index}
-                    className={`mr-2 hover:scale-105 duration-200 ${image===currentImage ? "opacity-95": "opacity-50"}`}
+                    className={`mr-2 hover:scale-105 duration-200 ${
+                      image === currentImage ? "opacity-95" : "opacity-50"
+                    }`}
                     onClick={() => setCurrentImage(image)}
-                    
                   >
                     <Image
                       src={image}
@@ -91,12 +108,12 @@ const SingleProduct = () => {
           <div className="md:flex xl:w-2/3 ">
             {/* product description start  */}
             <div className="p-2">
-              <h2 className="mb-1 font-semibold">Clementine</h2>
-              <p className="mb-1 text-gray-primary">SKU: {productId}</p>
+              <h2 className="mb-1 font-semibold">{title}</h2>
+              <p className="mb-1 text-gray-primary">Id: {productId}</p>
               {stock ? (
                 <div className="bg-primary-light w-fit text-sm px-2 py-1 rounded-full font-bold mb-6">
                   <span className="text-primary">Stock:</span>{" "}
-                  <span className="text-red">472</span>
+                  <span className="text-red">{quantity}</span>
                 </div>
               ) : (
                 <span className="mb-3 text-sm bg-red-200 inline-block px-3 py-1 rounded-full text-gray-primary">
@@ -104,17 +121,14 @@ const SingleProduct = () => {
                 </span>
               )}
 
-              <h2 className="font-bold mb-4">$13</h2>
+              <h2 className="font-bold mb-4">${price}</h2>
 
               <p
                 className={`text-gray-500 mb-2 ${
                   isDescCollapsed && "line-clamp-2"
                 }`}
               >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-                iste qui, necessitatibus aliquam quae quo nobis corporis at
-                labore omnis? Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Nostrum, voluptatem!
+                {description}
               </p>
               <div className="text-sm text-orange-500 cursor-pointer text-end px-8">
                 {isDescCollapsed ? (
@@ -127,6 +141,9 @@ const SingleProduct = () => {
                   </p>
                 )}
               </div>
+              <div className="mt-2 mb-4">
+                <p>Unit: {unit}</p>
+              </div>
               <div className="flex gap-4">
                 <Counter value={"1"} />
                 <Button text="Add to Cart" className={"px-12 py-2"} />
@@ -134,13 +151,13 @@ const SingleProduct = () => {
               <div className="font-medium mt-4">
                 Category:{" "}
                 <span className="text-gray-primary underline">
-                  fresh-vegetable
+                  {category.name}
                 </span>
               </div>
               <div className="flex items-center gap-4 text-xs text-gray-primary p-4 font-medium">
-                <p>fresh fruits</p>
-                <p>fruits</p>
-                <p>vegetable</p>
+                {tags.map((tag) => (
+                  <span>{tag}</span>
+                ))}
               </div>
 
               {/* social Network  */}
@@ -270,5 +287,16 @@ const SingleProduct = () => {
 SingleProduct.getLayout = (page) => {
   return <CustomerLayout>{page}</CustomerLayout>;
 };
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const id = params.productId;
+  const res = await getSingleProduct(id);
+  return {
+    props: {
+      res,
+    },
+  };
+}
 
 export default SingleProduct;
