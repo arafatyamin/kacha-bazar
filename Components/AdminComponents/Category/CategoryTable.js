@@ -21,7 +21,9 @@ const CategoryTable = ({ categories, setPage, page }) => {
       buttons: true,
       dangerMode: true,
     }).then((willDelete) => {
-      dispatch(removeCategoryData(id));
+      if (willDelete) {
+        dispatch(removeCategoryData(id));
+      }
     });
   };
 

@@ -14,6 +14,11 @@ export const postProductPending = "product/fetch-peinding";
 export const postProductError = "product/fetch-reject";
 export const postProductSuccess = "product/fetch-fullfill";
 
+// update product
+export const putProductPending = "put-product/fetch-peinding";
+export const putProductError = "put-product/fetch-reject";
+export const putProductSuccess = "put-product/fetch-fullfill";
+
 // deleted product
 export const deleteProductPeinding = "delete-product/peinding";
 export const deleteProductReject = "delete-product/reject";
