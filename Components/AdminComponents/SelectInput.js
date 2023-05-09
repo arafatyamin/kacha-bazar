@@ -11,8 +11,8 @@ const SelectInput = ({ items, name }) => {
         {name}
       </option>
 
-      {items?.map((item) => (
-        <option key={item.id} value={item.id}>
+      {items?.map((item, i) => (
+        <option key={i} value={item.id}>
           {item.name}
         </option>
       ))}

@@ -3,8 +3,24 @@ import { SlMagnifierAdd } from "react-icons/sl";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { removeProductData } from "@/store/thunk/admin/products";
+import swal from "sweetalert";
 
 const ProductsTable = ({ products }) => {
+  const dispatch = useDispatch();
+  const productDeleteHandelar = (id, name) => {
+    swal({
+      title: "Are you sure?",
+      text: `Delete ${name} Product!`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      dispatch(removeProductData(id));
+    });
+  };
+
   return (
     <div className="container pb-8 mx-auto rounded-md  bg-gray-100">
       <div className="overflow-x-auto bg-white">
@@ -37,7 +53,7 @@ const ProductsTable = ({ products }) => {
                   <div className="flex items-center">
                     <img
                       className="w-8 h-8 p-1 rounded-full bg-gray-100"
-                      src="https://i.postimg.cc/13JnVvWJ/Urban-Frgr-Organic-Calming-Herbal-Tea-15-ct.jpg"
+                      src={product?.images[0]}
                       alt="product"
                     />
                     <span className="ml-2">{product?.title}</span>
@@ -84,7 +100,12 @@ const ProductsTable = ({ products }) => {
                       <FaRegEdit />
                     </button>
 
-                    <button className="text-lg mr-2 font-normal text-gray-400 hover:text-red-600 duration-300">
+                    <button
+                      onClick={() =>
+                        productDeleteHandelar(product.id, product.title)
+                      }
+                      className="text-lg mr-2 font-normal text-gray-400 hover:text-red-600 duration-300"
+                    >
                       <RiDeleteBin6Line />
                     </button>
                   </div>

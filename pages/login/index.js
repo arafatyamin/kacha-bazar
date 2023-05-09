@@ -3,32 +3,24 @@ import Input from "@/Components/CommonComponents/shared/Input";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { AiOutlineMail } from "react-icons/ai";
+import { Controller, useForm } from "react-hook-form";
 import { BsFacebook, BsGoogle } from "react-icons/bs";
 import { CgKey } from "react-icons/cg";
 import getCustomer from "@/utils/getCustomer";
 
-const init = {
-  email: "",
-  password: "",
-  termsChecked: false,
-};
 const Login = () => {
-  const [formState, setFormState] = useState({ ...init });
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-  const changeHandler = (e) => {
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value,
-    });
+  const onSubmit = (data) => {
+    console.log(data);
+    console.log("clicked");
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    //TODO: Need to implement submission
-  };
   return (
     <>
       <Head>
@@ -76,44 +68,31 @@ const Login = () => {
               </div>
 
               {/* ========Input Section Start ========  */}
-              <form onSubmit={submitHandler} className="space-y-2">
-                <Input
-                  name={"email"}
-                  label={"Email"}
-                  Icon={AiOutlineMail}
-                  value={formState.email}
-                  changeHandler={changeHandler}
-                  type={"email"}
-                  className={"overflow-hidden"}
-                />
-                <Input
-                  name={"password"}
-                  label={"Password"}
-                  type={"password"}
-                  Icon={CgKey}
-                  value={formState.password}
-                  changeHandler={changeHandler}
-                />
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <Controller
+                  name="email"
+                  control={control}
+                  render={({ field }) => (
                     <Input
-                      type="checkbox"
-                      className="border-none"
-                      onChange={changeHandler}
-                      value={formState.termsChecked}
+                      label={"Email"}
+                      id={"email"}
+                      type={"email"}
+                      {...field}
                     />
-
-                    <p className="text-xs sm:text-sm text-gray-primary">
-                      Remember me
-                    </p>
-                  </div>
-                  <Link
-                    href={"#"}
-                    className="text-xs sm:text-sm text-gray-primary hover:text-primary"
-                  >
-                    Forgot Password?
-                  </Link>
-                </div>
+                  )}
+                />
+                <Controller
+                  name="password"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      label={"Password"}
+                      id={"password"}
+                      type={"password"}
+                      {...field}
+                    />
+                  )}
+                />
                 <div className="flex items-center gap-4">
                   <Button
                     text="Login Now"
