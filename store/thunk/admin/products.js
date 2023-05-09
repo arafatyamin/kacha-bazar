@@ -50,6 +50,8 @@ export const updateProduct = (data, setUpdateModal) => {
     dispatch(putProductFetchStart());
     try {
       const response = await axios.put(`/products/${data.id}`, data);
+
+      console.log(response);
       dispatch(putProductFetchSuccess(response?.data?.data));
       toast.success("Product Update Successfully!");
       setUpdateModal(false);
