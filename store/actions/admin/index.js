@@ -29,6 +29,9 @@ import {
   putCategoryFulfill,
   putCategoryPeinding,
   putCategoryReject,
+  putProductPending,
+  putProductSuccess,
+  putProductError,
 } from "@/store/actionTypes/actionTypes";
 
 // get products;
@@ -67,6 +70,26 @@ export const postProductsSuccess = (product) => {
 export const postProductsError = (error) => {
   return {
     type: postProductError,
+    payload: error.message,
+  };
+};
+
+// update products;
+export const putProductFetchStart = () => {
+  return {
+    type: putProductPending,
+  };
+};
+export const putProductFetchSuccess = (product) => {
+  return {
+    type: putProductSuccess,
+    payload: product,
+  };
+};
+
+export const putProductFetchError = (error) => {
+  return {
+    type: putProductError,
     payload: error.message,
   };
 };

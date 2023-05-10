@@ -16,20 +16,20 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
   const { postProductLoading } = useSelector((state) => state.admin);
 
   useEffect(() => {
-    // getCategories();
-    dispatch(getCategorysData);
+    getCategories();
+    // dispatch(getCategorysData());
   }, []);
 
-  // const getCategories = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       process.env.NEXT_PUBLIC_BACKEND_BASE_URL + `/categories`
-  //     );
-  //     setCategories(response.data.data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + `/categories`
+      );
+      setCategories(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getSubcategories = (e) => {
     const sc = categories?.find(

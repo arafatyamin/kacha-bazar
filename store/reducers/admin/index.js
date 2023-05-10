@@ -29,6 +29,9 @@ import {
   deleteCouponPending,
   deleteCouponReject,
   deleteCouponFulfill,
+  putProductPending,
+  putProductError,
+  putProductSuccess,
 } from "@/store/actionTypes/actionTypes";
 import initialState from "@/store/initialState";
 
@@ -78,6 +81,36 @@ const reducer = (state = initialState, action) => {
         ...state,
         postProductLoading: false,
         postProductError: false,
+        error: "",
+        products: [...state.products, action.payload],
+      };
+
+    // update product
+    case putProductPending:
+      return {
+        ...state,
+        putProductLoading: true,
+      };
+
+    case putProductError:
+      return {
+        ...state,
+        putProductLoading: false,
+        putProductError: true,
+        error: action.payload,
+      };
+
+    case putProductSuccess:
+      const productIndex = state.products.findIndex(
+        (p) => p.id === action.payload.id
+      );
+
+      state.productIndex[productIndex] = action.payload;
+
+      return {
+        ...state,
+        putProductLoading: false,
+        putProductError: false,
         error: "",
         products: [...state.products, action.payload],
       };
