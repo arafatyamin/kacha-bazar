@@ -20,6 +20,15 @@ import {
   deleteProductFulfill,
   deleteProductPeinding,
   deleteProductReject,
+  fetchCouponsStart,
+  fetchCouponError,
+  fetchCouponSuccess,
+  postCouponPending,
+  postCouponError,
+  postCouponSuccess,
+  deleteCouponPending,
+  deleteCouponReject,
+  deleteCouponFulfill,
 } from "@/store/actionTypes/actionTypes";
 import initialState from "@/store/initialState";
 
@@ -210,6 +219,82 @@ const reducer = (state = initialState, action) => {
         error: "",
         deleteSuccess: true,
         categories: state.categories.filter((c) => c.id !== action.payload),
+      };
+    //get coupons
+    case fetchCouponsStart:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case fetchCouponError:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        error: action.payload,
+      };
+
+    case fetchCouponSuccess:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        error: "",
+        coupons: action.payload,
+      };
+
+    // post coupon
+    case postCouponPending:
+      return {
+        ...state,
+        postcouponLoading: true,
+      };
+
+    case postCouponError:
+      return {
+        ...state,
+        postcouponLoading: false,
+        postcouponError: true,
+        error: action.payload,
+      };
+
+    case postCouponSuccess:
+      return {
+        ...state,
+        postcouponLoading: false,
+        postcouponError: false,
+        error: "",
+        coupons: [...state.coupons, action.payload],
+      };
+
+    // delete coupon
+    case deleteCouponPending:
+      return {
+        ...state,
+        deleteLoading: true,
+        deleteError: false,
+        error: "",
+        deleteSuccess: false,
+      };
+
+    case deleteCouponReject:
+      return {
+        ...state,
+        deleteLoading: false,
+        deleteError: true,
+        error: action.payload,
+        deleteSuccess: false,
+      };
+
+    case deleteCouponFulfill:
+      return {
+        ...state,
+        deleteLoading: false,
+        deleteError: false,
+        error: "",
+        deleteSuccess: true,
+        coupons: state.coupons.filter((p) => p.id !== action.payload),
       };
 
     default:

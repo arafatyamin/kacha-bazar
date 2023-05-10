@@ -1,25 +1,34 @@
 import {
-  fetchError,
-  fetchProducts,
-  fetchSuccess,
-  fetchCategoryPeinding,
-  fetchCategoryReject,
-  fetchCategoryFulfill,
-  putCategoryPeinding,
-  putCategoryFulfill,
-  putCategoryReject,
-  deleteCategoryPeinding,
   deleteCategoryFulfill,
+  deleteCategoryPeinding,
   deleteCategoryReject,
-  postCategoryPeinding,
-  postCategoryFulfill,
-  postCategoryReject,
-  postProductPending,
-  postProductError,
-  postProductSuccess,
+  deleteCouponFulfill,
+  deleteCouponPending,
+  deleteCouponReject,
   deleteProductFulfill,
   deleteProductPeinding,
   deleteProductReject,
+  fetchCategoryFulfill,
+  fetchCategoryPeinding,
+  fetchCategoryReject,
+  fetchCouponError,
+  fetchCouponSuccess,
+  fetchCouponsStart,
+  fetchError,
+  fetchProducts,
+  fetchSuccess,
+  postCategoryFulfill,
+  postCategoryPeinding,
+  postCategoryReject,
+  postCouponError,
+  postCouponPending,
+  postCouponSuccess,
+  postProductError,
+  postProductPending,
+  postProductSuccess,
+  putCategoryFulfill,
+  putCategoryPeinding,
+  putCategoryReject,
 } from "@/store/actionTypes/actionTypes";
 
 // get products;
@@ -160,6 +169,67 @@ export const deleteCategoryFetchSuccess = (id) => {
 export const deleteCategoryFetchError = (error) => {
   return {
     type: deleteCategoryReject,
+    payload: error.message,
+  };
+};
+
+// get coupons;
+export const couponsFetchStart = () => {
+  return {
+    type: fetchCouponsStart,
+  };
+};
+export const couponsFetchSuccess = (coupons) => {
+  return {
+    type: fetchCouponSuccess,
+    payload: coupons,
+  };
+};
+
+export const couponsFetchError = (error) => {
+  return {
+    type: fetchCouponError,
+    payload: error.message,
+  };
+};
+
+// post coupons;
+export const postCouponsStart = () => {
+  return {
+    type: postCouponPending,
+  };
+};
+export const postCouponsSuccess = (coupon) => {
+  return {
+    type: postCouponSuccess,
+    payload: coupon,
+  };
+};
+
+export const postCouponsError = (error) => {
+  return {
+    type: postCouponError,
+    payload: error.message,
+  };
+};
+
+// delete coupons
+export const deleteCouponFetchStart = () => {
+  return {
+    type: deleteCouponPending,
+  };
+};
+
+export const deleteCouponFetchSuccess = (id) => {
+  return {
+    type: deleteCouponFulfill,
+    payload: id,
+  };
+};
+
+export const deleteCouponFetchError = (error) => {
+  return {
+    type: deleteCouponReject,
     payload: error.message,
   };
 };
