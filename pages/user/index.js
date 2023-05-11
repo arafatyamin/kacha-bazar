@@ -3,6 +3,7 @@ import OrderDisplay from "@/Components/AdminComponents/OrderDisplay";
 import OrdersTable from "@/Components/AdminComponents/OrdersTable";
 import { orderItems } from "@/data/data";
 import getCustomer from "@/utils/getCustomer";
+import isLoggedIn from "@/auth/isLoggedIn";
 
 const dashboard = () => {
   return (
@@ -23,20 +24,22 @@ const dashboard = () => {
   );
 };
 
-// export async function getServerSideProps(context) {
-//   let customer = await getCustomer(context);
+export async function getServerSideProps(context) {
+  let customer = await getCustomer(context);
 
-//   if (!customer) {
-//     return {
-//       redirect: {
-//         destination: "/login",
-//         permanent: false,
-//       },
-//     };
-//   }
+  const loggedIn = await isLoggedIn(context);
 
-//   return { props: { customer } };
-// }
+  if (!loggedIn) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+}
 
 dashboard.getLayout = function (page) {
   const customer = null;
