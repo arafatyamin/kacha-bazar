@@ -34,17 +34,8 @@ const SingleProduct = ({ res }) => {
   const { productId } = router.query;
   const [isDescCollapsed, setIsDescCollapsed] = useState(true);
   const [currentImage, setCurrentImage] = useState(imageUrl[0]);
-  const {
-    price,
-    description,
-    images,
-    title,
-    unit,
-    discount,
-    quantity,
-    category,
-    tags,
-  } = res;
+  const { price, description, images, title, unit, quantity, category, tags } =
+    res;
   return (
     <>
       <Head>
