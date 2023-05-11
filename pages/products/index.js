@@ -18,7 +18,7 @@ const ProductsPage = ({ products }) => {
         <title>All Products</title>
       </Head>
       <main>
-        <section className="py-20">
+        <section className="py-10">
           <div className="container">
             <div className="md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="relative rounded-lg w-fit my-2">
@@ -105,7 +105,7 @@ const ProductsPage = ({ products }) => {
             </div>
           </div>
         </section>
-        <section>
+        <section className="pb-10">
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
               {products?.map((product) => (
