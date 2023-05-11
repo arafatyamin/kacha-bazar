@@ -60,7 +60,7 @@ const UserSideNav = () => {
           <Link
             href={link}
             key={_id}
-            className="flex items-center gap-2 hover:text-primary p-2 cursor-pointer"
+            className="flex items-center gap-2 hover:text-primary p-2 cursor-pointer whitespace-nowrap"
           >
             {icon} {title}
           </Link>
@@ -70,7 +70,7 @@ const UserSideNav = () => {
         href={"#"}
         key={"43"}
         onClick={logOut}
-        className="flex items-center gap-2 hover:text-primary p-2 cursor-pointer"
+        className="flex items-center gap-2 hover:text-primary p-2 cursor-pointer whitespace-nowrap"
       >
         <AiOutlineUnlock /> Log Out
       </Link>
