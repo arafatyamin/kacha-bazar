@@ -4,11 +4,12 @@ import Image from "next/image";
 import { useState } from "react";
 import { MdShoppingBasket } from "react-icons/md";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const ProductCard = ({ data }) => {
+  const router = useRouter();
+  const { route } = router;
   const { title, images, price, quantity, discount, id } = data;
-
-  console.log(data);
 
   const offerPrice = (price * (100 - discount)) / 100;
 
@@ -61,7 +62,7 @@ const ProductCard = ({ data }) => {
           ) : (
             <p className="font-bold text-lg"> ${price}</p>
           )}
-          {counter ? (
+          {route === "/" ? null : counter ? (
             <Counter
               value={counter}
               increaseHandler={increaseHandler}

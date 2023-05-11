@@ -23,23 +23,23 @@ const dashboard = () => {
   );
 };
 
-export async function getServerSideProps(context) {
-  // let customer = await getCustomer(context);
+// export async function getServerSideProps(context) {
+//   let customer = await getCustomer(context);
 
-  // if (!customer) {
-  //   return {
-  //     redirect: {
-  //       destination: "/login",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+//   if (!customer) {
+//     return {
+//       redirect: {
+//         destination: "/login",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return { props: {} };
-}
+//   return { props: { customer } };
+// }
 
 dashboard.getLayout = function (page) {
-  const customer = page.props.children.props.customer;
+  const customer = null;
   return (
     <CustomerDashboardLayout customer={customer}>
       {page}

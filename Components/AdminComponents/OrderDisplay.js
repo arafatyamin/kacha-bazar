@@ -1,7 +1,7 @@
 const OrderDisplay = ({ data }) => {
   const { icon, title, result, bg } = data;
   return (
-    <div className="flex gap-2 items-center border rounded-sm p-2">
+    <div className="flex gap-2 items-center border rounded-sm p-2 bg-white">
       <div
         className={`p-2 w-12 h-12 ${bg} flex justify-center items-center rounded-full`}
       >

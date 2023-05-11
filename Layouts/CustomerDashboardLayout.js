@@ -14,7 +14,7 @@ const CustomerDashboardLayout = ({ customer, children }) => {
         <div className="container">
           <div className="flex gap-10">
             <UserSideNav />
-            <div className="p-2">{children}</div>
+            <div className="p-2 w-full">{children}</div>
           </div>
         </div>
         <AppStoreBanner />

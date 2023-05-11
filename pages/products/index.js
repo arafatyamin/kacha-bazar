@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import img1 from "@/public/images/products/cta-bg-1.webp";
 import img2 from "@/public/images/products/cta-bg-2.webp";
 import img3 from "@/public/images/products/cta-bg-3.webp";
@@ -19,11 +18,15 @@ const ProductsPage = ({ products }) => {
         <title>All Products</title>
       </Head>
       <main>
-        <section className="py-20">
+        <section className="py-10">
           <div className="container">
             <div className="md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="relative rounded-lg w-fit my-2">
-                <Image className=" rounded-lg" src={img1} alt="Fresh and Natural"></Image>
+                <Image
+                  className=" rounded-lg"
+                  src={img1}
+                  alt="Fresh and Natural"
+                ></Image>
                 <div className="absolute top-0 left-0 z-10 mt-4 flex-col flex w-full items-center justify-center text-white">
                   <p className=" font-bold">Taste of</p>
                   <p className="text-2xl font-bold">Fresh and Natural</p>
@@ -37,7 +40,11 @@ const ProductsPage = ({ products }) => {
                 </div>
               </div>
               <div className="relative rounded-lg w-fit my-2">
-                <Image className=" rounded-lg" src={img2} alt="Fish and Meat"></Image>
+                <Image
+                  className=" rounded-lg"
+                  src={img2}
+                  alt="Fish and Meat"
+                ></Image>
                 <div className="absolute top-0 left-0 z-10 mt-4 flex-col flex w-full items-center justify-center text-white">
                   <p className=" font-bold">Taste of</p>
                   <p className="text-2xl font-bold">Fresh and Meat</p>
@@ -51,7 +58,11 @@ const ProductsPage = ({ products }) => {
                 </div>
               </div>
               <div className="relative rounded-lg w-fit my-2">
-                <Image className=" rounded-lg" src={img3} alt="Bread and Bakery"></Image>
+                <Image
+                  className=" rounded-lg"
+                  src={img3}
+                  alt="Bread and Bakery"
+                ></Image>
                 <div className="absolute top-0 left-0 z-10 mt-4 flex-col flex w-full items-center justify-center text-white">
                   <p className=" font-bold">Taste of</p>
                   <p className="text-2xl font-bold">Bread and Bakery</p>
@@ -94,7 +105,7 @@ const ProductsPage = ({ products }) => {
             </div>
           </div>
         </section>
-        <section>
+        <section className="pb-10">
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
               {products?.map((product) => (
