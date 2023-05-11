@@ -4,8 +4,11 @@ import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import SelectInput from "./SelectInput";
+import { useRouter } from "next/router";
 
 const OrdersTable = () => {
+  const router = useRouter();
+  const { route } = router;
   const status = [
     {
       _id: 1,
@@ -40,7 +43,7 @@ const OrdersTable = () => {
               <th className="p-3">METHOD</th>
               <th className="p-3">AMOUNT</th>
               <th className="p-3">STATUS</th>
-              <th className="p-3">ACTIONS</th>
+              {!route === "user" && <th className="p-3">ACTIONS</th>}
               <th className="p-3">INVOICE</th>
             </tr>
           </thead>
@@ -74,9 +77,11 @@ const OrdersTable = () => {
                   </span>
                 </td>
 
-                <td className="px-3 py-2">
-                  <SelectInput items={status} name={"Pending"} />
-                </td>
+                {!route === "user" && (
+                  <td className="px-3 py-2">
+                    <SelectInput items={status} name={"Pending"} />
+                  </td>
+                )}
                 <td className="px-3 py-2">
                   <div className="flex justify-end items-center">
                     <button className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300">
