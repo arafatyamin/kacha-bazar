@@ -7,7 +7,11 @@ const Loading = () => {
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const handleRouteChangeStart = () => setIsLoading(true);
-    const handleRouteComplete = () => setIsLoading(false);
+    const handleRouteComplete = () => {
+      setIsLoading(false);
+      document.body.style.overflow = "auto";
+      document.body.style.position = "relative";
+    };
 
     router.events.on("routeChangeStart", handleRouteChangeStart);
     router.events.on("routeChangeComplete", handleRouteComplete);
