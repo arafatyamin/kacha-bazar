@@ -2,6 +2,7 @@ import CustomerDashboardLayout from "@/Layouts/CustomerDashboardLayout";
 import React from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import getCustomer from "@/utils/getCustomer";
+import isLoggedIn from "@/auth/isLoggedIn";
 
 const OrderPage = () => {
   return (
@@ -197,9 +198,9 @@ const OrderPage = () => {
 };
 
 export async function getServerSideProps(context) {
-  let customer = await getCustomer(context);
+  const loggedIn = await isLoggedIn(context);
 
-  if (!customer) {
+  if (!loggedIn) {
     return {
       redirect: {
         destination: "/login",
@@ -208,7 +209,7 @@ export async function getServerSideProps(context) {
     };
   }
 
-  return { props: { customer } };
+  return { props: {} };
 }
 
 OrderPage.getLayout = function (page) {

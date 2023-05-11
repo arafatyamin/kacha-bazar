@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useForm } from "react-hook-form";
 import CustomerDashboardLayout from "@/Layouts/CustomerDashboardLayout";
 import getCustomer from "@/utils/getCustomer";
+import isLoggedIn from "@/auth/isLoggedIn";
 
 const ChangePassword = () => {
   const {
@@ -75,9 +76,9 @@ const ChangePassword = () => {
 };
 
 export async function getServerSideProps(context) {
-  let customer = await getCustomer(context);
+  const loggedIn = await isLoggedIn(context);
 
-  if (!customer) {
+  if (!loggedIn) {
     return {
       redirect: {
         destination: "/login",
@@ -86,7 +87,7 @@ export async function getServerSideProps(context) {
     };
   }
 
-  return { props: { customer } };
+  return { props: {} };
 }
 
 ChangePassword.getLayout = function (page) {

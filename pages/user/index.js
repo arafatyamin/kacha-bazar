@@ -25,8 +25,6 @@ const dashboard = () => {
 };
 
 export async function getServerSideProps(context) {
-  let customer = await getCustomer(context);
-
   const loggedIn = await isLoggedIn(context);
 
   if (!loggedIn) {

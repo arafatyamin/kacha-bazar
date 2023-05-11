@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import CustomerDashboardLayout from "@/Layouts/CustomerDashboardLayout";
 import getCustomer from "@/utils/getCustomer";
+import isLoggedIn from "@/auth/isLoggedIn";
 
 const UpdateProfile = () => {
   const {
@@ -114,9 +115,9 @@ const UpdateProfile = () => {
 };
 
 export async function getServerSideProps(context) {
-  let customer = await getCustomer(context);
+  const loggedIn = await isLoggedIn(context);
 
-  if (!customer) {
+  if (!loggedIn) {
     return {
       redirect: {
         destination: "/login",
@@ -125,7 +126,7 @@ export async function getServerSideProps(context) {
     };
   }
 
-  return { props: { customer } };
+  return { props: {} };
 }
 
 UpdateProfile.getLayout = function (page) {
