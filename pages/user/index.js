@@ -24,18 +24,18 @@ const dashboard = () => {
 };
 
 export async function getServerSideProps(context) {
-  let customer = await getCustomer(context);
+  // let customer = await getCustomer(context);
 
-  if (!customer) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
+  // if (!customer) {
+  //   return {
+  //     redirect: {
+  //       destination: "/login",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
-  return { props: { customer } };
+  return { props: {} };
 }
 
 dashboard.getLayout = function (page) {

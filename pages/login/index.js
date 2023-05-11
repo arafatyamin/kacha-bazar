@@ -5,10 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 import { BsFacebook, BsGoogle } from "react-icons/bs";
-import { CgKey } from "react-icons/cg";
-import getCustomer from "@/utils/getCustomer";
+import { signIn } from "next-auth/react";
+import isLoggedIn from "@/auth/isLoggedIn";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const router = useRouter();
   const { handleSubmit, control } = useForm({
     defaultValues: {
       email: "",
@@ -19,6 +21,18 @@ const Login = () => {
   const onSubmit = (data) => {
     console.log(data);
     console.log("clicked");
+  };
+
+  const logIn = async (e) => {
+    e.preventDefault();
+    const response = await signIn("login", {
+      email: "customer@gmail.com",
+      password: "123",
+      redirect: false,
+    });
+    if (response.ok) {
+      router.push("/user");
+    }
   };
 
   return (
@@ -45,6 +59,7 @@ const Login = () => {
                 height={"300"}
                 className="mx-auto"
               />
+
               <h2 className="max-w-xs text-center  font-bold mx-auto text-white mt-8">
                 Started for free and get attractive offer
               </h2>
@@ -68,7 +83,7 @@ const Login = () => {
               </div>
 
               {/* ========Input Section Start ========  */}
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <form onSubmit={logIn} className="space-y-4">
                 <Controller
                   name="email"
                   control={control}
@@ -140,9 +155,9 @@ const Login = () => {
 };
 
 export async function getServerSideProps(context) {
-  let customer = await getCustomer(context);
+  const logedIn = await isLoggedIn(context);
 
-  if (customer) {
+  if (logedIn) {
     return {
       redirect: {
         destination: "/user",
