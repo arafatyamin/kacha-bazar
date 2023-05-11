@@ -106,7 +106,7 @@ const home = ({ categories, products }) => {
 };
 
 export async function getServerSideProps(context) {
-  const customer = await getCustomer(context);
+  // const customer = await getCustomer(context);
   const categories = await getCategories();
   const products = await getProducts();
 
