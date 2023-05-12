@@ -1,5 +1,6 @@
 import Button from "@/Components/CommonComponents/shared/Button";
 import Input from "@/Components/CommonComponents/shared/Input";
+import isLoggedIn from "@/auth/isLoggedIn";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -133,5 +134,28 @@ const Login = () => {
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+  const { loggedIn, user } = await isLoggedIn(context);
+
+  if (loggedIn) {
+    if (user.type === "admin") {
+      return {
+        redirect: {
+          destination: "/admin/dashboard",
+          permanent: false,
+        },
+      };
+    } else {
+      return {
+        redirect: {
+          destination: "/user",
+          permanent: false,
+        },
+      };
+    }
+  }
+  return { props: {} };
+}
 
 export default Login;
