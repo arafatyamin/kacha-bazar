@@ -116,7 +116,11 @@ export async function getServerSideProps(context) {
   // const customer = await getCustomer(context);
   const categories = await getCategories();
   const products = await getProducts();
-  const loggedIn = await isLoggedIn(context);
+  let { loggedIn, user } = await isLoggedIn(context);
+
+  if (loggedIn && user.type === "admin") {
+    loggedIn = false;
+  }
 
   return { props: { loggedIn, categories, products } };
 }
