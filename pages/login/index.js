@@ -155,9 +155,9 @@ const Login = () => {
 };
 
 export async function getServerSideProps(context) {
-  const logedIn = await isLoggedIn(context);
+  const { loggedIn } = await isLoggedIn(context);
 
-  if (logedIn) {
+  if (loggedIn) {
     return {
       redirect: {
         destination: "/user",
