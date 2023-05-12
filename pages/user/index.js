@@ -2,8 +2,7 @@ import CustomerDashboardLayout from "@/Layouts/CustomerDashboardLayout";
 import OrderDisplay from "@/Components/AdminComponents/OrderDisplay";
 import OrdersTable from "@/Components/AdminComponents/OrdersTable";
 import { orderItems } from "@/data/data";
-import getCustomer from "@/utils/getCustomer";
-import isLoggedIn from "@/auth/isLoggedIn";
+import handleRedirect from "@/auth/handleRedirect";
 
 const dashboard = () => {
   return (
@@ -25,18 +24,7 @@ const dashboard = () => {
 };
 
 export async function getServerSideProps(context) {
-  const {loggedIn} = await isLoggedIn(context);
-
-  if (!loggedIn) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  return { props: { loggedIn } };
+  return await handleRedirect(context, "customer");
 }
 
 dashboard.getLayout = function (page) {

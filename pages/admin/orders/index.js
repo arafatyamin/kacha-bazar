@@ -4,6 +4,7 @@ import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
 import React from "react";
 import { AiOutlineCloudDownload } from "react-icons/ai";
+import handleRedirect from "@/auth/handleRedirect";
 
 const Order = () => {
   const status = [
@@ -74,8 +75,12 @@ const Order = () => {
   );
 };
 
-export default Order;
+export async function getServerSideProps(context) {
+  return await handleRedirect(context, "admin");
+}
 
 Order.getLayout = (page) => {
   return <AdminLayout>{page}</AdminLayout>;
 };
+
+export default Order;
