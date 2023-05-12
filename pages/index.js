@@ -9,6 +9,7 @@ import { offeredProductItems, productItems } from "@/data/productData";
 import getCustomer from "@/utils/getCustomer";
 import getCategories from "@/utils/getCategories";
 import getProducts from "@/utils/getProducts";
+import isLoggedIn from "@/auth/isLoggedIn";
 
 const home = ({ categories, products }) => {
   return (
@@ -109,13 +110,14 @@ export async function getServerSideProps(context) {
   // const customer = await getCustomer(context);
   const categories = await getCategories();
   const products = await getProducts();
+  const loggedIn = await isLoggedIn(context);
 
-  return { props: { customer, categories, products } };
+  return { props: { loggedIn, categories, products } };
 }
 
 home.getLayout = (page) => {
-  const customer = page.props.children.customer;
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
 
-  return <CustomerLayout customer={customer}>{page}</CustomerLayout>;
+  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
 };
 export default home;
