@@ -19,12 +19,14 @@ const home = ({ categories, products }) => {
         <title>Home</title>
       </Head>
       <main>
-        <div className="-z-3">
+        <section className="py-10">
           <HeroSection />
+        </section>
 
-          {/* ======================Featured Categories Part Start====================== */}
+        {/* ======================Featured Categories Part Start====================== */}
+        <section className="py-10">
           <div className="container">
-            <div className="text-center mt-10">
+            <div className="text-center">
               <h2 className="font-bold text-xl sm:text-2xl">
                 Featured Categories
               </h2>
@@ -39,45 +41,45 @@ const home = ({ categories, products }) => {
             </div>
             {/* <UserSideNav /> */}
           </div>
-          {/* ======================Featured Categories Part End====================== */}
+        </section>
+        {/* ======================Featured Categories Part End====================== */}
 
-          {/* ======================Regular Products Part Start====================== */}
-          <section>
-            <div className="container">
-              <div className="bg-gray-50 my-4">
-                <div className="text-center mt-10 space-y-4">
-                  <h2 className="font-bold text-xl sm:text-2xl">
-                    Regular Products for Daily Shopping
-                  </h2>
-                  <p className="text-gray-primary text-sm sm:text-base max-w-2xl mx-auto">
-                    See all our popular products in this week. You can choose
-                    your daily needs products from this list and get some
-                    special offer with free shipping.
-                  </p>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 py-10">
-                  {products &&
-                    products?.length > 0 &&
-                    products.map((product) => (
-                      <ProductCard key={product.id} data={product} />
-                    ))}
-                </div>
+        {/* ======================Regular Products Part Start====================== */}
+        <section className="py-10">
+          <div className="container">
+            <div>
+              <div className="text-center">
+                <h2 className="font-bold text-xl sm:text-2xl">
+                  Regular Products for Daily Shopping
+                </h2>
+                <p className="text-gray-primary text-sm sm:text-base max-w-2xl mx-auto">
+                  See all our popular products in this week. You can choose your
+                  daily needs products from this list and get some special offer
+                  with free shipping.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 pt-10">
+                {products &&
+                  products?.length > 0 &&
+                  products.map((product) => (
+                    <ProductCard key={product.id} data={product} />
+                  ))}
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* ======================Regular Products Part End====================== */}
+        {/* ======================Regular Products Part End====================== */}
 
-          {/* ======================Mobile Ads Banner Part Start====================== */}
-        </div>
+        {/* ======================Mobile Ads Banner Part Start====================== */}
         <MobileAdsBanner />
 
         {/* ======================Mobile Ads Banner Part End====================== */}
 
-        <section>
+        <section className="py-10">
           <div className="container">
-            <div className="bg-gray-50 my-4">
-              <div className="text-center mt-10 space-y-4">
+            <div>
+              <div className="text-center space-y-4">
                 <h2 className="font-bold text-xl sm:text-2xl">
                   Popular Products for Daily Shopping
                 </h2>
@@ -87,7 +89,7 @@ const home = ({ categories, products }) => {
                   with free shipping.
                 </p>
               </div>
-              <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              <div className="pt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 {products &&
                   products?.length > 0 &&
                   products.map((product) => (
@@ -99,7 +101,11 @@ const home = ({ categories, products }) => {
         </section>
 
         {/* ======================App Store Section Part Start====================== */}
-        <AppStoreBanner />
+        <section className="py-10 bg-indigo-50">
+          <div className="container">
+            <AppStoreBanner />
+          </div>
+        </section>
         {/* ======================App Store Section Part End====================== */}
       </main>
     </>
