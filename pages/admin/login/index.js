@@ -8,6 +8,9 @@ import { useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsFacebook, BsGoogle } from "react-icons/bs";
 import { CgKey } from "react-icons/cg";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import handleLPRedirect from "@/auth/handleLPRedirect";
 
 const init = {
   email: "",
@@ -15,6 +18,7 @@ const init = {
   termsChecked: false,
 };
 const Login = () => {
+  const router = useRouter();
   const [formState, setFormState] = useState({ ...init });
 
   const changeHandler = (e) => {
@@ -23,12 +27,18 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  const submitHandler = (e) => {
+  const logIn = async (e) => {
     e.preventDefault();
-
-    //TODO: Need to implement submission
+    const response = await signIn("admin", {
+      email: "zahid@gmail.com",
+      password: "123",
+      redirect: false,
+    });
+    if (response.ok) {
+      router.push("/admin/dashbord");
+    }
   };
+
   return (
     <>
       <Head>
@@ -78,7 +88,7 @@ const Login = () => {
                   </div>
 
                   {/* ========Input Section Start ========  */}
-                  <form onSubmit={submitHandler} className="space-y-2 ">
+                  <form onSubmit={logIn} className="space-y-2 ">
                     <Input
                       name={"email"}
                       label={"Email"}
@@ -136,26 +146,7 @@ const Login = () => {
 };
 
 export async function getServerSideProps(context) {
-  const { loggedIn, user } = await isLoggedIn(context);
-
-  if (loggedIn) {
-    if (user.type === "admin") {
-      return {
-        redirect: {
-          destination: "/admin/dashboard",
-          permanent: false,
-        },
-      };
-    } else {
-      return {
-        redirect: {
-          destination: "/user",
-          permanent: false,
-        },
-      };
-    }
-  }
-  return { props: {} };
+  return await handleLPRedirect(context);
 }
 
 export default Login;
