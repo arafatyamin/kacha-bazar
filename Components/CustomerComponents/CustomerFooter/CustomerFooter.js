@@ -289,11 +289,7 @@ const CustomerFooter = () => {
 
           <div className="mx-auto mx-w-screen-2xl px-3 sm:px-10 flex justify-center py-4">
             <p className="text-sm text-gray-500 leading-6">
-              Copyright 2022 @
-              <a href="https://w3schools.org" className="text-emerald-500">
-                HtmlLover
-              </a>
-              , All rights reserved.
+              Copyright {new Date().getFullYear()} @ All rights reserved.
             </p>
           </div>
         </div>
