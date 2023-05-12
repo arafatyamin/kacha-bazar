@@ -8,6 +8,7 @@ import { BsFacebook, BsGoogle } from "react-icons/bs";
 import { signIn } from "next-auth/react";
 import isLoggedIn from "@/auth/isLoggedIn";
 import { useRouter } from "next/router";
+import handleLPRedirect from "@/auth/handleLPRedirect";
 
 const Login = () => {
   const router = useRouter();
@@ -155,18 +156,7 @@ const Login = () => {
 };
 
 export async function getServerSideProps(context) {
-  const { loggedIn } = await isLoggedIn(context);
-
-  if (loggedIn) {
-    return {
-      redirect: {
-        destination: "/user",
-        permanent: false,
-      },
-    };
-  }
-
-  return { props: {} };
+  return await handleLPRedirect(context);
 }
 
 export default Login;
