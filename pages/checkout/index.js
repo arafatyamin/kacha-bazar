@@ -1,8 +1,8 @@
+import OrderSummary from "@/Components/CustomerComponents/Cards/OrderSummary/OrderSummary";
+import CustomerLayout from "@/Layouts/CustomerLayout";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
-import CustomerLayout from "@/Layouts/CustomerLayout";
-import { BsTruck } from "react-icons/bs";
-import OrderSummary from "@/Components/CustomerComponents/Cards/OrderSummary/OrderSummary";
+import { useSelector } from "react-redux";
 
 const checkout = () => {
   const {
@@ -12,6 +12,8 @@ const checkout = () => {
   } = useForm();
   const onSubmit = (data) => console.log(data);
 
+  const cartItemsArray = useSelector((state) => state.cart.cart);
+  console.log(cartItemsArray)
   return (
     <>
       <Head>
@@ -20,8 +22,8 @@ const checkout = () => {
       <main>
         <section>
           <div className="custom-container">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              <div className="p-2">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+              <div className="p-2 order-last lg:order-none">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="mb-8">
                     <h3 className="mb-3 font-medium">01. Personal Details</h3>
@@ -265,8 +267,8 @@ const checkout = () => {
                   />
                 </form>
               </div>
-              <div className="p-2">
-                <OrderSummary />
+              <div className="p-2 order-first lg:order-none">
+                <OrderSummary items={cartItemsArray}/>
               </div>
             </div>
           </div>

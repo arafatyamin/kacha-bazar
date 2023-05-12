@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import axios from "axios";
 import FormInput from "./FormInput";
+import { useDispatch, useSelector } from "react-redux";
+import { postNewProduct } from "@/store/thunk/admin/products";
+import { getCategorysData } from "@/store/thunk/admin/category";
 
 const AddNewProduct = ({ newProduct, setNewProduct }) => {
   const [categories, setCategories] = useState([]);
@@ -9,8 +12,12 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
   const [previews, setPreviews] = useState([]);
   const filesRef = useRef(null);
 
+  const dispatch = useDispatch();
+  const { postProductLoading } = useSelector((state) => state.admin);
+
   useEffect(() => {
     getCategories();
+    // dispatch(getCategorysData());
   }, []);
 
   const getCategories = async () => {
@@ -47,51 +54,50 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
     }
   };
 
-
-
-
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (filesRef.current.files.length < 2) {
       return;
     }
-    try {
-      const formData = new FormData(e.target);
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/products",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log(response.data); // contains new product data
-      e.target.reset();
-      setPreviews([]);
-      setNewProduct(false);
-    } catch (err) {
-      console.log(err);
-    }
+
+    const formData = new FormData(e.target);
+    dispatch(postNewProduct(formData, setNewProduct));
+
+    e.target.reset();
+    setPreviews([]);
+
+    // try {
+    //   const response = await axios.post(
+    //     process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/products",
+    //     formData,
+    //     {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data",
+    //       },
+    //     }
+    //   );
+
+    //   console.log(response.data); // contains new product data
+    // setNewProduct(false);
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   return (
     <div
       className={`fixed top-0 ${
         newProduct ? "right-0" : "right-[-100%]"
-      }   w-full duration-300  `}
+      }   w-full h-full duration-300 overflow-y-scroll`}
     >
-      <div className="flex justify-end relative  ">
+      <div className="flex justify-end relative">
         <div
           onClick={() => setNewProduct(false)}
-          className={`bg-black/60 w-full hidden lg:block `}
+          className={`bg-black/60 w-full hidden lg:block`}
         ></div>
 
         <div className="w-full bg-white ">
-          <div className=" bg-gray-100 p-6 flex justify-between items-center">
+          <div className="bg-gray-100 p-6 flex justify-between items-center">
             <div>
               <h2 className="text-lg">Add Product</h2>
               <p className="text-xs">Add your product information from here</p>
@@ -100,14 +106,14 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
             <div>
               <button
                 onClick={() => setNewProduct(!newProduct)}
-                className=" text-2xl h-10 w-10 bg-white text-red-600 rounded-full flex justify-center items-center shadow-md"
+                className="text-2xl h-10 w-10 bg-white text-red-600 rounded-full flex justify-center items-center shadow-md"
               >
                 <TiDeleteOutline />
               </button>
             </div>
           </div>
-          <form className="" onSubmit={handleSubmit}>
-            <div className="my-3 lg:grid grid-cols-1 lg:grid-cols-3 p-6  gap-6 rounded-md shadow-sm  bg-white text-xs">
+          <form onSubmit={handleSubmit}>
+            <div className=" lg:my-2 lg:grid grid-cols-1 lg:grid-cols-3 p-6  gap-5 rounded-md shadow-sm  bg-white text-xs">
               <FormInput title="Title" />
               <p>Images</p>
               <div className="col-span-2 ">
@@ -138,9 +144,9 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
               <p className="py-2">Description</p>
               <div className="col-span-2 ">
                 <textarea
-                  className="w-full p-3 focus:outline-none rounded-md border bg-gray-100"
+                  className="w-full p-2 focus:outline-none rounded-md border bg-gray-100"
                   name="description"
-                  rows="5"
+                  rows="2"
                   required
                 ></textarea>
               </div>
@@ -148,7 +154,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
               <div className="col-span-2 ">
                 <select
                   onChange={getSubcategories}
-                  className="w-full p-3 rounded-md border bg-gray-100 active:bg-white"
+                  className="w-full p-2 rounded-md border bg-gray-100 active:bg-white"
                 >
                   <option value={""} className="hidden">
                     Select Category
@@ -165,7 +171,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
               <div className="col-span-2 ">
                 <select
                   name="subCategory"
-                  className="w-full p-3 rounded-md border bg-gray-100 active:bg-white"
+                  className="w-full p-2 rounded-md border bg-gray-100 active:bg-white"
                 >
                   <option value={""} className="hidden">
                     Select Sub Category
@@ -217,7 +223,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
                 className="py-3 px-6 bg-[#108a61] rounded-md 
             hover:bg-[#078057] text-white  duration-300 w-full"
               >
-                Add Product
+                {postProductLoading ? "Loading..." : "Add Product"}
               </button>
             </div>
           </form>

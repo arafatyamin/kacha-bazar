@@ -3,31 +3,38 @@ import Input from "@/Components/CommonComponents/shared/Input";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { AiOutlineMail } from "react-icons/ai";
+import { Controller, useForm } from "react-hook-form";
 import { BsFacebook, BsGoogle } from "react-icons/bs";
-import { CgKey } from "react-icons/cg";
+import { signIn } from "next-auth/react";
+import isLoggedIn from "@/auth/isLoggedIn";
+import { useRouter } from "next/router";
 
-const init = {
-  email: "",
-  password: "",
-  termsChecked: false,
-};
 const Login = () => {
-  const [formState, setFormState] = useState({ ...init });
+  const router = useRouter();
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-  const changeHandler = (e) => {
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value,
-    });
+  const onSubmit = (data) => {
+    console.log(data);
+    console.log("clicked");
   };
 
-  const submitHandler = (e) => {
+  const logIn = async (e) => {
     e.preventDefault();
-
-    //TODO: Need to implement submission
+    const response = await signIn("customer", {
+      email: "customer@gmail.com",
+      password: "123",
+      redirect: false,
+    });
+    if (response.ok) {
+      router.push("/user");
+    }
   };
+
   return (
     <>
       <Head>
@@ -52,6 +59,7 @@ const Login = () => {
                 height={"300"}
                 className="mx-auto"
               />
+
               <h2 className="max-w-xs text-center  font-bold mx-auto text-white mt-8">
                 Started for free and get attractive offer
               </h2>
@@ -75,44 +83,31 @@ const Login = () => {
               </div>
 
               {/* ========Input Section Start ========  */}
-              <form onSubmit={submitHandler} className="space-y-2">
-                <Input
-                  name={"email"}
-                  label={"Email"}
-                  Icon={AiOutlineMail}
-                  value={formState.email}
-                  changeHandler={changeHandler}
-                  type={"email"}
-                  className={"overflow-hidden"}
-                />
-                <Input
-                  name={"password"}
-                  label={"Password"}
-                  type={"password"}
-                  Icon={CgKey}
-                  value={formState.password}
-                  changeHandler={changeHandler}
-                />
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
+              <form onSubmit={logIn} className="space-y-4">
+                <Controller
+                  name="email"
+                  control={control}
+                  render={({ field }) => (
                     <Input
-                      type="checkbox"
-                      className="border-none"
-                      onChange={changeHandler}
-                      value={formState.termsChecked}
+                      label={"Email"}
+                      id={"email"}
+                      type={"email"}
+                      {...field}
                     />
-
-                    <p className="text-xs sm:text-sm text-gray-primary">
-                      Remember me
-                    </p>
-                  </div>
-                  <Link
-                    href={"#"}
-                    className="text-xs sm:text-sm text-gray-primary hover:text-primary"
-                  >
-                    Forgot Password?
-                  </Link>
-                </div>
+                  )}
+                />
+                <Controller
+                  name="password"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      label={"Password"}
+                      id={"password"}
+                      type={"password"}
+                      {...field}
+                    />
+                  )}
+                />
                 <div className="flex items-center gap-4">
                   <Button
                     text="Login Now"
@@ -158,5 +153,20 @@ const Login = () => {
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+  const logedIn = await isLoggedIn(context);
+
+  if (logedIn) {
+    return {
+      redirect: {
+        destination: "/user",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
+}
 
 export default Login;

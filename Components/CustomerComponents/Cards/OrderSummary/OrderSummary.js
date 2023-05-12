@@ -1,42 +1,64 @@
 import Button from "@/Components/CommonComponents/shared/Button";
-import { cartData } from "@/data/cartData";
-import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import CartItem from "@/Components/CustomerComponents/Cards/CartItem/CartItem";
 import { useEffect, useState } from "react";
+import { BsArrowUp } from "react-icons/bs";
+import { HiShoppingBag } from "react-icons/hi";
 
-const OrderSummary = () => {
-  const [isVisible, setIsVisible] = useState(false)
-  const scrollToFunc = () => {
-    document.querySelector("#cart").scrollTo({top:0, behavior:"smooth"})
-  }
-  const listenToScroll =() => {
-    let scrollToShow = 20;
-    let sectionScrolled = document.querySelector("#cart").scrollTop
-    if (sectionScrolled >= scrollToShow) {
-      setIsVisible(true)
+const OrderSummary = ({ items }) => {
+  const orderTotal = items?.reduce((acc, curr) => {
+    if (acc.subtotal) {
+      acc.subtotal += Number(curr.count) * Number(curr.price);
+      acc.totalItems += Number(curr.count);
+      acc.discount += Number(curr.discount);
     } else {
-      setIsVisible(false)
+      acc.subtotal = Number(curr.count) * Number(curr.price);
+      acc.totalItems = Number(curr.count);
+      acc.discount = Number(curr.discount);
     }
-  }
+
+    return acc;
+  }, {});
+
+  const [isVisible, setIsVisible] = useState(false);
+  const scrollToFunc = () => {
+    document.querySelector("#cart").scrollTo({ top: 0, behavior: "smooth" });
+  };
+  const listenToScroll = () => {
+    let scrollToShow = 20;
+    let sectionScrolled = document.querySelector("#cart").scrollTop;
+    if (sectionScrolled >= scrollToShow) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
   useEffect(() => {
     document.querySelector("#cart").addEventListener("scroll", listenToScroll);
   }, []);
   return (
-    <div className="border rounded p-3">
-      <h3 className="font-medium mb-3">Order Summary</h3>
+    <div className="border rounded-md p-8 bg-white">
+      <h3 className="font-medium mb-3">Shopping Cart</h3>
       <div>
         <div className="relative">
           <div
-            className="h-96 bg-white rounded-md overflow-auto space-y-1 relative"
+            className={`${items.length>0?"h-96":"h-32"} bg-gray-50 rounded-md overflow-auto space-y-1 relative`}
             id="cart"
           >
-            {cartData?.map((item, index) => (
-              <CartItem key={index} data={item} />
-            ))}
+            {items.length > 0 ? (
+              items?.map((item, index) => <CartItem key={index} data={item} />)
+            ) : (
+              <div className="flex flex-col justify-center h-full items-center text-gray-primary">
+                <HiShoppingBag className="text-5xl " />
+                <p>No Item Added Yet!</p>
+              </div>
+            )}
           </div>
-          <div className="absolute bottom-2 left-[50%]">
+          <div className="absolute hidden sm:inline bottom-2 left-[50%]">
             {isVisible && (
-              <BsArrowUp className="mx-auto bg-primary-light p-2 w-8 h-8 rounded-full text-primary" onClick={scrollToFunc}/>
+              <BsArrowUp
+                className="mx-auto bg-primary-light p-2 w-8 h-8 rounded-full text-primary"
+                onClick={scrollToFunc}
+              />
             )}
           </div>
         </div>
@@ -45,16 +67,16 @@ const OrderSummary = () => {
           <input
             type="text"
             placeholder="Input your coupon code"
-            className="px-1 py-2 border rounded outline-none"
+            className="px-3 py-2 border rounded outline-none flex-grow"
           />
           <Button text={"Apply"} />
         </div>
         <div className="mt-5 border-b">
           <ul>
             <li className="flex justify-between items-center my-2">
-              Subtotal{" "}
+              Subtotal <span>items: {orderTotal.totalItems  || 0}</span>
               <span>
-                <b>$0.00</b>
+                <b>${orderTotal.subtotal || 0.00}</b>
               </span>
             </li>
             <li className="flex justify-between items-center my-2">
@@ -66,7 +88,7 @@ const OrderSummary = () => {
             <li className="flex justify-between items-center my-2">
               Discount{" "}
               <span className="text-orange-500">
-                <b>$0.00</b>
+                <b>${orderTotal.discount||0.00}</b>
               </span>
             </li>
           </ul>

@@ -1,7 +1,7 @@
 import { categoryItems } from "@/data/data";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
@@ -10,9 +10,10 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 import DropDown from "./DropDown";
 import SearchBar from "./SearchBar";
 
-const Header = () => {
-  const loggedIn = true;
+const Header = ({ loggedIn }) => {
+
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+
   return (
     <header>
       {/* ======================top Header Part Start====================== */}
@@ -36,19 +37,34 @@ const Header = () => {
             <Link href={"/contact-us"}>
               <li className="hover:text-primary duration-200">Contact Us</li>
             </Link>
-            <span>|</span>
-            {loggedIn && (
-              <Link href={"/#"}>
-                <li className="hover:text-primary duration-200">My account</li>
-              </Link>
+
+            {loggedIn ? (
+              <>
+                <span>|</span>
+                <Link href={"/user"}>
+                  <li className="hover:text-primary duration-200">
+                    My account
+                  </li>
+                </Link>
+              </>
+            ) : (
+              <>
+                <span>|</span>
+                <Link href={"/signup"}>
+                  <li className="flex items-center gap-1 hover:text-primary duration-200">
+                    <MdOutlinePersonOutline />
+                    <span>Sign Up</span>
+                  </li>
+                </Link>
+                <span>|</span>
+                <Link href={"/login"}>
+                  <li className="flex items-center gap-1 hover:text-primary duration-200">
+                    <MdOutlinePersonOutline />
+                    <span>Login</span>
+                  </li>
+                </Link>
+              </>
             )}
-            <span>|</span>
-            <Link href={"/signup"}>
-              <li className="flex items-center gap-1 hover:text-primary duration-200">
-                <MdOutlinePersonOutline />
-                <span>Sign Up</span>
-              </li>
-            </Link>
           </ul>
         </div>
       </div>
@@ -73,9 +89,11 @@ const Header = () => {
                 <Link href={"/checkout"}>
                   <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
                 </Link>
-                <Link href={"/user"}>
-                  <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
-                </Link>
+                {loggedIn && (
+                  <Link href={"/user"}>
+                    <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
+                  </Link>
+                )}
               </nav>
             </div>
           </div>

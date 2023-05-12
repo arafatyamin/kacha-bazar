@@ -1,13 +1,12 @@
 import Header from "@/Components/CommonComponents/Header";
 import BottomNav from "@/Components/CustomerComponents/BottomNav";
 import CustomerFooter from "@/Components/CustomerComponents/CustomerFooter/CustomerFooter";
-import React from "react";
 import withAuth from "../auth/withAuth";
 
-const CustomerLayout = ({ children }) => {
+const CustomerLayout = ({ loggedIn, children }) => {
   return (
     <>
-      <Header />
+      <Header loggedIn={loggedIn} />
       <BottomNav />
       {children}
       <CustomerFooter />
@@ -15,4 +14,5 @@ const CustomerLayout = ({ children }) => {
   );
 };
 
-export default withAuth(CustomerLayout);
+// export default withAuth(CustomerLayout);
+export default CustomerLayout;
