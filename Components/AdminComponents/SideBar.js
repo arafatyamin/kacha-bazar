@@ -11,8 +11,11 @@ import {
 import { FiUsers } from "react-icons/fi";
 import { BiUser } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const SideBar = () => {
+  const router = useRouter();
   const [isActive, setIsActive] = useState("dashbord");
 
   const sideNavItem = [
@@ -57,7 +60,12 @@ const SideBar = () => {
       link: "../admin/setting",
     },
   ];
-
+  const logOut = () => {
+    signOut({ redirect: false });
+    setTimeout(() => {
+      router.push("/admin/login");
+    }, 500);
+  };
   return (
     <div className="hidden lg:block w-[250px] min-h-screen">
       {/* nav menu  */}
@@ -93,7 +101,10 @@ const SideBar = () => {
         {/* logout button  */}
         <div className="absolute bottom-44 lg:bottom-4 w-full ">
           <div className=" flex justify-center items-center ">
-            <button className="flex items-center px-14 py-2 rounded-lg font-semibold duration-300 hover:bg-[#016a47] text-white bg-[#0E9F6E] ">
+            <button
+              className="flex items-center px-14 py-2 rounded-lg font-semibold duration-300 hover:bg-[#016a47] text-white bg-[#0E9F6E]"
+              onClick={logOut}
+            >
               <AiOutlineLogout className="mr-2" />
               <span className="">Log Out</span>
             </button>
