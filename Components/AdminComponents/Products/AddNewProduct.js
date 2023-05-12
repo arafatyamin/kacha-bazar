@@ -47,6 +47,12 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
     }
   };
 
+
+
+
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (filesRef.current.files.length < 2) {
@@ -76,16 +82,16 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
     <div
       className={`fixed top-0 ${
         newProduct ? "right-0" : "right-[-100%]"
-      }   w-full duration-300 `}
+      }   w-full duration-300  `}
     >
-      <div className="flex justify-end relative">
+      <div className="flex justify-end relative  ">
         <div
           onClick={() => setNewProduct(false)}
-          className={`bg-black/60 w-full hidden lg:block`}
+          className={`bg-black/60 w-full hidden lg:block `}
         ></div>
 
         <div className="w-full bg-white ">
-          <div className="bg-gray-100 p-6 flex justify-between items-center">
+          <div className=" bg-gray-100 p-6 flex justify-between items-center">
             <div>
               <h2 className="text-lg">Add Product</h2>
               <p className="text-xs">Add your product information from here</p>
@@ -94,13 +100,13 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
             <div>
               <button
                 onClick={() => setNewProduct(!newProduct)}
-                className="text-2xl h-10 w-10 bg-white text-red-600 rounded-full flex justify-center items-center shadow-md"
+                className=" text-2xl h-10 w-10 bg-white text-red-600 rounded-full flex justify-center items-center shadow-md"
               >
                 <TiDeleteOutline />
               </button>
             </div>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form className="" onSubmit={handleSubmit}>
             <div className="my-3 lg:grid grid-cols-1 lg:grid-cols-3 p-6  gap-6 rounded-md shadow-sm  bg-white text-xs">
               <FormInput title="Title" />
               <p>Images</p>
