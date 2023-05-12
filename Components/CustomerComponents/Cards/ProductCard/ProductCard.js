@@ -33,13 +33,15 @@ const ProductCard = ({ data }) => {
   return (
     <div className="group bg-white min-w-[200px] relative rounded border border-gray-100 shadow-sm pt-4">
       <div className="overflow-hidden">
+        <Link href={`/products/${id}`}>
         <Image
           src={images[0]}
           alt={title}
           width={150}
           height={150}
           className="mx-auto group-hover:scale-110 duration-300"
-        />
+          />
+          </Link>
       </div>
       {discount && (
         <p className="absolute top-4 right-4 bg-orange-400 text-white text-sm w-fit px-2 py-[2px] rounded ">
@@ -76,7 +78,7 @@ const ProductCard = ({ data }) => {
             />
           )}
         </div>
-        <p>${price}</p>
+        {/* <p>${price}</p> */}
       </div>
     </div>
   );
