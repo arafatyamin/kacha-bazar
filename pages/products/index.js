@@ -11,6 +11,9 @@ import ProductCard from "@/Components/CustomerComponents/Cards/ProductCard/Produ
 import getProducts from "@/utils/getProducts";
 
 const ProductsPage = ({ products }) => {
+  const filterOptions = (e) => {
+    console.log(e.target.value);
+  };
   return (
     <>
       <Head>
@@ -107,6 +110,22 @@ const ProductsPage = ({ products }) => {
         </section>
         <section className="pb-10">
           <div className="container">
+            <div className="bg-orange-100 p-4 flex items-center justify-between mb-10 rounded">
+              <p>
+                Total <span className="font-bold">{products.length}</span> Items
+                Found
+              </p>
+              <select
+                name="sort"
+                id="sort"
+                onChange={(e) => filterOptions(e)}
+                className="outline-none"
+              >
+                <option value="price">Sort By Price</option>
+                <option value="lth">Low To High</option>
+                <option value="htl">High To Low</option>
+              </select>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
               {products?.map((product) => (
                 <ProductCard key={product.id} data={product} />
