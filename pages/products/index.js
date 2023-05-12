@@ -84,7 +84,7 @@ const ProductsPage = ({ products }) => {
             >
               <Carousel show={8}>
                 {categoryItems.map((cat) => (
-                  <div>
+                  <div key={cat.id}>
                     <div
                       className="  mx-1 bg-white rounded-md"
                       style={{ padding: 8 }}
