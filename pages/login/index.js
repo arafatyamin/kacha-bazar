@@ -25,7 +25,7 @@ const Login = () => {
 
   const logIn = async (e) => {
     e.preventDefault();
-    const response = await signIn("login", {
+    const response = await signIn("customer", {
       email: "customer@gmail.com",
       password: "123",
       redirect: false,
