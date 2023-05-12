@@ -1,7 +1,7 @@
 import { categoryItems } from "@/data/data";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
@@ -10,9 +10,10 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 import DropDown from "./DropDown";
 import SearchBar from "./SearchBar";
 
-const Header = ({ customer }) => {
-  const loggedIn = true;
+const Header = ({ loggedIn }) => {
+
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+
   return (
     <header>
       {/* ======================top Header Part Start====================== */}
@@ -37,7 +38,7 @@ const Header = ({ customer }) => {
               <li className="hover:text-primary duration-200">Contact Us</li>
             </Link>
 
-            {customer ? (
+            {loggedIn ? (
               <>
                 <span>|</span>
                 <Link href={"/user"}>
@@ -88,7 +89,7 @@ const Header = ({ customer }) => {
                 <Link href={"/checkout"}>
                   <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
                 </Link>
-                {customer && (
+                {loggedIn && (
                   <Link href={"/user"}>
                     <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
                   </Link>

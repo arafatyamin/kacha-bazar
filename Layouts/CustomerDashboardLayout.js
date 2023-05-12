@@ -4,9 +4,9 @@ import ProtectedLayout from "./ProtectedLayout";
 import UserSideNav from "@/Components/AdminComponents/UserSideNav";
 import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
 
-const CustomerDashboardLayout = ({ customer, children }) => {
+const CustomerDashboardLayout = ({ loggedIn, children }) => {
   return (
-    <CustomerLayout customer={customer}>
+    <CustomerLayout loggedIn={loggedIn}>
       <Head>
         <title>User Dashboard</title>
       </Head>

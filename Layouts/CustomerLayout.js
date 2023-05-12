@@ -3,10 +3,10 @@ import BottomNav from "@/Components/CustomerComponents/BottomNav";
 import CustomerFooter from "@/Components/CustomerComponents/CustomerFooter/CustomerFooter";
 import withAuth from "../auth/withAuth";
 
-const CustomerLayout = ({ customer, children }) => {
+const CustomerLayout = ({ loggedIn, children }) => {
   return (
     <>
-      <Header customer={customer} />
+      <Header loggedIn={loggedIn} />
       <BottomNav />
       {children}
       <CustomerFooter />

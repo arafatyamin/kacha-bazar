@@ -36,13 +36,13 @@ export async function getServerSideProps(context) {
     };
   }
 
-  return { props: {} };
+  return { props: { loggedIn } };
 }
 
 dashboard.getLayout = function (page) {
-  const customer = null;
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
   return (
-    <CustomerDashboardLayout customer={customer}>
+    <CustomerDashboardLayout loggedIn={loggedIn}>
       {page}
     </CustomerDashboardLayout>
   );
