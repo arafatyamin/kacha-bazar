@@ -5,7 +5,7 @@ import axios from "axios";
 export const authOptions = {
   providers: [
     CredentialsProvider({
-      id: "login",
+      id: "customer",
       async authorize(credentials) {
         try {
           // console.log("using authorize function");
@@ -17,8 +17,28 @@ export const authOptions = {
               password,
             }
           );
-          // console.log("user => ", response.data.user);
+          // console.log("customer => ", response.data.user);
           return { ...response.data.user };
+        } catch (err) {
+          return null;
+        }
+      },
+    }),
+    CredentialsProvider({
+      id: "admin",
+      async authorize(credentials) {
+        try {
+          // console.log("using authorize function");
+          const { email, password } = credentials;
+          const response = await axios.post(
+            process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/admin/login",
+            {
+              email,
+              password,
+            }
+          );
+          // console.log("admin => ", response.data.user);
+          return { ...response.data.admin };
         } catch (err) {
           return null;
         }
@@ -38,6 +58,7 @@ export const authOptions = {
           ...token,
           id: user?.id,
           email: user?.email,
+          type: user?.type,
         };
       }
 
@@ -47,6 +68,7 @@ export const authOptions = {
     async session({ session, token }) {
       session.user.id = token.id;
       session.user.email = token.email;
+      session.user.type = token.type;
       session.isLoggedIn = true;
       return session;
     },
