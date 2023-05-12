@@ -179,6 +179,7 @@ const CustomerFooter = () => {
                         src="https://kachabazar-store.vercel.app/logo/logo-color.svg"
                         width="100"
                         height="100"
+                        alt="Logo"
                       />
                     </div>
                     <ul className="text-sm flex flex-col space-y-3">
