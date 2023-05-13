@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import FormInput from "./FormInput";
+import SelectImage from "./SelectImage";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProduct } from "@/store/thunk/admin/products";
 import { getCategorysData } from "@/store/thunk/admin/category";
 import Fade from "react-reveal/Fade";
 
 const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
+  const [images, setImages] = useState([...selectProduct.images]);
   const [subCategories, setSubCategories] = useState([]);
   const [previews, setPreviews] = useState(selectProduct.images);
   const filesRef = useRef(null);
@@ -40,51 +42,24 @@ const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
     setSubCategories(sc);
   };
 
-  const handleImages = (e) => {
-    const files = e.target.files;
-    let previews = [];
-
-    for (let i = 0; i < files.length; i++) {
-      const reader = new FileReader();
-      reader.readAsDataURL(files[i]);
-      reader.onload = () => {
-        previews.push(reader.result);
-        if (previews.length === files.length) {
-          setPreviews(previews);
-        }
-      };
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (filesRef.current.files.length < 2) {
+    if (images.length < 2) {
+      alert("minimum 2 images required");
       return;
     }
 
     const formData = new FormData(e.target);
-    dispatch(updateProduct(formData, setUpdateModal));
+
+    for (let i = 0; i < images.length; i++) {
+      formData.append("files", images[i]);
+    }
+
+    dispatch(updateProduct(selectProduct.id, formData, setUpdateModal));
 
     e.target.reset();
-    // setPreviews([]);
-
-    // try {
-    //   const response = await axios.post(
-    //     process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/products",
-    //     formData,
-    //     {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     }
-    //   );
-
-    //   console.log(response.data); // contains new product data
-    // setNewProduct(false);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    setImages([]);
   };
 
   return (
@@ -119,30 +94,7 @@ const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
                 <FormInput title={"Tittle"} value={title} />
                 <p>Images</p>
                 <div className="col-span-2 ">
-                  <fieldset className="w-full space-y-1 text-gray-100">
-                    <div className="flex">
-                      <input
-                        required
-                        ref={filesRef}
-                        multiple
-                        type="file"
-                        name="files"
-                        defaultChecked={previews[0]}
-                        onChange={handleImages}
-                        className="px-8 py-12 w-full border-2 border-dashed rounded-md border-gray-300 text-gray-400 "
-                      />
-                    </div>
-                  </fieldset>
-                  <div className="flex gap-1">
-                    {previews?.map((preview, i) => (
-                      <div
-                        className="w-[100px] h-[100px] p-2 border my-2 rounded-md"
-                        key={i}
-                      >
-                        <img src={preview} alt="product image" />
-                      </div>
-                    ))}
-                  </div>
+                  <SelectImage images={images} setImages={setImages} />
                 </div>
                 <p className="py-2">Description</p>
                 <div className="col-span-2 ">
