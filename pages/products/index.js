@@ -9,11 +9,17 @@ import CustomerLayout from "@/Layouts/CustomerLayout";
 import Head from "next/head";
 import ProductCard from "@/Components/CustomerComponents/Cards/ProductCard/ProductCard";
 import getProducts from "@/utils/getProducts";
+import { useState } from "react";
 
 const ProductsPage = ({ products }) => {
+  const [filterValue, setFilterValue] = useState("");
   const filterOptions = (e) => {
-    console.log(e.target.value);
+    let value = e.target.value;
+    setFilterValue(value);
   };
+
+  console.log(filterValue);
+
   return (
     <>
       <Head>
