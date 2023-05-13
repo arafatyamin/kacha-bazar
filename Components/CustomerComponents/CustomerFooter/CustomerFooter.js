@@ -6,7 +6,6 @@ import {
   BsTwitter,
   BsWhatsapp,
 } from "react-icons/bs";
-import FlotingCart from "../FlotingCart/FlotingCart";
 import ScrollToTop from "./ScrollToTop";
 import { Toaster } from "react-hot-toast";
 
@@ -278,11 +277,6 @@ const CustomerFooter = () => {
               </div>
             </div>
           </div>
-          {/* ======================Floating cart card component start ====================== */}
-          <div className="fixed top-80 right-0 hidden md:block">
-            <FlotingCart />
-          </div>
-          {/* ======================Floating cart card component start ====================== */}
 
           {/* ======================Scroll to top card component start ====================== */}
           <ScrollToTop />

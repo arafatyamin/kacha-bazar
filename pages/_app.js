@@ -10,8 +10,8 @@ export default function App({ Component, pageProps }) {
   return getLayout(
     <SessionProvider session={pageProps.session}>
       <Provider store={store}>
-            <Loading />
-        <Component {...pageProps}> </Component>
+        <Loading />
+        <Component {...pageProps}></Component>
       </Provider>
     </SessionProvider>
   );
