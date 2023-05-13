@@ -5,6 +5,8 @@ import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/Mobil
 import ProductCard from "@/Components/CustomerComponents/Cards/ProductCard/ProductCard";
 import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSection";
 import CustomerLayout from "@/Layouts/CustomerLayout";
+import { offeredProductItems, productItems } from "@/data/productData";
+import getCustomer from "@/utils/getCustomer";
 import getCategories from "@/utils/getCategories";
 import getProducts from "@/utils/getProducts";
 import isLoggedIn from "@/auth/isLoggedIn";
@@ -32,7 +34,7 @@ const home = ({ categories, products }) => {
                 Choose your necessary products from this feature categories.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
               {categories?.map((category) => (
                 <CategoryCard data={category} key={category.id} />
               ))}
@@ -56,7 +58,7 @@ const home = ({ categories, products }) => {
                   with free shipping.
                 </p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 pt-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 pt-10">
                 {products &&
                   products?.length > 0 &&
                   products.map((product) => (
@@ -114,11 +116,7 @@ export async function getServerSideProps(context) {
   // const customer = await getCustomer(context);
   const categories = await getCategories();
   const products = await getProducts();
-  let { loggedIn, user } = await isLoggedIn(context);
-
-  if (loggedIn && user.type === "admin") {
-    loggedIn = false;
-  }
+  const loggedIn = await isLoggedIn(context);
 
   return { props: { loggedIn, categories, products } };
 }

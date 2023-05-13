@@ -5,11 +5,14 @@ import { useState } from "react";
 import { MdShoppingBasket } from "react-icons/md";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "@/store/actions/cartAction";
 
 const ProductCard = ({ data }) => {
   const router = useRouter();
   const { route } = router;
   const { title, images, price, quantity, discount, id } = data;
+  const dispatch = useDispatch();
 
   const offerPrice = (price * (100 - discount)) / 100;
 
@@ -30,18 +33,24 @@ const ProductCard = ({ data }) => {
   const hoverStateHandler = () => {
     setHoverState(!hoverState);
   };
+
+  // Add to cart handler
+  const handleAddToCart = () => {
+    dispatch(addToCart(data));
+  };
+
   return (
     <div className="group bg-white min-w-[200px] relative rounded border border-gray-100 shadow-sm pt-4">
       <div className="overflow-hidden">
         <Link href={`/products/${id}`}>
-        <Image
-          src={images[0]}
-          alt={title}
-          width={150}
-          height={150}
-          className="mx-auto group-hover:scale-110 duration-300"
+          <Image
+            src={images[0]}
+            alt={title}
+            width={150}
+            height={150}
+            className="mx-auto group-hover:scale-110 duration-300"
           />
-          </Link>
+        </Link>
       </div>
       {discount && (
         <p className="absolute top-4 right-4 bg-orange-400 text-white text-sm w-fit px-2 py-[2px] rounded ">
@@ -72,7 +81,10 @@ const ProductCard = ({ data }) => {
             />
           ) : (
             <Button
-              onClick={increaseHandler}
+              onClick={() => {
+                increaseHandler();
+                handleAddToCart();
+              }}
               Icon={MdShoppingBasket}
               className="p-1 border-[var(--clr-gray)] text-lg hover:bg-primary hover:text-white duration-200 hover:scale-105"
             />

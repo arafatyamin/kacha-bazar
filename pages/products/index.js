@@ -10,6 +10,7 @@ import Head from "next/head";
 import ProductCard from "@/Components/CustomerComponents/Cards/ProductCard/ProductCard";
 import getProducts from "@/utils/getProducts";
 import { useState } from "react";
+import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
 
 const ProductsPage = ({ products }) => {
   const [filterValue, setFilterValue] = useState("");
@@ -17,8 +18,6 @@ const ProductsPage = ({ products }) => {
     let value = e.target.value;
     setFilterValue(value);
   };
-
-  console.log(filterValue);
 
   return (
     <>
@@ -139,6 +138,11 @@ const ProductsPage = ({ products }) => {
             </div>
           </div>
         </section>
+        {/* ======================Floating cart card component start ====================== */}
+        <div className="fixed top-80 right-0 hidden md:block">
+          <FlotingCart />
+        </div>
+        {/* ======================Floating cart card component end ====================== */}
       </main>
     </>
   );
