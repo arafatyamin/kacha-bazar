@@ -32,7 +32,7 @@ const handleRedirect = async (context, role, props) => {
           },
         };
       } else {
-        return { props: { ...props } };
+        return { props: { ...props, loggedIn } };
       }
     }
   }

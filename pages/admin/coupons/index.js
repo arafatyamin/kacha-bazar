@@ -4,6 +4,7 @@ import CouponsTable from "@/Components/AdminComponents/CouponsTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import AdminLayout from "@/Layouts/AdminLayout";
 import React, { useState } from "react";
+import handleRedirect from "@/auth/handleRedirect";
 
 const Coupons = () => {
   const [newCoupon, setNewCoupon] = useState(false);
@@ -33,8 +34,12 @@ const Coupons = () => {
   );
 };
 
-export default Coupons;
+export async function getServerSideProps(context) {
+  return await handleRedirect(context, "admin");
+}
 
 Coupons.getLayout = (page) => {
   return <AdminLayout>{page}</AdminLayout>;
 };
+
+export default Coupons;

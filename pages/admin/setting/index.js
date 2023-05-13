@@ -1,6 +1,7 @@
 import Head from "next/head";
 import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
+import handleRedirect from "@/auth/handleRedirect";
 
 const Setting = () => {
   const staffRole = [
@@ -52,10 +53,10 @@ const Setting = () => {
                 <fieldset className="w-full space-y-1 text-gray-100">
                   <div className="flex">
                     <input
-                        type="file"
-                        name="files"
-                        id="files"
-                        className="px-8 py-12 w-full border-2 border-dashed rounded-md border-gray-300 text-gray-400 "
+                      type="file"
+                      name="files"
+                      id="files"
+                      className="px-8 py-12 w-full border-2 border-dashed rounded-md border-gray-300 text-gray-400 "
                     />
                   </div>
                 </fieldset>
@@ -68,27 +69,27 @@ const Setting = () => {
               <p className="py-2">Name</p>
               <div className="col-span-2 ">
                 <input
-                    type="text"
-                    defaultValue={"Admin"}
-                    className="w-full p-3 focus:outline-none rounded-md border bg-gray-100"
+                  type="text"
+                  defaultValue={"Admin"}
+                  className="w-full p-3 focus:outline-none rounded-md border bg-gray-100"
                 />
               </div>
 
               <p className="py-2">Email</p>
               <div className="col-span-2 ">
                 <input
-                    type="text"
-                    defaultValue={"admin@gmail.com"}
-                    className="w-full p-3 focus:outline-none rounded-md border bg-gray-100"
+                  type="text"
+                  defaultValue={"admin@gmail.com"}
+                  className="w-full p-3 focus:outline-none rounded-md border bg-gray-100"
                 />
               </div>
 
               <p className="py-2">Contact Number</p>
               <div className="col-span-2 ">
                 <input
-                    type="text"
-                    defaultValue={"360-943-7332"}
-                    className="w-full focus:outline-none p-3 rounded-md border bg-gray-100"
+                  type="text"
+                  defaultValue={"360-943-7332"}
+                  className="w-full focus:outline-none p-3 rounded-md border bg-gray-100"
                 />
               </div>
               <p className="py-2">Your Role</p>
@@ -109,8 +110,12 @@ const Setting = () => {
   );
 };
 
-export default Setting;
+export async function getServerSideProps(context) {
+  return await handleRedirect(context, "admin");
+}
 
 Setting.getLayout = (page) => {
   return <AdminLayout>{page}</AdminLayout>;
 };
+
+export default Setting;

@@ -9,6 +9,7 @@ import AdminLayout from "@/Layouts/AdminLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsData } from "../../../store/thunk/admin/products";
 import { getCategorysData } from "@/store/thunk/admin/category";
+import handleRedirect from "@/auth/handleRedirect";
 
 const Products = () => {
   const [newProduct, setNewProduct] = useState(false);
@@ -94,8 +95,12 @@ const Products = () => {
   );
 };
 
-export default Products;
+export async function getServerSideProps(context) {
+  return await handleRedirect(context, "admin");
+}
 
 Products.getLayout = (page) => {
   return <AdminLayout>{page}</AdminLayout>;
 };
+
+export default Products;

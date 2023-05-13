@@ -2,6 +2,7 @@ import CustomerTable from "@/Components/AdminComponents/CustomerTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import AdminLayout from "@/Layouts/AdminLayout";
 import React from "react";
+import handleRedirect from "@/auth/handleRedirect";
 
 const Customers = () => {
   return (
@@ -23,8 +24,12 @@ const Customers = () => {
   );
 };
 
-export default Customers;
+export async function getServerSideProps(context) {
+  return await handleRedirect(context, "admin");
+}
 
 Customers.getLayout = (page) => {
   return <AdminLayout>{page}</AdminLayout>;
 };
+
+export default Customers;

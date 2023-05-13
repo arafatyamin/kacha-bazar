@@ -5,6 +5,7 @@ import SelectInput from "@/Components/AdminComponents/SelectInput";
 import StaffTable from "@/Components/AdminComponents/StaffTable";
 import AdminLayout from "@/Layouts/AdminLayout";
 import React, { useState } from "react";
+import handleRedirect from "@/auth/handleRedirect";
 
 const OurStaff = () => {
   const [newStaff, setNewStaff] = useState(false);
@@ -69,8 +70,12 @@ const OurStaff = () => {
   );
 };
 
-export default OurStaff;
+export async function getServerSideProps(context) {
+  return await handleRedirect(context, "admin");
+}
 
 OurStaff.getLayout = (page) => {
   return <AdminLayout>{page}</AdminLayout>;
 };
+
+export default OurStaff;

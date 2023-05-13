@@ -5,9 +5,9 @@ import CategoryTable from "@/Components/AdminComponents/Category/CategoryTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategorysData } from "../../../store/thunk/admin/category";
+import handleRedirect from "@/auth/handleRedirect";
 
 const Category = () => {
   const [newCategory, setNewCategory] = useState(false);
@@ -89,8 +89,12 @@ const Category = () => {
   );
 };
 
-export default Category;
+export async function getServerSideProps(context) {
+  return await handleRedirect(context, "admin");
+}
 
 Category.getLayout = (page) => {
   return <AdminLayout>{page}</AdminLayout>;
 };
+
+export default Category;
