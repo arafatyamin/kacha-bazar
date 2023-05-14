@@ -26,7 +26,7 @@ function CartDrawer({ openDrawer, setOpenDrawer }) {
             </div>
           </div>
           <div className="overflow-auto w-full h-[31.5rem] absolute">
-            {cart.length === 0 ? (
+            {cart.length <= 0 ? (
               <div className="p-2 flex justify-center items-center h-full">
                 <div className="text-gray-300">
                   <BsCart4 size={50} className="mx-auto mb-2" />
