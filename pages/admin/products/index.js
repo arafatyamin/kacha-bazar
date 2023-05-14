@@ -14,17 +14,28 @@ import handleRedirect from "@/auth/handleRedirect";
 const Products = () => {
   const [newProduct, setNewProduct] = useState(false);
   const [page, setPage] = useState(1);
-  // const [products, setProducts] = useState([]);
-
-  const dispatch = useDispatch();
-  const { products, isLoading, isError, error, categories } = useSelector(
-    (state) => state.admin
-  );
+  const [products, setProducts] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  const [isError, setError] = useState(false);
 
   useEffect(() => {
-    dispatch(getProductsData);
-    dispatch(getCategorysData);
+    getProducts();
   }, [page]);
+
+  const getProducts = async () => {
+    try {
+      setLoading(!isLoading);
+      const response = await axios(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+          `/products?page=${page}&limit=10`
+      );
+      // console.log(response.data); // products
+      setProducts(response.data.data);
+      setLoading(!isLoading);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const prices = [
     {
@@ -46,8 +57,12 @@ const Products = () => {
         <div className="my-3 grid grid-cols-1 lg:grid-cols-4 py-6 px-4 gap-6 rounded-md shadow-sm bg-white">
           <SearchInput placeholder={"search by product name"} />
 
-          <div>{<SelectInput items={categories} name={"Category"} />}</div>
-          <div>{<SelectInput items={prices} name={"Price"} />}</div>
+          <div>
+            <SelectInput items={[]} name={"Category"} />
+          </div>
+          <div>
+            <SelectInput items={prices} name={"Price"} />
+          </div>
           <div onClick={() => setNewProduct(!newProduct)}>
             <Button name={"Add Product"} />
           </div>

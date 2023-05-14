@@ -2,17 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import FormInput from "./FormInput";
 import SelectImage from "./SelectImage";
-import { useDispatch, useSelector } from "react-redux";
-import { updateProduct } from "@/store/thunk/admin/products";
-import { getCategorysData } from "@/store/thunk/admin/category";
 import Fade from "react-reveal/Fade";
+import axios from "axios";
 
-const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
+const UpdateProduct = ({ products, setUpdateModal, selectProduct }) => {
   const [images, setImages] = useState([...selectProduct.images]);
+  const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-  const [previews, setPreviews] = useState(selectProduct.images);
-  const filesRef = useRef(null);
-
+  const [updating, setUpdating] = useState(false);
   const {
     title,
     description,
@@ -26,18 +23,30 @@ const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
     unit,
   } = selectProduct || {};
 
-  const dispatch = useDispatch();
-  const { postProductLoading, categories, putProductLoading } = useSelector(
-    (state) => state.admin
-  );
-
   useEffect(() => {
-    dispatch(getCategorysData());
+    getCategories();
   }, []);
 
-  const getSubcategories = (e) => {
+  useEffect(() => {
+    if (categories.length > 0) {
+      getSubcategories(null, selectCategory.id);
+    }
+  }, [categories]);
+
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + `/categories`
+      );
+      setCategories(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getSubcategories = (e, id) => {
     const sc = categories?.find(
-      (category) => category?.id === e.target.value
+      (category) => category.id === id || category.id === e?.target?.value
     )?.subCategories;
     setSubCategories(sc);
   };
@@ -56,10 +65,29 @@ const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
       formData.append("files", images[i]);
     }
 
-    dispatch(updateProduct(selectProduct.id, formData, setUpdateModal));
+    // dispatch(updateProduct(selectProduct.id, formData, setUpdateModal));
 
-    e.target.reset();
-    setImages([]);
+    try {
+      setUpdating(!updating)
+      const response = await axios.put(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+          `/products/${selectProduct.id}`,
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
+      // console.log(response.data.data);
+      let up = products.findIndex((p) => p.id === response.data.data.id);
+      products[up] = response.data.data;
+    } catch (err) {
+      console.log(err);
+    } finally {
+      e.target.reset();
+      setImages([]);
+      setUpdating(!updating);
+      setUpdateModal(false);
+    }
   };
 
   return (
@@ -109,7 +137,7 @@ const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
                 <p className="py-2">Category</p>
                 <div className="col-span-2 ">
                   <select
-                    onChange={getSubcategories}
+                    onChange={(e) => getSubcategories(e)}
                     className="w-full p-2 rounded-md border bg-gray-100 active:bg-white"
                   >
                     <option value={""} className="hidden">
@@ -199,7 +227,7 @@ const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
                   className="py-3 px-6 bg-[#108a61] rounded-md 
             hover:bg-[#078057] text-white  duration-300 w-full"
                 >
-                  {putProductLoading ? "Loading..." : "Update Product"}
+                  {updating ? "Updating..." : "Update Product"}
                 </button>
               </div>
             </form>
