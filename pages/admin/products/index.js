@@ -10,30 +10,6 @@ import handleRedirect from "@/auth/handleRedirect";
 
 const Products = () => {
   const [newProduct, setNewProduct] = useState(false);
-  const [page, setPage] = useState(1);
-  const [products, setProducts] = useState([]);
-  const [isLoading, setLoading] = useState(true);
-  const [isError, setError] = useState(false);
-
-  useEffect(() => {
-    getProducts();
-  }, [page]);
-
-  const getProducts = async () => {
-    try {
-      setLoading(!isLoading);
-      const response = await axios(
-        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
-          `/products?page=${page}&limit=10`
-      );
-      // console.log(response.data); // products
-      setProducts(response.data.data);
-      setLoading(!isLoading);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const prices = [
     {
       _id: 1,
@@ -89,24 +65,11 @@ const Products = () => {
         </div>
 
         {/* products table  */}
-        {isError ? (
-          <div className="text-center text-2xl text-red-600 p-3">
-            <h2>{error}</h2>
-          </div>
-        ) : isLoading ? (
-          <div className="text-center p-3">
-            <h2>Loading...</h2>
-          </div>
-        ) : (
-          <ProductsTable products={products} setProducts={setProducts} />
-        )}
+
+        <ProductsTable />
       </div>
 
-      <AddNewProduct
-        newProduct={newProduct}
-        setNewProduct={setNewProduct}
-        setProducts={setProducts}
-      />
+      <AddNewProduct newProduct={newProduct} setNewProduct={setNewProduct} />
     </section>
   );
 };
