@@ -1,23 +1,20 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import axios from "axios";
 import FormInput from "./FormInput";
 import SelectImage from "./SelectImage";
-import { useDispatch, useSelector } from "react-redux";
-import { postNewProduct } from "@/store/thunk/admin/products";
-import { getCategorysData } from "@/store/thunk/admin/category";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 
 const AddNewProduct = ({ newProduct, setNewProduct }) => {
   const [images, setImages] = useState([]);
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-
+  const [creating, setCreating] = useState(false);
   const dispatch = useDispatch();
-  const { postProductLoading } = useSelector((state) => state.admin);
 
   useEffect(() => {
     getCategories();
-    // dispatch(getCategorysData());
   }, []);
 
   const getCategories = async () => {
@@ -40,10 +37,6 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (images.length < 2) {
-      alert("minimum 2 images required");
-      return;
-    }
 
     const formData = new FormData(e.target);
 
@@ -51,10 +44,26 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
       formData.append("files", images[i]);
     }
 
-    dispatch(postNewProduct(formData, setNewProduct));
-
-    e.target.reset();
-    setImages([]);
+    try {
+      setCreating(!creating);
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/products",
+        formData
+      );
+      dispatch({
+        type: "ADD_PRODUCT",
+        product: response?.data?.data,
+      });
+      toast.success("New Product Added Successfully!");
+    } catch (err) {
+      console.log(err);
+      toast.error("Something went wrong");
+    } finally {
+      e.target.reset();
+      setImages([]);
+      setCreating(!creating);
+      setNewProduct(false);
+    }
   };
 
   return (
@@ -98,7 +107,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
                 <textarea
                   className="w-full p-2 focus:outline-none rounded-md border bg-gray-100"
                   name="description"
-                  rows="2"
+                  rows="7"
                   required
                 ></textarea>
               </div>
@@ -175,7 +184,7 @@ const AddNewProduct = ({ newProduct, setNewProduct }) => {
                 className="py-3 px-6 bg-[#108a61] rounded-md 
             hover:bg-[#078057] text-white  duration-300 w-full"
               >
-                {postProductLoading ? "Loading..." : "Add Product"}
+                {creating ? "Creating..." : "Add Product"}
               </button>
             </div>
           </form>
