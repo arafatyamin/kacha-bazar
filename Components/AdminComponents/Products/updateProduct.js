@@ -4,12 +4,15 @@ import FormInput from "./FormInput";
 import SelectImage from "./SelectImage";
 import Fade from "react-reveal/Fade";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 
-const UpdateProduct = ({ products, setUpdateModal, selectProduct }) => {
+const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
   const [images, setImages] = useState([...selectProduct.images]);
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [updating, setUpdating] = useState(false);
+  const dispatch = useDispatch();
   const {
     title,
     description,
@@ -54,21 +57,14 @@ const UpdateProduct = ({ products, setUpdateModal, selectProduct }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (images.length < 2) {
-      alert("minimum 2 images required");
-      return;
-    }
-
     const formData = new FormData(e.target);
 
     for (let i = 0; i < images.length; i++) {
       formData.append("files", images[i]);
     }
 
-    // dispatch(updateProduct(selectProduct.id, formData, setUpdateModal));
-
     try {
-      setUpdating(!updating)
+      setUpdating(!updating);
       const response = await axios.put(
         process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
           `/products/${selectProduct.id}`,
@@ -77,11 +73,15 @@ const UpdateProduct = ({ products, setUpdateModal, selectProduct }) => {
           withCredentials: true,
         }
       );
-      // console.log(response.data.data);
-      let up = products.findIndex((p) => p.id === response.data.data.id);
-      products[up] = response.data.data;
+
+      dispatch({
+        type: "UPDATE_PRODUCT",
+        product: response.data.data,
+      });
+      toast.success("Product updated successfully");
     } catch (err) {
       console.log(err);
+      toast.error("Something went wrong");
     } finally {
       e.target.reset();
       setImages([]);
@@ -129,7 +129,7 @@ const UpdateProduct = ({ products, setUpdateModal, selectProduct }) => {
                   <textarea
                     className="w-full p-2 focus:outline-none rounded-md border bg-gray-100"
                     name="description"
-                    rows="2"
+                    rows="7"
                     required
                     defaultValue={description}
                   ></textarea>
