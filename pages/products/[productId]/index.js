@@ -283,6 +283,14 @@ export async function getServerSideProps(context) {
   const { params } = context;
   const id = params.productId;
   const res = await getSingleProduct(id);
+  if (!res) {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       res,
