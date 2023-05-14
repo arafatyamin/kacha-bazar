@@ -167,6 +167,7 @@ const ProductsTable = ({ products }) => {
       </div>
       {updateModal && (
         <UpdateProduct
+          products={products}
           setUpdateModal={setUpdateModal}
           selectProduct={selectProduct}
         />
