@@ -6,9 +6,6 @@ import ProductsTable from "@/Components/AdminComponents/Products/ProductsTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductsData } from "../../../store/thunk/admin/products";
-import { getCategorysData } from "@/store/thunk/admin/category";
 import handleRedirect from "@/auth/handleRedirect";
 
 const Products = () => {
@@ -101,11 +98,15 @@ const Products = () => {
             <h2>Loading...</h2>
           </div>
         ) : (
-          <ProductsTable products={products} />
+          <ProductsTable products={products} setProducts={setProducts} />
         )}
       </div>
 
-      <AddNewProduct newProduct={newProduct} setNewProduct={setNewProduct} />
+      <AddNewProduct
+        newProduct={newProduct}
+        setNewProduct={setNewProduct}
+        setProducts={setProducts}
+      />
     </section>
   );
 };

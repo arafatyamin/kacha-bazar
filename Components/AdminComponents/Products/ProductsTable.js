@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SlMagnifierAdd } from "react-icons/sl";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { removeProductData } from "@/store/thunk/admin/products";
+import axios from "axios";
 import swal from "sweetalert";
 import UpdateProduct from "./updateProduct";
+import toast from "react-hot-toast";
 
-const ProductsTable = ({ products }) => {
+const ProductsTable = ({ products, setProducts }) => {
   const [updateModal, setUpdateModal] = useState(false);
   const [selectProduct, setSelectProduct] = useState({});
 
@@ -17,17 +17,26 @@ const ProductsTable = ({ products }) => {
     setSelectProduct(product);
   };
 
-  const dispatch = useDispatch();
-  const productDeleteHandelar = (id, name) => {
+  const productDeleteHandelar = (id, name, index) => {
     swal({
       title: "Are you sure?",
-      text: `Delete ${name} Product!`,
+      text: `Delete "${name}" Product!`,
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
+    }).then(async (willDelete) => {
       if (willDelete) {
-        dispatch(removeProductData(id));
+        try {
+          await axios.delete(
+            process.env.NEXT_PUBLIC_BACKEND_BASE_URL + `/products/${id}`
+          );
+          const newProducts = [...products];
+          newProducts?.splice(index, 1);
+          setProducts(newProducts);
+          toast.success("Product Deleted Successfully!");
+        } catch (err) {
+          toast.error("Something went wrong");
+        }
       }
     });
   };
@@ -116,7 +125,7 @@ const ProductsTable = ({ products }) => {
 
                     <button
                       onClick={() =>
-                        productDeleteHandelar(product.id, product.title)
+                        productDeleteHandelar(product.id, product.title, i)
                       }
                       className="text-lg mr-2 font-normal text-gray-400 hover:text-red-600 duration-300"
                     >
