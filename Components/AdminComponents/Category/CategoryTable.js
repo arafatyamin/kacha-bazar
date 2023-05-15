@@ -1,28 +1,69 @@
 import { removeCategoryData } from "@/store/thunk/admin/category";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import UpdateCategory from "./UpdateCategory";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
-const CategoryTable = ({ categories, setPage, page }) => {
+const CategoryTable = () => {
   const [updatePP, showUpdate] = useState(false);
   const [CategoryToUpdate, setCTU] = useState({});
-
   const dispatch = useDispatch();
+  // const [categories, setCategories] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const categories = useSelector((state) => state.admin.categories);
 
-  const deleteCategory = (id, name) => {
+  useEffect(() => {
+    getCategories(page);
+  }, [page]);
+
+  const getCategories = async (page) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+          `/categories?page=${page}&limit=10`
+      );
+      dispatch({
+        type: "ADD_CATEGORIES",
+        categories: response.data.data,
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteCategory = (id, name, index) => {
+    console.log(id);
     swal({
       title: "Are you sure?",
-      text: `Delete ${name} Category!`,
+      text: `Delete "${name}" Category!`,
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
+    }).then(async (willDelete) => {
       if (willDelete) {
-        dispatch(removeCategoryData(id));
+        try {
+          const response = await axios.delete(
+            process.env.NEXT_PUBLIC_BACKEND_BASE_URL + `/categories/${id}`
+          );
+          console.log(response.data);
+          dispatch({
+            type: "REMOVE_CATEGORY",
+            index,
+          });
+          toast.success("Category Deleted");
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong");
+        }
       }
     });
   };
@@ -39,87 +80,94 @@ const CategoryTable = ({ categories, setPage, page }) => {
   return (
     <div className="container pb-8 mx-auto rounded-md  bg-gray-100">
       <div className="overflow-x-auto bg-white">
-        <table className="min-w-full text-xs">
-          <thead className="rounded-t-lg bg-gray-100 border border-b-none text-gray-500 ">
-            <tr className="text-left ">
-              <th title="Ranking" className="p-3 text-left">
-                ID
-              </th>
-              <th className="p-3 text-left">ICON</th>
-              <th className="p-3 w-[500px]">NAME</th>
-              <th className="p-3">Sub Category </th>
-              <th className="p-3">PUBLISHED</th>
-              <th className="p-3">ACTIONS</th>
-            </tr>
-          </thead>
-          <tbody className="text-[14px]">
-            {categories?.map((category, i) => (
-              <tr
-                key={"category" + i}
-                className="text-left bg-white border-b border-opacity-20 border-gray-700 "
-              >
-                <td className="px-3 py-2 text-left">
-                  <span>{category?.id.toUpperCase()}</span>
-                </td>
-                <td className="px-3 py-2 text-left">
-                  <div className="flex items-center">
-                    <img
-                      className="w-8 h-8 p-1 rounded-full bg-gray-100"
-                      src={category?.icon}
-                      alt="product"
-                    />
-                  </div>
-                </td>
-                <td className="px-3 py-2">
-                  <span className="text-gray-500 font-bold px-2 py-1 bg-gray-100 rounded-full mx-1">
-                    {category?.name}
-                  </span>
-                </td>
-                <td className="px-3 py-2">
-                  <span>{category?.subCategories?.length}</span>
-                </td>
-
-                <td className="px-3 py-2">
-                  <label
-                    htmlFor={"publish" + i}
-                    className="inline-flex items-center space-x-4 cursor-pointer text-gray-100"
-                  >
-                    <span className="relative">
-                      <input
-                        id={"publish" + i}
-                        type="checkbox"
-                        readOnly
-                        checked={category?.published ? true : false}
-                        className="hidden peer"
-                      />
-                      <div className="w-10 h-6 rounded-full shadow-inner bg-gray-200  peer-checked:bg-[#07895e]"></div>
-                      <div className="absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full shadow peer-checked:right-0 peer-checked:left-auto bg-white"></div>
-                    </span>
-                  </label>
-                </td>
-                <td className="px-3 py-2">
-                  <div className="flex justify-center items-center">
-                    <button
-                      className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300"
-                      onClick={() => categoryToUpdate(category?.id)}
-                    >
-                      <FaRegEdit />
-                    </button>
-
-                    <button
-                      className="text-lg mr-2 font-normal text-gray-400 hover:text-red-600 duration-300"
-                      onClick={() =>
-                        deleteCategory(category?.id, category?.name)
-                      }
-                    >
-                      <RiDeleteBin6Line />
-                    </button>
-                  </div>
-                </td>
+        {loading ? (
+          <div className="text-center p-3">
+            <h2>Loading...</h2>
+          </div>
+        ) : (
+          <table className="min-w-full text-xs">
+            <thead className="rounded-t-lg bg-gray-100 border border-b-none text-gray-500 ">
+              <tr className="text-left ">
+                <th title="Ranking" className="p-3 text-left">
+                  ID
+                </th>
+                <th className="p-3 text-left">ICON</th>
+                <th className="p-3 w-[500px]">NAME</th>
+                <th className="p-3">Sub Category </th>
+                <th className="p-3">PUBLISHED</th>
+                <th className="p-3">ACTIONS</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="text-[14px]">
+              {categories?.map((category, i) => (
+                <tr
+                  key={"category" + i}
+                  className="text-left bg-white border-b border-opacity-20 border-gray-700 "
+                >
+                  <td className="px-3 py-2 text-left">
+                    <span>{category?.id.toUpperCase()}</span>
+                  </td>
+                  <td className="px-3 py-2 text-left">
+                    <div className="flex items-center">
+                      <img
+                        className="w-8 h-8 p-1 rounded-full bg-gray-100"
+                        src={category?.icon}
+                        alt="product"
+                      />
+                    </div>
+                  </td>
+                  <td className="px-3 py-2">
+                    <span className="text-gray-500 font-bold px-2 py-1 bg-gray-100 rounded-full mx-1">
+                      {category?.name}
+                    </span>
+                  </td>
+                  <td className="px-3 py-2">
+                    <span>{category?.subCategories?.length}</span>
+                  </td>
+
+                  <td className="px-3 py-2">
+                    <label
+                      htmlFor={"publish" + i}
+                      className="inline-flex items-center space-x-4 cursor-pointer text-gray-100"
+                    >
+                      <span className="relative">
+                        <input
+                          id={"publish" + i}
+                          type="checkbox"
+                          readOnly
+                          checked={category?.published ? true : false}
+                          className="hidden peer"
+                        />
+                        <div className="w-10 h-6 rounded-full shadow-inner bg-gray-200  peer-checked:bg-[#07895e]"></div>
+                        <div className="absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full shadow peer-checked:right-0 peer-checked:left-auto bg-white"></div>
+                      </span>
+                    </label>
+                  </td>
+                  <td className="px-3 py-2">
+                    <div className="flex justify-center items-center">
+                      <button
+                        className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300"
+                        onClick={() => categoryToUpdate(category?.id)}
+                      >
+                        <FaRegEdit />
+                      </button>
+
+                      <button
+                        className="text-lg mr-2 font-normal text-gray-400 hover:text-red-600 duration-300"
+                        onClick={() =>
+                          deleteCategory(category?.id, category?.name, i)
+                        }
+                      >
+                        <RiDeleteBin6Line />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+
         {updatePP && (
           <UpdateCategory
             showUpdate={showUpdate}

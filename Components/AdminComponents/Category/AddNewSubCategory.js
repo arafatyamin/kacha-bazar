@@ -2,10 +2,15 @@ import { useState, useEffect } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import axios from "axios";
 import SelectInput from "../SelectInput";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 
 const AddNewSubCategory = ({ newSubCategory, setNewSubCategory }) => {
   const [categories, setCategories] = useState([]);
   const [preview, setPreview] = useState();
+  const [creating, setCreating] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getCategories();
@@ -34,6 +39,7 @@ const AddNewSubCategory = ({ newSubCategory, setNewSubCategory }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setCreating(true);
       const formData = new FormData(e.target);
       const response = await axios.post(
         process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/sub-categories",
@@ -44,12 +50,21 @@ const AddNewSubCategory = ({ newSubCategory, setNewSubCategory }) => {
           },
         }
       );
-      console.log(response.data); // contains sub category details
+
+      dispatch({
+        type: "ADD_SUB_CATEGORY",
+        subCategory: response.data.data,
+        category: formData.get("category"),
+      });
+      toast.success("Sub Category created successfully");
+    } catch (err) {
+      console.log(err);
+      toast.error("Something went wrong");
+    } finally {
+      setCreating(false);
       e.target.reset();
       setPreview("");
       setNewSubCategory(false);
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -156,7 +171,7 @@ const AddNewSubCategory = ({ newSubCategory, setNewSubCategory }) => {
                 className="py-3 px-6 bg-[#108a61] rounded-md 
             hover:bg-[#078057] text-white  duration-300 w-full"
               >
-                Add Sub Category
+                {creating ? "Creating..." : " Add Sub Category"}
               </button>
             </div>
           </form>

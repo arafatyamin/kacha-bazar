@@ -18,13 +18,16 @@ import toast from "react-hot-toast";
 // get category
 export const getCategorysData = () => {
   return async (dispatch) => {
-    dispatch(categoryFetchStart());
+    // dispatch(categoryFetchStart());
 
     try {
       const response = await axios.get("/categories");
-      dispatch(categoryFetchSuccess(response?.data?.data));
+      dispatch({
+        type: "ADD_CATEGORIES",
+        catetgories: response?.data?.data,
+      });
     } catch (error) {
-      dispatch(categoryFetchError(error));
+      // dispatch(categoryFetchError(error));
     }
   };
 };
