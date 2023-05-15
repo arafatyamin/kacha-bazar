@@ -10,12 +10,24 @@ import { useDispatch } from "react-redux";
 
 const CartItem = ({ data }) => {
   const dispatch = useDispatch();
-  const { id, title, images, originalPrice, price, discount, count } = data;
+  const {
+    id,
+    title,
+    images,
+    originalPrice,
+    price,
+    discount,
+    count = 0,
+    userQuantity,
+  } = data;
   return (
     <div
       key={id}
-      className="flex py-3 px-4 shadow-sm rounded-md border-2 border-gray-100"
+      className="flex items-center py-3 px-4 shadow-sm rounded-md border-2 border-gray-100"
     >
+      <span className=" bg-[#10b981] text-white w-6 h-6 flex items-center justify-center rounded-full">
+        {userQuantity}
+      </span>
       <div className="sm:w-1/4 w-1/3">
         <Image
           className="mx-auto my-auto"
@@ -36,12 +48,12 @@ const CartItem = ({ data }) => {
             </span>
           </p>
           <p className="sm:text-lg font-bold text-gray-700 mt-1">
-            Total = ${price * count}
+            Total = ${price * userQuantity}
           </p>
         </div>
-        <div className="my-auto flex gap-2 items-center">
+        <div className="flex gap-2 items-center" style={{ marginTop: 0 }}>
           <Counter
-            value={count}
+            value={userQuantity}
             increaseHandler={() => dispatch(addToCart(data))}
             decreaseHandler={() => dispatch(decreaseFromCart(data))}
           />
