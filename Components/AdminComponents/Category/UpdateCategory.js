@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import axios from "axios";
 import Fade from "react-reveal/Fade";
-import { useDispatch, useSelector } from "react-redux";
-import { updatedCategoryData } from "@/store/thunk/admin/category";
+import { useDispatch } from "react-redux";
 
-const UpdateCategory = ({ showUpdate, category, updatePP }) => {
+const UpdateCategory = ({ showUpdate, category }) => {
   const [preview, setPreview] = useState(category?.icon);
-
   const dispatch = useDispatch();
-  const { updatedLoading } = useSelector((state) => state.admin);
+  const [updating, setUpdating] = useState(false);
 
   const showPreview = (e) => {
     const img = e.target.files[0];
@@ -24,25 +22,29 @@ const UpdateCategory = ({ showUpdate, category, updatePP }) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    dispatch(updatedCategoryData(formData, category?.id, showUpdate));
-
-    // try {
-    //   // const response = await axios.put(
-    //   //   process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
-    //   //     "/categories/" +
-    //   //     category?.id,
-    //   //   formData,
-    //   //   {
-    //   //     headers: {
-    //   //       "Content-Type": "multipart/form-data",
-    //   //     },
-    //   //   }
-    //   // );
-    //   // updateCategory(response.data.data);
-    //   // showUpdate(false);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      setUpdating(true);
+      const response = await axios.put(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+          "/categories/" +
+          category?.id,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      dispatch({
+        type: "UPDATE_CATEGORY",
+        category: response.data.data,
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setUpdating(false);
+      showUpdate(false);
+    }
   };
 
   return (
@@ -136,7 +138,7 @@ const UpdateCategory = ({ showUpdate, category, updatePP }) => {
                   className="py-3 px-6 bg-[#108a61] rounded-md 
             hover:bg-[#078057] text-white  duration-300 w-full"
                 >
-                  {updatedLoading ? "Loading..." : "Update Category"}
+                  {updating ? "Updating..." : "Update Category"}
                 </button>
               </div>
             </form>

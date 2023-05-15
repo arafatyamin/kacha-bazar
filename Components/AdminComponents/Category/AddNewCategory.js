@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { postCategoryData } from "@/store/thunk/admin/category";
+import { useDispatch } from "react-redux";
 
 const AddNewCategory = ({ newCategory, setNewCategory }) => {
   const [preview, setPreview] = useState();
+  const [creating, setCreating] = useState(false);
 
   const dispatch = useDispatch();
-  const { postCategoryLoading } = useSelector((state) => state.admin);
 
   const showPreview = (e) => {
     const img = e.target.files[0];
@@ -22,25 +21,32 @@ const AddNewCategory = ({ newCategory, setNewCategory }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    dispatch(postCategoryData(formData, setNewCategory));
-    e.target.reset();
 
-    // try {
-    //   const response = await axios.post(
-    //     process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/categories",
-    //     formData,
-    //     {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     }
-    //   );
-    //   console.log(response.data); // contains category details
-    // setPreview("");
-    // setNewCategory(false);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      setCreating(true);
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/categories",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      dispatch({
+        type: "ADD_CATEGORY",
+        category: response.data.data,
+      });
+      toast.success("Category created successfully");
+    } catch (err) {
+      console.log(err);
+      toast.error("Something went wrong");
+    } finally {
+      e.target.reset();
+      setPreview("");
+      setCreating(false);
+      setNewCategory(false);
+    }
   };
 
   return (
@@ -137,7 +143,7 @@ const AddNewCategory = ({ newCategory, setNewCategory }) => {
                 className="py-3 px-6 bg-[#108a61] rounded-md 
             hover:bg-[#078057] text-white  duration-300 w-full"
               >
-                {postCategoryLoading ? "Loading..." : "Add Category"}
+                {creating ? "Creating..." : "Add Category"}
               </button>
             </div>
           </form>
