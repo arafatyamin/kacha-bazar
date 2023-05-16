@@ -6,26 +6,10 @@ import ProductsTable from "@/Components/AdminComponents/Products/ProductsTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductsData } from "../../../store/thunk/admin/products";
-import { getCategorysData } from "@/store/thunk/admin/category";
 import handleRedirect from "@/auth/handleRedirect";
 
 const Products = () => {
   const [newProduct, setNewProduct] = useState(false);
-  const [page, setPage] = useState(1);
-  // const [products, setProducts] = useState([]);
-
-  const dispatch = useDispatch();
-  const { products, isLoading, isError, error, categories } = useSelector(
-    (state) => state.admin
-  );
-
-  useEffect(() => {
-    dispatch(getProductsData);
-    dispatch(getCategorysData);
-  }, [page]);
-
   const prices = [
     {
       _id: 1,
@@ -46,8 +30,12 @@ const Products = () => {
         <div className="my-3 grid grid-cols-1 lg:grid-cols-4 py-6 px-4 gap-6 rounded-md shadow-sm bg-white">
           <SearchInput placeholder={"search by product name"} />
 
-          <div>{<SelectInput items={categories} name={"Category"} />}</div>
-          <div>{<SelectInput items={prices} name={"Price"} />}</div>
+          <div>
+            <SelectInput items={[]} name={"Category"} />
+          </div>
+          <div>
+            <SelectInput items={prices} name={"Price"} />
+          </div>
           <div onClick={() => setNewProduct(!newProduct)}>
             <Button name={"Add Product"} />
           </div>
@@ -77,17 +65,8 @@ const Products = () => {
         </div>
 
         {/* products table  */}
-        {isError ? (
-          <div className="text-center text-2xl text-red-600 p-3">
-            <h2>{error}</h2>
-          </div>
-        ) : isLoading ? (
-          <div className="text-center p-3">
-            <h2>Loading...</h2>
-          </div>
-        ) : (
-          <ProductsTable products={products} />
-        )}
+
+        <ProductsTable />
       </div>
 
       <AddNewProduct newProduct={newProduct} setNewProduct={setNewProduct} />

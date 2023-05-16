@@ -6,37 +6,12 @@ import SearchInput from "@/Components/AdminComponents/SearchInput";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategorysData } from "../../../store/thunk/admin/category";
+import axios from "axios";
 import handleRedirect from "@/auth/handleRedirect";
 
 const Category = () => {
   const [newCategory, setNewCategory] = useState(false);
   const [newSubCategory, setNewSubCategory] = useState(false);
-  // const [categories, setCategories] = useState([]);
-  const [page, setPage] = useState(1);
-
-  const dispatch = useDispatch();
-  const { categories, categoryLoading, categoryError, error } = useSelector(
-    (state) => state.admin
-  );
-
-  console.log(categoryLoading);
-
-  useEffect(() => {
-    dispatch(getCategorysData());
-  }, [page]);
-
-  // const getCategories = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
-  //         `/categories?page=${page}&limit=10`
-  //     );
-  //     setCategories(response.data.data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   return (
     <section className=" bg-gray-100 min-h-screen">
@@ -59,22 +34,7 @@ const Category = () => {
           </div>
         </div>
 
-        {/* category table  */}
-        {categoryError ? (
-          <div className="text-center text-2xl text-red-600 p-3">
-            <h2>{error}</h2>
-          </div>
-        ) : categoryLoading ? (
-          <div className="text-center p-3">
-            <h2>Loading...</h2>
-          </div>
-        ) : (
-          <CategoryTable
-            categories={categories}
-            setPage={setPage}
-            page={page}
-          />
-        )}
+        <CategoryTable />
       </div>
 
       <AddNewCategory

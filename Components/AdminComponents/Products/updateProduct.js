@@ -1,16 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 import FormInput from "./FormInput";
-import { useDispatch, useSelector } from "react-redux";
-import { updateProduct } from "@/store/thunk/admin/products";
-import { getCategorysData } from "@/store/thunk/admin/category";
+import SelectImage from "./SelectImage";
 import Fade from "react-reveal/Fade";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
 
 const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
+  const [images, setImages] = useState([...selectProduct.images]);
+  const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-  const [previews, setPreviews] = useState(selectProduct.images);
-  const filesRef = useRef(null);
-
+  const [updating, setUpdating] = useState(false);
+  const dispatch = useDispatch();
   const {
     title,
     description,
@@ -24,67 +26,68 @@ const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
     unit,
   } = selectProduct || {};
 
-  const dispatch = useDispatch();
-  const { postProductLoading, categories, putProductLoading } = useSelector(
-    (state) => state.admin
-  );
-
   useEffect(() => {
-    dispatch(getCategorysData());
+    getCategories();
   }, []);
 
-  const getSubcategories = (e) => {
-    const sc = categories?.find(
-      (category) => category?.id === e.target.value
-    )?.subCategories;
-    setSubCategories(sc);
+  useEffect(() => {
+    if (categories.length > 0) {
+      getSubcategories(null, selectCategory.id);
+    }
+  }, [categories]);
+
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + `/categories`
+      );
+      setCategories(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const handleImages = (e) => {
-    const files = e.target.files;
-    let previews = [];
-
-    for (let i = 0; i < files.length; i++) {
-      const reader = new FileReader();
-      reader.readAsDataURL(files[i]);
-      reader.onload = () => {
-        previews.push(reader.result);
-        if (previews.length === files.length) {
-          setPreviews(previews);
-        }
-      };
-    }
+  const getSubcategories = (e, id) => {
+    const sc = categories?.find(
+      (category) => category.id === id || category.id === e?.target?.value
+    )?.subCategories;
+    setSubCategories(sc);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (filesRef.current.files.length < 2) {
-      return;
+    const formData = new FormData(e.target);
+
+    for (let i = 0; i < images.length; i++) {
+      formData.append("files", images[i]);
     }
 
-    const formData = new FormData(e.target);
-    dispatch(updateProduct(formData, setUpdateModal));
+    try {
+      setUpdating(!updating);
+      const response = await axios.put(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+          `/products/${selectProduct.id}`,
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
 
-    e.target.reset();
-    // setPreviews([]);
-
-    // try {
-    //   const response = await axios.post(
-    //     process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/products",
-    //     formData,
-    //     {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     }
-    //   );
-
-    //   console.log(response.data); // contains new product data
-    // setNewProduct(false);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+      dispatch({
+        type: "UPDATE_PRODUCT",
+        product: response.data.data,
+      });
+      toast.success("Product updated successfully");
+    } catch (err) {
+      console.log(err);
+      toast.error("Something went wrong");
+    } finally {
+      e.target.reset();
+      setImages([]);
+      setUpdating(!updating);
+      setUpdateModal(false);
+    }
   };
 
   return (
@@ -119,37 +122,14 @@ const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
                 <FormInput title={"Tittle"} value={title} />
                 <p>Images</p>
                 <div className="col-span-2 ">
-                  <fieldset className="w-full space-y-1 text-gray-100">
-                    <div className="flex">
-                      <input
-                        required
-                        ref={filesRef}
-                        multiple
-                        type="file"
-                        name="files"
-                        defaultChecked={previews[0]}
-                        onChange={handleImages}
-                        className="px-8 py-12 w-full border-2 border-dashed rounded-md border-gray-300 text-gray-400 "
-                      />
-                    </div>
-                  </fieldset>
-                  <div className="flex gap-1">
-                    {previews?.map((preview, i) => (
-                      <div
-                        className="w-[100px] h-[100px] p-2 border my-2 rounded-md"
-                        key={i}
-                      >
-                        <img src={preview} alt="product image" />
-                      </div>
-                    ))}
-                  </div>
+                  <SelectImage images={images} setImages={setImages} />
                 </div>
                 <p className="py-2">Description</p>
                 <div className="col-span-2 ">
                   <textarea
                     className="w-full p-2 focus:outline-none rounded-md border bg-gray-100"
                     name="description"
-                    rows="2"
+                    rows="7"
                     required
                     defaultValue={description}
                   ></textarea>
@@ -157,7 +137,7 @@ const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
                 <p className="py-2">Category</p>
                 <div className="col-span-2 ">
                   <select
-                    onChange={getSubcategories}
+                    onChange={(e) => getSubcategories(e)}
                     className="w-full p-2 rounded-md border bg-gray-100 active:bg-white"
                   >
                     <option value={""} className="hidden">
@@ -247,7 +227,7 @@ const UpdateProduct = ({ setUpdateModal, selectProduct }) => {
                   className="py-3 px-6 bg-[#108a61] rounded-md 
             hover:bg-[#078057] text-white  duration-300 w-full"
                 >
-                  {putProductLoading ? "Loading..." : "Update Product"}
+                  {updating ? "Updating..." : "Update Product"}
                 </button>
               </div>
             </form>

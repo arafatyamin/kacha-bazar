@@ -45,13 +45,12 @@ export const postNewProduct = (data, setNewProduct) => {
 };
 
 // post new product
-export const updateProduct = (data, setUpdateModal) => {
+export const updateProduct = (id, data, setUpdateModal) => {
   return async (dispatch) => {
     dispatch(putProductFetchStart());
     try {
-      const response = await axios.put(`/products/${data.id}`, data);
+      const response = await axios.put(`/products/${id}`, data);
 
-      console.log(response);
       dispatch(putProductFetchSuccess(response?.data?.data));
       toast.success("Product Update Successfully!");
       setUpdateModal(false);

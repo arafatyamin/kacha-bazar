@@ -7,7 +7,6 @@ import {
   BsWhatsapp,
 } from "react-icons/bs";
 import ScrollToTop from "./ScrollToTop";
-import { Toaster } from "react-hot-toast";
 
 const CustomerFooter = () => {
   return (
@@ -289,7 +288,6 @@ const CustomerFooter = () => {
           </div>
         </div>
       </footer>
-      <Toaster position="top-center" />
     </>
   );
 };

@@ -1,338 +1,77 @@
-import {
-  fetchCategoryFulfill,
-  fetchCategoryReject,
-  fetchError,
-  fetchProducts,
-  fetchSuccess,
-  putCategoryFulfill,
-  putCategoryReject,
-  putCategoryPeinding,
-  fetchCategoryPeinding,
-  deleteCategoryPeinding,
-  deleteCategoryReject,
-  deleteCategoryFulfill,
-  postCategoryFulfill,
-  postCategoryPeinding,
-  postCategoryReject,
-  postProductPending,
-  postProductError,
-  postProductSuccess,
-  deleteProductFulfill,
-  deleteProductPeinding,
-  deleteProductReject,
-  fetchCouponsStart,
-  fetchCouponError,
-  fetchCouponSuccess,
-  postCouponPending,
-  postCouponError,
-  postCouponSuccess,
-  deleteCouponPending,
-  deleteCouponReject,
-  deleteCouponFulfill,
-  putProductPending,
-  putProductError,
-  putProductSuccess,
-} from "@/store/actionTypes/actionTypes";
-import initialState from "@/store/initialState";
+const initialData = {
+  products: [],
+  categories: [],
+};
 
-const reducer = (state = initialState, action) => {
+const adminReducer = (state = initialData, action) => {
   switch (action.type) {
-    //get products
-    case fetchProducts:
+    case "ADD_CATEGORIES":
       return {
         ...state,
-        isLoading: true,
+        categories: [...action.categories],
       };
-
-    case fetchError:
+    case "ADD_CATEGORY":
       return {
         ...state,
-        isLoading: false,
-        isError: true,
-        error: action.payload,
+        categories: [...state.categories, action.category],
       };
-
-    case fetchSuccess:
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        error: "",
-        products: action.payload,
-      };
-
-    // post product
-    case postProductPending:
-      return {
-        ...state,
-        postProductLoading: true,
-      };
-
-    case postProductError:
-      return {
-        ...state,
-        postProductLoading: false,
-        postProductError: true,
-        error: action.payload,
-      };
-
-    case postProductSuccess:
-      return {
-        ...state,
-        postProductLoading: false,
-        postProductError: false,
-        error: "",
-        products: [...state.products, action.payload],
-      };
-
-    // update product
-    case putProductPending:
-      return {
-        ...state,
-        putProductLoading: true,
-      };
-
-    case putProductError:
-      return {
-        ...state,
-        putProductLoading: false,
-        putProductError: true,
-        error: action.payload,
-      };
-
-    case putProductSuccess:
-      const productIndex = state.products.findIndex(
-        (p) => p.id === action.payload.id
+    case "UPDATE_CATEGORY":
+      const updadtedCategories = [...state.categories];
+      const cateIndex = updadtedCategories.findIndex(
+        (c) => c.id === action.category.id
       );
-
-      state.productIndex[productIndex] = action.payload;
-
+      updadtedCategories?.splice(cateIndex, 1, action.category);
       return {
         ...state,
-        putProductLoading: false,
-        putProductError: false,
-        error: "",
-        products: [...state.products, action.payload],
+        categories: [...updadtedCategories],
       };
-
-    // delete product
-    case deleteProductPeinding:
+    case "REMOVE_CATEGORY":
+      const newCategories = [...state.categories];
+      newCategories?.splice(action.index, 1);
       return {
         ...state,
-        deleteLoading: true,
-        deleteError: false,
-        error: "",
-        deleteSuccess: false,
+        categories: [...newCategories],
       };
-
-    case deleteProductReject:
-      return {
-        ...state,
-        deleteLoading: false,
-        deleteError: true,
-        error: action.payload,
-        deleteSuccess: false,
-      };
-
-    case deleteProductFulfill:
-      return {
-        ...state,
-        deleteLoading: false,
-        deleteError: false,
-        error: "",
-        deleteSuccess: true,
-        products: state.products.filter((p) => p.id !== action.payload),
-      };
-
-    // get categorys
-    case fetchCategoryPeinding:
-      return {
-        ...state,
-        categoryLoading: true,
-      };
-
-    case fetchCategoryReject:
-      return {
-        ...state,
-        categoryLoading: false,
-        categoryError: true,
-        error: action.payload,
-      };
-
-    case fetchCategoryFulfill:
-      return {
-        ...state,
-        categoryLoading: false,
-        categoryError: false,
-        error: "",
-        categories: action.payload,
-      };
-
-    // post category
-    case postCategoryPeinding:
-      return {
-        ...state,
-        postCategoryLoading: true,
-      };
-
-    case postCategoryReject:
-      return {
-        ...state,
-        postCategoryLoading: false,
-        postCategoryError: true,
-        error: action.payload,
-      };
-
-    case postCategoryFulfill:
-      return {
-        ...state,
-        postCategoryLoading: false,
-        postCategoryError: false,
-        error: "",
-        categories: [...state.categories, action.payload],
-      };
-
-    // update category
-    case putCategoryPeinding:
-      return {
-        ...state,
-        updatedLoading: true,
-        updatedError: false,
-        error: "",
-        updateSuccess: false,
-      };
-
-    case putCategoryReject:
-      return {
-        ...state,
-        updatedLoading: false,
-        updatedError: true,
-        error: action.payload,
-        updateSuccess: false,
-      };
-
-    case putCategoryFulfill:
-      const index = state.categories.findIndex(
-        (c) => c.id === action.payload.id
+    case "ADD_SUB_CATEGORY":
+      const tempCategories = [...state.categories];
+      const catIndex = tempCategories.findIndex(
+        (c) => c.id === action.category
       );
-
-      state.categories[index] = action.payload;
+      tempCategories[catIndex].subCategories.push(action.subCategory);
       return {
         ...state,
-        updatedLoading: false,
-        updatedError: false,
-        error: "",
-        updateSuccess: true,
+        categories: [...tempCategories],
       };
-
-    // delete category
-    case deleteCategoryPeinding:
+    case "ADD_PRODUCTS":
       return {
         ...state,
-        deleteLoading: true,
-        deleteError: false,
-        error: "",
-        deleteSuccess: false,
+        products: [...action.products],
       };
-
-    case deleteCategoryReject:
+    case "ADD_PRODUCT":
       return {
         ...state,
-        deleteLoading: false,
-        deleteError: true,
-        error: action.payload,
-        deleteSuccess: false,
+        products: [...state.products, action.product],
       };
-
-    case deleteCategoryFulfill:
+    case "UPDATE_PRODUCT":
+      const updadtedProducts = [...state.products];
+      const index = updadtedProducts.findIndex(
+        (p) => p.id === action.product.id
+      );
+      updadtedProducts?.splice(index, 1, action.product);
       return {
         ...state,
-        deleteLoading: false,
-        deleteError: false,
-        error: "",
-        deleteSuccess: true,
-        categories: state.categories.filter((c) => c.id !== action.payload),
+        products: [...updadtedProducts],
       };
-    //get coupons
-    case fetchCouponsStart:
+    case "REMOVE_PRODUCT":
+      const newProducts = [...state.products];
+      newProducts?.splice(action.index, 1);
       return {
         ...state,
-        isLoading: true,
+        products: [...newProducts],
       };
-
-    case fetchCouponError:
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-        error: action.payload,
-      };
-
-    case fetchCouponSuccess:
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        error: "",
-        coupons: action.payload,
-      };
-
-    // post coupon
-    case postCouponPending:
-      return {
-        ...state,
-        postcouponLoading: true,
-      };
-
-    case postCouponError:
-      return {
-        ...state,
-        postcouponLoading: false,
-        postcouponError: true,
-        error: action.payload,
-      };
-
-    case postCouponSuccess:
-      return {
-        ...state,
-        postcouponLoading: false,
-        postcouponError: false,
-        error: "",
-        coupons: [...state.coupons, action.payload],
-      };
-
-    // delete coupon
-    case deleteCouponPending:
-      return {
-        ...state,
-        deleteLoading: true,
-        deleteError: false,
-        error: "",
-        deleteSuccess: false,
-      };
-
-    case deleteCouponReject:
-      return {
-        ...state,
-        deleteLoading: false,
-        deleteError: true,
-        error: action.payload,
-        deleteSuccess: false,
-      };
-
-    case deleteCouponFulfill:
-      return {
-        ...state,
-        deleteLoading: false,
-        deleteError: false,
-        error: "",
-        deleteSuccess: true,
-        coupons: state.coupons.filter((p) => p.id !== action.payload),
-      };
-
     default:
       return state;
   }
 };
 
-export default reducer;
+export default adminReducer;
