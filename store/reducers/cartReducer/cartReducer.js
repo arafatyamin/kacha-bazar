@@ -9,19 +9,17 @@ const initialState = {
 };
 
 const cartReducer = (state = initialState, action) => {
-  const selectedProduct = state.cart.find(
+  const selectedProduct = state.cart.findIndex(
     (product) => product.id === action.payload.id
   );
   switch (action.type) {
     case ADD_TO_CART:
-      if (selectedProduct) {
-        const newCart = state.cart.filter(
-          (product) => product.id !== selectedProduct.id
-        );
-        selectedProduct.userQuantity += 1;
+      if (selectedProduct !== -1) {
+        const newCartItems = [...state.cart];
+        newCartItems[selectedProduct].userQuantity += 1;
         return {
           ...state,
-          cart: [...newCart, selectedProduct],
+          cart: [...newCartItems],
         };
       }
       return {
@@ -29,20 +27,20 @@ const cartReducer = (state = initialState, action) => {
         cart: [...state.cart, { ...action.payload, userQuantity: 1 }],
       };
     case DECREASE_FROM_CART:
-      if (selectedProduct) {
-        const newCart = state.cart.filter(
-          (product) => product.id !== selectedProduct.id
-        );
-        selectedProduct.userQuantity -= 1;
+      if (selectedProduct !== -1) {
+        const newCartItems = [...state.cart];
+        newCartItems[selectedProduct].userQuantity -= 1;
         return {
           ...state,
-          cart: [...newCart, selectedProduct],
+          cart: [...newCartItems],
         };
       }
     case REMOVE_FROM_CART:
+      const tempCartItems = [...state.cart];
+      tempCartItems.splice(selectedProduct, 1);
       return {
         ...state,
-        cart: state.cart.filter((product) => product.id !== action.payload.id),
+        cart: [...tempCartItems],
       };
     default:
       return state;
