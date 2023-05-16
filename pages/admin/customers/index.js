@@ -1,4 +1,4 @@
-import CustomerTable from "@/Components/AdminComponents/CustomerTable";
+import CustomerTable from "@/Components/AdminComponents/Customers/CustomerTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import AdminLayout from "@/Layouts/AdminLayout";
 import React from "react";
