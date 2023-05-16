@@ -9,25 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/store/actions/cartAction";
 
 const ProductCard = ({ data }) => {
-  const router = useRouter();
-  const { route } = router;
   const { title, images, price, quantity, discount, id } = data;
   const dispatch = useDispatch();
 
   const offerPrice = (price * (100 - discount)) / 100;
-
-  /**======== Counter part========= */
-
-  const [counter, setCounter] = useState(0);
-
-  const increaseHandler = () => {
-    setCounter((prev) => prev + 1);
-  };
-  const decreaseHandler = () => {
-    setCounter((prev) => prev - 1);
-  };
-
-  /**======== Counter part end========= */
 
   const [hoverState, setHoverState] = useState(false);
   const hoverStateHandler = () => {
@@ -73,22 +58,14 @@ const ProductCard = ({ data }) => {
           ) : (
             <p className="font-bold text-lg"> ${price}</p>
           )}
-          {route === "/" ? null : counter ? (
-            <Counter
-              value={counter}
-              increaseHandler={increaseHandler}
-              decreaseHandler={decreaseHandler}
-            />
-          ) : (
-            <Button
-              onClick={() => {
-                increaseHandler();
-                handleAddToCart();
-              }}
-              Icon={MdShoppingBasket}
-              className="p-1 border-[var(--clr-gray)] text-lg hover:bg-primary hover:text-white duration-200 hover:scale-105"
-            />
-          )}
+          <Button
+            onClick={() => {
+              handleAddToCart();
+            }}
+            Icon={MdShoppingBasket}
+            className="p-1 border-[var(--clr-gray)] text-lg hover:bg-primary hover:text-white duration-200 hover:scale-105"
+            title="Add To Cart"
+          />
         </div>
         {/* <p>${price}</p> */}
       </div>

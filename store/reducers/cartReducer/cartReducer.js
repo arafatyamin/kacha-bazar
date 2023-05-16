@@ -9,17 +9,38 @@ const initialState = {
 };
 
 const cartReducer = (state = initialState, action) => {
-  console.log(action.payload);
+  const selectedProduct = state.cart.findIndex(
+    (product) => product.id === action.payload.id
+  );
   switch (action.type) {
     case ADD_TO_CART:
+      if (selectedProduct !== -1) {
+        const newCartItems = [...state.cart];
+        newCartItems[selectedProduct].userQuantity += 1;
+        return {
+          ...state,
+          cart: [...newCartItems],
+        };
+      }
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        cart: [...state.cart, { ...action.payload, userQuantity: 1 }],
       };
+    case DECREASE_FROM_CART:
+      if (selectedProduct !== -1) {
+        const newCartItems = [...state.cart];
+        newCartItems[selectedProduct].userQuantity -= 1;
+        return {
+          ...state,
+          cart: [...newCartItems],
+        };
+      }
     case REMOVE_FROM_CART:
+      const tempCartItems = [...state.cart];
+      tempCartItems.splice(selectedProduct, 1);
       return {
         ...state,
-        cart: state.cart.filter((product) => product.id !== action.payload.id),
+        cart: [...tempCartItems],
       };
     default:
       return state;

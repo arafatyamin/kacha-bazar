@@ -34,7 +34,7 @@ function CartDrawer({ openDrawer, setOpenDrawer }) {
                 </div>
               </div>
             ) : (
-              cart?.map((data) => <CartItem key={data.id} data={data} />)
+              cart.map((data) => <CartItem key={data.id} data={data} />)
             )}
           </div>
           <div
