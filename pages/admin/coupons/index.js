@@ -82,6 +82,7 @@ const Coupons = () => {
 
         {/* coupons table  */}
         <CouponsTable
+          loading={loading}
           coupons={coupons}
           deleteCoupon={deleteCoupon}
           pageData={pageData}

@@ -3,7 +3,14 @@ import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Pagination from "../Pagination";
 
-const CouponsTable = ({ coupons, deleteCoupon, page, setPage, pageData }) => {
+const CouponsTable = ({
+  loading,
+  coupons,
+  deleteCoupon,
+  page,
+  setPage,
+  pageData,
+}) => {
   return (
     <div className="container pb-8 mx-auto rounded-md  bg-gray-100">
       <div className="overflow-x-auto bg-white">
