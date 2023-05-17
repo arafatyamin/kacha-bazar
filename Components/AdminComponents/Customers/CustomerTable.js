@@ -37,7 +37,6 @@ const CustomerTable = () => {
   };
 
   const deleteCustomer = (id, name, index) => {
-    console.log(id);
     swal({
       title: "Are you sure?",
       text: `Delete "${name}"`,
@@ -82,7 +81,7 @@ const CustomerTable = () => {
               </tr>
             </thead>
             <tbody className="text-[14px]">
-              {customers.map((customer, i) => (
+              {customers?.map((customer, i) => (
                 <tr
                   key={i}
                   className="text-left bg-white border-b border-opacity-20 border-gray-700 "
