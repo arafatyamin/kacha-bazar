@@ -1,6 +1,7 @@
-import React from "react";
+import { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import UpdateCoupon from "./UpdateCoupon";
 import Pagination from "../Pagination";
 
 const CouponsTable = ({
@@ -11,6 +12,9 @@ const CouponsTable = ({
   setPage,
   pageData,
 }) => {
+  const [update, setUpdate] = useState(false);
+  const [couponToUpdate, setCTU] = useState({});
+
   return (
     <div className="container pb-8 mx-auto rounded-md  bg-gray-100">
       <div className="overflow-x-auto bg-white">
@@ -64,9 +68,7 @@ const CouponsTable = ({
                   </td>
                   <td className="px-3 py-2 text-center">
                     {new Date().getTime() <
-                    new Date(
-                      coupon?.couponValidityTime || coupon?.expiresAt
-                    ).getTime() ? (
+                    new Date(coupon?.expiresAt).getTime() ? (
                       <span className="py-1 px-3 bg-green-600/20 rounded-full text-green-600">
                         Active
                       </span>
@@ -79,7 +81,10 @@ const CouponsTable = ({
 
                   <td className="px-3 py-2">
                     <div className="flex justify-center items-center">
-                      <button className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300">
+                      <button
+                        className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300"
+                        onClick={() => setCTU(coupon?.id, i)}
+                      >
                         <FaRegEdit />
                       </button>
 
@@ -100,6 +105,7 @@ const CouponsTable = ({
         )}
         <Pagination pageData={pageData} page={page} setPage={setPage} />
       </div>
+      <UpdateCoupon update={update} setUpdate={setUpdate} />
     </div>
   );
 };

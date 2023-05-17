@@ -1,15 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState,useEffect } from "react";
 import { TiDeleteOutline } from "react-icons/ti";
-import { useDispatch } from "react-redux";
-import axios from "axios";
 import FormInput from "../FormInput";
-import { toast } from "react-hot-toast";
 
-const AddNewCoupons = ({ newCoupon, setNewCoupon, addCoupon }) => {
+function UpdateCoupon({ update, setUpdate,updateCoupon }) {
+  const [updating, setUpdating] = useState(false);
   const [categories, setCategories] = useState([]);
   const [preview, setPreview] = useState("");
-  const [creating, setCreating] = useState(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     getCategories();
@@ -42,15 +38,15 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon, addCoupon }) => {
 
     const formData = new FormData(e.target);
     try {
-      setCreating(true);
-      const response = await axios.post(
+      setUpdating(true);
+      const response = await axios.put(
         process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/admin/coupons",
         formData,
         {
           withCredentials: true,
         }
       );
-      addCoupon(response.data.data);
+      console.log(response.data);
       toast.success("Coupon created successfully");
     } catch (err) {
       console.log(err);
@@ -58,19 +54,19 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon, addCoupon }) => {
     } finally {
       e.target.reset();
       setPreview("");
-      setCreating(false);
-      setNewCoupon(false);
+      setUpdating(false);
+      setUpdate(false);
     }
   };
   return (
     <div
       className={`fixed top-0 ${
-        newCoupon ? "right-0" : "right-[-100%]"
+        update ? "right-0" : "right-[-100%]"
       }   w-full duration-300 `}
     >
       <div className="flex justify-end relative">
         <div
-          onClick={() => setNewCoupon(false)}
+          onClick={() => setUpdate(false)}
           className={`bg-black/60 hidden lg:block w-full h-screen`}
         ></div>
 
@@ -83,7 +79,7 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon, addCoupon }) => {
 
             <div>
               <button
-                onClick={() => setNewCoupon(!newCoupon)}
+                onClick={() => setUpdate(!update)}
                 className="text-2xl h-10 w-10 bg-white text-red-600 rounded-full flex justify-center items-center shadow-md"
               >
                 <TiDeleteOutline />
@@ -161,7 +157,7 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon, addCoupon }) => {
 
             <div className="col-span-3 px-3 flex items-center gap-6">
               <button
-                onClick={() => setNewCoupon(false)}
+                onClick={() => setUpdate(false)}
                 className="py-3 px-6 bg-gray-100 rounded-md hover:bg-red-100 text-red-300 hover:text-red-600 duration-300 w-full"
               >
                 Cancel
@@ -172,7 +168,7 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon, addCoupon }) => {
                 className="py-3 px-6 bg-[#108a61] rounded-md 
           hover:bg-[#078057] text-white  duration-300 w-full"
               >
-                {creating ? "Creating..." : "Add Coupon"}
+                {updating ? "Updating..." : "Update Coupon"}
               </button>
             </div>
           </form>
@@ -180,6 +176,6 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon, addCoupon }) => {
       </div>
     </div>
   );
-};
+}
 
-export default AddNewCoupons;
+export default UpdateCoupon;

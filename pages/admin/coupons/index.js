@@ -39,6 +39,10 @@ const Coupons = () => {
     }
   };
 
+  const addCoupon = (coupon) => {
+    setCoupons([...coupons, coupon]);
+  };
+
   const deleteCoupon = async (id, name, index) => {
     swal({
       title: "Are you sure?",
@@ -90,7 +94,11 @@ const Coupons = () => {
           setPage={setPage}
         />
       </div>
-      <AddNewCoupons newCoupon={newCoupon} setNewCoupon={setNewCoupon} />
+      <AddNewCoupons
+        newCoupon={newCoupon}
+        setNewCoupon={setNewCoupon}
+        addCoupon={addCoupon}
+      />
     </section>
   );
 };
