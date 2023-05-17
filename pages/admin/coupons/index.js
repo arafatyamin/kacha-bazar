@@ -1,13 +1,68 @@
-import AddNewCoupons from "@/Components/AdminComponents/AddNewCoupons";
+import AddNewCoupons from "@/Components/AdminComponents/Coupons/AddNewCoupons";
 import Button from "@/Components/AdminComponents/Button";
-import CouponsTable from "@/Components/AdminComponents/CouponsTable";
+import CouponsTable from "@/Components/AdminComponents/Coupons/CouponsTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import AdminLayout from "@/Layouts/AdminLayout";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import handleRedirect from "@/auth/handleRedirect";
+import axios from "axios";
+import {} from "react";
+import swal from "sweetalert";
+import { toast } from "react-hot-toast";
 
 const Coupons = () => {
+  const [coupons, setCoupons] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageData, setPageData] = useState({});
+  const [loading, setLoading] = useState(true);
   const [newCoupon, setNewCoupon] = useState(false);
+
+  useEffect(() => {
+    getCoupons();
+  }, [page]);
+
+  const getCoupons = async () => {
+    try {
+      setLoading(true);
+
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+          `/admin/coupons?page=${page}&limit=10`
+      );
+      const { coupons, ...data } = response.data.data;
+      setCoupons(coupons);
+      setPageData(data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteCoupon = async (id, name, index) => {
+    swal({
+      title: "Are you sure?",
+      text: `Delete "${name}"`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        try {
+          const response = await axios.delete(
+            process.env.NEXT_PUBLIC_BACKEND_BASE_URL + `/admin/coupons/${id}`
+          );
+          const newCoupons = [...coupons];
+          newCoupons.splice(index, 1);
+          setCoupons(newCoupons);
+          toast.success("Coupon Deleted");
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong");
+        }
+      }
+    });
+  };
 
   return (
     <section className=" bg-gray-100 min-h-screen">
@@ -26,9 +81,14 @@ const Coupons = () => {
         </div>
 
         {/* coupons table  */}
-        <CouponsTable />
+        <CouponsTable
+          coupons={coupons}
+          deleteCoupon={deleteCoupon}
+          pageData={pageData}
+          page={page}
+          setPage={setPage}
+        />
       </div>
-
       <AddNewCoupons newCoupon={newCoupon} setNewCoupon={setNewCoupon} />
     </section>
   );
