@@ -7,7 +7,13 @@ import { useSelector } from "react-redux";
 
 function CartDrawer({ openDrawer, setOpenDrawer }) {
   const { cart } = useSelector((state) => state.cart);
-  console.log(cart);
+
+  // Calculate the total price
+  const totalPrice = cart.reduce(
+    (acc, item) => acc + item.price * item.userQuantity,
+    0
+  );
+
   return (
     <>
       <Drawer
@@ -43,7 +49,7 @@ function CartDrawer({ openDrawer, setOpenDrawer }) {
           >
             <p className="px-1 py-2 text-white text-lg">Procide to cheakout</p>
             <p className="py-1 px-2 bg-white text-lg rounded-lg text-green-600 font-semibold">
-              $19:00
+              ${totalPrice.toFixed(2)}
             </p>
           </div>
         </div>

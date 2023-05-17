@@ -7,6 +7,12 @@ function FlotingCart() {
   const { cart } = useSelector((state) => state.cart);
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  // Calculate Total Price
+  const totalPrice = cart.reduce(
+    (acc, item) => acc + item.price * item.userQuantity,
+    0
+  );
+
   return (
     <div className="h-24 w-[75px] hidden lg:block bg-gray-200 rounded-md">
       <div onClick={() => setOpenDrawer(!openDrawer)}>
@@ -15,7 +21,7 @@ function FlotingCart() {
           <p className="text-sm text-center pt-2 ">{cart.length} items</p>
         </div>
         <div className="bg-green-700 py-2 rounded-b-md">
-          <p className="text-center text-white">$00.00</p>
+          <p className="text-center text-white">${totalPrice.toFixed(2)}</p>
         </div>
       </div>
       <div className="w-full">
