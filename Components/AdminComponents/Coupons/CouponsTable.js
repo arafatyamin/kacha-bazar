@@ -1,19 +1,73 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import UpdateCoupon from "./UpdateCoupon";
 import Pagination from "../Pagination";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import swal from "sweetalert";
+import { toast } from "react-hot-toast";
 
-const CouponsTable = ({
-  loading,
-  coupons,
-  deleteCoupon,
-  page,
-  setPage,
-  pageData,
-}) => {
+const CouponsTable = () => {
   const [update, setUpdate] = useState(false);
-  const [couponToUpdate, setCTU] = useState({});
+  const [couponToUpdate, setCTU] = useState(null);
+  const [page, setPage] = useState(1);
+  const [pageData, setPageData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const coupons = useSelector((state) => state.admin.coupons);
+
+  useEffect(() => {
+    getCoupons();
+  }, [page]);
+
+  const getCoupons = async () => {
+    try {
+      setLoading(true);
+
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+          `/admin/coupons?page=${page}&limit=10`
+      );
+      const { coupons, ...data } = response.data.data;
+      dispatch({
+        type: "ADD_COUPONS",
+        coupons: coupons,
+      });
+      setPageData(data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteCoupon = async (id, name, index) => {
+    swal({
+      title: "Are you sure?",
+      text: `Delete "${name}"`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        try {
+          const response = await axios.delete(
+            process.env.NEXT_PUBLIC_BACKEND_BASE_URL + `/admin/coupons/${id}`
+          );
+          dispatch({
+            type: "REMOVE_COUPON",
+            index,
+          });
+
+          toast.success("Coupon Deleted");
+        } catch (err) {
+          console.log(err);
+          toast.error("Something went wrong");
+        }
+      }
+    });
+  };
 
   return (
     <div className="container pb-8 mx-auto rounded-md  bg-gray-100">
@@ -83,7 +137,10 @@ const CouponsTable = ({
                     <div className="flex justify-center items-center">
                       <button
                         className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300"
-                        onClick={() => setCTU(coupon?.id, i)}
+                        onClick={() => {
+                          setCTU(() => coupon);
+                          setUpdate(true);
+                        }}
                       >
                         <FaRegEdit />
                       </button>
@@ -105,7 +162,7 @@ const CouponsTable = ({
         )}
         <Pagination pageData={pageData} page={page} setPage={setPage} />
       </div>
-      <UpdateCoupon update={update} setUpdate={setUpdate} />
+      {update && <UpdateCoupon coupon={couponToUpdate} setUpdate={setUpdate} />}
     </div>
   );
 };
