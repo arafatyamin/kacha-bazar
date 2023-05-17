@@ -5,7 +5,7 @@ import axios from "axios";
 import FormInput from "../FormInput";
 import { toast } from "react-hot-toast";
 
-const AddNewCoupons = ({ newCoupon, setNewCoupon, addCoupon }) => {
+const AddNewCoupons = ({ newCoupon, setNewCoupon }) => {
   const [categories, setCategories] = useState([]);
   const [preview, setPreview] = useState("");
   const [creating, setCreating] = useState(false);
@@ -50,7 +50,10 @@ const AddNewCoupons = ({ newCoupon, setNewCoupon, addCoupon }) => {
           withCredentials: true,
         }
       );
-      addCoupon(response.data.data);
+      dispatch({
+        type: "ADD_COUPON",
+        coupon: response?.data?.data,
+      });
       toast.success("Coupon created successfully");
     } catch (err) {
       console.log(err);
