@@ -41,7 +41,9 @@ const OrderSummary = ({ items }) => {
       <div>
         <div className="relative">
           <div
-            className={`${items.length>0?"h-96":"h-32"} bg-gray-50 rounded-md overflow-auto space-y-1 relative`}
+            className={`${
+              items.length > 0 ? "h-96" : "h-32"
+            } bg-gray-50 rounded-md overflow-auto space-y-1 relative`}
             id="cart"
           >
             {items.length > 0 ? (
@@ -74,9 +76,9 @@ const OrderSummary = ({ items }) => {
         <div className="mt-5 border-b">
           <ul>
             <li className="flex justify-between items-center my-2">
-              Subtotal <span>items: {orderTotal.totalItems  || 0}</span>
+              Subtotal
               <span>
-                <b>${orderTotal.subtotal || 0.00}</b>
+                <b>${orderTotal.subtotal || 0.0}</b>
               </span>
             </li>
             <li className="flex justify-between items-center my-2">
@@ -88,7 +90,7 @@ const OrderSummary = ({ items }) => {
             <li className="flex justify-between items-center my-2">
               Discount{" "}
               <span className="text-orange-500">
-                <b>${orderTotal.discount||0.00}</b>
+                <b>${orderTotal.discount || 0.0}</b>
               </span>
             </li>
           </ul>

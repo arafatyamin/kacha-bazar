@@ -49,7 +49,6 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const DECREASE_FROM_CART = "DECREASE_FROM_CART";
 
-
 // get product
 export const fetchCouponsStart = "coupon/fetch-start";
 export const fetchCouponError = "coupon/fetch-error";
@@ -64,3 +63,6 @@ export const postCouponSuccess = "coupon/fetch-fullfill";
 export const deleteCouponPending = "delete-coupon/pending";
 export const deleteCouponReject = "delete-coupon/reject";
 export const deleteCouponFulfill = "delete-coupon/fullfill";
+
+// Checkout or order
+export const ORDER_CONFIRM = "ORDER_CONFIRM";
