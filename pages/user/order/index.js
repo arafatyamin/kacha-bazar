@@ -3,6 +3,7 @@ import React from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import handleRedirect from "@/auth/handleRedirect";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 const OrderPage = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -75,12 +76,12 @@ const OrderPage = () => {
                         {price * userQuantity}
                       </td>
                       <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                        <a
-                          href="#!"
+                        <Link
+                          href={`/user/order/${id}`}
                           className="px-3 py-1 bg-emerald-100 text-xs text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all font-semibold rounded-full"
                         >
                           Details
-                        </a>
+                        </Link>
                       </td>
                     </tr>
                   );
