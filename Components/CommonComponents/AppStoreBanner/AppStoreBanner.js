@@ -20,7 +20,7 @@ const AppStoreBanner = () => {
             necessary product from our KachaBazar shop and get some special
             offer.
           </p>
-          <div className="mt-8 gap-4 flex flex-col md:flex-row items-center">
+          <div className="mt-8 gap-4 flex flex-col md:flex-row items-center justify-center">
             <a href="">
               <span>
                 <img
