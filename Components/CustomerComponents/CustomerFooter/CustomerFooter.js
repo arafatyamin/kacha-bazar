@@ -7,6 +7,7 @@ import {
   BsWhatsapp,
 } from "react-icons/bs";
 import ScrollToTop from "./ScrollToTop";
+import FlotingCart from "../FlotingCart/FlotingCart";
 
 const CustomerFooter = () => {
   return (
@@ -280,6 +281,11 @@ const CustomerFooter = () => {
           {/* ======================Scroll to top card component start ====================== */}
           <ScrollToTop />
           {/* ======================Scroll to top card component start ====================== */}
+          {/* ======================Floating cart card component start ====================== */}
+          <div className="fixed top-80 right-0 hidden md:block">
+            <FlotingCart />
+          </div>
+          {/* ======================Floating cart card component end ====================== */}
 
           <div className="mx-auto mx-w-screen-2xl px-3 sm:px-10 flex justify-center py-4">
             <p className="text-sm text-gray-500 leading-6">

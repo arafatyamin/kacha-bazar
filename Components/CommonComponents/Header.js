@@ -9,10 +9,11 @@ import { IoIosArrowUp } from "react-icons/io";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import DropDown from "./DropDown";
 import SearchBar from "./SearchBar";
+import { useSelector } from "react-redux";
 
 const Header = ({ loggedIn }) => {
-
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const { cart } = useSelector((state) => state.cart);
 
   return (
     <header>
@@ -86,7 +87,10 @@ const Header = ({ loggedIn }) => {
               <SearchBar />
               <nav className="gap-10 text-white text-2xl hidden md:flex">
                 <BsBell className="hover:scale-110 duration-200 cursor-pointer" />
-                <Link href={"/checkout"}>
+                <Link href={"/checkout"} className="relative">
+                  <span className="absolute -top-2 -right-2.5 bg-red-600 w-5 h-5 text-center rounded-full text-sm z-10">
+                    {cart.length}
+                  </span>
                   <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
                 </Link>
                 {loggedIn && (
