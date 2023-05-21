@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const OrderPage = () => {
   const { cart } = useSelector((state) => state.cart);
-  console.log(cart);
+
   return (
     <div className="flex flex-col bg-white">
       <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
@@ -54,106 +54,37 @@ const OrderPage = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                <tr>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    5f46
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    April 11, 2023{" "}
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    COD
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    Pending
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    $65.00
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    <a
-                      href="#!"
-                      className="px-3 py-1 bg-emerald-100 text-xs text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all font-semibold rounded-full"
-                    >
-                      Details
-                    </a>
-                  </td>
-                </tr>
-                <tr className="">
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    1D04
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    April 11, 2023{" "}
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    COD
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium text-orange-500">
-                    Pending
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    $65.00
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    <a
-                      href="#!"
-                      className="px-3 py-1 bg-emerald-100 text-xs text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all font-semibold rounded-full"
-                    >
-                      Details
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    5444
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    April 11, 2023{" "}
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    COD
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    Delivered
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    $65.00
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    <a
-                      href="#!"
-                      className="px-3 py-1 bg-emerald-100 text-xs text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all font-semibold rounded-full"
-                    >
-                      Details
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    5F46
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    April 11, 2023{" "}
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    COD
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    Pending
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    $65.00
-                  </td>
-                  <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
-                    <a
-                      href="#!"
-                      className="px-3 py-1 bg-emerald-100 text-xs text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all font-semibold rounded-full"
-                    >
-                      Details
-                    </a>
-                  </td>
-                </tr>
+                {cart.map((item) => {
+                  const { id, status, orderTime, method, price, userQuantity } =
+                    item;
+                  return (
+                    <tr>
+                      <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
+                        {id}
+                      </td>
+                      <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
+                        {orderTime}
+                      </td>
+                      <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
+                        {method}
+                      </td>
+                      <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
+                        {status}
+                      </td>
+                      <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
+                        {price * userQuantity}
+                      </td>
+                      <td className="px-5 py-3 whitespace-nowrap text-sm font-medium">
+                        <a
+                          href="#!"
+                          className="px-3 py-1 bg-emerald-100 text-xs text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all font-semibold rounded-full"
+                        >
+                          Details
+                        </a>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

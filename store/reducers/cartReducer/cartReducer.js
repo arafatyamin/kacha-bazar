@@ -24,7 +24,16 @@ const cartReducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        cart: [...state.cart, { ...action.payload, userQuantity: 1 }],
+        cart: [
+          ...state.cart,
+          {
+            ...action.payload,
+            userQuantity: 1,
+            orderTime: new Date().toDateString(),
+            status: "pending",
+            method: "COD",
+          },
+        ],
       };
     case DECREASE_FROM_CART:
       if (selectedProduct !== -1) {
