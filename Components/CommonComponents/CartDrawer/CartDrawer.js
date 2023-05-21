@@ -1,6 +1,7 @@
 import CartItem from "@/Components/CustomerComponents/Cards/CartItem/CartItem";
 import { cartData } from "@/data/cartData";
 import { Drawer } from "antd";
+import Link from "next/link";
 
 import { BsBagCheck, BsCart4 } from "react-icons/bs";
 import { useSelector } from "react-redux";
@@ -43,15 +44,19 @@ function CartDrawer({ openDrawer, setOpenDrawer }) {
               cart.map((data) => <CartItem key={data.id} data={data} />)
             )}
           </div>
-          <div
-            div
-            className="flex items-center justify-between p-[10px] mt-3 bg-primary rounded-lg absolute right-0 left-0 bottom-0"
-          >
-            <p className="px-1 py-2 text-white text-lg">Procide to cheakout</p>
-            <p className="py-1 px-2 bg-white text-lg rounded-lg text-green-600 font-semibold">
-              ${totalPrice.toFixed(2)}
-            </p>
-          </div>
+          <Link href="/checkout">
+            <div
+              div
+              className="flex items-center justify-between p-[10px] mt-3 bg-primary rounded-lg absolute right-0 left-0 bottom-0 hover:bg-emerald-600 transition-colors"
+            >
+              <p className="px-1 py-2 text-white text-lg">
+                Procide to cheakout
+              </p>
+              <p className="py-1 px-2 bg-white text-lg rounded-lg text-green-600 font-semibold">
+                ${totalPrice.toFixed(2)}
+              </p>
+            </div>
+          </Link>
         </div>
       </Drawer>
     </>

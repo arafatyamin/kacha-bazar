@@ -1,19 +1,26 @@
 import OrderSummary from "@/Components/CustomerComponents/Cards/OrderSummary/OrderSummary";
 import CustomerLayout from "@/Layouts/CustomerLayout";
+import { orderConfirm } from "@/store/actions/orderAction";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const checkout = () => {
+  const cartItemsArray = useSelector((state) => state.cart.cart);
+  const order = useSelector((state) => state.order);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const mergeData = { ...data, cartItemsArray };
+    dispatch(orderConfirm(mergeData));
+  };
 
-  const cartItemsArray = useSelector((state) => state.cart.cart);
-  console.log(cartItemsArray)
+  console.log(order);
+
   return (
     <>
       <Head>
@@ -268,7 +275,7 @@ const checkout = () => {
                 </form>
               </div>
               <div className="p-2 order-first lg:order-none">
-                <OrderSummary items={cartItemsArray}/>
+                <OrderSummary items={cartItemsArray} />
               </div>
             </div>
           </div>
