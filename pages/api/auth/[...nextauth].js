@@ -69,6 +69,7 @@ export const authOptions = {
       session.user.id = token.id;
       session.user.email = token.email;
       session.user.type = token.type;
+      session.user.image = "";
       session.isLoggedIn = true;
       return session;
     },

@@ -2,8 +2,11 @@ import CustomerDashboardLayout from "@/Layouts/CustomerDashboardLayout";
 import React from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import handleRedirect from "@/auth/handleRedirect";
+import { useSelector } from "react-redux";
 
 const OrderPage = () => {
+  const { cart } = useSelector((state) => state.cart);
+  console.log(cart);
   return (
     <div className="flex flex-col bg-white">
       <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
