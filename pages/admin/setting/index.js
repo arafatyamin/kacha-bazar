@@ -92,10 +92,10 @@ const Setting = () => {
                   className="w-full focus:outline-none p-3 rounded-md border bg-gray-100"
                 />
               </div>
-              <p className="py-2">Your Role</p>
+              {/* <p className="py-2">Your Role</p>
               <div className="col-span-2 ">
                 <SelectInput items={staffRole} name={"Role"} />
-              </div>
+              </div> */}
 
               <div className="col-span-3 py-4 flex justify-end">
                 <button className="py-3 px-6 bg-[#0E9F6E] rounded-md text-white hover:bg-[#07895e] duration-300">

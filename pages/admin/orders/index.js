@@ -1,4 +1,4 @@
-import OrdersTable from "@/Components/AdminComponents/OrdersTable";
+import OrdersTable from "@/Components/AdminComponents/Orders/OrdersTable";
 import SearchInput from "@/Components/AdminComponents/SearchInput";
 import SelectInput from "@/Components/AdminComponents/SelectInput";
 import AdminLayout from "@/Layouts/AdminLayout";
@@ -55,7 +55,7 @@ const Order = () => {
         <h3 className="lg:py-4 text-xl font-semibold p-2 ">Orders</h3>
 
         {/* products search section  */}
-        <div className="my-3 grid grid-cols-1 lg:grid-cols-4 py-6 px-4 gap-6 rounded-md shadow-sm bg-white">
+        {/* <div className="my-3 grid grid-cols-1 lg:grid-cols-4 py-6 px-4 gap-6 rounded-md shadow-sm bg-white">
           <SearchInput placeholder={"search by phone"} />
 
           <div>{<SelectInput items={status} name={"Status"} />}</div>
@@ -65,7 +65,7 @@ const Order = () => {
               Download all Orders <AiOutlineCloudDownload className="ml-3" />
             </button>
           </div>
-        </div>
+        </div> */}
 
         {/* oorder table  */}
 
