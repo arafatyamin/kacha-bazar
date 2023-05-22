@@ -10,19 +10,22 @@ import TotalOrderCard from "@/Components/AdminComponents/TotalOrderCard ";
 import Charts from "@/Components/AdminComponents/Charts";
 import AdminTable from "@/Components/AdminComponents/AdminTable";
 import handleRedirect from "@/auth/handleRedirect";
+import getSales from "@/utils/getSales";
+import getOrdersCount from "@/utils/getOrdersCount";
+import getTopSellingProducts from "@/utils/getTopSellingProducts";
 
-const Dashbord = () => {
+const Dashbord = ({ sales, ordersCount, topSelling }) => {
   const orders = [
-    { time: "Today Order", price: "$197", color: "#0D969B", FiLayers },
+    { time: "Today Order", price: sales[0].sale, color: "#0D969B", FiLayers },
     {
       time: "This Month",
-      price: "$1145.00",
+      price: sales[1].sale,
       color: "#1887FA",
       FiLayers: FiShoppingCart,
     },
     {
       time: "Total Order",
-      price: "$44088.35",
+      price: sales[2].sale,
       color: "#059C62",
       FiLayers: ImCreditCard,
     },
@@ -54,7 +57,9 @@ const Dashbord = () => {
                 </div>
                 <div>
                   <div className="   ">Total Order</div>
-                  <div className=" font-semibold text-2xl">330</div>
+                  <div className=" font-semibold text-2xl">
+                    {ordersCount?.find((c) => c.status === "Total")?.count || 0}
+                  </div>
                 </div>
               </div>
               <div className="flex border border-solid items-center rounded-md rounded-5 max-w-60 h-auto bg-white py-4 ">
@@ -63,10 +68,10 @@ const Dashbord = () => {
                 </div>
                 <div>
                   <div className="   ">Order Pending</div>
-                  <div className=" text-orange-500 font-semibold ">
-                    (9895.90)
+                  <div className=" font-semibold text-2xl">
+                    {ordersCount?.find((c) => c.status === "Pending")?.count ||
+                      0}
                   </div>
-                  <div className=" font-semibold text-2xl">71</div>
                 </div>
               </div>
               <div className="flex border border-solid items-center rounded-md rounded-5 max-w-60 h-auto bg-white py-4 ">
@@ -75,7 +80,10 @@ const Dashbord = () => {
                 </div>
                 <div>
                   <div className="   ">Order Processing</div>
-                  <div className=" font-semibold text-2xl">41</div>
+                  <div className=" font-semibold text-2xl">
+                    {ordersCount?.find((c) => c.status === "Processing")
+                      ?.count || 0}
+                  </div>
                 </div>
               </div>
               <div className="flex border border-solid items-center rounded-md rounded-5 max-w-60 h-auto bg-white py-4 ">
@@ -84,18 +92,21 @@ const Dashbord = () => {
                 </div>
                 <div>
                   <div className="   ">Order Delivered</div>
-                  <div className=" font-semibold text-2xl">218</div>
+                  <div className=" font-semibold text-2xl">
+                    {ordersCount?.find((c) => c.status === "Delivered")
+                      ?.count || 0}
+                  </div>
                 </div>
               </div>
             </div>
 
             <div>
-              <Charts />
+              <Charts topSelling={topSelling} />
             </div>
 
-            <div className="my-10">
+            {/* <div className="my-10">
               <AdminTable></AdminTable>
-            </div>
+            </div> */}
           </div>
         </section>
       </main>
@@ -105,7 +116,14 @@ const Dashbord = () => {
 };
 
 export async function getServerSideProps(context) {
-  return await handleRedirect(context, "admin");
+  const sales = await getSales(context);
+  const ordersCount = await getOrdersCount(context);
+  const topSelling = await getTopSellingProducts(context);
+  return await handleRedirect(context, "admin", {
+    sales,
+    ordersCount,
+    topSelling,
+  });
 }
 
 Dashbord.getLayout = (page) => {
