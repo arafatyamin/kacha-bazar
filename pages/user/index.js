@@ -1,6 +1,6 @@
 import CustomerDashboardLayout from "@/Layouts/CustomerDashboardLayout";
 import OrderDisplay from "@/Components/AdminComponents/OrderDisplay";
-import OrdersTable from "@/Components/AdminComponents/OrdersTable";
+import OrdersTable from "@/Components/AdminComponents/Orders/OrdersTable";
 import { orderItems } from "@/data/data";
 import handleRedirect from "@/auth/handleRedirect";
 
