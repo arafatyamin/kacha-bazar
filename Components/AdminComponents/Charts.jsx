@@ -96,7 +96,14 @@ const DynamicPieChart = dynamic(
   }
 );
 
-export default function Charts() {
+export default function Charts({ topSelling }) {
+  const topSellingData = topSelling?.map((item) => {
+    return {
+      name: item?.product?.title,
+      value: item?.sales,
+    };
+  });
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
       <div className=" border bg-white rounded-lg py-6 ">
@@ -127,7 +134,7 @@ export default function Charts() {
         <ResponsiveContainer width="99%" height={400}>
           <DynamicPieChart>
             <Pie
-              data={data}
+              data={topSellingData}
               cx={200}
               cy={200}
               labelLine={false}
