@@ -3,9 +3,7 @@ import React from "react";
 const InvoiceHeader = () => {
   return (
     <div>
-      
-
-      <section className="flex justify-between mb-1 bg-gray-200 p-6 ">
+      <section className="lg:flex justify-between mb-1 bg-gray-200 p-6 rounded-lg ">
         <div>
           <h3 className="text-2xl font-bold">INVOICE</h3>
           <p>
@@ -19,46 +17,45 @@ const InvoiceHeader = () => {
 
       <hr className="divide-y divide-red-400"></hr>
 
-    <section className="bg-gray-200 flex justify-between p-6">
-        <div>
-            <h4 className="font-bold text-gray-600">DATE</h4>
-            <p className="text-gray-500">May 21, 2023</p>
+      <section className="bg-gray-200 lg:flex justify-between p-6">
+        <div className="mb-3">
+          <h4 className="font-bold text-gray-600">DATE</h4>
+          <p className="text-gray-500 text-sm">May 21, 2023</p>
         </div>
-        <div>
-            <h4 className="font-bold text-gray-600">INVOICE NO.</h4>
-            <p className="text-gray-500">#10067</p>
+        <div className="mb-3">
+          <h4 className="font-bold text-gray-600">INVOICE NO.</h4>
+          <p className="text-gray-500 text-sm">#10067</p>
         </div>
-        <div>
-            <h4 className="font-bold text-gray-600">INVOICE TO.</h4>
-            <p className="text-gray-500">eurttr trut</p>
-            <p className="text-gray-500">edinarweg@gmail.com rturturtu</p>
-            <p className="text-gray-500">rturturtu</p>
+        <div className="mb-3">
+          <h4 className="font-bold text-gray-600">INVOICE TO.</h4>
+          <p className="text-gray-500 text-sm">eurttr trut</p>
+          <p className="text-gray-500 text-sm">edinarweg@gmail.com rturturtu</p>
+          <p className="text-gray-500 text-sm">rturturtu</p>
         </div>
-        
-    </section>
+      </section>
 
-    <section className="mt-6">
+      <section className="mt-6">
         <table className="mx-auto">
-            <thead className="bg-gray-200">
-                <tr>
-                    <td className="uppercase">Sr.</td>
-                    <td>Product name</td>
-                    <td>Quantity</td>
-                    <td>Item price</td>
-                    <td>Amount</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Test product-Red</td>
-                    <td>1</td>
-                    <td>$12.00</td>
-                    <td>$12.00</td>
-                </tr>
-            </tbody>
+          <thead className="bg-gray-200">
+            <tr>
+              <td className="uppercase">Sr.</td>
+              <td>Product name</td>
+              <td>Quantity</td>
+              <td>Item price</td>
+              <td>Amount</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="text-gray-500 text-sm">1</td>
+              <td className="text-gray-500 text-sm">Test product-Red</td>
+              <td className="text-sm font-bold">1</td>
+              <td className="font-bold text-sm">$12.00</td>
+              <td className="text-red-500 text-sm font-bold">$12.00</td>
+            </tr>
+          </tbody>
         </table>
-    </section>
+      </section>
     </div>
   );
 };
