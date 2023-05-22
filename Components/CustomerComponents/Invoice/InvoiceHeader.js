@@ -5,7 +5,7 @@ const InvoiceHeader = () => {
     <div>
       
 
-      <section className="flex justify-between mb-20 bg-gray-200 p-6 ">
+      <section className="flex justify-between mb-1 bg-gray-200 p-6 ">
         <div>
           <h3 className="text-2xl font-bold">INVOICE</h3>
           <p>
@@ -35,6 +35,29 @@ const InvoiceHeader = () => {
             <p className="text-gray-500">rturturtu</p>
         </div>
         
+    </section>
+
+    <section className="mt-6">
+        <table className="mx-auto">
+            <thead className="bg-gray-200">
+                <tr>
+                    <td className="uppercase">Sr.</td>
+                    <td>Product name</td>
+                    <td>Quantity</td>
+                    <td>Item price</td>
+                    <td>Amount</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Test product-Red</td>
+                    <td>1</td>
+                    <td>$12.00</td>
+                    <td>$12.00</td>
+                </tr>
+            </tbody>
+        </table>
     </section>
     </div>
   );

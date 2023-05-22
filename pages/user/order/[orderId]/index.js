@@ -13,8 +13,8 @@ const OrderDetailsPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Order Page</title>
       </Head>
-      <main className="bg-gray-200">
-        <h1>Order Page: {orderId}</h1>
+      <main className="bg-gray-200 mt-10">
+        {/* <h1>Order Page: {orderId}</h1> */}
         <p className="bg-green-200 mb-8 p-4">
           Thank you{" "}
           <span className="text-green-500 font-bold ">eurtr trut,</span> Your
