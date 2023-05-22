@@ -13,11 +13,11 @@ const OrderDetailsPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Order Page</title>
       </Head>
-      <main className="bg-gray-200 mt-10">
+      <main className="bg-gray-100 mt-10 w-11/12 xl:w-9/12 mx-auto">
         {/* <h1>Order Page: {orderId}</h1> */}
-        <p className="bg-green-200 mb-8 p-4">
+        <p className="bg-green-200 mb-8 p-3 rounded-lg">
           Thank you{" "}
-          <span className="text-green-500 font-bold ">eurtr trut,</span> Your
+          <span className="text-green-600 font-bold ">eurtr trut,</span> Your
           order have been received !
         </p>
 
