@@ -8,12 +8,13 @@ import swal from "sweetalert";
 import UpdateCategory from "./UpdateCategory";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import Pagination from "../Pagination";
 
 const CategoryTable = () => {
   const [updatePP, showUpdate] = useState(false);
   const [CategoryToUpdate, setCTU] = useState({});
   const dispatch = useDispatch();
-  // const [categories, setCategories] = useState([]);
+  const [pageData, setPageData] = useState({});
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const categories = useSelector((state) => state.admin.categories);
@@ -27,11 +28,13 @@ const CategoryTable = () => {
       setLoading(true);
       const response = await axios.get(
         process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
-          `/categories?page=${page}&limit=10`
+          `/admin/categories?page=${page}&limit=10`
       );
+      const { categories, ...data } = response.data.data;
+      setPageData(data);
       dispatch({
         type: "ADD_CATEGORIES",
-        categories: response.data.data,
+        categories: categories,
       });
     } catch (err) {
       console.log(err);
@@ -175,48 +178,7 @@ const CategoryTable = () => {
             category={CategoryToUpdate}
           />
         )}
-        <div className="rounded-b-md text-xs bg-white shadow-md border border-t-none font-semibold text-gray-500 ">
-          <div className="p-4  flex  justify-between items-center col-span-4">
-            <p>SHOWING 46-60 OF 312</p>
-
-            <div className="flex items-center">
-              <button
-                disabled={!isPP}
-                className={`p-2 ${
-                  !isPP ? "" : "hover:bg-gray-200"
-                } duration-300 rounded-md mx-1`}
-                onClick={() => setPage((old) => old - 1)}
-              >
-                <AiOutlineLeft />
-              </button>
-
-              <button className="p-2 bg-[#07895e] text-white duration-300 rounded-md mx-1">
-                {page}
-              </button>
-              {/* <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
-                2
-              </button>
-              <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
-                3
-              </button>
-
-              <span>-</span>
-
-              <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
-                21
-              </button> */}
-              <button
-                disabled={!isNP}
-                className={`p-2 ${
-                  !isNP ? "" : "hover:bg-gray-200"
-                } duration-300 rounded-md mx-1`}
-                onClick={() => setPage((old) => old + 1)}
-              >
-                <AiOutlineRight />
-              </button>
-            </div>
-          </div>
-        </div>
+        <Pagination pageData={pageData} page={page} setPage={setPage} />
       </div>
     </div>
   );

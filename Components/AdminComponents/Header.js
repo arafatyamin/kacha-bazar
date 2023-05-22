@@ -5,11 +5,20 @@ import { AiOutlineLogout, AiFillSetting } from "react-icons/ai";
 import { GoThreeBars } from "react-icons/go";
 import Link from "next/link";
 import MobileDiviceMenu from "./MobileDiviceMenu";
-import SmallDeviceMenu from "./SmallDeviceMenu";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
   const [openProfileModal, setOpenProfileModal] = useState(false);
   const [openSideNav, setOpenSideNav] = useState(false);
+
+  const logOut = () => {
+    signOut({ redirect: false });
+    setTimeout(() => {
+      router.push("/admin/login");
+    }, 500);
+  };
 
   return (
     <nav className="shadow-md  w-full bg-white">
@@ -25,7 +34,7 @@ const Header = () => {
         </div>
         <div className="flex items-center  ">
           {/* button  */}
-          <div className="mr-5">
+          {/* <div className="mr-5">
             <button className="p-3 md:mx-2">
               <FaMoon />
             </button>
@@ -37,7 +46,7 @@ const Header = () => {
                 </p>
               </div>
             </button>
-          </div>
+          </div> */}
 
           <div className="relative">
             {/* avatar  */}
@@ -71,7 +80,10 @@ const Header = () => {
                     <span className="">Edit Profile</span>
                   </Link>
 
-                  <button className="w-full rounded-lg rounded-t-none flex font-sm p-3 duration-300 hover:bg-gray-200 items-center">
+                  <button
+                    className="w-full rounded-lg rounded-t-none flex font-sm p-3 duration-300 hover:bg-gray-200 items-center"
+                    onClick={logOut}
+                  >
                     <AiOutlineLogout className="mr-2" />
                     <span className="">Log Out</span>
                   </button>

@@ -9,10 +9,12 @@ import UpdateProduct from "./updateProduct";
 import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
+import Pagination from "../Pagination";
 
 const ProductsTable = ({ setProducts }) => {
   const [updateModal, setUpdateModal] = useState(false);
   const [selectProduct, setSelectProduct] = useState({});
+  const [pageData, setPageData] = useState({});
   const [isLoading, setLoading] = useState(true);
   const [isError, setError] = useState(false);
   const [page, setPage] = useState(1);
@@ -28,12 +30,13 @@ const ProductsTable = ({ setProducts }) => {
       setLoading(!isLoading);
       const response = await axios(
         process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
-          `/products?page=${page}&limit=10`
+          `/admin/products?page=${page}&limit=10`
       );
-      // console.log(response.data); // products
+      const { products, ...data } = response.data.data;
+      setPageData(data);
       dispatch({
         type: "ADD_PRODUCTS",
-        products: response.data.data,
+        products: products,
       });
       setLoading(!isLoading);
     } catch (err) {
@@ -181,42 +184,7 @@ const ProductsTable = ({ setProducts }) => {
               ))}
             </tbody>
           </table>
-          <div className="rounded-b-md text-xs bg-white shadow-md border border-t-none font-semibold text-gray-500 ">
-            <div className="p-4  flex  justify-between items-center col-span-4">
-              <p>SHOWING 46-60 OF 312</p>
-
-              <div className="flex items-center">
-                <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
-                  <AiOutlineLeft />
-                </button>
-
-                <button className="p-2 bg-[#07895e] text-white duration-300 rounded-md mx-1">
-                  1
-                </button>
-                <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
-                  2
-                </button>
-                <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
-                  3
-                </button>
-                <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
-                  4
-                </button>
-                <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
-                  5
-                </button>
-
-                <span>-</span>
-
-                <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
-                  21
-                </button>
-                <button className="p-2 hover:bg-gray-200 duration-300 rounded-md mx-1">
-                  <AiOutlineRight />
-                </button>
-              </div>
-            </div>
-          </div>
+          <Pagination pageData={pageData} page={page} setPage={setPage} />
         </div>
       )}
 

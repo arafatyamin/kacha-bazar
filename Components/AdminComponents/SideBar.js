@@ -9,7 +9,6 @@ import {
   AiOutlineLogout,
 } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
-import { BiUser } from "react-icons/bi";
 import { FiSettings } from "react-icons/fi";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
