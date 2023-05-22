@@ -6,36 +6,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
-import { BsFacebook, BsGoogle } from "react-icons/bs";
 import { CgKey } from "react-icons/cg";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import handleLPRedirect from "@/auth/handleLPRedirect";
+import { toast } from "react-hot-toast";
 
-const init = {
-  email: "",
-  password: "",
-  termsChecked: false,
-};
 const Login = () => {
   const router = useRouter();
-  const [formState, setFormState] = useState({ ...init });
+  const [data, setData] = useState({});
 
   const changeHandler = (e) => {
-    setFormState({
-      ...formState,
+    setData({
+      ...data,
       [e.target.name]: e.target.value,
     });
   };
   const logIn = async (e) => {
     e.preventDefault();
-    const response = await signIn("admin", {
-      email: "zahid@gmail.com",
-      password: "123",
-      redirect: false,
-    });
-    if (response.ok) {
-      router.push("/admin/dashbord");
+
+    if (Object.values(data).length !== 2) {
+      toast.error("credentials missing");
+      return;
+    }
+    try {
+      const response = await signIn("admin", {
+        ...data,
+        redirect: false,
+      });
+      if (response.ok) {
+        router.push("/admin/dashbord");
+      } else {
+        toast.error("Incorrect email or password");
+      }
+    } catch (err) {
+      toast.error("Incorrect email or password");
     }
   };
 
@@ -90,42 +95,22 @@ const Login = () => {
                   {/* ========Input Section Start ========  */}
                   <form onSubmit={logIn} className="space-y-2 ">
                     <Input
-                      name={"email"}
                       label={"Email"}
                       Icon={AiOutlineMail}
-                      value={formState.email}
-                      changeHandler={changeHandler}
+                      name="email"
+                      value={data?.email}
+                      onChange={changeHandler}
                       type={"email"}
                       className={"overflow-hidden"}
                     />
                     <Input
-                      name={"password"}
                       label={"Password"}
                       type={"password"}
                       Icon={CgKey}
-                      value={formState.password}
-                      changeHandler={changeHandler}
+                      name="password"
+                      value={data?.password}
+                      onChange={changeHandler}
                     />
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <Input
-                          type="checkbox"
-                          className="border-none"
-                          onChange={changeHandler}
-                          value={formState.termsChecked}
-                        />
-
-                        <p className="text-xs sm:text-sm text-gray-primary">
-                          Remember me
-                        </p>
-                      </div>
-                      <Link
-                        href={"#"}
-                        className="text-xs sm:text-sm text-gray-primary hover:text-primary"
-                      >
-                        Forgot Password?
-                      </Link>
-                    </div>
                     <div className="flex items-center gap-4">
                       <Button
                         text="Login Now"
