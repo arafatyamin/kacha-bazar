@@ -49,11 +49,11 @@ const SideBar = () => {
       icon: <AiOutlineGift />,
       link: "../admin/coupons",
     },
-    {
-      name: "our staff",
-      icon: <BiUser />,
-      link: "../admin/ourStaff",
-    },
+    // {
+    //   name: "our staff",
+    //   icon: <BiUser />,
+    //   link: "../admin/ourStaff",
+    // },
     {
       name: "setting",
       icon: <FiSettings />,
