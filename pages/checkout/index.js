@@ -4,6 +4,7 @@ import { orderConfirm } from "@/store/actions/orderAction";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import isLoggedIn from "@/auth/isLoggedIn";
 
 const checkout = () => {
   const cartItemsArray = useSelector((state) => state.cart.cart);
@@ -285,8 +286,15 @@ const checkout = () => {
   );
 };
 
+export async function getServerSideProps(context) {
+  const loggedIn = await isLoggedIn(context);
+
+  return { props: { loggedIn } };
+}
+
 checkout.getLayout = (page) => {
-  return <CustomerLayout>{page}</CustomerLayout>;
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
+  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
 };
 
 export default checkout;
