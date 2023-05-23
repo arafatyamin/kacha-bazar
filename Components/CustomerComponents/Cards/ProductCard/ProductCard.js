@@ -7,11 +7,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/store/actions/cartAction";
+import { toast } from "react-hot-toast";
 
-const ProductCard = ({ data }) => {
+const ProductCard = ({ data, loggedIn }) => {
   const { title, images, price, quantity, discount, id } = data;
   const dispatch = useDispatch();
-
+  const { loggedIn: isLoggedIn } = loggedIn;
   const offerPrice = (price * (100 - discount)) / 100;
 
   const [hoverState, setHoverState] = useState(false);
@@ -58,9 +59,16 @@ const ProductCard = ({ data }) => {
           ) : (
             <p className="font-bold text-lg"> ${price}</p>
           )}
+
           <Button
             onClick={() => {
-              handleAddToCart();
+              console.log(isLoggedIn);
+              if (!isLoggedIn) {
+                toast.error("Login first to add product in cart");
+                return;
+              } else {
+                handleAddToCart();
+              }
             }}
             Icon={MdShoppingBasket}
             className="p-1 border-[var(--clr-gray)] text-lg hover:bg-primary hover:text-white duration-200 hover:scale-105"

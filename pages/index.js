@@ -11,7 +11,7 @@ import getCategories from "@/utils/getCategories";
 import getProducts from "@/utils/getProducts";
 import isLoggedIn from "@/auth/isLoggedIn";
 
-const home = ({ categories, products }) => {
+const home = ({ categories, products, loggedIn }) => {
   return (
     <>
       <Head>
@@ -62,7 +62,11 @@ const home = ({ categories, products }) => {
                 {products &&
                   products?.length > 0 &&
                   products.map((product) => (
-                    <ProductCard key={product.id} data={product} />
+                    <ProductCard
+                      key={product.id}
+                      data={product}
+                      loggedIn={loggedIn}
+                    />
                   ))}
               </div>
             </div>
@@ -93,7 +97,11 @@ const home = ({ categories, products }) => {
                 {products &&
                   products?.length > 0 &&
                   products.map((product) => (
-                    <ProductCard key={product.id} data={product} />
+                    <ProductCard
+                      key={product.id}
+                      data={product}
+                      loggedIn={loggedIn}
+                    />
                   ))}
               </div>
             </div>

@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 const Header = ({ loggedIn }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const { cart } = useSelector((state) => state.cart);
-
+  const { loggedIn: isLoggedIn } = loggedIn;
   return (
     <header>
       {/* ======================top Header Part Start====================== */}
@@ -39,7 +39,7 @@ const Header = ({ loggedIn }) => {
               <li className="hover:text-primary duration-200">Contact Us</li>
             </Link>
 
-            {loggedIn ? (
+            {isLoggedIn ? (
               <>
                 <span>|</span>
                 <Link href={"/user"}>
@@ -93,7 +93,7 @@ const Header = ({ loggedIn }) => {
                   </span>
                   <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
                 </Link>
-                {loggedIn && (
+                {isLoggedIn && (
                   <Link href={"/user"}>
                     <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
                   </Link>
