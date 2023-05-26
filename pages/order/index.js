@@ -12,7 +12,7 @@ const order = () => {
     const {
         name,
         status,
-        invoiceNo,
+        orderId,
         orderDate,
         arrivalDate,
       products,
@@ -70,7 +70,7 @@ const order = () => {
           </div>
           <div>
             <p className="order-title">INVOICE NO.</p>
-            <p className=" order-subtitle">{invoiceNo || "#20671"}</p>
+            <p className=" order-subtitle">{orderId || "#20671"}</p>
           </div>
           <div className="md:max-w-xs md:text-right">
             <p className="order-title">INVOICE TO.</p>
