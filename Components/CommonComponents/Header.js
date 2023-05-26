@@ -1,19 +1,20 @@
 import { categoryItems } from "@/data/data";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdOutlinePersonOutline } from "react-icons/md";
-import { useSelector } from "react-redux";
 import DropDown from "./DropDown";
 import SearchBar from "./SearchBar";
+import { useSelector } from "react-redux";
 
 const Header = ({ loggedIn }) => {
-  
-
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const { cart } = useSelector((state) => state.cart);
+  const { loggedIn: isLoggedIn } = loggedIn;
   return (
     <header>
       {/* ======================top Header Part Start====================== */}
@@ -38,7 +39,7 @@ const Header = ({ loggedIn }) => {
               <li className="hover:text-primary duration-200">Contact Us</li>
             </Link>
 
-            {loggedIn ? (
+            {isLoggedIn ? (
               <>
                 <span>|</span>
                 <Link href={"/user"}>
@@ -69,18 +70,7 @@ const Header = ({ loggedIn }) => {
         </div>
       </div>
       {/* ======================Top Header Part End====================== */}
-      
-    </header>
-  );
-};
-
-export default Header;
-
-export function Navigation ({loggedIn}) {
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const { cart } = useSelector((state) => state.cart);
-  return (
-    <div className="sticky top-0 z-20">
+      <div>
         {/* //TODO: Need to add sticky behavior of Main Header */}
         {/* ======================Main header Part Start====================== */}
         <div className="bg-primary  text-lg">
@@ -103,7 +93,7 @@ export function Navigation ({loggedIn}) {
                   </span>
                   <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
                 </Link>
-                {loggedIn && (
+                {isLoggedIn && (
                   <Link href={"/user"}>
                     <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
                   </Link>
@@ -177,8 +167,11 @@ export function Navigation ({loggedIn}) {
           </div>
         </nav>
         <hr />
-        
-              {/* ======================Sub header Part End====================== */}
       </div>
-  )
-}
+
+      {/* ======================Sub header Part End====================== */}
+    </header>
+  );
+};
+
+export default Header;

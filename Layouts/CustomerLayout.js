@@ -1,4 +1,4 @@
-import Header, { Navigation } from "@/Components/CommonComponents/Header";
+import Header from "@/Components/CommonComponents/Header";
 import BottomNav from "@/Components/CustomerComponents/BottomNav";
 import CustomerFooter from "@/Components/CustomerComponents/CustomerFooter/CustomerFooter";
 import withAuth from "../auth/withAuth";
@@ -10,7 +10,6 @@ const CustomerLayout = ({ loggedIn, children }) => {
     <>
       <Provider store={store}>
         <Header loggedIn={loggedIn} />
-        <Navigation loggedIn={loggedIn} />
         <BottomNav />
         {children}
         <CustomerFooter />

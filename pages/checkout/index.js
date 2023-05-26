@@ -6,9 +6,6 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import isLoggedIn from "@/auth/isLoggedIn";
 import { useRouter } from "next/router";
-import { BsTruck } from "react-icons/bs";
-import {HiOutlineArrowUturnLeft} from 'react-icons/hi'
-import Button from "@/Components/CommonComponents/shared/Button";
 
 const checkout = () => {
   const cartItemsArray = useSelector((state) => state.cart.cart);
@@ -170,7 +167,7 @@ const checkout = () => {
                     </div>
                   </div>
 
-                  <div className="mb-8">
+                  {/* <div className="mb-8">
                     <h3 className="font-medium mb-3">03. Shipping Cost</h3>
                     <div className="flex gap-5">
                       <label htmlFor="fedex" className="flex-1 cursor-pointer">
@@ -270,15 +267,12 @@ const checkout = () => {
                         </div>
                       </label>
                     </div>
-                  </div>
+                  </div> */}
 
                   {errors.exampleRequired && (
                     <span>This field is required</span>
                   )}
-                  <Button
-                    text={"Continue Shopping"}
-                    Icon={HiOutlineArrowUturnLeft}
-                  />
+
                   <input
                     className="bg-green-600 px-5 py-2 text-white rounded cursor-pointer"
                     type="submit"
