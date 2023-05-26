@@ -14,27 +14,34 @@ const Login = () => {
   const router = useRouter();
   const { handleSubmit, control } = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email: "customer@gmail.com",
+      password: "123",
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log("clicked");
-  };
-
-  const logIn = async (e) => {
-    e.preventDefault();
+  const onSubmit = async(data) => {
     const response = await signIn("customer", {
-      email: "customer@gmail.com",
-      password: "123",
+      ...data,
       redirect: false,
     });
+    console.log(response)
     if (response.ok) {
+      
       router.push("/user");
     }
   };
+
+  // const logIn = async (e) => {
+  //   e.preventDefault();
+  //   const response = await signIn("customer", {
+  //     email: "customer@gmail.com",
+  //     password: "123",
+  //     redirect: false,
+  //   });
+  //   if (response.ok) {
+  //     router.push("/user");
+  //   }
+  // };
 
   return (
     <>
@@ -84,7 +91,7 @@ const Login = () => {
               </div>
 
               {/* ========Input Section Start ========  */}
-              <form onSubmit={logIn} className="space-y-4">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <Controller
                   name="email"
                   control={control}
@@ -146,7 +153,7 @@ const Login = () => {
                   <p>Login with Facebook</p>
                 </div>
               </div>
-              {/* ========OAuth Section Start ========  */}
+              {/* ========OAuth Section End ========  */}
             </div>
           </div>
         </div>
