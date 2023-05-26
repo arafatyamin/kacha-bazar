@@ -2,18 +2,34 @@ import Button from "@/Components/CommonComponents/shared/Button";
 import CustomerLayout from "@/Layouts/CustomerLayout";
 import Image from "next/image";
 import { AiOutlineCloudDownload, AiOutlinePrinter } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 const order = () => {
     let formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
     });
+    const {
+        name,
+        status,
+        invoiceNo,
+        orderDate,
+        arrivalDate,
+      products,
+      subTotal,
+      discount,
+      shippingCost,
+      total,
+      paymentMethod,
+      shippingAddress,
+    } = useSelector((state) => state.order);
+    
+    
   return (
     <div className="container">
       <div className="!bg-emerald-100 rounded-md mt-5 px-4 py-3">
         <label>
-          Thank you{" "}
-          <span className="font-bold text-emerald-600">Sifytul Karim,</span>{" "}
+          Thank you <span className="font-bold text-emerald-600">{name},</span>{" "}
           Your order have been received !
         </label>
       </div>
@@ -42,19 +58,23 @@ const order = () => {
         {/* top end  */}
         {/* bottom  start*/}
         <div className="md:flex md:justify-between md:items-center space-y-4 md:space-y-0 text-sm">
-          <div>
-            <p className="order-title">Date</p>
-            <p className=" order-subtitle">May 25, 2023</p>
+          <div className="flex justify-between md:block">
+            <div>
+              <p className="order-title">Order Date</p>
+              <p className=" order-subtitle">{orderDate || "May 25, 2023"}</p>
+            </div>
+            <div>
+              <p className="order-title">Probable Date of Arrival</p>
+              <p className=" order-subtitle">{arrivalDate || "May 28, 2023"}</p>
+            </div>
           </div>
           <div>
             <p className="order-title">INVOICE NO.</p>
-            <p className=" order-subtitle">#20671</p>
+            <p className=" order-subtitle">{invoiceNo || "#20671"}</p>
           </div>
           <div className="md:max-w-xs md:text-right">
             <p className="order-title">INVOICE TO.</p>
-            <p className="order-subtitle">
-              samet kaya kadıköy istanbul, kadıköy, 3400
-            </p>
+            <p className="order-subtitle">{shippingAddress}</p>
           </div>
         </div>
         {/* bottom end  */}
@@ -97,25 +117,26 @@ const order = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-100 text-serif text-sm">
-            {Array.from({ length: 3 }).map((items, index) => (
-              <tr key={index}>
-                <th className="px-6 py-1 whitespace-nowrap font-normal text-gray-500 text-left">
-                  {index + 1}
-                </th>
-                <td className="px-6 py-1 whitespace-nowrap font-normal text-gray-500">
-                  {items?.title || "aloe"}
-                </td>
-                <td className="px-6 py-1 whitespace-nowrap font-bold text-center">
-                  {items?.cartQuantity || 2}
-                </td>
-                <td className="px-6 py-1 whitespace-nowrap font-bold text-center font-DejaVu">
-                  {formatter.format(items?.price || 34)}
-                </td>
-                <td className="px-6 py-1 whitespace-nowrap text-right font-bold font-DejaVu k-grid text-red-500">
-                  {formatter.format(items?.price * items?.cartQuantity || 34)}
-                </td>
-              </tr>
-            ))}
+            {products.length > 0 &&
+              products.map((items, index) => (
+                <tr key={items.id}>
+                  <th className="px-6 py-1 whitespace-nowrap font-normal text-gray-500 text-left">
+                    {index +1}
+                  </th>
+                  <td className="px-6 py-1 whitespace-nowrap font-normal text-gray-500">
+                    {items?.title || "N/A"}
+                  </td>
+                  <td className="px-6 py-1 whitespace-nowrap font-bold text-center">
+                    {items?.quantity}
+                  </td>
+                  <td className="px-6 py-1 whitespace-nowrap font-bold text-center font-DejaVu">
+                    {formatter.format(items?.price)}
+                  </td>
+                  <td className="px-6 py-1 whitespace-nowrap text-right font-bold font-DejaVu k-grid text-red-500">
+                    {formatter.format(items?.price * items?.quantity)}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
@@ -125,20 +146,20 @@ const order = () => {
       <div className="bg-emerald-50 px-6 py-8 md:flex md:justify-between md:items-center space-y-4 md:space-y-0 text-sm my-8 rounded-md">
         <div>
           <p className="order-title">Payment method</p>
-          <p className="order-subtitle">COD</p>
+          <p className="order-subtitle">{paymentMethod}</p>
         </div>
         <div>
           <p className="order-title">Shipping cost</p>
-          <p className="order-subtitle">{formatter.format(60.0)}</p>
+          <p className="order-subtitle">{formatter.format(shippingCost)}</p>
         </div>
         <div>
           <p className="order-title">Discount</p>
-          <p className="order-subtitle">{formatter.format(0.0)}</p>
+          <p className="order-subtitle">{formatter.format(discount)}</p>
         </div>
         <div>
           <p className="order-title">Total Amount</p>
           <p className="order-subtitle text-red-500 opacity-100 text-2xl">
-            {formatter.format(26.0)}
+            {formatter.format(total)}
           </p>
         </div>
       </div>

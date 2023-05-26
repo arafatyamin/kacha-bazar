@@ -5,11 +5,14 @@ import Head from "next/head";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import isLoggedIn from "@/auth/isLoggedIn";
+import { useRouter } from "next/router";
 
 const checkout = () => {
   const cartItemsArray = useSelector((state) => state.cart.cart);
   const order = useSelector((state) => state.order);
+  const router = useRouter();
   const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -18,6 +21,7 @@ const checkout = () => {
   const onSubmit = (data) => {
     const mergeData = { ...data, cartItemsArray };
     dispatch(orderConfirm(mergeData));
+    router.push("/order")
   };
 
   console.log(order);
