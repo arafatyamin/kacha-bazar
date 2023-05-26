@@ -144,6 +144,12 @@ body {
   /* .tableActionsIcon {
   font-size: 1.5rem;
  } */
+ .order-title {
+  @apply font-bold uppercase tracking-wider text-black opacity-70 
+ }
+ .order-subtitle {
+  @apply text-black opacity-60 font-semibold
+ }
 }
 
 
