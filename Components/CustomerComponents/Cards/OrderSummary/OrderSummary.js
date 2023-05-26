@@ -36,7 +36,7 @@ const OrderSummary = ({ items }) => {
     document.querySelector("#cart").addEventListener("scroll", listenToScroll);
   }, []);
   return (
-    <div className="border rounded-md p-8 bg-white">
+    <div className="border rounded-md p-8 bg-white lg:sticky top-32">
       <h3 className="font-medium mb-3">Shopping Cart</h3>
       <div>
         <div className="relative">

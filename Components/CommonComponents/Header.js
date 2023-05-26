@@ -1,19 +1,18 @@
 import { categoryItems } from "@/data/data";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BiPhoneCall } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdOutlinePersonOutline } from "react-icons/md";
+import { useSelector } from "react-redux";
 import DropDown from "./DropDown";
 import SearchBar from "./SearchBar";
-import { useSelector } from "react-redux";
 
 const Header = ({ loggedIn }) => {
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const { cart } = useSelector((state) => state.cart);
+  
 
   return (
     <header>
@@ -70,7 +69,18 @@ const Header = ({ loggedIn }) => {
         </div>
       </div>
       {/* ======================Top Header Part End====================== */}
-      <div>
+      
+    </header>
+  );
+};
+
+export default Header;
+
+export function Navigation ({loggedIn}) {
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const { cart } = useSelector((state) => state.cart);
+  return (
+    <div className="sticky top-0 z-20">
         {/* //TODO: Need to add sticky behavior of Main Header */}
         {/* ======================Main header Part Start====================== */}
         <div className="bg-primary  text-lg">
@@ -167,11 +177,8 @@ const Header = ({ loggedIn }) => {
           </div>
         </nav>
         <hr />
+        
+              {/* ======================Sub header Part End====================== */}
       </div>
-
-      {/* ======================Sub header Part End====================== */}
-    </header>
-  );
-};
-
-export default Header;
+  )
+}
