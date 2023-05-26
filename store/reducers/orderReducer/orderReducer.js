@@ -14,7 +14,8 @@ const orderReducer = (state = initialState, action) => {
   const { payload } = action;
   const productsArray = payload?.cartItemsArray?.map((product) => ({
     id: product.id,
-    quanity: product.userQuantity,
+    title:product.title,
+    quantity: product.userQuantity,
     price: product.price,
   }));
   switch (action.type) {
