@@ -1,15 +1,13 @@
-import Counter from "@/Components/CommonComponents/Counter";
 import Button from "@/Components/CommonComponents/shared/Button";
 import Image from "next/image";
 import { useState } from "react";
 import { MdShoppingBasket } from "react-icons/md";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "@/store/actions/cartAction";
+import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
+import { addToCart, removeCart } from "@/utils/cartItems";
 
-const ProductCard = ({ data, loggedIn }) => {
+const ProductCard = ({ data, loggedIn, existsInCart }) => {
   const { title, images, price, quantity, discount, id } = data;
   const dispatch = useDispatch();
   const { loggedIn: isLoggedIn } = loggedIn;
@@ -20,9 +18,26 @@ const ProductCard = ({ data, loggedIn }) => {
     setHoverState(!hoverState);
   };
 
-  // Add to cart handler
-  const handleAddToCart = () => {
-    dispatch(addToCart(data));
+  const add_To_Cart = async () => {
+    await addToCart({
+      productId: id,
+      quantity: 1,
+    });
+
+    dispatch({
+      type: "ADD_TO_CART",
+      item: { product: data, quantity: 1 },
+    });
+  };
+
+  const removeItem = async () => {
+    await removeCart({
+      productId: id,
+    });
+    dispatch({
+      type: "REMOVE_CART",
+      id,
+    });
   };
 
   return (
@@ -67,15 +82,27 @@ const ProductCard = ({ data, loggedIn }) => {
                 toast.error("Login first to add product in cart");
                 return;
               } else {
-                handleAddToCart();
+                if (existsInCart) {
+                  removeItem();
+                } else {
+                  add_To_Cart();
+                }
               }
             }}
+            style={{
+              ...(existsInCart
+                ? {
+                    background: "#059669",
+                    color: "white",
+                    transform: "scale(1.05)",
+                  }
+                : {}),
+            }}
             Icon={MdShoppingBasket}
-            className="p-1 border-[var(--clr-gray)] text-lg hover:bg-primary hover:text-white duration-200 hover:scale-105"
-            title="Add To Cart"
+            className={`p-1 border-[var(--clr-gray)] text-lg   hover:bg-primary hover:text-white duration-200 hover:scale-105`}
+            title={!existsInCart ? "Add To Cart" : "Remove from cart"}
           />
         </div>
-        {/* <p>${price}</p> */}
       </div>
     </div>
   );

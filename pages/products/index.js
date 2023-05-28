@@ -11,8 +11,9 @@ import ProductCard from "@/Components/CustomerComponents/Cards/ProductCard/Produ
 import getProducts from "@/utils/getProducts";
 import { useState } from "react";
 import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
+import isLoggedIn from "@/auth/isLoggedIn";
 
-const ProductsPage = ({ products }) => {
+const ProductsPage = ({ products, loggedIn }) => {
   const [filterValue, setFilterValue] = useState("");
   const filterOptions = (e) => {
     let value = e.target.value;
@@ -133,7 +134,11 @@ const ProductsPage = ({ products }) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
               {products?.map((product) => (
-                <ProductCard key={product.id} data={product} />
+                <ProductCard
+                  key={product.id}
+                  data={product}
+                  loggedIn={loggedIn}
+                />
               ))}
             </div>
           </div>
@@ -144,14 +149,17 @@ const ProductsPage = ({ products }) => {
 };
 
 ProductsPage.getLayout = (page) => {
-  return <CustomerLayout>{page}</CustomerLayout>;
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
+  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const loggedIn = await isLoggedIn(context);
   const products = await getProducts();
   return {
     props: {
       products,
+      loggedIn,
     },
   };
 }
