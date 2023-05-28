@@ -1,15 +1,30 @@
 import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BsHandbagFill } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getCartItems } from "@/utils/cartItems";
 
 function FlotingCart() {
-  const { cart } = useSelector((state) => state.cart);
+  let { cart } = useSelector((state) => state.cart);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    addcartItems();
+  }, []);
+
+  const addcartItems = async () => {
+    const items = await getCartItems();
+    console.log("cart items ", items);
+
+    dispatch({
+      type: "LOAD_CART_ITEMS",
+      cartItems: items,
+    });
+  };
   // Calculate Total Price
   const totalPrice = cart.reduce(
-    (acc, item) => acc + item.price * item.userQuantity,
+    (acc, item) => acc + item.product.price * item.quantity,
     0
   );
 

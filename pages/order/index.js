@@ -1,30 +1,30 @@
 import Button from "@/Components/CommonComponents/shared/Button";
 import CustomerLayout from "@/Layouts/CustomerLayout";
+import isLoggedIn from "@/auth/isLoggedIn";
 import Image from "next/image";
 import { AiOutlineCloudDownload, AiOutlinePrinter } from "react-icons/ai";
 import { useSelector } from "react-redux";
 
 const order = () => {
-    let formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-    const {
-        name,
-        status,
-        invoiceNo,
-        orderDate,
-        arrivalDate,
-      products,
-      subTotal,
-      discount,
-      shippingCost,
-      total,
-      paymentMethod,
-      shippingAddress,
-    } = useSelector((state) => state.order);
-    
-    
+  let formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
+  const {
+    name,
+    status,
+    invoiceNo,
+    orderDate,
+    arrivalDate,
+    products,
+    subTotal,
+    discount,
+    shippingCost,
+    total,
+    paymentMethod,
+    shippingAddress,
+  } = useSelector((state) => state.order);
+
   return (
     <div className="container">
       <div className="!bg-emerald-100 rounded-md mt-5 px-4 py-3">
@@ -121,7 +121,7 @@ const order = () => {
               products.map((items, index) => (
                 <tr key={items.id}>
                   <th className="px-6 py-1 whitespace-nowrap font-normal text-gray-500 text-left">
-                    {index +1}
+                    {index + 1}
                   </th>
                   <td className="px-6 py-1 whitespace-nowrap font-normal text-gray-500">
                     {items?.title || "N/A"}
@@ -184,8 +184,15 @@ const order = () => {
   );
 };
 
+export async function getServerSideProps(context) {
+  const loggedIn = await isLoggedIn(context);
+
+  return { props: { loggedIn } };
+}
+
 export default order;
 
-order.getLayout =(page) => {
-    return <CustomerLayout>{page}</CustomerLayout>
-}
+order.getLayout = (page) => {
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
+  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
+};

@@ -1,5 +1,4 @@
 import CartItem from "@/Components/CustomerComponents/Cards/CartItem/CartItem";
-import { cartData } from "@/data/cartData";
 import { Drawer } from "antd";
 import Link from "next/link";
 
@@ -8,10 +7,10 @@ import { useSelector } from "react-redux";
 
 function CartDrawer({ openDrawer, setOpenDrawer }) {
   const { cart } = useSelector((state) => state.cart);
-
+ 
   // Calculate the total price
   const totalPrice = cart.reduce(
-    (acc, item) => acc + item.price * item.userQuantity,
+    (acc, item) => acc + item?.product?.price * item.quantity,
     0
   );
 
@@ -41,7 +40,7 @@ function CartDrawer({ openDrawer, setOpenDrawer }) {
                 </div>
               </div>
             ) : (
-              cart.map((data) => <CartItem key={data.id} data={data} />)
+              cart.map((data,i) => <CartItem key={data.id} index={i} data={data} />)
             )}
           </div>
           <Link href="/checkout">

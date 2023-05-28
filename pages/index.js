@@ -5,13 +5,13 @@ import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/Mobil
 import ProductCard from "@/Components/CustomerComponents/Cards/ProductCard/ProductCard";
 import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSection";
 import CustomerLayout from "@/Layouts/CustomerLayout";
-import { offeredProductItems, productItems } from "@/data/productData";
-import getCustomer from "@/utils/getCustomer";
 import getCategories from "@/utils/getCategories";
 import getProducts from "@/utils/getProducts";
 import isLoggedIn from "@/auth/isLoggedIn";
+import { useSelector } from "react-redux";
 
 const home = ({ categories, products, loggedIn }) => {
+  const { cart } = useSelector((state) => state.cart);
   return (
     <>
       <Head>
@@ -66,6 +66,9 @@ const home = ({ categories, products, loggedIn }) => {
                       key={product.id}
                       data={product}
                       loggedIn={loggedIn}
+                      existsInCart={cart?.some(
+                        (item) => item?.product?.id === product.id
+                      )}
                     />
                   ))}
               </div>
@@ -101,6 +104,9 @@ const home = ({ categories, products, loggedIn }) => {
                       key={product.id}
                       data={product}
                       loggedIn={loggedIn}
+                      existsInCart={cart?.some(
+                        (item) => item?.product?.id === product.id
+                      )}
                     />
                   ))}
               </div>

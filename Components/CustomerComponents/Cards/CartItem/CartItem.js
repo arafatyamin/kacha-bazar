@@ -1,32 +1,57 @@
 import Counter from "@/Components/CommonComponents/Counter";
-import {
-  addToCart,
-  decreaseFromCart,
-  removeFromCart,
-} from "@/store/actions/cartAction";
+import { updateCart, removeCart } from "@/utils/cartItems";
 import Image from "next/image";
 import { BiTrash } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 
-const CartItem = ({ data }) => {
+const CartItem = ({ data, index }) => {
   const dispatch = useDispatch();
-  const {
-    id,
-    title,
-    images,
-    originalPrice,
-    price,
-    discount,
-    count = 0,
-    userQuantity,
-  } = data;
+  const { id, title, images, originalPrice, price } = data?.product;
+
+  const increaseItemQuantity = async () => {
+    await updateCart({
+      productId: id,
+      quantity: data?.quantity + 1,
+    });
+    dispatch({
+      type: "UPDATE_CART",
+      quantity: data?.quantity + 1,
+      index,
+    });
+  };
+  const decreaseItemQuantity = async () => {
+    try {
+      await updateCart({
+        productId: id,
+        quantity: data?.quantity - 1,
+      });
+      dispatch({
+        type: "UPDATE_CART",
+        quantity: data?.quantity - 1,
+        index,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeItem = async () => {
+    await removeCart({
+      productId: id,
+    });
+    dispatch({
+      type: "REMOVE_CART",
+      index,
+    });
+  };
+
   return (
     <div
       key={id}
       className="flex items-center py-3 px-4 shadow-sm rounded-md border-2 border-gray-100"
     >
       <span className=" bg-[#10b981] text-white w-6 h-6 flex items-center justify-center rounded-full">
-        {userQuantity}
+        {data?.quantity}
       </span>
       <div className="sm:w-1/4 w-1/3">
         <Image
@@ -48,18 +73,18 @@ const CartItem = ({ data }) => {
             </span>
           </p>
           <p className="sm:text-lg font-bold text-gray-700 mt-1">
-            Total = ${price * userQuantity}
+            Total = ${price * data?.quantity}
           </p>
         </div>
         <div className="flex gap-2 items-center" style={{ marginTop: 0 }}>
           <Counter
-            value={userQuantity}
-            increaseHandler={() => dispatch(addToCart(data))}
-            decreaseHandler={() => dispatch(decreaseFromCart(data))}
+            value={data?.quantity}
+            increaseHandler={increaseItemQuantity}
+            decreaseHandler={decreaseItemQuantity}
           />
           <BiTrash
             className="text-red-500 text-xl cursor-pointer"
-            onClick={() => dispatch(removeFromCart(data))}
+            onClick={removeItem}
           />
         </div>
       </div>
