@@ -2,6 +2,7 @@ import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/Mobil
 import CustomerLayout from "@/Layouts/CustomerLayout";
 
 import OfferCard from "../../Components/CustomerComponents/OfferPage/OfferCard";
+import handleStatus from "@/auth/handleStatus";
 
 const offerPage = () => {
   return (
@@ -69,7 +70,12 @@ const offerPage = () => {
     </div>
   );
 };
+export async function getServerSideProps(context) {
+  return await handleStatus(context);
+}
+
 offerPage.getLayout = (page) => {
-  return <CustomerLayout>{page}</CustomerLayout>;
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
+  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
 };
 export default offerPage;

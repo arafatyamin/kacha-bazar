@@ -1,4 +1,5 @@
 import CustomerLayout from "@/Layouts/CustomerLayout";
+import handleStatus from "@/auth/handleStatus";
 import Head from "next/head";
 import { FiPhoneCall } from "react-icons/fi";
 import { GoLocation } from "react-icons/go";
@@ -150,8 +151,13 @@ const ContactUsPage = () => {
   );
 };
 
+export async function getServerSideProps(context) {
+  return await handleStatus(context);
+}
+
 ContactUsPage.getLayout = (page) => {
-  return <CustomerLayout>{page}</CustomerLayout>;
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
+  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
 };
 
 export default ContactUsPage;
