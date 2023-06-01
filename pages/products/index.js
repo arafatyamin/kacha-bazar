@@ -12,8 +12,11 @@ import getProducts from "@/utils/getProducts";
 import { useState } from "react";
 import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
 import isLoggedIn from "@/auth/isLoggedIn";
+import { useSelector } from "react-redux";
 
 const ProductsPage = ({ products, loggedIn }) => {
+  const { cart } = useSelector((state) => state.cart);
+
   const [filterValue, setFilterValue] = useState("");
   const filterOptions = (e) => {
     let value = e.target.value;
@@ -138,6 +141,9 @@ const ProductsPage = ({ products, loggedIn }) => {
                   key={product.id}
                   data={product}
                   loggedIn={loggedIn}
+                  existsInCart={cart?.some(
+                    (item) => item?.product?.id === product.id
+                  )}
                 />
               ))}
             </div>
@@ -154,7 +160,7 @@ ProductsPage.getLayout = (page) => {
 };
 
 export async function getServerSideProps(context) {
-  const loggedIn = await isLoggedIn(context);
+  const { loggedIn } = await isLoggedIn(context);
   const products = await getProducts();
   return {
     props: {
