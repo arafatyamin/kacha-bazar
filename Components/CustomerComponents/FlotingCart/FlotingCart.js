@@ -5,17 +5,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCartItems } from "@/utils/cartItems";
 
 function FlotingCart() {
-  let { cart } = useSelector((state) => state.cart);
+  let {
+    cart: { cart },
+    user,
+  } = useSelector((state) => state);
+
   const [openDrawer, setOpenDrawer] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    addcartItems();
-  }, []);
+    if (user) {
+      addcartItems();
+    }
+  }, [user]);
 
   const addcartItems = async () => {
     const items = await getCartItems();
-    console.log("cart items ", items);
 
     dispatch({
       type: "LOAD_CART_ITEMS",

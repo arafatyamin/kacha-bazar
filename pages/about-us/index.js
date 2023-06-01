@@ -1,5 +1,6 @@
 import TeamCard from "@/Components/CustomerComponents/Cards/TeamCard/TeamCard";
 import CustomerLayout from "@/Layouts/CustomerLayout";
+import handleStatus from "@/auth/handleStatus";
 import { teamMembers } from "@/data/data";
 import Head from "next/head";
 
@@ -167,9 +168,13 @@ const AboutUs = () => {
   );
 };
 
+export async function getServerSideProps(context) {
+  return await handleStatus(context);
+}
+
 AboutUs.getLayout = (page) => {
-  console.log(page);
-  return <CustomerLayout>{page}</CustomerLayout>;
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
+  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
 };
 
 export default AboutUs;

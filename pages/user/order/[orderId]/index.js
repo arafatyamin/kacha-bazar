@@ -1,7 +1,9 @@
+import CustomerLayout from "@/Layouts/CustomerLayout";
 import InvoiceFooter from "@/Components/CustomerComponents/Invoice/InvoiceFooter";
 import InvoiceHeader from "@/Components/CustomerComponents/Invoice/InvoiceHeader";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import handleRedirect from "@/auth/handleRedirect";
 
 const OrderDetailsPage = () => {
   const { query } = useRouter();
@@ -28,6 +30,15 @@ const OrderDetailsPage = () => {
       </main>
     </>
   );
+};
+
+export async function getServerSideProps(context) {
+  return await handleRedirect(context, "customer");
+}
+
+OrderDetailsPage.getLayout = function (page) {
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
+  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
 };
 
 export default OrderDetailsPage;

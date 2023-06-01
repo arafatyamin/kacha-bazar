@@ -14,7 +14,6 @@ const cartReducer = (state = initialState, action) => {
   // );
   switch (action.type) {
     case "LOAD_CART_ITEMS":
-      console.log(action.cartItems);
       return {
         ...state,
         cart: [...action.cartItems],
@@ -53,6 +52,12 @@ const cartReducer = (state = initialState, action) => {
         cart: [...tempItems],
       };
     }
+
+    case "CLEAR_CART":
+      return {
+        ...state,
+        cart: [],
+      };
 
     // case ADD_TO_CART:
     //   if (selectedProduct !== -1) {

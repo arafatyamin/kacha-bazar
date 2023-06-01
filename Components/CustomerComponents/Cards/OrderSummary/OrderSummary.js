@@ -47,7 +47,9 @@ const OrderSummary = ({ items }) => {
             id="cart"
           >
             {items.length > 0 ? (
-              items?.map((item, index) => <CartItem key={index} data={item} />)
+              items?.map((item, index) => (
+                <CartItem key={index} data={item} index={index} />
+              ))
             ) : (
               <div className="flex flex-col justify-center h-full items-center text-gray-primary">
                 <HiShoppingBag className="text-5xl " />

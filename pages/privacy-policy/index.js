@@ -1,6 +1,7 @@
 import PageHeader from "@/Components/CommonComponents/PageHeader/PageHeader";
 import Head from "next/head";
 import CustomerLayout from "@/Layouts/CustomerLayout";
+import handleStatus from "@/auth/handleStatus";
 
 const PrivacyPolicy = () => {
   return (
@@ -244,9 +245,13 @@ const PrivacyPolicy = () => {
     </>
   );
 };
+export async function getServerSideProps(context) {
+  return await handleStatus(context);
+}
 
 PrivacyPolicy.getLayout = (page) => {
-  return <CustomerLayout>{page}</CustomerLayout>;
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
+  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
 };
 
 export default PrivacyPolicy;

@@ -10,11 +10,11 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 import DropDown from "./DropDown";
 import SearchBar from "./SearchBar";
 import { useSelector } from "react-redux";
+import { signOut } from "next-auth/react";
 
 const Header = ({ loggedIn }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const { cart } = useSelector((state) => state.cart);
-  const { loggedIn: isLoggedIn } = loggedIn;
   return (
     <header>
       {/* ======================top Header Part Start====================== */}
@@ -39,13 +39,17 @@ const Header = ({ loggedIn }) => {
               <li className="hover:text-primary duration-200">Contact Us</li>
             </Link>
 
-            {isLoggedIn ? (
+            {loggedIn ? (
               <>
                 <span>|</span>
                 <Link href={"/user"}>
                   <li className="hover:text-primary duration-200">
                     My account
                   </li>
+                </Link>
+                <span>|</span>
+                <Link href="#" onClick={signOut}>
+                  <li className="hover:text-primary duration-200">Logout</li>
                 </Link>
               </>
             ) : (
@@ -93,7 +97,7 @@ const Header = ({ loggedIn }) => {
                   </span>
                   <FiShoppingCart className="hover:scale-110 duration-200 cursor-pointer" />
                 </Link>
-                {isLoggedIn && (
+                {loggedIn && (
                   <Link href={"/user"}>
                     <MdOutlinePersonOutline className="hover:scale-110 duration-200 cursor-pointer" />
                   </Link>

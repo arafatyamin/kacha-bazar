@@ -1,7 +1,7 @@
 import isLoggedIn from "./isLoggedIn";
 
 const handleRedirect = async (context, role, props) => {
-  const { loggedIn, user } = await isLoggedIn(context);
+  const { loggedIn, user, token } = await isLoggedIn(context);
 
   if (!loggedIn) {
     return {
@@ -20,7 +20,7 @@ const handleRedirect = async (context, role, props) => {
           },
         };
       } else {
-        return { props: { ...props } };
+        return { props: { ...props, loggedIn, user, token } };
       }
     }
     if (role === "customer") {
@@ -32,7 +32,7 @@ const handleRedirect = async (context, role, props) => {
           },
         };
       } else {
-        return { props: { ...props, loggedIn } };
+        return { props: { ...props, loggedIn, user, token } };
       }
     }
   }

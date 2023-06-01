@@ -1,4 +1,5 @@
 import CustomerLayout from "@/Layouts/CustomerLayout";
+import handleStatus from "@/auth/handleStatus";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { Collapse, theme } from "antd";
 import Head from "next/head";
@@ -298,9 +299,13 @@ function faq() {
     </>
   );
 }
+export async function getServerSideProps(context) {
+  return await handleStatus(context);
+}
 
 faq.getLayout = (page) => {
-  return <CustomerLayout>{page}</CustomerLayout>;
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
+  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
 };
 
 export default faq;

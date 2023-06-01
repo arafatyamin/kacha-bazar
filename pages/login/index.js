@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Controller, useForm } from "react-hook-form";
 import { BsFacebook, BsGoogle } from "react-icons/bs";
 import { signIn } from "next-auth/react";
-import isLoggedIn from "@/auth/isLoggedIn";
 import { useRouter } from "next/router";
 import handleLPRedirect from "@/auth/handleLPRedirect";
 
@@ -19,29 +18,16 @@ const Login = () => {
     },
   });
 
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     const response = await signIn("customer", {
       ...data,
       redirect: false,
     });
-    console.log(response)
+
     if (response.ok) {
-      
       router.push("/user");
     }
   };
-
-  // const logIn = async (e) => {
-  //   e.preventDefault();
-  //   const response = await signIn("customer", {
-  //     email: "customer@gmail.com",
-  //     password: "123",
-  //     redirect: false,
-  //   });
-  //   if (response.ok) {
-  //     router.push("/user");
-  //   }
-  // };
 
   return (
     <>

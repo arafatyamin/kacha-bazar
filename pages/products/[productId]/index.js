@@ -27,15 +27,46 @@ import {
   MdKeyboardArrowRight,
 } from "react-icons/md";
 import getSingleProduct from "@/utils/getSingleProduct";
+import isLoggedIn from "@/auth/isLoggedIn";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, removeCart } from "@/utils/cartItems";
+import { toast } from "react-hot-toast";
 
-const SingleProduct = ({ res }) => {
+const SingleProduct = ({ res, loggedIn }) => {
   const [stock, setStock] = useState(true);
   const router = useRouter();
+  const dispatch = useDispatch();
   const { productId } = router.query;
+  const { cart } = useSelector((state) => state.cart);
   const [isDescCollapsed, setIsDescCollapsed] = useState(true);
   const [currentImage, setCurrentImage] = useState(imageUrl[0]);
   const { price, description, images, title, unit, quantity, category, tags } =
     res;
+
+  const existsInCart = cart?.some((item) => item?.product?.id === res.id);
+
+  const add_To_Cart = async () => {
+    await addToCart({
+      productId: res.id,
+      quantity: 1,
+    });
+
+    dispatch({
+      type: "ADD_TO_CART",
+      item: { product: res, quantity: 1 },
+    });
+  };
+
+  const removeItem = async () => {
+    await removeCart({
+      productId: res.id,
+    });
+    dispatch({
+      type: "REMOVE_CART",
+      id: res.id,
+    });
+  };
+
   return (
     <>
       <Head>
@@ -54,7 +85,6 @@ const SingleProduct = ({ res }) => {
           </ul>
         </div>
         <div className="custom-container bg-white xl:flex p-4 rounded-md my-8">
-          {/* <==== Image portion Start ====>  */}
           <div className="xl:w-1/3">
             <div className="w-fit mx-auto">
               <Image src={images[0]} height={400} width={400} alt={title} />
@@ -94,13 +124,10 @@ const SingleProduct = ({ res }) => {
               </Carousel>
             </div>
           </div>
-          {/* <==== Image portion end ====>  */}
-          {/* <==== Description portion Start  ====>  */}
+
           <div className="md:flex xl:w-2/3 ">
-            {/* product description start  */}
             <div className="p-2">
               <h2 className="mb-1 font-semibold">{title}</h2>
-              <p className="mb-1 text-gray-primary">Id: {productId}</p>
               {stock ? (
                 <div className="bg-primary-light w-fit text-sm px-2 py-1 rounded-full font-bold mb-6">
                   <span className="text-primary">Stock:</span>{" "}
@@ -136,8 +163,30 @@ const SingleProduct = ({ res }) => {
                 <p>Unit: {unit}</p>
               </div>
               <div className="flex gap-4">
-                <Counter value={"1"} />
-                <Button text="Add to Cart" className={"px-12 py-2"} />
+                <Button
+                  text={!existsInCart ? "Add to Cart" : "Added"}
+                  className={"px-12 py-2 "}
+                  style={{
+                    ...(existsInCart
+                      ? {
+                          background: "#059669 !important",
+                          color: "white !important",
+                        }
+                      : {}),
+                  }}
+                  onClick={() => {
+                    if (!loggedIn) {
+                      toast.error("Login first to add product in cart");
+                      return;
+                    } else {
+                      if (existsInCart) {
+                        removeItem();
+                      } else {
+                        add_To_Cart();
+                      }
+                    }
+                  }}
+                />
               </div>
               <div className="font-medium mt-4">
                 Category:{" "}
@@ -151,19 +200,14 @@ const SingleProduct = ({ res }) => {
                 ))}
               </div>
 
-              {/* social Network  */}
               <div className="my-6 space-y-4">
                 <div>
                   <p className="font-semibold">Share in your social network</p>
-                  <p className="text-gray-primary text-sm">
-                    For get lots of traffic from social network share this
-                    product
-                  </p>
                 </div>
                 <ul className="text-sm flex">
                   <li className="flex items-center mr-3 transition ease-in-out duration-500">
                     <a
-                      href="https://www.facebook.com/"
+                      href="#"
                       target="_blank"
                       aria-label="social-link-Facebook"
                       className="block text-center mx-auto text-[#3b5998] hover:bg-white"
@@ -173,7 +217,7 @@ const SingleProduct = ({ res }) => {
                   </li>
                   <li className="flex items-center mr-3 transition ease-in-out duration-500">
                     <a
-                      href="https://www.facebook.com/"
+                      href="#"
                       target="_blank"
                       aria-label="social-link-twitter"
                       className="block text-center mx-auto text-[#00aced] hover:bg-white"
@@ -183,7 +227,7 @@ const SingleProduct = ({ res }) => {
                   </li>
                   <li className="flex items-center mr-3 transition ease-in-out duration-500">
                     <a
-                      href="https://www.facebook.com/"
+                      href="#"
                       target="_blank"
                       aria-label="social-link-pinterest"
                       className="block text-center mx-auto text-[#cb2128] hover:bg-white"
@@ -193,7 +237,7 @@ const SingleProduct = ({ res }) => {
                   </li>
                   <li className="flex items-center mr-3 transition ease-in-out duration-500">
                     <a
-                      href="https://www.facebook.com/"
+                      href="#"
                       target="_blank"
                       aria-label="social-link-Linkedin"
                       className="block text-center mx-auto text-[#007fb1] hover:bg-white"
@@ -203,7 +247,7 @@ const SingleProduct = ({ res }) => {
                   </li>
                   <li className="flex items-center mr-3 transition ease-in-out duration-500">
                     <a
-                      href="https://www.facebook.com/"
+                      href="#"
                       target="_blank"
                       aria-label="social-link-whatsapp"
                       className="block text-center mx-auto text-[#25d366] hover:bg-white"
@@ -214,9 +258,7 @@ const SingleProduct = ({ res }) => {
                 </ul>
               </div>
             </div>
-            {/* product description end */}
 
-            {/* terms section  start */}
             <div className="p-4 text-gray-primary text-sm bg-gray-50 rounded-md h-fit">
               <ul>
                 <li className="py-2 flex gap-2 items-center">
@@ -266,9 +308,7 @@ const SingleProduct = ({ res }) => {
                 </li>
               </ul>
             </div>
-            {/* terms section  end */}
           </div>
-          {/* <==== Description portion end ====>  */}
         </div>
       </section>
     </>
@@ -276,13 +316,15 @@ const SingleProduct = ({ res }) => {
 };
 
 SingleProduct.getLayout = (page) => {
-  return <CustomerLayout>{page}</CustomerLayout>;
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
+  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
 };
 
 export async function getServerSideProps(context) {
   const { params } = context;
   const id = params.productId;
   const res = await getSingleProduct(id);
+  const { loggedIn } = await isLoggedIn(context);
   if (!res) {
     return {
       redirect: {
@@ -294,6 +336,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       res,
+      loggedIn,
     },
   };
 }

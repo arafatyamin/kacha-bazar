@@ -10,7 +10,7 @@ import { addToCart, removeCart } from "@/utils/cartItems";
 const ProductCard = ({ data, loggedIn, existsInCart }) => {
   const { title, images, price, quantity, discount, id } = data;
   const dispatch = useDispatch();
-  const { loggedIn: isLoggedIn } = loggedIn;
+  // const { loggedIn: isLoggedIn } = loggedIn;
   const offerPrice = (price * (100 - discount)) / 100;
 
   const [hoverState, setHoverState] = useState(false);
@@ -77,8 +77,7 @@ const ProductCard = ({ data, loggedIn, existsInCart }) => {
 
           <Button
             onClick={() => {
-              console.log(isLoggedIn);
-              if (!isLoggedIn) {
+              if (!loggedIn) {
                 toast.error("Login first to add product in cart");
                 return;
               } else {
