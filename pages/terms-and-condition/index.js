@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import CustomerLayout from "@/Layouts/CustomerLayout";
 import PageHeader from "@/Components/CommonComponents/PageHeader/PageHeader";
+import handleStatus from "@/auth/handleStatus";
 
 const TermsAndCondition = () => {
   return (
@@ -122,7 +123,7 @@ const TermsAndCondition = () => {
                 <p className="mb-3">
                   We shall not be hold responsible for any content that appears
                   on your Website. You agree to protect and defend us against
-                  all claims that is rising on your Website. No link(s) should
+                  all claims that is rising on your Website. No link's should
                   appear on any Website that may be interpreted as libelous,
                   obscene or criminal, or which infringes, otherwise violates,
                   or advocates the infringement or other violation of, any third
@@ -134,15 +135,13 @@ const TermsAndCondition = () => {
               <div className="mt-3">
                 <h2 className="mb-2 text-2xl font-medium">Your Privacy</h2>
                 <p>
-                  <p>
-                    Please read{" "}
-                    <Link
-                      href="/privacy-policy"
-                      className="text-primary hover:underline"
-                    >
-                      Privacy Policy
-                    </Link>
-                  </p>
+                  Please read
+                  <Link
+                    href="/privacy-policy"
+                    className="text-primary hover:underline"
+                  >
+                    Privacy Policy
+                  </Link>
                 </p>
               </div>
               <div className="mt-3">
@@ -218,9 +217,12 @@ const TermsAndCondition = () => {
     </>
   );
 };
-
+export async function getServerSideProps(context) {
+  return handleStatus(context);
+}
 TermsAndCondition.getLayout = (page) => {
-  return <CustomerLayout>{page}</CustomerLayout>;
+  const loggedIn = page.props.children.props.children[1].props.loggedIn;
+  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
 };
 
 export default TermsAndCondition;
