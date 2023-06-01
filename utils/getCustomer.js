@@ -1,16 +1,13 @@
 import axios from "axios";
 
-const getCustomer = async (context) => {
-  const { req } = context;
-  const cookies = req.headers.cookie;
-
+const getCustomer = async (token) => {
   try {
+    console.log(store.getState()?.user?.token, token);
     const response = await axios.get(
       process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/customer/details",
       {
-        withCredentials: true,
         headers: {
-          Cookie: cookies,
+          authToken: token,
         },
       }
     );
