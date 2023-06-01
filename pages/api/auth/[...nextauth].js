@@ -18,6 +18,7 @@ export const authOptions = {
             }
           );
           // console.log("customer => ", response.data.user);
+          console.log(response.data.user);
           return { ...response.data.user };
         } catch (err) {
           return null;
@@ -59,6 +60,7 @@ export const authOptions = {
           id: user?.id,
           email: user?.email,
           type: user?.type,
+          token: user?.token,
         };
       }
 
@@ -69,6 +71,7 @@ export const authOptions = {
       session.user.id = token.id;
       session.user.email = token.email;
       session.user.type = token.type;
+      session.user.token = token.token;
       session.user.image = "";
       session.isLoggedIn = true;
       return session;
