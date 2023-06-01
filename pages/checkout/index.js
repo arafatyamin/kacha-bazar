@@ -1,15 +1,25 @@
 import OrderSummary from "@/Components/CustomerComponents/Cards/OrderSummary/OrderSummary";
 import CustomerLayout from "@/Layouts/CustomerLayout";
-import { orderConfirm } from "@/store/actions/orderAction";
+import { useState } from "react";
 import Head from "next/head";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import isLoggedIn from "@/auth/isLoggedIn";
 import { useRouter } from "next/router";
+import handleStatus from "@/auth/handleStatus";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import SyncLoader from "react-spinners/SyncLoader";
 
-const checkout = () => {
+const checkout = ({ token }) => {
+  const override = {
+    textAlign: "center",
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    zIndex: 999999999999,
+  };
+  const [loading, setLoading] = useState(false);
   const cartItemsArray = useSelector((state) => state.cart.cart);
-  const order = useSelector((state) => state.order);
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -18,13 +28,54 @@ const checkout = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    const mergeData = { ...data, cartItemsArray };
-    dispatch(orderConfirm(mergeData));
-    router.push("/order")
-  };
+  const onSubmit = async (data) => {
+    if (cartItemsArray.length === 0) {
+      toast.error("Cart is empty");
+      return;
+    }
+    setLoading(true);
+    const { phone, ...rest } = data;
+    const address = Object.values(rest).join(",");
 
-  console.log(order);
+    const items = cartItemsArray.map((item) => {
+      return {
+        id: item.product.id,
+        quantity: item.quantity,
+        price: item.product.price,
+      };
+    });
+
+    const order = {
+      products: items,
+      discount: 0,
+      shippingCost: 2,
+      paymentMethod: "COD",
+      phone,
+      shippingAddress: address,
+    };
+
+    try {
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/customer/orders",
+        order,
+        {
+          headers: {
+            authToken: token,
+          },
+        }
+      );
+      dispatch({
+        type: "CLEAR_CART",
+      });
+      toast.success("Order placed successfully");
+      router.push("/order/?id=" + response.data.data.id);
+    } catch (err) {
+      console.log(err);
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -33,6 +84,14 @@ const checkout = () => {
       </Head>
       <main>
         <section>
+          <SyncLoader
+            loading={loading}
+            color={"#10b981"}
+            cssOverride={override}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+
           <div className="custom-container">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
               <div className="p-2 order-last lg:order-none">
@@ -41,51 +100,6 @@ const checkout = () => {
                     <h3 className="mb-3 font-medium">01. Personal Details</h3>
                     <div>
                       <div className="flex flex-col md:flex-row gap-3 mb-5">
-                        <div className="w-full">
-                          <label
-                            htmlFor="firstName"
-                            className="mb-1 inline-block"
-                          >
-                            First Name
-                          </label>
-                          <br />
-                          <input
-                            id="firstName"
-                            placeholder="John"
-                            className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
-                            {...register("firstName")}
-                          />
-                        </div>
-                        <div className="w-full">
-                          <label
-                            htmlFor="lastName"
-                            className="mb-1 inline-block"
-                          >
-                            Last Name
-                          </label>
-                          <br />
-                          <input
-                            id="lastName"
-                            placeholder="Doe"
-                            className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
-                            {...register("lastName")}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col md:flex-row gap-3 mb-5">
-                        <div className="w-full">
-                          <label htmlFor="email" className="mb-1 inline-block">
-                            Email Address
-                          </label>
-                          <br />
-                          <input
-                            id="email"
-                            className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
-                            placeholder="John@gmail.com"
-                            {...register("email")}
-                          />
-                        </div>
                         <div className="w-full">
                           <label
                             htmlFor="phoneNumber"
@@ -98,7 +112,7 @@ const checkout = () => {
                             id="phoneNumber"
                             className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
                             placeholder="e.g. 123456789"
-                            {...register("phoneNumber")}
+                            {...register("phone")}
                           />
                         </div>
                       </div>
@@ -113,14 +127,14 @@ const checkout = () => {
                           htmlFor="shippingAddress"
                           className="mb-1 inline-block"
                         >
-                          Shipping Address
+                          Street Address
                         </label>
                         <br />
                         <input
                           id="shippingAddress"
                           className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
                           placeholder="123 Boulevard Rd, Beverley Hills"
-                          {...register("shippingAddress")}
+                          {...register("address")}
                         />
                       </div>
                       <div className="flex flex-col md:flex-row gap-3 mb-5">
@@ -134,6 +148,18 @@ const checkout = () => {
                             className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
                             placeholder="Dhaka"
                             {...register("city")}
+                          />
+                        </div>
+                        <div className="w-full">
+                          <label htmlFor="zip" className="mb-1 inline-block">
+                            ZIP / Postal
+                          </label>
+                          <br />
+                          <input
+                            id="zip"
+                            className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
+                            placeholder="2345"
+                            {...register("zip")}
                           />
                         </div>
                         <div className="w-full">
@@ -151,123 +177,9 @@ const checkout = () => {
                             {...register("country")}
                           />
                         </div>
-                        <div className="w-full">
-                          <label htmlFor="zip" className="mb-1 inline-block">
-                            ZIP / Postal
-                          </label>
-                          <br />
-                          <input
-                            id="zip"
-                            className="px-3 py-2 w-full outline-none border rounded focus:border-green-600"
-                            placeholder="2345"
-                            {...register("zip")}
-                          />
-                        </div>
                       </div>
                     </div>
                   </div>
-
-                  {/* <div className="mb-8">
-                    <h3 className="font-medium mb-3">03. Shipping Cost</h3>
-                    <div className="flex gap-5">
-                      <label htmlFor="fedex" className="flex-1 cursor-pointer">
-                        <div className="px-3 py-5 border rounded">
-                          <div className="flex justify-between gap-2">
-                            <div className="flex gap-3 items-center">
-                              <div>
-                                <BsTruck size="30" color="#bcbcbc" />
-                              </div>
-                              <div>
-                                <h6>FedEx</h6>
-                                <p className="text-sm">
-                                  Delivery: Total Cost: $60.00
-                                </p>
-                              </div>
-                            </div>
-                            <input
-                              id="fedex"
-                              type="radio"
-                              name="shipments"
-                              value="fedex"
-                              {...register("fedex", { required: true })}
-                            />
-                          </div>
-                        </div>
-                      </label>
-                      <label htmlFor="ups" className="flex-1 cursor-pointer">
-                        <div className="px-3 py-5 border rounded">
-                          <div className="flex justify-between gap-2">
-                            <div className="flex gap-3 items-center">
-                              <div>
-                                <BsTruck size="30" color="#bcbcbc" />
-                              </div>
-                              <div>
-                                <h6>UPS</h6>
-                                <p className="text-sm">
-                                  Delivery: 7 Days Cost: $20.00
-                                </p>
-                              </div>
-                            </div>
-                            <input
-                              id="ups"
-                              type="radio"
-                              name="shipments"
-                              value="ups"
-                              {...register("ups", { required: true })}
-                            />
-                          </div>
-                        </div>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="mb-8">
-                    <h3 className="font-medium mb-3">04. Payment Details</h3>
-                    <div className="flex gap-5">
-                      <label htmlFor="cash" className="flex-1 cursor-pointer">
-                        <div className="px-3 py-5 border rounded">
-                          <div className="flex justify-between gap-2">
-                            <div className="flex gap-3 items-center">
-                              <div>
-                                <BsTruck size="30" color="#bcbcbc" />
-                              </div>
-                              <div>
-                                <h6>Cash On Delivery</h6>
-                              </div>
-                            </div>
-                            <input
-                              id="cash"
-                              type="radio"
-                              name="cash"
-                              value="cash"
-                              {...register("cash", { required: true })}
-                            />
-                          </div>
-                        </div>
-                      </label>
-                      <label htmlFor="card" className="flex-1 cursor-pointer">
-                        <div className="px-3 py-5 border rounded">
-                          <div className="flex justify-between gap-2">
-                            <div className="flex gap-3 items-center">
-                              <div>
-                                <BsTruck size="30" color="#bcbcbc" />
-                              </div>
-                              <div>
-                                <h6>Credit Card</h6>
-                              </div>
-                            </div>
-                            <input
-                              id="card"
-                              type="radio"
-                              name="card"
-                              value="card"
-                              {...register("card", { required: true })}
-                            />
-                          </div>
-                        </div>
-                      </label>
-                    </div>
-                  </div> */}
 
                   {errors.exampleRequired && (
                     <span>This field is required</span>
@@ -276,6 +188,7 @@ const checkout = () => {
                   <input
                     className="bg-green-600 px-5 py-2 text-white rounded cursor-pointer"
                     type="submit"
+                    value={loading ? "Submiting" : "Submit"}
                   />
                 </form>
               </div>
@@ -291,9 +204,7 @@ const checkout = () => {
 };
 
 export async function getServerSideProps(context) {
-  const loggedIn = await isLoggedIn(context);
-
-  return { props: { loggedIn } };
+  return await handleStatus(context, "customer");
 }
 
 checkout.getLayout = (page) => {
