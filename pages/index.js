@@ -12,6 +12,8 @@ import { useSelector } from "react-redux";
 
 const home = ({ categories, products, loggedIn }) => {
   const { cart } = useSelector((state) => state.cart);
+ 
+
   return (
     <>
       <Head>
@@ -130,7 +132,7 @@ export async function getServerSideProps(context) {
   // const customer = await getCustomer(context);
   const categories = await getCategories();
   const products = await getProducts();
-  const loggedIn = await isLoggedIn(context);
+  const {loggedIn} = await isLoggedIn(context);
 
   return { props: { loggedIn, categories, products } };
 }
