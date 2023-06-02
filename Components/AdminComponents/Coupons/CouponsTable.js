@@ -106,7 +106,7 @@ const CouponsTable = () => {
                     <span>{coupon?.createdAt}</span>
                   </td>
                   <td className="px-3 py-2">
-                    <span>Apr 29, 2023 </span>
+                    <span>{coupon?.expiresAt}</span>
                   </td>
                   <td className="px-3 py-2">
                     <span>{coupon?.campaignName}</span>
