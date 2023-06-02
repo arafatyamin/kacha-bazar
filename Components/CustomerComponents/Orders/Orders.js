@@ -1,15 +1,12 @@
 import { SlMagnifierAdd } from "react-icons/sl";
-import { FaRegEdit } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import SelectInput from "../SelectInput";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Pagination from "../Pagination";
 import { toast } from "react-hot-toast";
+import Pagination from "@/Components/AdminComponents/Pagination";
+import Link from "next/link";
 
-const OrdersTable = () => {
+const OrdersTable = ({ token }) => {
   const router = useRouter();
   const { route } = router;
   const status = [
@@ -46,7 +43,12 @@ const OrdersTable = () => {
 
       const response = await axios.get(
         process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
-          `/admin/orders?page=${page}&limit=10`
+          `/customer/orders?page=${page}&limit=10`,
+        {
+          headers: {
+            authToken: token,
+          },
+        }
       );
       const { orders, ...data } = response.data.data;
       setOrders(orders);
@@ -55,29 +57,6 @@ const OrdersTable = () => {
       console.log(err);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleChange = async (e, id, index) => {
-    const value = e.target.value;
-
-    try {
-      const response = await axios.put(
-        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + `/admin/orders/` + id,
-        {
-          status: value,
-        },
-        {
-          withCredentials: true,
-        }
-      );
-      const tempOrdes = [...orders];
-      tempOrdes[index].status = value;
-      setOrders(tempOrdes);
-      toast.success("Order status changed successfully");
-    } catch (err) {
-      console.log(err);
-      toast.error("Something went wrong");
     }
   };
 
@@ -96,7 +75,7 @@ const OrdersTable = () => {
               <th className="p-3">METHOD</th>
               <th className="p-3">AMOUNT</th>
               <th className="p-3">STATUS</th>
-              <th className="p-3">ACTIONS</th>
+              {/* <th className="p-3">ACTIONS</th> */}
               <th className="p-3">INVOICE</th>
             </tr>
           </thead>
@@ -165,27 +144,13 @@ const OrdersTable = () => {
                     </span>
                   </td>
                   <td className="px-3 py-2">
-                    <select
-                      onChange={(e) => handleChange(e, order?.id, i)}
-                      className="w-full p-3 py-2 rounded-md border bg-gray-100 active:bg-white"
-                    >
-                      {status?.map((item, i) => (
-                        <option
-                          key={i}
-                          value={item.name}
-                          selected={order?.status === item.name}
-                        >
-                          {item.name}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-
-                  <td className="px-3 py-2">
                     <div className="flex justify-end items-center">
-                      <button className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300">
+                      <Link
+                        href={"/order?id=" + order?.id}
+                        className="text-lg mr-2 font-normal text-gray-400 hover:text-[#07895e] duration-300"
+                      >
                         <SlMagnifierAdd />
-                      </button>
+                      </Link>
                     </div>
                   </td>
                 </tr>
