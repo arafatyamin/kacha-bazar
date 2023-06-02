@@ -8,10 +8,10 @@ import { toast } from "react-hot-toast";
 import { addToCart, removeCart } from "@/utils/cartItems";
 
 const ProductCard = ({ data, loggedIn, existsInCart }) => {
-  const { title, images, price, quantity, discount, id } = data;
+  const { title, images, price, originalPrice, quantity, discount, id } = data;
   const dispatch = useDispatch();
   // const { loggedIn: isLoggedIn } = loggedIn;
-  const offerPrice = (price * (100 - discount)) / 100;
+  // const offerPrice = (price * (100 - discount)) / 100;
 
   const [hoverState, setHoverState] = useState(false);
   const hoverStateHandler = () => {
@@ -55,7 +55,7 @@ const ProductCard = ({ data, loggedIn, existsInCart }) => {
       </div>
       {discount && (
         <p className="absolute top-4 right-4 bg-orange-400 text-white text-sm w-fit px-2 py-[2px] rounded ">
-          {discount}% Off
+          ${discount} Off
         </p>
       )}
       <div className="px-4 pb-4">
@@ -66,9 +66,9 @@ const ProductCard = ({ data, loggedIn, existsInCart }) => {
         <div className="flex justify-between items-center">
           {discount ? (
             <div className="flex gap-1">
-              <p className="font-bold text-lg">${offerPrice}</p>
+              <p className="font-bold text-lg">${price}</p>
               <p className="font-bold line-through text-gray-primary">
-                ${price}
+                ${originalPrice}
               </p>
             </div>
           ) : (

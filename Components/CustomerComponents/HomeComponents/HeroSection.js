@@ -5,6 +5,8 @@ import TinyBanner from "../Banner/TinyBanner";
 import OfferCard from "../OfferPage/OfferCard";
 import Button from "@/Components/CommonComponents/shared/Button";
 import Link from "next/link";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const carouselSlider = [
   {
@@ -27,6 +29,25 @@ const carouselSlider = [
   },
 ];
 const HeroSection = () => {
+  const [coupons, setCoupons] = useState([]);
+
+  useEffect(() => {
+    getCoupons();
+  }, []);
+
+  const getCoupons = async () => {
+    try {
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+          "/admin/coupons?page=1&limit=2"
+      );
+      console.log(response.data.data.coupons);
+      setCoupons(response.data.data.coupons);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="bg-white ">
       <div className="container">
@@ -57,21 +78,14 @@ const HeroSection = () => {
               Latest Super Discount Active Coupon Code
             </div>
             <div className="flex flex-col gap-4">
-              {Array(2)
-                .fill()
-                .map((_, index) => (
-                  <OfferCard
-                    key={index}
-                    title="Card Title"
-                    categories="Grocery"
-                    discount="15"
-                    shippingCost="500"
-                    couponCode="SUMMER21"
-                    status="Active"
-                    imageUrl="https://kachabazar-store.vercel.app/_next/image?url=https%3A%2F%2Fi.ibb.co%2F23kQcB9%2Fins3.jpg&w=128&q=75"
-                    validity={"1d"}
-                  />
-                ))}
+              {coupons?.map((coupon, index) => (
+                <OfferCard
+                  key={index}
+                  coupon={coupon}
+                  status="Active"
+                  validity={"1d"}
+                />
+              ))}
               <div className="w-full text-center my-4">
                 <Link href={"/offerPage"}>
                   <Button text={"Show More"} />
