@@ -1,10 +1,29 @@
 import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
 import CustomerLayout from "@/Layouts/CustomerLayout";
-
 import OfferCard from "../../Components/CustomerComponents/OfferPage/OfferCard";
 import handleStatus from "@/auth/handleStatus";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const offerPage = () => {
+  const [coupons, setCoupons] = useState([]);
+
+  useEffect(() => {
+    getCoupons();
+  }, []);
+
+  const getCoupons = async () => {
+    try {
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL +
+          "/admin/coupons?page=1&limit=10"
+      );
+      setCoupons(response.data.data.coupons);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="w-full">
       <div
@@ -21,51 +40,12 @@ const offerPage = () => {
       <section className="my-8">
         <div className="custom-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <OfferCard
-              title="Card Title"
-              categories="Grocery"
-              discount="15"
-              shippingCost="500"
-              couponCode="SUMMER21"
-              status="Active"
-              imageUrl="https://kachabazar-store.vercel.app/_next/image?url=https%3A%2F%2Fi.ibb.co%2F23kQcB9%2Fins3.jpg&w=128&q=75"
-              validity={"1h"}
-            />
-            <OfferCard
-              title="Card Title"
-              categories="Cloths"
-              discount="12"
-              shippingCost="1500"
-              couponCode="SUMMER21"
-              status="Active"
-              imageUrl="https://kachabazar-store.vercel.app/_next/image?url=https%3A%2F%2Fi.ibb.co%2FPDLPDHc%2Fins1.jpg&w=128&q=75"
-              validity={"2h"}
-            />
-            <OfferCard
-              title="Another Card Title"
-              categories="Cloths"
-              discount="13"
-              shippingCost="500"
-              couponCode="AUGUST21"
-              status="Inactive"
-              imageUrl="https://images.immediate.co.uk/production/volatile/sites/30/2023/02/Bowl-of-fruit-5155e6f.jpg?quality=90&resize=768,574"
-              validity={"1d"}
-            />
-            <OfferCard
-              title="Another Card Title"
-              categories="Grocery"
-              discount="12"
-              shippingCost="1000"
-              couponCode="WINTER21"
-              status="Inactive"
-              imageUrl="https://kachabazar-store.vercel.app/_next/image?url=https%3A%2F%2Fi.ibb.co%2F4thS4Z1%2Fins2.jpg&w=128&q=75"
-              validity={"2d"}
-            />
+            {coupons?.map((coupon) => (
+              <OfferCard coupon={coupon} />
+            ))}
           </div>
-
-          {/* mobile add banner */}
         </div>
-          <MobileAdsBanner></MobileAdsBanner>
+        <MobileAdsBanner></MobileAdsBanner>
       </section>
     </div>
   );
