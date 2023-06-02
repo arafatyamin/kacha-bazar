@@ -2,25 +2,9 @@ import Image from "next/image";
 import { useState } from "react";
 import Countdown, { zeroPad } from "react-countdown";
 
-const OfferCard = ({
-  title,
-  discount,
-  categories,
-  imageUrl,
-  shippingCost,
-  couponCode,
-  status,
-  validity,
-  coupon,
-}) => {
-  validity = validity?.endsWith("d")
-    ? Number(validity.slice(0, -1)) * 24 * 60 * 60 * 1000
-    : validity?.endsWith("h") && Number(validity.slice(0, -1)) * 60 * 60 * 1000;
-  // console.log(coupon);
-
+const OfferCard = ({ coupon }) => {
   const remainingTime =
     new Date(coupon?.expiresAt).getTime() - new Date().getTime();
-  console.log(remainingTime);
 
   const [copyStatus, setCopyStatus] = useState("");
   function handleCopyClick() {
