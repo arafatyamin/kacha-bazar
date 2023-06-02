@@ -15,21 +15,17 @@ import getOrdersCount from "@/utils/getOrdersCount";
 import getTopSellingProducts from "@/utils/getTopSellingProducts";
 
 const Dashbord = ({ sales, ordersCount, topSelling }) => {
-  const orders = [
-    { time: "Today Order", price: sales[0].sale, color: "#0D969B", FiLayers },
-    {
+  const salesData = {
+    today: { time: "Today Order", color: "#0D969B", FiLayers },
+    month: {
       time: "This Month",
-      price: sales[1].sale,
       color: "#1887FA",
-      FiLayers: FiShoppingCart,
     },
-    {
+    all: {
       time: "Total Order",
-      price: sales[2].sale,
       color: "#059C62",
-      FiLayers: ImCreditCard,
     },
-  ];
+  };
 
   return (
     <>
@@ -45,8 +41,12 @@ const Dashbord = ({ sales, ordersCount, topSelling }) => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {orders.map((order, i) => (
-                <TotalOrderCard key={i} order={order}></TotalOrderCard>
+              {sales?.map((sale, i) => (
+                <TotalOrderCard
+                  key={i}
+                  data={salesData[sale.period]}
+                  sale={sale?.sale}
+                ></TotalOrderCard>
               ))}
             </div>
 
