@@ -12,26 +12,10 @@ const Order = ({ user, order }) => {
   const router = useRouter();
   const { type } = router.query;
 
-  console.log(order, user);
-
   let formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
-  const {
-    name,
-    status,
-    invoiceNo,
-    orderDate,
-    arrivalDate,
-    products,
-    subTotal,
-    discount,
-    shippingCost,
-    total,
-    paymentMethod,
-    shippingAddress,
-  } = useSelector((state) => state.order);
 
   if (!order) {
     return (
@@ -199,7 +183,9 @@ const Order = ({ user, order }) => {
           <div>
             <p className="order-title">Discount</p>
             <p className="order-subtitle">
-              {formatter.format(order?.discount)}
+              {order?.discount
+                ? formatter.format(order?.discount?.amount)
+                : formatter.format(0)}
             </p>
           </div>
           <div>

@@ -19,6 +19,7 @@ const checkout = ({ token }) => {
     zIndex: 999999999999,
   };
   const [loading, setLoading] = useState(false);
+  const [coupon, setCoupon] = useState(null);
   const cartItemsArray = useSelector((state) => state.cart.cart);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const checkout = ({ token }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = async (data) => {
     if (cartItemsArray.length === 0) {
       toast.error("Cart is empty");
@@ -47,7 +49,16 @@ const checkout = ({ token }) => {
 
     const order = {
       products: items,
-      discount: 0,
+
+      ...(coupon
+        ? {
+            discount: true,
+            coupon,
+          }
+        : {
+            discount: false,
+          }),
+
       shippingCost: 2,
       paymentMethod: "COD",
       phone,
@@ -68,7 +79,7 @@ const checkout = ({ token }) => {
         type: "CLEAR_CART",
       });
       toast.success("Order placed successfully");
-      router.push("/order/?id=" + response.data.data.id);
+      router.push("/order/?id=" + response.data.data.id + '&type=new');
     } catch (err) {
       console.log(err);
       toast.error("Something went wrong");
@@ -193,7 +204,11 @@ const checkout = ({ token }) => {
                 </form>
               </div>
               <div className="p-2 order-first lg:order-none">
-                <OrderSummary items={cartItemsArray} />
+                <OrderSummary
+                  items={cartItemsArray}
+                  token={token}
+                  sc={setCoupon}
+                />
               </div>
             </div>
           </div>
