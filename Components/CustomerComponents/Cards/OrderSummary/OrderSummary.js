@@ -1,23 +1,18 @@
 import Button from "@/Components/CommonComponents/shared/Button";
 import CartItem from "@/Components/CustomerComponents/Cards/CartItem/CartItem";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect, useState, useRef } from "react";
+import { toast } from "react-hot-toast";
 import { BsArrowUp } from "react-icons/bs";
 import { HiShoppingBag } from "react-icons/hi";
 
-const OrderSummary = ({ items }) => {
-  const orderTotal = items?.reduce((acc, curr) => {
-    if (acc.subtotal) {
-      acc.subtotal += Number(curr.count) * Number(curr.price);
-      acc.totalItems += Number(curr.count);
-      acc.discount += Number(curr.discount);
-    } else {
-      acc.subtotal = Number(curr.count) * Number(curr.price);
-      acc.totalItems = Number(curr.count);
-      acc.discount = Number(curr.discount);
-    }
-
-    return acc;
-  }, {});
+const OrderSummary = ({ items, token, sc }) => {
+  const couponRef = useRef(null);
+  const [discount, setDiscount] = useState(0.0);
+  const [coupon, setCoupon] = useState(null);
+  const subTotal = items.reduce((total, item) => {
+    return (total += item.product.price * item.quantity);
+  }, 0);
 
   const [isVisible, setIsVisible] = useState(false);
   const scrollToFunc = () => {
@@ -35,6 +30,66 @@ const OrderSummary = ({ items }) => {
   useEffect(() => {
     document.querySelector("#cart").addEventListener("scroll", listenToScroll);
   }, []);
+
+  const validateCoupon = async () => {
+    if (!couponRef.current.value) {
+      toast.error(`Please enter a coupon code first`);
+      return;
+    }
+    if (discount > 0) {
+      toast.error(`You can only use one coupon at a time`);
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/coupons/validate",
+        {
+          code: couponRef.current.value,
+        },
+        {
+          headers: {
+            authToken: token,
+          },
+        }
+      );
+      const coupon = response.data.data;
+
+      if (coupon?.minimumAmount > subTotal) {
+        toast.error(
+          `This coupon can only be used for purchases totaling $${coupon?.minimumAmount} or more.`
+        );
+        return;
+      }
+
+      setCoupon(coupon);
+      sc(coupon);
+      toast.success("Coupon applied successfully");
+      couponRef.current.value = "";
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response.data.message || "Something went wrong");
+    }
+  };
+
+  useEffect(() => {
+    if (coupon && subTotal) {
+      console.log(subTotal, coupon?.minimumAmount);
+      if (coupon?.minimumAmount > subTotal) {
+        toast.error(
+          `This coupon can only be used for purchases totaling $${coupon?.minimumAmount} or more.`
+        );
+        sc(null);
+        setCoupon(null);
+        setDiscount(0);
+      } else {
+        const totalDiscount = (coupon?.discountPercentage / 100) * subTotal;
+        setDiscount(totalDiscount);
+        sc(coupon);
+      }
+    }
+  }, [subTotal, coupon]);
+
   return (
     <div className="border rounded-md p-8 bg-white">
       <h3 className="font-medium mb-3">Shopping Cart</h3>
@@ -69,37 +124,47 @@ const OrderSummary = ({ items }) => {
 
         <div className="flex gap-3 justify-between items-center mt-4">
           <input
+            ref={couponRef}
             type="text"
             placeholder="Input your coupon code"
             className="px-3 py-2 border rounded outline-none flex-grow"
           />
-          <Button text={"Apply"} />
+          <Button text={"Apply"} onClick={validateCoupon} />
         </div>
         <div className="mt-5 border-b">
           <ul>
             <li className="flex justify-between items-center my-2">
               Subtotal
               <span>
-                <b>${orderTotal.subtotal || 0.0}</b>
+                <b>${subTotal || 0.0}</b>
+              </span>
+            </li>
+            <li className="flex justify-between items-center my-2">
+              <div className="flex justify-between items-center">
+                Discount{" "}
+                {coupon && (
+                  <p className="text-gray-700  text-sm pl-2">
+                    ({coupon?.campaignCode} applied)
+                  </p>
+                )}
+              </div>
+
+              <span className="text-orange-500">
+                <b>${discount.toFixed(2)}</b>
               </span>
             </li>
             <li className="flex justify-between items-center my-2">
               Shipping Cost{" "}
-              <span>
-                <b>$0.00</b>
-              </span>
-            </li>
-            <li className="flex justify-between items-center my-2">
-              Discount{" "}
-              <span className="text-orange-500">
-                <b>${orderTotal.discount || 0.0}</b>
-              </span>
+              <span>{subTotal > 500 ? <b>free</b> : <b>$2.00</b>}</span>
             </li>
           </ul>
         </div>
         <div className="mt-3 font-bold">
           <p className="flex justify-between items-center">
-            Total Cost <span>$0.00</span>
+            Total Cost{" "}
+            <span>
+              ${subTotal + (subTotal > 500 ? 0 : 2) - discount.toFixed(2)}
+            </span>
           </p>
         </div>
       </div>
