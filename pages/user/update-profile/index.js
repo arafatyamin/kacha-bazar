@@ -1,83 +1,62 @@
 import { useForm } from "react-hook-form";
-import CustomerDashboardLayout from "@/Layouts/CustomerDashboardLayout";
-import handleRedirect from "@/auth/handleRedirect";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { toast } from "react-hot-toast";
+import { AiOutlineCloudUpload } from "react-icons/ai";
 
-const UpdateProfile = ({ token }) => {
-  const [details, setDetails] = useState({});
-  const [loading, setLoading] = useState(false);
+
+const UpdateProfile = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  useEffect(() => {
-    getDetails();
-  }, []);
-
-  const getDetails = async () => {
-    try {
-      const response = await axios.get(
-        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/customer/details",
-        {
-          headers: {
-            authToken: token,
-          },
-        }
-      );
-      setDetails(response.data.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const onSubmit = async (data) => {
-    try {
-      setLoading(true);
-      for (let key in data) {
-        if (!data[key]) {
-          delete data[key];
-        }
-      }
-      const response = await axios.put(
-        process.env.NEXT_PUBLIC_BACKEND_BASE_URL + "/customer/details",
-        data,
-        {
-          headers: {
-            authToken: token,
-          },
-        }
-      );
-      toast.success("Details updated");
-    } catch (err) {
-      console.log(err);
-      toast.error("Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const onSubmit = (data) => console.log(data);
   return (
     <div>
       <h3 className="mb-3 font-medium">Update Profile</h3>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-2 gap-4"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-4">
+        {/* register your input into the hook by invoking the "register" function */}
+        {/* upload image */}
+        <div className=" col-span-2">
+          <label className="mb-1 inline-block" htmlFor="name">
+            Photo
+          </label>
+          <br />
+          <div className="border border-dashed border-gray-500 relative">
+            <input type="file" multiple
+              className="cursor-pointer relative block opacity-0 w-full h-full p-16 z-50"
+              {...register("file", { required: true })}
+            />
+            <div className="text-center p-6 absolute top-0 right-0 left-0 m-auto" >
+              <span className="flex justify-center text-3xl text-emerald-500"><AiOutlineCloudUpload /></span>
+              <h4 className="text-sm mt-2">Drag your image here</h4>
+              <p className="text-xs text-gray-400">(only*.jpeg and *.png images will be accepted)</p>
+            </div>
+          </div>
+        </div>
+
         {/* input your name */}
         <div className="my-4">
           <label className="mb-1 inline-block" htmlFor="name">
-            Name
+            Full Name
           </label>
           <br />
           <input
             id="name"
-            defaultValue={details?.name}
             className="outline-none w-full border px-6 py-2 rounded focus:border-green-500"
             placeholder="Enter Your Full Name"
-            {...register("name")}
+            {...register("name", { required: true })}
+          />
+        </div>
+        {/* your address */}
+        <div className="my-4">
+          <label className="mb-1 inline-block" htmlFor="email">
+            Your Address
+          </label>
+          <br />
+          <input
+            id="address"
+            className="outline-none w-full border px-6 py-2 rounded focus:border-green-500"
+            placeholder="Your Address"
+            {...register("address", { required: true })}
           />
         </div>
 
@@ -89,10 +68,9 @@ const UpdateProfile = ({ token }) => {
           <br />
           <input
             id="email"
-            defaultValue={details?.email}
             className="outline-none w-full border px-6 py-2 rounded focus:border-green-500"
             placeholder="justin@gmail.com"
-            {...register("email")}
+            {...register("email", { required: true })}
           />
         </div>
 
@@ -104,10 +82,9 @@ const UpdateProfile = ({ token }) => {
           <br />
           <input
             id="phoneNumber"
-            defaultValue={details?.phone}
             className="outline-none w-full border px-6 py-2 rounded focus:border-green-500"
             placeholder="212-512-2888"
-            {...register("phone")}
+            {...register("phoneNumber", { required: true })}
           />
         </div>
 
@@ -119,25 +96,10 @@ const UpdateProfile = ({ token }) => {
           <input
             className="bg-emerald-500 hover:bg-emerald-600 px-6 py-2 text-white rounded-full mt-2 cursor-pointer"
             type="submit"
-            value={loading ? "Submiting" : "Submit"}
           />
         </div>
       </form>
-    </div>
-  );
-};
-
-export async function getServerSideProps(context) {
-  return await handleRedirect(context, "customer");
-}
-
-UpdateProfile.getLayout = function (page) {
-  const loggedIn = page.props.children.props.children[1].props.loggedIn;
-  return (
-    <CustomerDashboardLayout loggedIn={loggedIn}>
-      {page}
-    </CustomerDashboardLayout>
-  );
+    </div>)
 };
 
 export default UpdateProfile;

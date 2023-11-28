@@ -20,7 +20,7 @@ const Input = ({ label, id, className, placeholder, Icon, type, ...props }) => {
           autoComplete="false"
           className="outline-none flex-1 px-2 h-8 rounded-md"
           id={id}
-          placeholder={placeholder}
+          placeholder={placeholder || ''}
           type={
             type === "password" ? (passwordOpen ? "text" : "password") : type
           }

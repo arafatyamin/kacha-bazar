@@ -2,11 +2,23 @@ import Image from "next/image";
 import { useState } from "react";
 import Countdown, { zeroPad } from "react-countdown";
 
-const OfferCard = ({ coupon }) => {
-  const remainingTime =
-    new Date(coupon?.expiresAt).getTime() - new Date().getTime();
+const OfferCard = ({
+  title,
+  discount,
+  categories,
+  imageUrl,
+  shippingCost,
+  couponCode,
+  status,
+  validity,
 
+
+}) => {
+  validity = validity?.endsWith("d")
+    ? Number(validity.slice(0, -1)) * 24 * 60 * 60 * 1000
+    : validity?.endsWith("h") && Number(validity.slice(0, -1)) * 60 * 60 * 1000;
   const [copyStatus, setCopyStatus] = useState("");
+
   function handleCopyClick() {
     const copyText = document.getElementById("couponCode");
     if (copyText) {
@@ -18,11 +30,11 @@ const OfferCard = ({ coupon }) => {
   }
 
   return (
-    <div className="block md:flex md:justify-between items-center bg-white rounded-md shadow-sm min-h-[150px] xl:h-[150px] border p-4 space-y-4 md:space-y-0">
-      <div className="flex items-center md:w-2/3 md:border-r-2 border-dashed pr-1 ">
-        <figure className="h-full">
+    <div className="block md:flex lg:flex md:justify-between lg:justify-between items-center bg-white rounded-md shadow-sm h-[190px] border">
+      <div className="p-6 flex items-center justify-items-start  w-2/3">
+        <figure className="image h-full">
           <Image
-            src={coupon?.image}
+            src={imageUrl}
             alt="My Image"
             width="120"
             height="220"
@@ -33,29 +45,28 @@ const OfferCard = ({ coupon }) => {
         <div className="ml-5">
           <span className="inline-block mb-2">
             {/* countdown start */}
-            <Countdown date={Date.now() + remainingTime} renderer={renderer} />
+            <Countdown date={Date.now() + validity} renderer={renderer} />
           </span>
-          <h2 className=" text-lg leading-6 font-medium mb-3">
-            {coupon?.campaignName}
-          </h2>
+          <h2 className=" text-lg leading-6 font-medium mb-3">{title}</h2>
           <div className="flex items-center">
-            <p className=" font-bold text-xl text-gray-600">
+            <p className=" font-bold flex text-xl text-gray-600">
               <span className="text-lg md:text-xl lg:text-2xl leading-12 text-red-500 font-extrabold">
-                {coupon?.discountPercentage}%
+                {discount}%
               </span>{" "}
               Off
             </p>
-            <div className="font-medium flex items-center px-3 py-1 rounded-full bg-primary-light ml-2">
-              {new Date().getTime() < new Date(coupon?.expiresAt).getTime() ? (
-                <span className="text-emerald-600 inline-block">Active</span>
-              ) : (
-                <span className="text-red-600 inline-block">Ended</span>
-              )}
+            <div className="font-normal flex items-center px-3 py-1 rounded-full bg-primary-light ml-2">
+              <span
+                className={`${status == "Active" ? "text-emerald-500" : "text-red-600"
+                  }  inline-block`}
+              >
+                {status}
+              </span>
             </div>
           </div>
         </div>
       </div>
-      <div className="md:w-1/3 md:pl-3">
+      <div className="my-6 md:w-1/3 relative px-2">
         <div className="before:my-6 flex md:my-5 mb-6 items-center">
           <div className="w-full">
             <div className="block">
@@ -71,23 +82,12 @@ const OfferCard = ({ coupon }) => {
                       onClick={handleCopyClick}
                       className="uppercase  font-semibold text-base leading-7 text-emerald-600"
                     >
-                      {coupon?.campaignCode}
+                      {couponCode}
                     </span>
                   )}
                 </button>
               </div>
             </div>
-            <p className="text-xs text-gray-500 mt-2">
-              * This coupon code will apply on{" "}
-              <span className="font-bold text-gray-700">
-                {coupon?.category?.name}
-              </span>{" "}
-              category and when you shopping more then
-              <span className="font-bold text-gray-700">
-                {" "}
-                ${coupon?.minimumAmount}
-              </span>
-            </p>
           </div>
         </div>
       </div>
@@ -133,7 +133,7 @@ function renderer({ days, hours, minutes, seconds, completed }) {
           {zeroPad(minutes)}
         </span>
         :
-        <span className="flex items-center justify-center bg-primary text-white font-semibold px-2 py-1 rounded mx-1 w-8">
+        <span className="flex items-center justify-center bg-primary text-white px-2 py-1 rounded mx-1 w-8">
           {zeroPad(seconds)}
         </span>
       </div>

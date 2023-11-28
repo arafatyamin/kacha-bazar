@@ -1,34 +1,31 @@
-import Head from "next/head";
 import AppStoreBanner from "@/Components/CommonComponents/AppStoreBanner/AppStoreBanner";
+// import CartDrawer from "@/Components/CommonComponents/CartDrawer/CartDrawer";
 import CategoryCard from "@/Components/CustomerComponents/Cards/CategoryCard/CategoryCard";
+import FlotingCart from "@/Components/CustomerComponents/FlotingCart/FlotingCart";
+// import UserSideNav from "@/Components/CustomerComponents/CustomerAdmin/UserSideNav";
 import MobileAdsBanner from "@/Components/CommonComponents/MobileAdsBanner/MobileAdsBanner";
+import BottomNav from "@/Components/CustomerComponents/BottomNav";
 import ProductCard from "@/Components/CustomerComponents/Cards/ProductCard/ProductCard";
 import HeroSection from "@/Components/CustomerComponents/HomeComponents/HeroSection";
 import CustomerLayout from "@/Layouts/CustomerLayout";
-import getCategories from "@/utils/getCategories";
-import getProducts from "@/utils/getProducts";
-import isLoggedIn from "@/auth/isLoggedIn";
-import { useSelector } from "react-redux";
+import { categoryItems } from "@/data/data";
+import { offeredProductItems, productItems } from "@/data/productData";
+import Head from "next/head";
 
-const home = ({ categories, products, loggedIn }) => {
-  const { cart } = useSelector((state) => state.cart);
- 
-
+const home = () => {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Home</title>
+        <title>Home Page</title>
       </Head>
       <main>
-        <section className="py-10">
+        <div className="-z-3">
           <HeroSection />
-        </section>
+          <BottomNav />
 
-        {/* ======================Featured Categories Part Start====================== */}
-        <section className="py-10">
-          <div className="container">
-            <div className="text-center">
+          {/* ======================Featured Categories Part Start====================== */}
+          <div className="custom-container py-6 ">
+            <div className="text-center mt-10">
               <h2 className="font-bold text-xl sm:text-2xl">
                 Featured Categories
               </h2>
@@ -36,59 +33,59 @@ const home = ({ categories, products, loggedIn }) => {
                 Choose your necessary products from this feature categories.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
-              {categories?.map((category) => (
-                <CategoryCard data={category} key={category.id} />
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 mt-8">
+              {categoryItems.map((categoryItem) => (
+                <CategoryCard data={categoryItem} key={categoryItem.id} />
               ))}
             </div>
             {/* <UserSideNav /> */}
           </div>
-        </section>
-        {/* ======================Featured Categories Part End====================== */}
+          {/* ======================Featured Categories Part End====================== */}
 
-        {/* ======================Regular Products Part Start====================== */}
-        <section className="py-10">
-          <div className="container">
-            <div>
-              <div className="text-center">
-                <h2 className="font-bold text-xl sm:text-2xl">
-                  Regular Products for Daily Shopping
-                </h2>
-                <p className="text-gray-primary text-sm sm:text-base max-w-2xl mx-auto">
-                  See all our popular products in this week. You can choose your
-                  daily needs products from this list and get some special offer
-                  with free shipping.
-                </p>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 pt-10">
-                {products &&
-                  products?.length > 0 &&
-                  products.map((product) => (
-                    <ProductCard
-                      key={product.id}
-                      data={product}
-                      loggedIn={loggedIn}
-                      existsInCart={cart?.some(
-                        (item) => item?.product?.id === product.id
-                      )}
-                    />
-                  ))}
+          {/* ======================Featured Products Part Start====================== */}
+          <section>
+            <div className="bg-gray-50 my-4 py-4 px-4 md:px-0">
+              <div className="custom-container">
+                <div className="text-center mt-10 space-y-4">
+                  <h2 className="font-bold text-xl sm:text-2xl">
+                    Popular Products for Daily Shopping
+                  </h2>
+                  <p className="text-gray-primary text-sm sm:text-base max-w-2xl mx-auto">
+                    See all our popular products in this week. You can choose
+                    your daily needs products from this list and get some
+                    special offer with free shipping.
+                  </p>
+                </div>
+                <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                  {productItems &&
+                    productItems?.length > 0 &&
+                    productItems.map((item, ind) => (
+                      <ProductCard
+                        key={ind}
+                        imgUrl={item.imgUrl}
+                        title={item.title}
+                        quantity={item.quantity}
+                        price={item.price}
+                        offer={item.offer}
+                      />
+                    ))}
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* ======================Regular Products Part End====================== */}
+          {/* ======================Featured Products Part End====================== */}
 
-        {/* ======================Mobile Ads Banner Part Start====================== */}
+          {/* ======================Mobile Ads Banner Part Start====================== */}
+        </div>
         <MobileAdsBanner />
 
         {/* ======================Mobile Ads Banner Part End====================== */}
 
-        <section className="py-10">
-          <div className="container">
-            <div>
-              <div className="text-center space-y-4">
+        <section>
+          <div className="bg-gray-50 my-4 py-4 px-4 md:px-0">
+            <div className="custom-container">
+              <div className="text-center mt-10 space-y-4">
                 <h2 className="font-bold text-xl sm:text-2xl">
                   Popular Products for Daily Shopping
                 </h2>
@@ -98,17 +95,17 @@ const home = ({ categories, products, loggedIn }) => {
                   with free shipping.
                 </p>
               </div>
-              <div className="pt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                {products &&
-                  products?.length > 0 &&
-                  products.map((product) => (
+              <div className="py-10 grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                {offeredProductItems &&
+                  offeredProductItems?.length > 0 &&
+                  offeredProductItems.map((item, index) => (
                     <ProductCard
-                      key={product.id}
-                      data={product}
-                      loggedIn={loggedIn}
-                      existsInCart={cart?.some(
-                        (item) => item?.product?.id === product.id
-                      )}
+                      key={index}
+                      imgUrl={item.imgUrl}
+                      title={item.title}
+                      quantity={item.quantity}
+                      price={item.price}
+                      offer={item.offer}
                     />
                   ))}
               </div>
@@ -117,29 +114,20 @@ const home = ({ categories, products, loggedIn }) => {
         </section>
 
         {/* ======================App Store Section Part Start====================== */}
-        <section className="py-10 bg-indigo-50">
-          <div className="container">
-            <AppStoreBanner />
-          </div>
-        </section>
+        <AppStoreBanner />
         {/* ======================App Store Section Part End====================== */}
+
+        {/* ======================Floating cart card component start ====================== */}
+        <div div className="fixed top-80 right-0 hidden md:block" >
+          <FlotingCart />
+        </div>
+        {/* ======================Floating cart card component start ====================== */}
       </main>
     </>
   );
 };
 
-export async function getServerSideProps(context) {
-  // const customer = await getCustomer(context);
-  const categories = await getCategories();
-  const products = await getProducts();
-  const {loggedIn} = await isLoggedIn(context);
-
-  return { props: { loggedIn, categories, products } };
-}
-
 home.getLayout = (page) => {
-  const loggedIn = page.props.children.props.children[1].props.loggedIn;
-
-  return <CustomerLayout loggedIn={loggedIn}>{page}</CustomerLayout>;
+  return <CustomerLayout>{page}</CustomerLayout>;
 };
 export default home;

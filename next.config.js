@@ -6,6 +6,7 @@ module.exports = {
       "www.healthyeating.org",
       "kachabazar-store.vercel.app",
       "res.cloudinary.com",
+      "img.freepik.com",
     ],
   },
 };
